@@ -129,12 +129,12 @@ moving:
 signChangeYCase:
 	sub $t0, $t0, 1	#decrease counter
 	sub $t6, $t3, $t1	#(current x - previous x)=height
-	mul $t2, $t2, $t2	#previous y square
-	mul $t4, $t4, $t4	#current y square
-	add $t7, $t2, $t4	#current y squared + previous y squared
+	mul $t8, $t2, $t2	#previous y square
+	mul $t9, $t4, $t4	#current y square
+	add $t7, $t8, $t9	#current y squared + previous y squared
 	mul $t5, $t6, $t7	#height*(y1^2+y2^2)=a (suppose)
-	sub $t2, $t4, $t2	#(y2-y1)
-	mtc1 $t2, $f10		#(y2-y1) sent to float register
+	sub $t7, $t4, $t2	#(y2-y1)
+	mtc1 $t7, $f10		#(y2-y1) sent to float register
 	cvt.s.w $f10, $f10	#(y2-y1) converted to float
 	mtc1 $t5, $f12		#a sent to float register
 	cvt.s.w $f12, $f12	#a converted to float
@@ -152,14 +152,28 @@ signChangeYCase:
 giveValidOutput:
 	l.s $f2, two
 	div.s $f8, $f8, $f2		# now $f8 contains calc area by 2
+	l.s $f2, hundred
+	mul.s $f8, $f8, $f2
+	cvt.w.s $f8, $f8
+	mfc1 $t8, $f8
+	li $t9, 100
+	div $t8, $t9
 	#print String "Area: " 
 	li $v0,4
 	la $a0, msg4
 	syscall
 	
 	#print int
-	li $v0, 2
-	mov.s $f12, $f8	# integer part of area 
+	li $v0, 1
+	mflo $a0	# integer part of area 
+	syscall
+	
+	li $v0,4
+	la $a0,msg5
+	syscall
+	
+	li $v0, 1
+	mfhi $a0
 	syscall 
 	
 	j end
@@ -198,8 +212,10 @@ msg1: .asciiz "n: "
 msg2: .asciiz "Enter x-coordinate "
 msg3: .asciiz "Enter y-coordinate "
 msg4: .asciiz "Area: "
+msg5: .asciiz "."
 LF: .asciiz "\n"
 two: .float 2.0
+hundred: .float 100.0
 
 errorMsg1: .asciiz "badInputException :: Given n is less than 2 -> Does not make mathematical sense -> Program Terminated"
 errorMsg2: .asciiz "badInputException :: Given input points are not x-sorted -> Program Terminated"
