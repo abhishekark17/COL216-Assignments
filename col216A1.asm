@@ -133,9 +133,9 @@ signChangeYCase:
 	mul $t4, $t4, $t4	#current y square
 	add $t7, $t2, $t4	#current y squared + previous y squared
 	mul $t5, $t6, $t7	#height*(y1^2+y2^2)=a (suppose)
-	sub $t2, $t2, $t4	#(y1-y2)
-	mtc1 $t2, $f10		#(y1-y2) sent to float register
-	cvt.d.w $f10, $f10	#(y1-y2) converted to float
+	sub $t2, $t4, $t2	#(y2-y1)
+	mtc1 $t2, $f10		#(y2-y1) sent to float register
+	cvt.s.w $f10, $f10	#(y2-y1) converted to float
 	mtc1 $t5, $f12		#a sent to float register
 	cvt.s.w $f12, $f12	#a converted to float
 	div.s $f12, $f12, $f10	#a/(y1-y2)=2*area
@@ -152,16 +152,14 @@ signChangeYCase:
 giveValidOutput:
 	l.s $f2, two
 	div.s $f8, $f8, $f2		# now $f8 contains calc area by 2
-	cvt.w.s $f8, $f8			# moved the area to t8 register
-	mfc1 $t8, $f8
 	#print String "Area: " 
 	li $v0,4
 	la $a0, msg4
 	syscall
 	
 	#print int
-	li $v0,1
-	move $a0,$t8	# integer part of area 
+	li $v0, 2
+	mov.s $f12, $f8	# integer part of area 
 	syscall 
 	
 	j end
