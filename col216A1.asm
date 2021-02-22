@@ -56,7 +56,7 @@ main:
 	
 	blt $t0,2, NumPtsLessThan2  # give error if number of points is less than 2.
 	
-	#print String ">> " 
+	#print String "Enter x-coordinate " 
 	li $v0,4
 	la $a0, msg2
 	syscall
@@ -66,9 +66,9 @@ main:
 	syscall
 	move $t1,$v0
 	
-	#print String ">> " 
+	#print String "Enter y-coordinate " 
 	li $v0,4
-	la $a0, msg2
+	la $a0, msg3
 	syscall
 	
 	#get int input: first y coordinate 
@@ -81,7 +81,7 @@ main:
 while:
 	beq $t0,0,giveValidOutput
 	
-	#print String ">> " 
+	#print String "Enter x-coordinate " 
 	li $v0,4
 	la $a0, msg2
 	syscall
@@ -93,9 +93,9 @@ while:
 	
 	bgt $t1,$t3, unsortedxError
 	
-	#print String ">> " 
+	#print String "Enter y-coordinate " 
 	li $v0,4
-	la $a0, msg2
+	la $a0, msg3
 	syscall
 	
 	#get int input: next y coordinate 
@@ -103,16 +103,36 @@ while:
 	syscall
 	move $t4,$v0
 	
+	mul $t4, $t4, $t2
+	blt $t4, $zero, signChangeYCase
+	
 	sub $t0,$t0,1  # one more input point read successfully
 	sub $t6,$t3,$t1	# current x - prev x coordinate 
 	add $t7,$t2,$t4 # current y + prev y coordinate 
 	
-	mul $t5,$t6,$t7	# product of the above two into $t5 
+	mul $t5,$t6,$t7	# product of the above two into $t5
+	#take modulus of area as both y maybe negative 
 	add $t8,$t8,$t5	# add this to calc area 
+	j moving
 	
+	
+moving:
 	move $t1,$t3	# current x = next x
 	move $t2,$t4 	# current y = next y
 	j while
+	
+signChangeYCase:
+	sub $t0, $t0, 1	#decrease counter
+	sub $t6, $t3, $t1	#current x - previous x
+	mul $t2, $t2, $t2	#previous y square
+	mul $t4, $t4, $t4	#current y square
+	add $t7, $t2, $t4	#current y squared + previous y squared
+	mul $t5, $t6, $t7	#height*(y1^2+y2^2)
+	sub $t2, $t2, $t4	#(y1-y2)
+	#divide by (y1-y2) and take modulus of area to make it positive
+	j moving
+	
+	
 
 	
 ############### Main End #####################
@@ -123,7 +143,7 @@ giveValidOutput:
 	
 	#print String "Area: " 
 	li $v0,4
-	la $a0, msg3
+	la $a0, msg4
 	syscall
 	
 	#print int
@@ -179,8 +199,9 @@ end:
 	
 	.data
 msg1: .asciiz "n: "
-msg2: .asciiz ">> "
-msg3: .asciiz "Area: "
+msg2: .asciiz "Enter x-coordinate "
+msg3: .asciiz "Enter y-coordinate "
+msg4: .asciiz "Area: "
 LF: .asciiz "\n"
 
 errorMsg1: .asciiz "badInputException :: Given n is less than 2 -> Does not make mathematical sense -> Program Terminated"
