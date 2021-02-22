@@ -26,6 +26,7 @@
 	#Begin 
 	.text
 	.globl main
+	.ent main
 	
 	
 # $t0 = n 
@@ -103,16 +104,20 @@ while:
 	syscall
 	move $t4,$v0
 	
-	mul $t4, $t4, $t2
-	blt $t4, $zero, signChangeYCase
+	mul $t9, $t4, $t2
+	blt $t9, 0, signChangeYCase
 	
 	sub $t0,$t0,1  # one more input point read successfully
 	sub $t6,$t3,$t1	# current x - prev x coordinate 
 	add $t7,$t2,$t4 # current y + prev y coordinate 
 	
 	mul $t5,$t6,$t7	# product of the above two into $t5
-	#take modulus of area as both y maybe negative 
-	add $t8,$t8,$t5	# add this to calc area 
+	
+	abs $t5, $t5
+	
+	mtc1 $t5, $f6
+	cvt.s.w $f6, $f6
+	add.s $f8, $f8, $f6	# add this to calc area 
 	j moving
 	
 	
@@ -123,14 +128,21 @@ moving:
 	
 signChangeYCase:
 	sub $t0, $t0, 1	#decrease counter
-	sub $t6, $t3, $t1	#current x - previous x
+	sub $t6, $t3, $t1	#(current x - previous x)=height
 	mul $t2, $t2, $t2	#previous y square
 	mul $t4, $t4, $t4	#current y square
 	add $t7, $t2, $t4	#current y squared + previous y squared
-	mul $t5, $t6, $t7	#height*(y1^2+y2^2)
+	mul $t5, $t6, $t7	#height*(y1^2+y2^2)=a (suppose)
 	sub $t2, $t2, $t4	#(y1-y2)
-	#divide by (y1-y2) and take modulus of area to make it positive
-	j moving
+	mtc1 $t2, $f10		#(y1-y2) sent to float register
+	cvt.d.w $f10, $f10	#(y1-y2) converted to float
+	mtc1 $t5, $f12		#a sent to float register
+	cvt.s.w $f12, $f12	#a converted to float
+	div.s $f12, $f12, $f10	#a/(y1-y2)=2*area
+	abs.s $f12, $f12	#converted to positive incase it was negative
+	add.s $f8, $f8, $f12	#added it to final area
+	j moving		
+
 	
 	
 
@@ -138,9 +150,10 @@ signChangeYCase:
 ############### Main End #####################
 ############### Giving outputs Begin #########
 giveValidOutput:
-	rem $t9, $t8, 2		# $t9 contains remainder 
-	div $t8, $t8, 2		# now $t8 contains calc area by 2
-	
+	l.s $f2, two
+	div.s $f8, $f8, $f2		# now $f8 contains calc area by 2
+	cvt.w.s $f8, $f8			# moved the area to t8 register
+	mfc1 $t8, $f8
 	#print String "Area: " 
 	li $v0,4
 	la $a0, msg4
@@ -151,22 +164,7 @@ giveValidOutput:
 	move $a0,$t8	# integer part of area 
 	syscall 
 	
-	beq $t9,$zero,giveIntOutput
-	j giveFloatOutput 
-	
-giveIntOutput:
-	#print String ".00\n"
-	li $v0,4
-	la $a0, outputStrEven
-	syscall
-	j end 
-	
-giveFloatOutput:
-	#print String ".50\n" 
-	li $v0,4
-	la $a0, outputStrOdd
-	syscall
-	j end 
+	j end
 	
 ######### Give Outputs End ############
 ######### Error Handling Begin ########
@@ -203,6 +201,7 @@ msg2: .asciiz "Enter x-coordinate "
 msg3: .asciiz "Enter y-coordinate "
 msg4: .asciiz "Area: "
 LF: .asciiz "\n"
+two: .float 2.0
 
 errorMsg1: .asciiz "badInputException :: Given n is less than 2 -> Does not make mathematical sense -> Program Terminated"
 errorMsg2: .asciiz "badInputException :: Given input points are not x-sorted -> Program Terminated"
