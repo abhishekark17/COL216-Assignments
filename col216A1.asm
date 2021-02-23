@@ -16,12 +16,13 @@
 # >> 2
 # This is so because taking input of two integer coordinates separated by a whitespace on a single line is not so easy to read.
 # Here, ">> " is automatically generated for the user. The user simply has to give the values of the coordinates and press enter/return after each coordinate given.
-# Not doing so will result in incorrect input. How to detect such incorrect input ?? still need to incorporate in the code. 
+# Not doing so will result in incorrect input.
 # Since we have a finite representation for integer coordinates and area also, we need to specify a bound on input coordinate
-# Current Design incorporates Coordinates and Area with limits of 32 bit representation. 
+# Current Design incorporates Coordinates and Area with limits of 32 bit floating point representation. 
 
 		
-# How are we calculating the area? by calculating the area of trapezium formed by 2 consecutive points and the x axis.
+# How are we calculating the area? by calculating the modulus of area of trapezium formed by 2 consecutive points and the x axis if both points are on the same side,
+# else calculating the modulus of the area of the two triangles formed on both the sides of the x-axis by simple math. 
 	
 	#Begin 
 	.text
@@ -37,10 +38,6 @@
 # $t5 = one Trapezium Area 
 # $t6 = $t3 - $t1 
 # $t7 = $t2 + $t4 
-# $t8 = calc area 
-# $t9 = Remainder (calc Area / 2)
-
-#in the end we will divide by 2.
 
 
 ########## Main Begin ############
@@ -92,7 +89,7 @@ while:
 	syscall
 	move $t3,$v0
 	
-	bgt $t1,$t3, unsortedxError
+	bgt $t1,$t3, unsortedxError		# give error if input points are not sorted according to x-coordinate.
 	
 	#print String "Enter y-coordinate " 
 	li $v0,4
@@ -209,8 +206,8 @@ end:
 	
 	.data
 msg1: .asciiz "n: "
-msg2: .asciiz "Enter x-coordinate "
-msg3: .asciiz "Enter y-coordinate "
+msg2: .asciiz "Enter x-coordinate >> "
+msg3: .asciiz "Enter y-coordinate >> "
 msg4: .asciiz "Area: "
 msg5: .asciiz "."
 LF: .asciiz "\n"
@@ -219,6 +216,3 @@ hundred: .float 100.0
 
 errorMsg1: .asciiz "badInputException :: Given n is less than 2 -> Does not make mathematical sense -> Program Terminated"
 errorMsg2: .asciiz "badInputException :: Given input points are not x-sorted -> Program Terminated"
-
-outputStrEven: .asciiz ".00"
-outputStrOdd: .asciiz ".50"
