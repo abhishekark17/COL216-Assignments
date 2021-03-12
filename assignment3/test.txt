@@ -1,0 +1,5 @@
+lw $t1,420
+lw $t2,404
+label: sub $t1,$t1,$t2
+bne $t1,$t2,label
+sub $t0 , $t1,$t3
