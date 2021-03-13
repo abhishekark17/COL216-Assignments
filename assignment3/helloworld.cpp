@@ -8,17 +8,23 @@ using namespace std;
 //Max int val: 	2147483647
 
 
-vector<int> CIRS (3,0);   //current instruction register set
+vector<int> CIRS (4,0);   //current instruction register set
 class instruction {
   public:
   vector<int> cirs;
   int opID;
+  string label="";
   instruction (vector<int> CIRS , int id) {
     cirs = CIRS;
     opID = id;
   }
+  instruction (vector<int> CIRS , int id,string str) {
+    cirs = CIRS;
+    opID = id;
+    label=str;
+  }
   instruction () {
-    cirs = {-1,-1,-1};
+    cirs = {-1,-1,-1,-1};
     opID = -1;
   }
 };
@@ -27,6 +33,7 @@ int maxAllowedInst=100;
 int startMemOfData=400;
 
 vector<int> data123 (262044,0);
+vector<int> numOfInst (10,0);
 
 string error="";
 int numClockCycles = 0;
@@ -52,7 +59,7 @@ int labelNumber = 0;
 
 vector<string> myset = {"add","sub","mul","slt","addi","bne","beq","lw","sw","j"};
 
-int pc = 0;
+int pc = 1;
 
 // sw $5, 8($7) # mem[$7+8] <- $5
 //$7 is the register holding the memory address, 8 an offset and $5 is the source of the information that will be written in memory.
@@ -198,14 +205,15 @@ void findImmediate() {
      }
      else{
          isValidInt=false;
-         cout<<"Not a valid integer"<<endl;
+         //cout<<"Not a valid integer"<<endl;
          break;
      }
  }
  //cout<<buffer<<"vsd"<<endl;
  if(isValidInt){
-     CIRS[2]=stoi(buffer);
-     cout<<"value"<<CIRS[2]<<endl;
+   cout<<buffer<<"buffer"<<endl;
+     //CIRS[2]=stoi(buffer);
+     //cout<<"value"<<CIRS[2]<<endl;
  }
  
  currentInst=currentInst.substr(i);
@@ -216,7 +224,8 @@ void findImmediate() {
 
 
 
-void findLabel(){
+string findLabel(){
+  RemoveSpaces();
   string buffer = "";
   int i = 0;
   while (i < currentInst.size()) {
@@ -226,13 +235,12 @@ void findLabel(){
   }
 
   currentInst = currentInst.substr(i);
+  //cout<<"cureet "<<currentInst<<endl;
   if (!currentInst.empty()) cout << "Error: Invalid lable type" << endl;
   else{
-    uniqueLabelID[labelNumber] = buffer;
-    CIRS[2]=labelNumber;
-    labelNumber++;
+    //cout<<labelNumber<<"LALBELnUMBER"<<endl;
   }
-  return;
+  return buffer;
   
 }
 
@@ -240,89 +248,141 @@ void findLabel(){
 
 void offsetType() {
   string buffer = "";
+  string buffer1="";
   int i = 1;
-  int offset;
+  int offset=0;
+  int final1=0;
+  bool bracketed=true;
   if(currentInst[0]=='-') {
     buffer="-"; 
     currentInst = currentInst.substr(1);}
   else i=0;
+  while (i < currentInst.size() && currentInst[i] < 58 && currentInst[i] > 47 ) {
+      if (currentInst[i] == ' ' || currentInst[i] == '\t' || currentInst[i]=='('){
+        break;
+      }
+      buffer += currentInst[i];
+      i++;
+    }
+    currentInst=currentInst.substr(i);
+
+
   //cout<<"sadfj"<<endl;
-  while (i < currentInst.size() && currentInst[i] < 58 && currentInst[i] > 47) {
-    if (currentInst[i] == ' ' || currentInst[i] == '\t' || currentInst[i] == '(') break;
-    buffer += currentInst[i];
-    i++;
+  int indexOfLparen=currentInst.find("(");
+  if(indexOfLparen==-1){
+    bracketed=false;
   }
-  //cout<<"orut"<<endl;
-  if(currentInst.size()>=2){
-    offset=stoi(buffer);
+  else bracketed=true;
+  int indexOfRparen=currentInst.find(")");
+  if(bracketed && (indexOfRparen==-1 || indexOfRparen<indexOfLparen)){
+    error="Unmatched Parenthesis";
   }
-
-  else cout<<"Not a valid offset";
-  //cout<<"offset"<<offset<<endl;
-  currentInst = currentInst.substr(i);
-  int final1=0;
-  RemoveSpaces();
-  if (currentInst[0] != '(' ) cout << "'(' EXPECTED" << endl;
-  else {
-    currentInst = currentInst.substr(1);
+  else if (bracketed){
+    //string bufferOfBracket;
+    
+    cout<<buffer<<"buffer"<<endl;
+    //offset=stoi(buffer);
+    string strInsideParen;
+    if(bracketed){
+      strInsideParen = currentInst.substr(indexOfLparen+1,(indexOfRparen-indexOfLparen-1));}
+    else strInsideParen=currentInst;
+  
     RemoveSpaces();
-    int ValOfRegister = 0;
-    int offset1= 0;
-    //
-  if (currentInst[0] == '$') {
-    if (currentInst[0] != '$' || currentInst.size() < 2) {
-      cout << "Register Not Found" << endl;
-      return; // raise exception 
-    } 
+    if(strInsideParen.size()>0) {
+      RemoveSpaces();
+      int ValOfRegister = 0;
+      int offset1= 0;
+      //cout<<strInsideParen<<"asdf"<<endl;
+    if (strInsideParen[0] == '$') {
+      if (strInsideParen.size() < 2) {
+        error="No such Register Exist";
+        return; // raise exception 
+      } 
 
-    string first5 = "", first3 = "", first2 = "";
+      string first5 = "", first3 = "", first2 = "";
 
-    first2 = currentInst.substr(0,2);
-    if (currentInst.size()>= 3) first3 = currentInst.substr(0,3);
-    if (currentInst.size() >= 5) first5 = currentInst.substr(0,5);
+      first2 = strInsideParen.substr(0,2);
+      if (strInsideParen.size()>= 3) first3 = strInsideParen.substr(0,3);
+      if (strInsideParen.size() >= 5) first5 = strInsideParen.substr(0,5);
+
+      //cout<<registers[rmap["$t1"]]<<"value of t1"<<endl;
+      if (first5 == "$zero") {
+        buffer1=first5;
+        ValOfRegister = registers[0];
+        strInsideParen = strInsideParen.substr(5);
+      }
+      else if (rmap.find(first3) != rmap.end()) {
+        buffer1=first3;
+        ValOfRegister = registers[rmap.at(first3)];
+        cout<<"valOfre"<<ValOfRegister<<endl;
+        strInsideParen = strInsideParen.substr(3);
+      }
+      else if (rmap.find(first2) != rmap.end()) {
+        buffer1=first2;
+        ValOfRegister = registers[rmap.at(first2)];
+        strInsideParen = strInsideParen.substr(2);
+      }
+      else {error="Unknown Register"; return;};
+      final1 = ValOfRegister;
+      //cout<<first2<<","<<first3<<","<<first5<<endl;
+      //cout<<final1<<"finalr"<<endl;
+    }
+    else {
+      int i1 = 1;
+    
+      if(strInsideParen[0]=='-') {
+        buffer1="-"; 
+        strInsideParen = strInsideParen.substr(1);}
+      else i1=0;
+      while (i1 < strInsideParen.size() && strInsideParen[i1] < 58 && strInsideParen[i1] > 47) {
+        if (strInsideParen[i1] == ' ' || strInsideParen[i1] == '\t' || strInsideParen[i1] == ')') break;
+        buffer1 += strInsideParen[i1];
+        i1++;
+      }
+      
+
+          
+        }
+      }
+      //cout<<final1<<"Xsfinal1"<<endl;
+      //cout<<final1<<"fdg"<<endl;
+      //cout<<buffer1<<" Fbuffer1"<<endl;
+      //cout<<"final"<<endl;
+        if(rmap.find(buffer1)!=rmap.end()){
+          CIRS[3]=0;
+          //cout<<buffer1<<"buffer1"<<endl;
+          CIRS[2]=rmap.at(buffer1);
+          }
+        else{
+          CIRS[3]=1;
+          for(int i=0;i<buffer1.size();i++){
+            if ((buffer1[i]<=47 || buffer1[i]>=58) && buffer1[i]!='-' ){
+            error="Not a valid object inside parenthesis";return;
+            }
+            
+          }
+          CIRS[2]=stoi(buffer1);
 
   
-    if (first5 == "$zero") {
-      ValOfRegister = registers[0];
-      currentInst = currentInst.substr(5);
-    }
-    else if (rmap.find(first3) != rmap.end()) {
-      ValOfRegister = registers[rmap.at(first3)];
-      currentInst = currentInst.substr(3);
-    }
-    else if (rmap.find(first2) != rmap.end()) {
-      ValOfRegister = registers[rmap.at(first2)];
-      currentInst = currentInst.substr(2);
-    }
-    else {cout << "Unknown Register"; return;};
-    final1 = ValOfRegister;
+
+  
   }
-  else {
-    string buffer1 = "";
-    int i1 = 1;
-  
-    if(currentInst[0]=='-') {
-      buffer1="-"; 
-      currentInst = currentInst.substr(1);}
-    else i1=0;
-    while (i1 < currentInst.size() && currentInst[i1] < 58 && currentInst[i1] > 47) {
-      if (currentInst[i1] == ' ' || currentInst[i1] == '\t' || currentInst[i1] == ')') break;
-      buffer1 += currentInst[i1];
-      i1++;
-    }
-    //cout<<"final"<<endl;
-    if(currentInst.size()>=2){
-      offset1 = stoi(buffer1);
-    }
-    final1 = offset1;
-    //cout<<final1<<"fdg"<<endl;
-
+  if(bracketed)
+    currentInst=currentInst.substr(indexOfRparen+1);
+  else currentInst=currentInst.substr(0);
   }
-
   
-}
-CIRS[1] = final1 + offset;
-cout<<CIRS[1]<<endl;
+  //cout<<"orut"<<endl;
+  for(int i=0;i<buffer.size();i++){
+    if ((buffer[i]<=47 || buffer[i]>=58) && buffer[i]!='-' ){
+      error="Not a valid offset";return;
+    }
+  }
+  offset=stoi(buffer);
+  //cout<<"offset"<<offset<<endl;
+
+CIRS[1] = offset;
+//cout<<CIRS[1]<<endl;
 return;
 }
 
@@ -330,6 +390,7 @@ return;
 
 instruction readInst () {
   int j=0;
+  string lableInst;
   //instruction inst;
   vector<int> mynullv = {-1,-1,-1};
   instruction mynull(mynullv,-1);
@@ -342,7 +403,7 @@ instruction readInst () {
   }
   string operation=currentInst.substr(0,j);
   currentInst=currentInst.substr(j+1);
-    cout<<operation<<endl;
+    //cout<<operation<<endl;
   bool isValidOp=false;
   int operationId=-1;
   for (int i=0;i<myset.size();i++) {
@@ -364,6 +425,7 @@ instruction readInst () {
       removeComma();
       
     }
+    RemoveSpaces();
     if(currentInst!="") {
       error="More than expected argument";
     }// raise exception
@@ -381,6 +443,7 @@ instruction readInst () {
     RemoveSpaces();
     removeComma();
     findImmediate();
+    RemoveSpaces();
     if(currentInst!="") {
       error="More than expected argument";
     }// raise exception
@@ -396,7 +459,9 @@ instruction readInst () {
       
     }
     RemoveSpaces();
-    findLabel();
+    removeComma();
+    lableInst=findLabel();
+    RemoveSpaces();
     if(currentInst!="") {
       error="More than expected argument";
     }// raise exception
@@ -420,11 +485,16 @@ instruction readInst () {
 
   if (operationId==9){//j label/address
     RemoveSpaces();
-    findLabel();
+    lableInst=findLabel();
   }
-    cout<<operationId<<endl;
+    //cout<<operationId<<endl;
+  if(operationId==9 || operationId==5 || operationId==6){
+    instruction inst(CIRS,operationId,lableInst);
+    return inst;
+  }
+  else{
   instruction inst(CIRS,operationId);
-  return inst;
+  return inst;}
 }
 
 
@@ -491,25 +561,25 @@ void mul (vector<int>& cirs) {
 
 void addi (vector<int>& cirs) {
   registers[cirs[0]] = registers[cirs[1]] + cirs[2];
-  cout<<"value:"<<cirs[2]<<endl;
+  //cout<<"value:"<<cirs[2]<<endl;
   //pc++;
   return;
 }
 
-void bne (vector<int>& cirs) {
+void bne (vector<int>& cirs,string& label) {
   if (registers[cirs[0]] != registers[cirs[1]]) {
-      cout<<"label:"<<cirs[2]<<",";
-      cout<<uniqueLabelID[cirs[2]]<<",";
-      cout<<lableTable[uniqueLabelID[cirs[2]]]<<endl;;
-    pc = lableTable[uniqueLabelID[cirs[2]]];
+      //cout<<"label:"<<cirs[2]<<",";
+      //cout<<uniqueLabelID[cirs[2]]<<",";
+      //cout<<lableTable[uniqueLabelID[cirs[2]]]<<endl;;
+    pc = lableTable[label];
   }
   cout<<"label Id"<<pc<<endl;
   
   return;
 }
-void beq (vector<int>& cirs) {
+void beq (vector<int>& cirs,string& label) {
   if (registers[cirs[0]] == registers[cirs[1]]) {
-    pc = lableTable[uniqueLabelID[cirs[2]]];
+    pc = lableTable[label];
   }
   return;
 }
@@ -523,7 +593,12 @@ void slt (vector<int>& cirs) {
   return;
 }
 void lw (vector<int>& cirs) {
-  int address=cirs[1];
+  int offset=cirs[1];
+  int typeOfarg=cirs[3];
+  int address;
+  //cout<<cirs[1]<<","<<cirs[2]<<","<<cirs[3]<<endl;
+  if(typeOfarg==0) address=offset+registers[cirs[2]];
+  else address=offset+cirs[2];
   if(address<400 || address>1048576) error="Error: Memory Address not accessible\n";
   else if(address%4 != 0) error = "Error: invalid memory location\n";
   else {
@@ -531,12 +606,16 @@ void lw (vector<int>& cirs) {
     address -= 100;
   }
   registers[cirs[0]] = data123[address];
-    cout<<address<<","<<cirs[0]<<endl;
+    //cout<<address<<","<<cirs[0]<<endl;
   //pc++;
   return;
 }
 void sw (vector<int>& cirs) {
-  int address=cirs[1];
+  int offset=cirs[1];
+  int typeOfarg=cirs[3];
+  int address;
+  if(typeOfarg==0) address=offset+registers[cirs[2]];
+  else address=offset+cirs[2];
   if(address<400 || address>1048576) error="Error: Memory Address not accessible\n";
   else if(address%4 != 0) error = "Error: invalid memory location\n";
   else {
@@ -550,72 +629,83 @@ void sw (vector<int>& cirs) {
   return;
 }
 
-void j (vector<int>& cirs) {
-  pc = lableTable[uniqueLabelID[cirs[0]]];
+void j (vector<int>& cirs,string& label) {
+  pc = lableTable[label];
   return;
 }
 
 void execute () {
   
   while (pc < maxInstructions) {
-      cout<<"PC:"<<pc<<endl;
+   
+      //cout<<"PC:"<<pc<<endl;
 
-    instruction currInst = iset[pc];
+    instruction currInst = iset[pc-1];
     pc++;
 //{"add","sub","mul","slt","addi","bne","beq","lw","sw","j"};
     switch (currInst.opID) {
       case 0: {
         //add 
         add (currInst.cirs);
+        numOfInst[0]++;
         break;
       }
       case 1: {
         //sub
         sub (currInst.cirs);
+        numOfInst[1]++;
         break;
       }
       case 2: {
         //mul
-        sub (currInst.cirs);
+        mul (currInst.cirs);
+        numOfInst[2]++;
         break;
       }
       case 3: {
         // slt
         slt (currInst.cirs);
+        numOfInst[3]++;
         break;
       }
       case 4: {
         //addi
         addi(currInst.cirs);
+        numOfInst[4]++;
         break;
       }
       case 5: {
         //bne
-        bne (currInst.cirs);
+        bne (currInst.cirs,currInst.label);
+        numOfInst[5]++;
         break;
       }
       case 6: {
         //beq
-        beq(currInst.cirs);
+        beq(currInst.cirs,currInst.label);
+        numOfInst[6]++;
         break;
       }
       case 7: {
         //lw
         lw(currInst.cirs);
+        numOfInst[7]++;
         break;
       }
       case 8: {
         //sw
         sw(currInst.cirs);
+        numOfInst[8]++;
         break;
       }
       case 9: {
         //j
-        j (currInst.cirs);
+        j (currInst.cirs,currInst.label);
+        numOfInst[9]++;
         break;
       }
     };
-  printVector();
+  //printVector();
 
 
   }
@@ -652,10 +742,15 @@ void execute () {
 //       int id=x.opID;
 //       cout<<y[0]<<","<<y[1]<<","<<y[2]<<","<<id<<endl;
 //   }
-  
+ for(auto x:lableTable){
+      cout<<x.first<<" "<<x.second<<endl;
+    }
   execute ();
   //cout<<pc<<endl;
-  cout<<error<<endl;;
+  cout<<error<<" last error "<<pc<<endl;
+  for(int i=0;i<numOfInst.size();i++){
+    cout<<myset[i]<<":"<<numOfInst[i]<<endl;
+  }
 
   return 0;
 }

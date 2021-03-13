@@ -1,5 +1,11 @@
-lw $t1,420
-lw $t2,404
-label: sub $t1,$t1,$t2
-bne $t1,$t2,label
-sub $t0 , $t1,$t3
+addi $t0, $t0, 50
+addi $s0, $s0, 10
+addi $t8, $t8, 5
+lw $s1, 100(500)
+sw $t0, 500(500)
+  beq $s1, $t3, loop
+j loop
+slt $t9,$t0,$t4
+
+loop: 
+  add $t6, $t0, $t4
