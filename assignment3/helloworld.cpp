@@ -28,13 +28,13 @@ class instruction {
     opID = -1;
   }
 };
-
+int sizeOfData;
 string error1="";
 vector<string> error;
 int maxAllowedInst=100;
 int startMemOfData=400;
 
-vector<int> data123 (262044,0);
+vector<int> data123 (1<<18,0);
 vector<int> numOfInst (10,0);
 
 
@@ -45,7 +45,8 @@ vector<instruction> iset;
 
 
 vector<int> registers(32,0);
-string file = "test.txt";
+string file;
+string outfile;
 
 unordered_map<string,int> lableTable;
 unordered_map <int,string> uniqueLabelID;
@@ -66,18 +67,25 @@ int pc = 1;
 // sw $5, 8($7) # mem[$7+8] <- $5
 //$7 is the register holding the memory address, 8 an offset and $5 is the source of the information that will be written in memory.
 
-void printVector() {
+void printVector(ofstream& out) {
   cout << "[";
+  out << "[";
   for(int i=0;i<31;i++){
+    if(registers[rmap["$zero"]]!=0){
+      error1 = "Error: Register Zero Cannot Be Modified";return;
+    }
     string s="$";
     s=s+to_string(i);
     cout<<s<<": "<<registers[rmap[s]]<<",";
+    out<<s<<": "<<registers[rmap[s]]<<",";
   }
   string s="$";
     s=s+to_string(31);
     cout<<s<<": "<<registers[rmap[s]];
+    out<<s<<": "<<registers[rmap[s]];
 
   cout  << "]" << endl;
+  out  << "]" << endl;
 }
 
 void initialize_registers () {
@@ -180,7 +188,7 @@ void findRegister (int i) {
     return;
   }
   
-  cout << "Unknown Register";
+  error.push_back("Synatx Error:"+to_string(currentInstNum)+": Unknown Register");
   return;
   
 }
@@ -189,7 +197,7 @@ void findRegister (int i) {
 
 void removeComma() {
   if (currentInst.size() < 2 || currentInst[0] != ',') {
-    cout << "Error: Comma Expected" << endl;
+   error.push_back("Synatx Error:"+to_string(currentInstNum)+": Comma Expected");
 
   }
   currentInst = currentInst.substr(1);
@@ -310,8 +318,7 @@ void offsetType() {
       first2 = strInsideParen.substr(0,2);
       if (strInsideParen.size()>= 3) first3 = strInsideParen.substr(0,3);
       if (strInsideParen.size() >= 5) first5 = strInsideParen.substr(0,5);
-
-      //cout<<registers[rmap["$t1"]]<<"value of t1"<<endl;
+      
       if (first5 == "$zero") {
         buffer1=first5;
         ValOfRegister = registers[0];
@@ -330,8 +337,7 @@ void offsetType() {
       }
       else {error.push_back("Synatx Error:"+to_string(currentInstNum)+": Register Not Found"); return;};
       final1 = ValOfRegister;
-      //cout<<first2<<","<<first3<<","<<first5<<endl;
-      //cout<<final1<<"finalr"<<endl;
+    
     }
     else {
       int i1 = 1;
@@ -485,7 +491,7 @@ instruction readInst () {
     if((currentInst[0]>47 && currentInst[0]<58) || currentInst[0]=='-' ){
       offsetType();
     }
-    else error.push_back("Synatx Error:"+to_string(currentInstNum)+": Unacceptable Label Type");;
+    else error.push_back("Synatx Error:"+to_string(currentInstNum)+": Unacceptable Label Type");
     
   
   }
@@ -519,6 +525,7 @@ void preprocess () {  // checking if line has label: at the beginning;
   currentInstNum=1;
   string tempLabel="";
   for (int i=0; i < numberofInst ; i++) {
+    CIRS={0,0,0,0};
     bool isLabel = false;
     currentInst = inputprogram[i];
     
@@ -540,10 +547,12 @@ void preprocess () {  // checking if line has label: at the beginning;
         currentInst=currentInst.substr(1);
         RemoveSpaces();
         
-
         }
+        
 
     } 
+   
+     
     instruction instObj = readInst();
     iset.push_back(instObj);
     currentInstNum++;
@@ -574,19 +583,46 @@ void addi (vector<int>& cirs) {
 }
 
 void bne (vector<int>& cirs,string& label) {
+  if(lableTable.find(label)==lableTable.end()){
+     error1="Error: Label Not Found";
+      return;
+
+  }
   if (registers[cirs[0]] != registers[cirs[1]]) {
       //cout<<"label:"<<cirs[2]<<",";
       //cout<<uniqueLabelID[cirs[2]]<<",";
       //cout<<lableTable[uniqueLabelID[cirs[2]]]<<endl;;
-    pc = lableTable[label];
+    if(lableTable.find(label)!=lableTable.end()){
+      pc = lableTable[label];
+      cout<<label<<endl;
+     
+    }
+    else{
+       error1="Error: Label Not Found";
+      return;
+    }
+    
   }
-  cout<<"label Id"<<pc<<endl;
+  //cout<<"label Id"<<pc<<endl;
   
   return;
 }
 void beq (vector<int>& cirs,string& label) {
+    if(lableTable.find(label)==lableTable.end()){
+     error1="Error: Label Not Found";
+      return;
+
+  }
   if (registers[cirs[0]] == registers[cirs[1]]) {
-    pc = lableTable[label];
+    if(lableTable.find(label)!=lableTable.end()){
+      pc = lableTable[label];
+      cout<<label<<endl;
+      
+    }
+    else{
+      error1="Error: Label Not Found";
+      return;
+    }
   }
   return;
 }
@@ -606,11 +642,17 @@ void lw (vector<int>& cirs) {
   //cout<<cirs[1]<<","<<cirs[2]<<","<<cirs[3]<<endl;
   if(typeOfarg==0) address=offset+registers[cirs[2]];
   else address=offset+cirs[2];
-  if(address<400 || address>1048576) {error1="Error: Memory Address not accessible";return;}
-  else if(address%4 != 0) {error1 = "Error: invalid memory location";return;}
+  if(address<4*numberofInst || address>1048576) {
+    error1="Error: Memory Address not accessible";
+    return;
+    }
+  else if(address%4 != 0) {
+    error1 = "Error: invalid memory location";
+    return;
+    }
   else {
     address /= 4; 
-    address -= 100;
+    address -= numberofInst;
   }
   registers[cirs[0]] = data123[address];
     //cout<<address<<","<<cirs[0]<<endl;
@@ -621,14 +663,22 @@ void sw (vector<int>& cirs) {
   int offset=cirs[1];
   int typeOfarg=cirs[3];
   int address;
-  if(typeOfarg==0) address=offset+registers[cirs[2]];
+  if(typeOfarg==0) {
+    address=offset+registers[cirs[2]];
+    }
   else address=offset+cirs[2];
-  if(address<400 || address>1048576) {error1="Error: Memory Address not accessible";return;}
-  else if(address%4 != 0) {error1 = "Error: invalid memory location"; return;}
+  if(address<4*numberofInst || address>1048576) {
+    error1="Error: Memory Address not accessible";
+    return;
+    }
+  else if(address%4 != 0) {
+    error1 = "Error: invalid memory location";
+    return;
+    }
   else {
    
     address /= 4;
-    address -= 100; 
+    address -= numberofInst; 
   }
   data123[address] = registers[cirs[0]];
 
@@ -641,14 +691,14 @@ void j (vector<int>& cirs,string& label) {
   return;
 }
 
-void execute () {
-  if(error1!="") return;
+void execute (ofstream& out) {
   while (pc < maxInstructions) {
-    numClockCycles++;
-    if(error1!="") return;
    
-      //cout<<"PC:"<<pc<<endl;
-      //cout<<error<<" error "<<pc<<endl;
+    if(error1!="") {
+      cout<<"Runtime Error:"<<pc-1<<":"<<error1<<endl;
+      return;
+    }
+     numClockCycles++;
 
     instruction currInst = iset[pc-1];
     pc++;
@@ -715,60 +765,66 @@ void execute () {
         break;
       }
     };
-  printVector();
-
-
+    
+  printVector(out);
   }
-
-
-
+  if(error1!="") {
+      cout<<"Runtime Error:"<<pc-1<<":"<<error1<<endl;
+      return;
+    }
   return;
 }
 
 
- int main() {
+ int main(int argc, char** argv) {
   initialize_registers();
-  //cout<<"sahgoi"<<endl;
-  
-  
-  for(int i=0;i<262044;i++){
-    data123[i] = i;
-  }
+  registers[rmap["$sp"]]=(1<<20)-4;
+  if (argc==1){
+		cout<<"Input File should be given as argument"<<endl;
+    return 0;	
+	}
+	else{
+		file=argv[1];
+    if(argc==3) outfile=argv[2];
+    else outfile="output.txt";
+	}
   
   readFile(file);
   preprocess(); // all input has been read and stored in iset.
-  //cout<<maxInstructions<<endl;
-  //cout<<currentInstNum<<endl;
-  
-  //cout<<numberofInst<<endl;
-  //maxInstructions = currentInstNum;
-    //for(int i=0;i<inputprogram.size();i++){
-      //cout<<inputprogram[i]<<endl;
-  //}
-  maxInstructions=numberofInst+1;
-//   for(int i=0;i<iset.size();i++){
-//       instruction x=iset[i];
-//       vector<int> y=x.cirs;
-//       int id=x.opID;
-//       cout<<y[0]<<","<<y[1]<<","<<y[2]<<","<<id<<endl;
-//   }
- for(auto x:lableTable){
-      cout<<x.first<<" "<<x.second<<endl;
- }
-  //cout<<pc<<endl;
-  if(error.size()>0){
-  for(int i=0;i<error.size();i++){
-      cout<<error[i]<<"\n"<<endl;
-    
+  sizeOfData=(1<<18) - numberofInst;
+  /*
+  for(int i=0;i<data123.size();i++){
+    data123[i] = 0;
   }
+  */
+  
+
+  maxInstructions=numberofInst+1;
+  ofstream outstream(outfile);
+  if(error.size()>0){
+    for(int i=0;i<error.size();i++){
+        cout<<error[i]<<"\n"<<endl;
+        outstream<<error[i]<<"\n"<<endl;
+      
+    }
+  outstream.close();
   return 0;
   }
-  execute ();
+  execute (outstream);
   cout<<"Number Of Clock Cycles: "<<numClockCycles<<endl;
-  for(int i=0;i<numOfInst.size();i++){
-    cout<<myset[i]<<": "<<numOfInst[i]<<endl;
+  outstream<<"Number Of Clock Cycles: "<<numClockCycles<<endl;
+  cout<<"[";
+  outstream<<"[";
+  int totalValidinstruction=0;
+  for(int i=0;i<numOfInst.size()-1;i++){
+    totalValidinstruction+=numOfInst[i];
+    cout<<myset[i]<<": "<<numOfInst[i]<<",";
+    outstream<<myset[i]<<": "<<numOfInst[i]<<",";
   }
- 
-
+  totalValidinstruction+=numOfInst[numOfInst.size()-1];
+  cout<<myset[numOfInst.size()-1]<<": "<<numOfInst[numOfInst.size()-1]<<","<<"NumberOfEmptyInstruction: "<<(numberofInst-totalValidinstruction) <<"]"<<endl;
+  outstream<<myset[numOfInst.size()-1]<<": "<<numOfInst[numOfInst.size()-1]<<","<<"NumberOfEmptyInstruction: "<<(numberofInst-totalValidinstruction) <<"]"<<endl;
+  //cout<<numberofInst<<","<<sizeOfData<<endl;
+  outstream.close();
   return 0;
 }
