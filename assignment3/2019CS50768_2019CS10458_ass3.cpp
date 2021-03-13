@@ -76,13 +76,13 @@ void printVector(ofstream& out) {
     }
     string s="$";
     s=s+to_string(i);
-    cout<<s<<": "<<registers[rmap[s]]<<",";
-    out<<s<<": "<<registers[rmap[s]]<<",";
+    cout<<s<<": "<<hex<<registers[rmap[s]]<<dec<<",";
+    out<<s<<": "<<hex<<registers[rmap[s]]<<dec<<",";
   }
   string s="$";
     s=s+to_string(31);
-    cout<<s<<": "<<registers[rmap[s]];
-    out<<s<<": "<<registers[rmap[s]];
+    cout<<s<<": "<<hex<<registers[rmap[s]]<<dec;
+    out<<s<<": "<<registers[rmap[s]]<<dec;
 
   cout  << "]" << endl;
   out  << "]" << endl;
