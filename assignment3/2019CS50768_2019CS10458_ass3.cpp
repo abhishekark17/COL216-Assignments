@@ -36,6 +36,7 @@ int startMemOfData=400;
 
 vector<int> data123 (1<<18,0);
 vector<int> numOfInst (10,0);
+int numberofInst=0;
 
 
 int numClockCycles = 0;
@@ -51,7 +52,7 @@ string outfile;
 unordered_map<string,int> lableTable;
 unordered_map <int,string> uniqueLabelID;
 
-int numberofInst = 0;
+int numberOfLine = 0;
 string currentInst;
 int currentInstNum = 0;
 int maxInstructions = 0;
@@ -132,7 +133,7 @@ void readFile(string file){
   string myline;
   while (ifs.good()) {
     getline (ifs,myline);
-    numberofInst++;
+    numberOfLine++;
     inputprogram.push_back(myline);
   }
   ifs.close();
@@ -327,7 +328,7 @@ void offsetType() {
       else if (rmap.find(first3) != rmap.end()) {
         buffer1=first3;
         ValOfRegister = registers[rmap.at(first3)];
-        cout<<"valOfre"<<ValOfRegister<<endl;
+        //cout<<"valOfre"<<ValOfRegister<<endl;
         strInsideParen = strInsideParen.substr(3);
       }
       else if (rmap.find(first2) != rmap.end()) {
@@ -524,11 +525,11 @@ void preprocess () {  // checking if line has label: at the beginning;
   int labelIndex;
   currentInstNum=1;
   string tempLabel="";
-  for (int i=0; i < numberofInst ; i++) {
+  for (int i=0; i < numberOfLine ; i++) {
     CIRS={0,0,0,0};
     bool isLabel = false;
     currentInst = inputprogram[i];
-    
+    RemoveSpaces();
     if (currentInst != ""){
         RemoveSpaces();
 
@@ -546,15 +547,19 @@ void preprocess () {  // checking if line has label: at the beginning;
         RemoveSpaces();
         currentInst=currentInst.substr(1);
         RemoveSpaces();
-        
+        if(currentInst=="") continue;
         }
         
 
+    }
+    else {
+      continue;
     } 
    
      
     instruction instObj = readInst();
     iset.push_back(instObj);
+    numberofInst++;
     currentInstNum++;
   }
 
@@ -594,7 +599,7 @@ void bne (vector<int>& cirs,string& label) {
       //cout<<lableTable[uniqueLabelID[cirs[2]]]<<endl;;
     if(lableTable.find(label)!=lableTable.end()){
       pc = lableTable[label];
-      cout<<label<<endl;
+      //cout<<label<<endl;
      
     }
     else{
@@ -616,7 +621,7 @@ void beq (vector<int>& cirs,string& label) {
   if (registers[cirs[0]] == registers[cirs[1]]) {
     if(lableTable.find(label)!=lableTable.end()){
       pc = lableTable[label];
-      cout<<label<<endl;
+      //cout<<label<<endl;
       
     }
     else{
@@ -692,7 +697,7 @@ void j (vector<int>& cirs,string& label) {
 }
 
 void execute (ofstream& out) {
-  while (pc < maxInstructions) {
+  while (pc <= maxInstructions) {
    
     if(error1!="") {
       cout<<"Runtime Error:"<<pc-1<<":"<<error1<<endl;
@@ -765,11 +770,13 @@ void execute (ofstream& out) {
         break;
       }
     };
-    
+  cout<<"Cycle Number: "<<numClockCycles<<endl;
+  out<<"Cycle Number: "<<numClockCycles<<endl;
+
   printVector(out);
   }
   if(error1!="") {
-      cout<<"Runtime Error:"<<pc-1<<":"<<error1<<endl;
+      cout<<"Runtime Error:"<<pc<<":"<<error1<<endl;
       return;
     }
   return;
@@ -792,14 +799,14 @@ void execute (ofstream& out) {
   readFile(file);
   preprocess(); // all input has been read and stored in iset.
   sizeOfData=(1<<18) - numberofInst;
-  /*
-  for(int i=0;i<data123.size();i++){
-    data123[i] = 0;
+  
+  for(int i=250-numberofInst;i<250-numberofInst+10;i++){
+    data123[i] = i-(250-numberofInst);
   }
-  */
+  
   
 
-  maxInstructions=numberofInst+1;
+  maxInstructions=numberofInst;
   ofstream outstream(outfile);
   if(error.size()>0){
     for(int i=0;i<error.size();i++){
@@ -811,8 +818,10 @@ void execute (ofstream& out) {
   return 0;
   }
   execute (outstream);
-  cout<<"Number Of Clock Cycles: "<<numClockCycles<<endl;
-  outstream<<"Number Of Clock Cycles: "<<numClockCycles<<endl;
+  cout<<endl;
+  outstream<<endl;
+  cout<<"Total Number of Cycles: "<<numClockCycles<<endl<<endl;
+  outstream<<"Total Number of Cycles: "<<numClockCycles<<endl<<endl;
   cout<<"[";
   outstream<<"[";
   int totalValidinstruction=0;
@@ -821,10 +830,24 @@ void execute (ofstream& out) {
     cout<<myset[i]<<": "<<numOfInst[i]<<",";
     outstream<<myset[i]<<": "<<numOfInst[i]<<",";
   }
-  totalValidinstruction+=numOfInst[numOfInst.size()-1];
-  cout<<myset[numOfInst.size()-1]<<": "<<numOfInst[numOfInst.size()-1]<<","<<"NumberOfEmptyInstruction: "<<(numberofInst-totalValidinstruction) <<"]"<<endl;
-  outstream<<myset[numOfInst.size()-1]<<": "<<numOfInst[numOfInst.size()-1]<<","<<"NumberOfEmptyInstruction: "<<(numberofInst-totalValidinstruction) <<"]"<<endl;
-  //cout<<numberofInst<<","<<sizeOfData<<endl;
+  cout<<myset[numOfInst.size()-1]<<": "<<numOfInst[numOfInst.size()-1]<<"]"<<endl;
+  outstream<<myset[numOfInst.size()-1]<<": "<<numOfInst[numOfInst.size()-1]<<"]"<<endl;
+  cout<<endl;
+  outstream<<endl;
+  cout<<"Final data values that are updated during execution:"<<endl;
+  outstream<<"Final data values that are updated during execution:"<<endl;
+
+  for(int i=250-numberofInst;i<250-numberofInst+10;i++){
+    cout<<(i+numberofInst)*4<<"-"<<(i+numberofInst)*4+3<<": "<<hex<<data123[i]<<dec<<endl;
+    outstream<<(i+numberofInst)*4<<"-"<<(i+numberofInst)*4+3<<": "<<hex<<data123[i]<<dec<<endl;
+
+  } 
+  //cout<<pc<<endl;
+  //cout<<numberofInst<<endl;
+  //totalValidinstruction+=numOfInst[numOfInst.size()-1];
+  //cout<<myset[numOfInst.size()-1]<<": "<<numOfInst[numOfInst.size()-1]<<","<<"NumberOfEmptyInstruction: "<<(numberOfLine-totalValidinstruction) <<"]"<<endl;
+  //outstream<<myset[numOfInst.size()-1]<<": "<<numOfInst[numOfInst.size()-1]<<","<<"NumberOfEmptyInstruction: "<<(numberOfLine-totalValidinstruction) <<"]"<<endl;
+  //cout<<numberOfLine<<","<<sizeOfData<<endl;
   outstream.close();
   return 0;
 }
