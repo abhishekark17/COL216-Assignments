@@ -1,0 +1,4 @@
+Syntax Error:2: ": Error: more than one label
+
+Syntax Error:2: Unknown Instruction
+
