@@ -1,2 +1,2 @@
-add $9, $9, $3
-label : aha: j label
+addi $1, $1, - 2
+

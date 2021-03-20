@@ -82,8 +82,8 @@ void printVector(ofstream& out) {
 
     string s="$";
     s=s+to_string(i);
-    cout<<s<<": "<<hex<<registers[rmap[s]]<<dec<<",";
-    out<<s<<": "<<hex<<registers[rmap[s]]<<dec<<",";
+    cout<< s << ": " << hex << registers[rmap[s]] << dec << ",";
+    out << s << ": " << hex << registers[rmap[s]] << dec << ",";
   }
 
   string s="$";
@@ -190,7 +190,12 @@ void removeComma() {
 void findImmediate() {
   int i=0;
   bool isValidInt=true;
-  string buffer;
+  string buffer = "";
+  if (currentInst[0] == '-') {
+    buffer += "-"; 
+    currentInst = currentInst.substr(1);
+    RemoveSpaces();
+  }
   for(i=0;i<currentInst.size();i++){
     if(currentInst[i]==' ' || currentInst[i]=='\t') break;
     else if(currentInst[i]>47 && currentInst[i]<58) buffer+=currentInst[i];
@@ -315,7 +320,7 @@ void offsetType() {
       CIRS[3]=1;
       for(int i=0;i<buffer1.size();i++){
         if ((buffer1[i]<=47 || buffer1[i]>=58) && buffer1[i]!='-' ){
-          error.push_back("Synatx Error:"+to_string(currentInstNum)+": Not a valid parameter Inside Parenthesis");
+          error.push_back("Syntax Error:"+to_string(currentInstNum)+": Not a valid parameter Inside Parenthesis");
           return;
         }  
       }
@@ -328,7 +333,7 @@ void offsetType() {
   
   for(int i=0;i<buffer.size();i++){
     if ((buffer[i]<=47 || buffer[i]>=58) && buffer[i]!='-' ) {
-      error.push_back("Synatx Error:"+to_string(currentInstNum)+": Not a Valid Offset");
+      error.push_back("Syntax Error:"+to_string(currentInstNum)+": Not a Valid Offset");
       return;
     }
   }
