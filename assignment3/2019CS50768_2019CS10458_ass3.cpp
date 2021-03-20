@@ -13,7 +13,6 @@ vector<int> CIRS (4,0);   //current instruction register set
 CIRS DEFINITION FOR VARIOUS INSTRUCTIONS:
 add,sub,mul, slt := [register1 ,register2 ,register3 , NotUsed]
 addi := [register1,register2,immediateValue,NotUsed]
-
 lw, sw := [register1, offset , last register , 0] // 0 if register is there as last arguement inside parenthesis
        := [register1, offset ,address , 1]  // 1 if address given as argument inside braces
 bne, beq := [register1, register2, NotUsed, NotUsed]
@@ -82,8 +81,8 @@ void printVector(ofstream& out) {
 
     string s="$";
     s=s+to_string(i);
-    cout<< s << ": " << hex << registers[rmap[s]] << dec << ",";
-    out << s << ": " << hex << registers[rmap[s]] << dec << ",";
+    cout<<s<<": "<<hex<<registers[rmap[s]]<<dec<<",";
+    out<<s<<": "<<hex<<registers[rmap[s]]<<dec<<",";
   }
 
   string s="$";
@@ -190,22 +189,19 @@ void removeComma() {
 void findImmediate() {
   int i=0;
   bool isValidInt=true;
-  string buffer = "";
-  if (currentInst[0] == '-') {
-    buffer += "-"; 
+  string buffer;
+  if(currentInst[0] == '-') {
+    buffer = "-"; 
     currentInst = currentInst.substr(1);
-    RemoveSpaces();
   }
-  for(i=0;i<currentInst.size();i++){
-    if(currentInst[i]==' ' || currentInst[i]=='\t') break;
-    else if(currentInst[i]>47 && currentInst[i]<58) buffer+=currentInst[i];
-    else {
-      isValidInt=false;
-      break;
-    }
-  }
+  else i = 0;
 
-  if(isValidInt) CIRS[2]=stoi(buffer);
+  while (i < currentInst.size() && currentInst[i] < 58 && currentInst[i] > 47 ) {
+    if (currentInst[i] == ' ' || currentInst[i] == '\t' || currentInst[i]=='(') break;
+    buffer += currentInst[i];
+    i++;
+  }
+  CIRS[2]=stoi(buffer);
   currentInst=currentInst.substr(i);
 }
 
@@ -229,7 +225,7 @@ string findLabel(){
 void offsetType() {
   string buffer = "";
   string buffer1 = "";
-  int i = 1;
+  int i = 0;
   int offset = 0;
   int final1 = 0;
   bool bracketed = true;
@@ -296,7 +292,7 @@ void offsetType() {
       }
 
       else {  // string inside parenthesis does not start with $
-        int i1 = 1;
+        int i1 = 0;
     
         if(strInsideParen[0]=='-') {
           buffer1="-"; 
@@ -320,7 +316,7 @@ void offsetType() {
       CIRS[3]=1;
       for(int i=0;i<buffer1.size();i++){
         if ((buffer1[i]<=47 || buffer1[i]>=58) && buffer1[i]!='-' ){
-          error.push_back("Syntax Error:"+to_string(currentInstNum)+": Not a valid parameter Inside Parenthesis");
+          error.push_back("Synatx Error:"+to_string(currentInstNum)+": Not a valid parameter Inside Parenthesis");
           return;
         }  
       }
@@ -333,7 +329,7 @@ void offsetType() {
   
   for(int i=0;i<buffer.size();i++){
     if ((buffer[i]<=47 || buffer[i]>=58) && buffer[i]!='-' ) {
-      error.push_back("Syntax Error:"+to_string(currentInstNum)+": Not a Valid Offset");
+      error.push_back("Synatx Error:"+to_string(currentInstNum)+": Not a Valid Offset");
       return;
     }
   }
@@ -670,7 +666,7 @@ int main(int argc, char** argv) {
   preprocess(); // all input has been read and stored in iset.
   sizeOfData=(1<<18) - numberofInst;
   
-  for(int i=250-numberofInst;i<250-numberofInst+10;i++) data123[i] = i-(250-numberofInst);
+  //for(int i=250-numberofInst;i<250-numberofInst+10;i++) data123[i] = i-(250-numberofInst);
   
   maxInstructions=numberofInst;
   ofstream outstream(outfile);
@@ -701,11 +697,13 @@ int main(int argc, char** argv) {
   cout<<endl; outstream<<endl;
   cout<<"Final data values that are updated during execution:"<<endl;
   outstream<<"Final data values that are updated during execution:"<<endl;
-
-  for(int i=250-numberofInst;i<250-numberofInst+10;i++){
-    cout<<(i+numberofInst)*4<<"-"<<(i+numberofInst)*4+3<<": "<<hex<<data123[i]<<dec<<endl;
-    outstream<<(i+numberofInst)*4<<"-"<<(i+numberofInst)*4+3<<": "<<hex<<data123[i]<<dec<<endl;
-  } 
+  
+  for(int i=numberofInst;i<(1<<18);i++){
+    if(data123[i-numberofInst]!=0) {
+      cout<<(i)*4<<"-"<<(i)*4+3<<": "<<hex<<data123[i-numberofInst]<<dec<<endl;
+      outstream<<(i)*4<<"-"<<(i)*4+3<<": "<<hex<<data123[i-numberofInst]<<dec<<endl;
+    }
+  }
   //cout<<pc<<endl;
   //cout<<numberofInst<<endl;
   //totalValidinstruction+=numOfInst[numOfInst.size()-1];
