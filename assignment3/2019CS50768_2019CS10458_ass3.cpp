@@ -1,3 +1,5 @@
+// ABHINAV SINGHAL 2019CS50768
+// Partner in Assignment-3 : ABHISHEK KUMAR 2019CS10458
 #include <iostream>
 #include <vector>
 #include <algorithm>
@@ -51,11 +53,12 @@ int numberofInst=0;
 
 int numClockCycles = 0;
 unordered_map <string,int> rmap;
+unordered_map <int, string> rrmap; // reverse register map
 vector<string> inputprogram;
 vector<instruction> iset;
 
 vector<int> registers(32,0);
-string file , outfile;
+string file , outfile = "output.txt";
 
 unordered_map<string,int> lableTable; //which lable is present on which instruction number
 unordered_map <int,string> uniqueLabelID;
@@ -69,6 +72,60 @@ vector<string> myset = {"add","sub","mul","slt","addi","bne","beq","lw","sw","j"
 //                        R     R     R     R     I      I     I    
 
 int pc = 1;   // program counter  //
+
+
+////////////////////////////////////////////
+////////////////////////////////////////////
+//  IMPORTANT DECLARATIONS FOR MINOR EXAM
+////////////////////////////////////////////
+////////////////////////////////////////////
+const int numDramRows = 1024, numDramCols = 1024;
+const int  actualNumDramCols = 256;
+int ROW_ACCESS_DELAY = 0, COL_ACCESS_DELAY = 0;
+int numRowBufferUpdates = 0;
+int currentRowInRowBuffer = 0;
+int uptoClkCyc = 0;
+int lwInstRegisterID = -1;
+int swInstMemAdd = -1;
+vector<string> exectutionOutput;
+
+bool DRAMrequestIssued = false;
+
+//  (row,col)
+pair<int,int> getActualRowColFromAddress (int address) {  // address supplied should be a multiple of 4
+  pair <int,int> mypair;
+  if (address < 0) {
+    mypair.first = -1; mypair.second = -1;
+    return mypair;
+  }
+  else if (address % 4 != 0 ) {
+    mypair.first = -2; mypair.second = -2;
+    return mypair;
+  }
+  else if (address > (numDramRows*numDramCols - 4)) {    //(1024*1024 - 4) last accessible address
+    mypair.first = -3; mypair.second = -3;
+    return mypair; 
+  }
+  mypair.first = address / numDramRows;           // row of dram
+  mypair.second = (address - (mypair.first)* numDramRows ) / 4; // actual col of dram
+  return mypair; 
+}
+
+int getRowOfRowBuffer (int address) {
+  pair<int,int> mypair = getActualRowColFromAddress(address);
+  return mypair.first;
+}
+
+
+
+
+
+
+
+
+// MINOR EXAM DECLARATIONS END
+
+
 
 void printVector(ofstream& out) {
   cout << "[";
@@ -126,6 +183,40 @@ void initialize_registers () {
   rmap["$sp"] = 29; rmap["$29"] = 29;
   rmap["$fp"] = 30; rmap["$30"] = 30;
   rmap["$ra"] = 31; rmap["$31"] = 31;  
+
+
+  rrmap[0] = "$zero"; 
+  rrmap[1] = "$at"; 
+  rrmap[2] = "$v0"; 
+  rrmap[3] = "$v1"; 
+  rrmap[4] = "$a0"; 
+  rrmap[5] = "$a1"; 
+  rrmap[6] = "$a2"; 
+  rrmap[7] = "$a3"; 
+  rrmap[8] = "$t0"; 
+  rrmap[9] = "$t1"; 
+  rrmap[10] = "$t2"; 
+  rrmap[11] = "$t3"; 
+  rrmap[12] = "$t4"; 
+  rrmap[13] = "$t5"; 
+  rrmap[14] = "$t6"; 
+  rrmap[15] = "$t7"; 
+  rrmap[16] = "$s0"; 
+  rrmap[17] = "$s1"; 
+  rrmap[18] = "$s2"; 
+  rrmap[19] = "$s3"; 
+  rrmap[20] = "$s4"; 
+  rrmap[21] = "$s5"; 
+  rrmap[22] = "$s6"; 
+  rrmap[23] = "$s7"; 
+  rrmap[24] = "$t8"; 
+  rrmap[25] = "$t9"; 
+  rrmap[26] = "$k0";
+  rrmap[27] = "$k1"; 
+  rrmap[28] = "$gp"; 
+  rrmap[29] = "$sp"; 
+  rrmap[30] = "$fp";
+  rrmap[31] = "$ra";
   return;
 }
 
@@ -648,7 +739,301 @@ void execute (ofstream& out) {
   return;
 }
 
+void execute1 (ofstream & out) {
+  while (pc <= maxInstructions) {
+    if(error1 != "") {
+      cout << "Runtime Error:" << pc-1 << ":" << error1 << endl;
+      return;
+    }
+    
+    numClockCycles++;
+    instruction currInst = iset[pc-1];
+    pc++;
 
+    switch (currInst.opID) {
+      case 0: { //add 
+        if ((DRAMrequestIssued == false) || (DRAMrequestIssued && (lwInstRegisterID != currInst.cirs[0]) && (lwInstRegisterID != currInst.cirs[1]) && (lwInstRegisterID != currInst.cirs[2]))) {
+          add (currInst.cirs);
+          exectutionOutput.push_back("cycle " + to_string(numClockCycles) + ": " + rrmap.at(currInst.cirs[0]) + "=" + to_string(registers[currInst.cirs[0]])  );
+          numOfInst[0]++;
+        }
+        // DRAMrequestIssued = true now 
+        else {  // you cannot execute the instruction currently and cannot go forward => wait
+          numClockCycles =  uptoClkCyc + 1;
+          DRAMrequestIssued = false;    // that request has been completed now and we have that register's value in that register after loading from memory.
+          lwInstRegisterID = -1; swInstMemAdd = -1;
+
+          add (currInst.cirs);
+          exectutionOutput.push_back("cycle " + to_string(numClockCycles) + ": " + rrmap.at(currInst.cirs[0]) + "=" + to_string(registers[currInst.cirs[0]])  + "(after wait)");
+          numOfInst[0]++;
+        }      
+        
+        break;
+      }
+
+      case 1: { //sub
+        if ((DRAMrequestIssued == false) || (DRAMrequestIssued && (lwInstRegisterID != currInst.cirs[0]) && (lwInstRegisterID != currInst.cirs[1]) && (lwInstRegisterID != currInst.cirs[2]))) {
+          sub(currInst.cirs);
+          exectutionOutput.push_back("cycle " + to_string(numClockCycles) + ": " + rrmap.at(currInst.cirs[0]) + "=" + to_string(registers[currInst.cirs[0]])  );
+          numOfInst[1]++;
+        }
+        // DRAMrequestIssued = true now 
+        else {  // you cannot execute the instruction currently and cannot go forward => wait
+          numClockCycles =  uptoClkCyc + 1;
+          DRAMrequestIssued = false;    // that request has been completed now and we have that register's value in that register after loading from memory.
+          lwInstRegisterID = -1; swInstMemAdd = -1;
+
+          sub (currInst.cirs);
+          exectutionOutput.push_back("cycle " + to_string(numClockCycles) + ": " + rrmap.at(currInst.cirs[0]) + "=" + to_string(registers[currInst.cirs[0]])  + "(after wait)");
+          numOfInst[1]++;
+        }    
+        
+        break;
+      }
+      case 2: { //mul
+        if ((DRAMrequestIssued == false)  || (DRAMrequestIssued && (lwInstRegisterID != currInst.cirs[0]) && (lwInstRegisterID != currInst.cirs[1]) && (lwInstRegisterID != currInst.cirs[2]))) {
+          mul (currInst.cirs);
+          exectutionOutput.push_back("cycle " + to_string(numClockCycles) + ": " + rrmap.at(currInst.cirs[0]) + "=" + to_string(registers[currInst.cirs[0]])  );
+          numOfInst[2]++;
+        }
+        // DRAMrequestIssued = true now 
+        else {  // you cannot execute the instruction currently and cannot go forward => wait
+          numClockCycles =  uptoClkCyc + 1;
+          DRAMrequestIssued = false;    // that request has been completed now and we have that register's value in that register after loading from memory.
+          lwInstRegisterID = -1; swInstMemAdd = -1;
+
+          mul (currInst.cirs);
+          exectutionOutput.push_back("cycle " + to_string(numClockCycles) + ": " + rrmap.at(currInst.cirs[0]) + "=" + to_string(registers[currInst.cirs[0]])  + "(after wait)");
+          numOfInst[2]++;
+        }    
+        
+        break;
+      }
+      case 3: { // slt
+        if ((DRAMrequestIssued == false) || (DRAMrequestIssued && (lwInstRegisterID != currInst.cirs[0]) && (lwInstRegisterID != currInst.cirs[1]) && (lwInstRegisterID != currInst.cirs[2]))) {
+          slt (currInst.cirs);
+          exectutionOutput.push_back("cycle " + to_string(numClockCycles) + ": " + rrmap.at(currInst.cirs[0]) + "=" + to_string(registers[currInst.cirs[0]])  );
+          numOfInst[3]++;
+        }
+        // DRAMrequestIssued = true now 
+        else {  // you cannot execute the instruction currently and cannot go forward => wait
+          numClockCycles =  uptoClkCyc + 1;
+          DRAMrequestIssued = false;    // that request has been completed now and we have that register's value in that register after loading from memory.
+          lwInstRegisterID = -1; swInstMemAdd = -1;
+
+          slt (currInst.cirs);
+          exectutionOutput.push_back("cycle " + to_string(numClockCycles) + ": " + rrmap.at(currInst.cirs[0]) + "=" + to_string(registers[currInst.cirs[0]])  + "(after wait)");
+          numOfInst[3]++;
+        }    
+        
+        break;
+      }
+
+      case 4: { //addi
+        if ( (DRAMrequestIssued == false) || (DRAMrequestIssued && (lwInstRegisterID != currInst.cirs[0]) && (lwInstRegisterID != currInst.cirs[1]) )) {
+          addi (currInst.cirs);
+  
+          exectutionOutput.push_back("cycle " + to_string(numClockCycles) + ": " + rrmap.at(currInst.cirs[0]) + "=" + to_string(registers[currInst.cirs[0]])  );
+          numOfInst[4]++;
+        }
+        // DRAMrequestIssued = true now 
+        else {  // you cannot execute the instruction currently and cannot go forward => wait
+          numClockCycles =  uptoClkCyc + 1;
+      
+          DRAMrequestIssued = false;    // that request has been completed now and we have that register's value in that register after loading from memory.
+          lwInstRegisterID = -1; swInstMemAdd = -1;
+
+          addi (currInst.cirs);
+          exectutionOutput.push_back("cycle " + to_string(numClockCycles) + ": " + rrmap.at(currInst.cirs[0]) + "=" + to_string(registers[currInst.cirs[0]])  + "(after wait)");
+          numOfInst[4]++;
+        }    
+        break;
+      }
+
+      // NOTE THAT WHENEVER YOU ARE BRANCHING, YOU HAVE TO WAIT IF THE REGISTERS ARE NOT AVAILABLE BECAUSE YOU CANNOT DECIDE WHICH INSTRUCTION TO EXECUTE FIRST
+      // HENCE WAIT UNTILL ALL CLOCK CYCLES TO LOAD THE NECESSARY REGISTER AND THEN EXECUTE THE CURRENT COMMAND.
+      case 5: { //bne
+        if ( (DRAMrequestIssued == false) || (DRAMrequestIssued && (lwInstRegisterID != currInst.cirs[0]) && (lwInstRegisterID != currInst.cirs[1]) )) {
+          bne (currInst.cirs,currInst.label);
+          exectutionOutput.push_back("cycle " + to_string(numClockCycles) + ": " + "Jump to label ID: " + currInst.label);
+          numOfInst[5]++;
+        }
+        
+        else {  // you cannot execute the instruction currently and cannot go forward => wait
+          numClockCycles =  uptoClkCyc + 1;
+          DRAMrequestIssued = false;    // that request has been completed now and we have that register's value in that register after loading from memory.
+          lwInstRegisterID = -1; swInstMemAdd = -1;
+
+          bne (currInst.cirs,currInst.label);
+          exectutionOutput.push_back("cycle " + to_string(numClockCycles) + ": " + "Jump to label ID: " + currInst.label);
+          numOfInst[5]++;
+        }    
+        
+        break;
+      }
+      case 6: { //beq
+        if ( (DRAMrequestIssued == false)  || (DRAMrequestIssued && (lwInstRegisterID != currInst.cirs[0]) && (lwInstRegisterID != currInst.cirs[1]) )) {
+          beq (currInst.cirs,currInst.label);
+          exectutionOutput.push_back("cycle " + to_string(numClockCycles) + ": " + "Jump to label ID: " + currInst.label);
+          numOfInst[6]++;
+        }
+        else {  // you cannot execute the instruction currently and cannot go forward => wait
+          numClockCycles =  uptoClkCyc + 1;
+          DRAMrequestIssued = false;    // that request has been completed now and we have that register's value in that register after loading from memory.
+          lwInstRegisterID = -1; swInstMemAdd = -1;
+
+          beq (currInst.cirs,currInst.label);
+          exectutionOutput.push_back("cycle " + to_string(numClockCycles) + ": " + "Jump to label ID: " + currInst.label);
+          numOfInst[6]++;
+        }    
+        
+        break;
+      }
+      case 7: { //lw
+        if (DRAMrequestIssued)  {numClockCycles = uptoClkCyc + 1; DRAMrequestIssued = false; }
+        if ((DRAMrequestIssued == false) ) {
+          exectutionOutput.push_back("cycle " + to_string(numClockCycles) + ": " + "DRAM Request Issued");
+          DRAMrequestIssued = true;
+          lwInstRegisterID = currInst.cirs[0];
+
+          int offset = currInst.cirs[1];
+          int typeOfarg = currInst.cirs[3];
+          int address;
+          if (typeOfarg == 0) address=offset + registers[currInst.cirs[2]];
+          else address = offset + currInst.cirs[2];
+          int wantedRow = getRowOfRowBuffer(address);
+          if (wantedRow < 0) {
+            cout << "BAD ADDRESS";
+            return;
+          }
+          if (currentRowInRowBuffer == wantedRow) uptoClkCyc = numClockCycles + COL_ACCESS_DELAY;
+          else {
+            uptoClkCyc = numClockCycles + (2 * ROW_ACCESS_DELAY) + COL_ACCESS_DELAY;
+            numRowBufferUpdates++ ;
+          }
+
+          lw(currInst.cirs);
+          exectutionOutput.push_back("cycle " + to_string(numClockCycles + 1)  + "-" + to_string(uptoClkCyc) + ": " +  rrmap.at(currInst.cirs[0]) + "=" + to_string(registers[currInst.cirs[0]]) );
+          
+          
+          numOfInst[7]++;
+        }
+        
+        break;
+      }
+      case 8: { //sw
+        if (DRAMrequestIssued)  {numClockCycles = uptoClkCyc + 1; DRAMrequestIssued = false;}
+
+        if ((DRAMrequestIssued == false) ) {
+          exectutionOutput.push_back("cycle " + to_string(numClockCycles) + ": " + "DRAM Request Issued (sw)");
+          DRAMrequestIssued = true;
+          
+          int offset = currInst.cirs[1];
+          int typeOfarg = currInst.cirs[3];
+          int address;
+          if(typeOfarg == 0) address=offset + registers[currInst.cirs[2]];
+          else address = offset + currInst.cirs[2];
+          swInstMemAdd = address;
+
+          int wantedRow = getRowOfRowBuffer(address);
+          if (wantedRow < 0) {
+            cout << "BAD ADDRESS (sw)";
+            return;
+          }
+          if (currentRowInRowBuffer == wantedRow) uptoClkCyc = numClockCycles + COL_ACCESS_DELAY;
+          else {
+            uptoClkCyc = numClockCycles + (2 * ROW_ACCESS_DELAY) + COL_ACCESS_DELAY;
+            numRowBufferUpdates++ ;
+          }
+
+          sw(currInst.cirs);
+          exectutionOutput.push_back("cycle " + to_string(numClockCycles + 1)  + "-" + to_string(uptoClkCyc) + ": " +  rrmap.at(currInst.cirs[0]) + "=" + to_string(registers[currInst.cirs[0]]) );
+          numOfInst[8]++;
+        }
+        break;
+      }
+
+      case 9: { //j       // note that j instruction can always be executed regardless of DRAM calls.
+        j (currInst.cirs,currInst.label);
+        numOfInst[9]++;
+        exectutionOutput.push_back("cycle " + to_string(numClockCycles) + ": " + "Jump to label ID: " + currInst.label);
+        break;
+      }
+    };
+  }
+
+  if(error1 != "") {
+      cout << "Runtime Error:" << pc << ":" << error1 <<endl;
+      return;
+  }
+  return;
+}
+//    NEW MAIN FUNCTION   //
+
+int main (int argc, char** argv) {
+  initialize_registers();
+  registers[rmap["$sp"]]=(1<<20)-4;
+  // argv = 0 -  :: 1 - inputfile :: 2 - ROW_ACCESS_DELAY :: 3 - COL_ACCESS_DELAY :: 4 - OUTFILE
+  if (argc==1){
+		cout<<"Input File should be given as argument"<<endl;
+    return 0;	
+	}
+  else if (argc == 2 || argc == 3) {
+    cout << "Please give both ROW_ACCESS_DELAY and COL_ACCESS_DELAY as argument" << endl;
+    return 0;
+  }
+  else {
+    file = argv[1];
+    ROW_ACCESS_DELAY = stoi(argv[2]);
+    COL_ACCESS_DELAY = stoi(argv[3]);
+    if (argc == 5) outfile = argv[4];
+  }
+
+  readFile(file);
+  preprocess(); // all input has been read and stored in iset.
+  sizeOfData=(1<<18) - numberofInst;
+
+  maxInstructions=numberofInst;
+  ofstream outstream(outfile);
+
+  if(error.size()>0){
+    for(int i=0;i<error.size();i++){
+      cout<<error[i]<<"\n"<<endl;
+      outstream<<error[i]<<"\n"<<endl;  
+    }
+    outstream.close();
+    return 0;
+  }
+
+  execute1(outstream);
+
+  cout << endl; outstream << endl;
+  cout << "Total Number of Cycles: " << numClockCycles << endl << endl;
+  outstream << "Total Number of Cycles: " << numClockCycles << endl << endl;
+  
+  
+
+  cout << "Memory content at the end of the execution:" << endl;
+  outstream << "Memory content at the end of the execution:" << endl;
+
+  for(int i=numberofInst;i<(1<<18);i++){
+    if(data123[i-numberofInst]!=0) {
+      cout<<(i)*4<<"-"<<(i)*4+3<<": "<<hex<<data123[i-numberofInst]<<dec<<endl;
+      outstream<<(i)*4<<"-"<<(i)*4+3<<": "<<hex<<data123[i-numberofInst]<<dec<<endl;
+    }
+  }
+
+  cout << "Every cycle description: " << endl << endl;
+  outstream <<  "Every cycle description: " << endl << endl;
+
+  for (string x : exectutionOutput) {
+    cout << x << endl;
+    outstream << x << endl;
+  }
+  outstream.close();
+  return 0;
+}
+/*
 int main(int argc, char** argv) {
   initialize_registers();
   registers[rmap["$sp"]]=(1<<20)-4;
@@ -713,3 +1098,4 @@ int main(int argc, char** argv) {
   outstream.close();
   return 0;
 }
+*/
