@@ -1,0 +1,11 @@
+addi $t7, $0, 1000 
+addi $t0, $t0, 1000
+addi $s0, $s0, 2000
+start:
+    
+    sw $s0, 1000
+    bne $t0, $t7, exit 
+    sub $t0, $t0, $t7
+    j start
+exit: 
+    addi $s1, $s1, 1

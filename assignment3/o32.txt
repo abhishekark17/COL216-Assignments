@@ -1,25 +1,48 @@
 
-Total Number of Cycles: 15
+Total Number of Clock Cycles: 54
 
-Total Number of Row Buffer Updates: 1
+Total Number of Row Buffer Updates: 4
 
 Memory content at the end of the execution:
 
+1000-1003: 1
+1024-1027: 2
 
 Every cycle description: 
 
-cycle 1: Instruction: addi ($t2,$t2,1000): $t2=1000
-cycle 2: DRAM Request Issued (lw)
-cycle 3-12: Access Row 0 from DRAM
-cycle 13-14: Accessing Column 1000: $t1=0
-cycle 3: Instruction: addi ($t0,$t0,8): $t0=8
-cycle 4: Instruction: addi ($t0,$t0,8): $t0=16
-cycle 5: Instruction: addi ($t0,$t0,8): $t0=24
-cycle 15: Instruction: addi ($t2,$t2,8): $t2=1008
+cycle 1: Instruction: addi ($t0,$zero,1): $t0=1
+cycle 2: Instruction: addi ($t1,$zero,2): $t1=2
+cycle 3: DRAM Request Issued (sw)
+cycle 4-13: Access Row 0 from DRAM
+cycle 14-15: Accessing Column 1000: memory address 1000-1003 = 1
+cycle 4: Instruction: add ($t4,$t1,$t2): $t4=2
+cycle 5: Instruction: addi ($s0,$s0,45): $s0=45
+cycle 6: Instruction: addi ($s0,$s0,45): $s0=90
+cycle 7: Instruction: addi ($s0,$s0,45): $s0=135
+cycle 8: Instruction: addi ($s0,$s0,45): $s0=180
+cycle 9: Instruction: addi ($s0,$s0,45): $s0=225
+cycle 10: Instruction: addi ($s0,$s0,45): $s0=270
+cycle 11: Instruction: addi ($s0,$s0,45): $s0=315
+cycle 12: Instruction: addi ($s0,$s0,45): $s0=360
+cycle 13: Instruction: addi ($s0,$s0,45): $s0=405
+cycle 14: Instruction: addi ($s0,$s0,45): $s0=450
+cycle 15: Instruction: addi ($s0,$s0,45): $s0=495
+cycle 16: Instruction: addi ($s0,$s0,45): $s0=540
+cycle 17: Instruction: addi ($s0,$s0,45): $s0=585
+cycle 18: Instruction: addi ($s0,$s0,45): $s0=630
+cycle 19: Instruction: addi ($s0,$s0,45): $s0=675
+cycle 20: Instruction: addi ($s0,$s0,45): $s0=720
+cycle 21: Instruction: addi ($s0,$s0,45): $s0=765
+cycle 22: DRAM Request Issued (sw)
+cycle 23-32: WriteBack Row 0 to DRAM
+cycle 33-42: Access Row 1 from DRAM
+cycle 43-44: Accessing Column 0: memory address 1024-1027 = 2
+cycle 23: Instruction: addi ($s0,$s0,45): $s0=810
+cycle 45-54: WriteBack Row 1 to DRAM
 
 END OF EXECUTION. META DATA: 
 
 Number of times each instruction was executed: 
 
-[add: 0,sub: 0,mul: 0,slt: 0,addi: 5,bne: 0,beq: 0,lw: 1,sw: 0,j: 0]
+[add: 1,sub: 0,mul: 0,slt: 0,addi: 20,bne: 0,beq: 0,lw: 0,sw: 2,j: 0]
 

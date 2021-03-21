@@ -1,0 +1,30 @@
+addi $t0, $t0, 50
+addi $s0, $s0, 1000
+addi $t8, $t8, 10
+addi $t2, $t2, 1
+addi $t5, $t5, 3
+addi $t6, $t6, 1000
+lw $s1, 100 (500)
+sw $t0, 500 (500)
+slt $t9,$t0, $t2
+beq $t9, $t1, loop
+beq $t9, $t1, another
+loop:
+    addi $t6,$t6, 20
+    sw $t8, 0($t6)
+    add $t1, $t1, $t3
+    addi $t4, $t4, 1
+    addi $t4, $t4, 1
+    addi $t4, $t4, 1
+    sub $t4, $t4, $t5
+    beq $t8, $zero, end
+    sub $t8, $t8, $t2
+    j loop 
+another:
+    add $t0,$t0,$s0
+    slt $t9,$t0, $t3
+    
+    
+end:
+    sw $t1, 500
+    lw $s5, 500

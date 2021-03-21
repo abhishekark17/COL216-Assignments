@@ -1,0 +1,170 @@
+
+Total Number of Clock Cycles: 175
+
+Total Number of Clock Cycles after last Writeback to DRAM: 185
+
+Total Number of Row Buffer Updates: 16
+
+Memory content at the end of the execution:
+
+1000-1003: 50
+1020-1023: 10
+1040-1043: 9
+1060-1063: 8
+1080-1083: 7
+1100-1103: 6
+1120-1123: 5
+1140-1143: 4
+1160-1163: 3
+1180-1183: 2
+1200-1203: 1
+
+Every cycle description: 
+
+cycle 1: Instruction: addi ($t0,$t0,50): $t0=50
+cycle 2: Instruction: addi ($s0,$s0,1000): $s0=1000
+cycle 3: Instruction: addi ($t8,$t8,10): $t8=10
+cycle 4: Instruction: addi ($t2,$t2,1): $t2=1
+cycle 5: Instruction: addi ($t5,$t5,3): $t5=3
+cycle 6: Instruction: addi ($t6,$t6,1000): $t6=1000
+cycle 7: DRAM Request Issued (lw)
+cycle 8-17: Access Row 0 from DRAM
+cycle 18-19: Accessing Column 600: $s1=0
+cycle 20: DRAM Request Issued (sw)
+cycle 21-22: Accessing Column 1000: memory address 1000-1003 = 50
+cycle 23: Instruction: slt ($t9,$t0,$t2): $t9=0
+cycle 24: Instruction beq ($t9,$t1,loop,1)
+cycle 25: Instruction: addi ($t6,$t6,20): $t6=1020
+cycle 26: DRAM Request Issued (sw)
+cycle 27-28: Accessing Column 1020: memory address 1020-1023 = 10
+cycle 27: Instruction: add ($t1,$t1,$t3): $t1=0
+cycle 28: Instruction: addi ($t4,$t4,1): $t4=1
+cycle 29: Instruction: addi ($t4,$t4,1): $t4=2
+cycle 30: Instruction: addi ($t4,$t4,1): $t4=3
+cycle 31: Instruction: sub ($t4,$t4,$t5): $t4=0
+cycle 32: Instruction beq ($t8,$zero,end,0)
+cycle 33: Instruction: sub ($t8,$t8,$t2): $t8=9
+cycle 34: Instruction j :Jump to label ID: loop
+cycle 35: Instruction: addi ($t6,$t6,20): $t6=1040
+cycle 36: DRAM Request Issued (sw)
+cycle 37-46: WriteBack Row 0 to DRAM
+cycle 47-56: Access Row 1 from DRAM
+cycle 57-58: Accessing Column 16: memory address 1040-1043 = 9
+cycle 37: Instruction: add ($t1,$t1,$t3): $t1=0
+cycle 38: Instruction: addi ($t4,$t4,1): $t4=1
+cycle 39: Instruction: addi ($t4,$t4,1): $t4=2
+cycle 40: Instruction: addi ($t4,$t4,1): $t4=3
+cycle 41: Instruction: sub ($t4,$t4,$t5): $t4=0
+cycle 59: Instruction beq ($t8,$zero,end,0)
+cycle 60: Instruction: sub ($t8,$t8,$t2): $t8=8
+cycle 61: Instruction j :Jump to label ID: loop
+cycle 62: Instruction: addi ($t6,$t6,20): $t6=1060
+cycle 63: DRAM Request Issued (sw)
+cycle 64-65: Accessing Column 36: memory address 1060-1063 = 8
+cycle 64: Instruction: add ($t1,$t1,$t3): $t1=0
+cycle 65: Instruction: addi ($t4,$t4,1): $t4=1
+cycle 66: Instruction: addi ($t4,$t4,1): $t4=2
+cycle 67: Instruction: addi ($t4,$t4,1): $t4=3
+cycle 68: Instruction: sub ($t4,$t4,$t5): $t4=0
+cycle 69: Instruction beq ($t8,$zero,end,0)
+cycle 70: Instruction: sub ($t8,$t8,$t2): $t8=7
+cycle 71: Instruction j :Jump to label ID: loop
+cycle 72: Instruction: addi ($t6,$t6,20): $t6=1080
+cycle 73: DRAM Request Issued (sw)
+cycle 74-75: Accessing Column 56: memory address 1080-1083 = 7
+cycle 74: Instruction: add ($t1,$t1,$t3): $t1=0
+cycle 75: Instruction: addi ($t4,$t4,1): $t4=1
+cycle 76: Instruction: addi ($t4,$t4,1): $t4=2
+cycle 77: Instruction: addi ($t4,$t4,1): $t4=3
+cycle 78: Instruction: sub ($t4,$t4,$t5): $t4=0
+cycle 79: Instruction beq ($t8,$zero,end,0)
+cycle 80: Instruction: sub ($t8,$t8,$t2): $t8=6
+cycle 81: Instruction j :Jump to label ID: loop
+cycle 82: Instruction: addi ($t6,$t6,20): $t6=1100
+cycle 83: DRAM Request Issued (sw)
+cycle 84-85: Accessing Column 76: memory address 1100-1103 = 6
+cycle 84: Instruction: add ($t1,$t1,$t3): $t1=0
+cycle 85: Instruction: addi ($t4,$t4,1): $t4=1
+cycle 86: Instruction: addi ($t4,$t4,1): $t4=2
+cycle 87: Instruction: addi ($t4,$t4,1): $t4=3
+cycle 88: Instruction: sub ($t4,$t4,$t5): $t4=0
+cycle 89: Instruction beq ($t8,$zero,end,0)
+cycle 90: Instruction: sub ($t8,$t8,$t2): $t8=5
+cycle 91: Instruction j :Jump to label ID: loop
+cycle 92: Instruction: addi ($t6,$t6,20): $t6=1120
+cycle 93: DRAM Request Issued (sw)
+cycle 94-95: Accessing Column 96: memory address 1120-1123 = 5
+cycle 94: Instruction: add ($t1,$t1,$t3): $t1=0
+cycle 95: Instruction: addi ($t4,$t4,1): $t4=1
+cycle 96: Instruction: addi ($t4,$t4,1): $t4=2
+cycle 97: Instruction: addi ($t4,$t4,1): $t4=3
+cycle 98: Instruction: sub ($t4,$t4,$t5): $t4=0
+cycle 99: Instruction beq ($t8,$zero,end,0)
+cycle 100: Instruction: sub ($t8,$t8,$t2): $t8=4
+cycle 101: Instruction j :Jump to label ID: loop
+cycle 102: Instruction: addi ($t6,$t6,20): $t6=1140
+cycle 103: DRAM Request Issued (sw)
+cycle 104-105: Accessing Column 116: memory address 1140-1143 = 4
+cycle 104: Instruction: add ($t1,$t1,$t3): $t1=0
+cycle 105: Instruction: addi ($t4,$t4,1): $t4=1
+cycle 106: Instruction: addi ($t4,$t4,1): $t4=2
+cycle 107: Instruction: addi ($t4,$t4,1): $t4=3
+cycle 108: Instruction: sub ($t4,$t4,$t5): $t4=0
+cycle 109: Instruction beq ($t8,$zero,end,0)
+cycle 110: Instruction: sub ($t8,$t8,$t2): $t8=3
+cycle 111: Instruction j :Jump to label ID: loop
+cycle 112: Instruction: addi ($t6,$t6,20): $t6=1160
+cycle 113: DRAM Request Issued (sw)
+cycle 114-115: Accessing Column 136: memory address 1160-1163 = 3
+cycle 114: Instruction: add ($t1,$t1,$t3): $t1=0
+cycle 115: Instruction: addi ($t4,$t4,1): $t4=1
+cycle 116: Instruction: addi ($t4,$t4,1): $t4=2
+cycle 117: Instruction: addi ($t4,$t4,1): $t4=3
+cycle 118: Instruction: sub ($t4,$t4,$t5): $t4=0
+cycle 119: Instruction beq ($t8,$zero,end,0)
+cycle 120: Instruction: sub ($t8,$t8,$t2): $t8=2
+cycle 121: Instruction j :Jump to label ID: loop
+cycle 122: Instruction: addi ($t6,$t6,20): $t6=1180
+cycle 123: DRAM Request Issued (sw)
+cycle 124-125: Accessing Column 156: memory address 1180-1183 = 2
+cycle 124: Instruction: add ($t1,$t1,$t3): $t1=0
+cycle 125: Instruction: addi ($t4,$t4,1): $t4=1
+cycle 126: Instruction: addi ($t4,$t4,1): $t4=2
+cycle 127: Instruction: addi ($t4,$t4,1): $t4=3
+cycle 128: Instruction: sub ($t4,$t4,$t5): $t4=0
+cycle 129: Instruction beq ($t8,$zero,end,0)
+cycle 130: Instruction: sub ($t8,$t8,$t2): $t8=1
+cycle 131: Instruction j :Jump to label ID: loop
+cycle 132: Instruction: addi ($t6,$t6,20): $t6=1200
+cycle 133: DRAM Request Issued (sw)
+cycle 134-135: Accessing Column 176: memory address 1200-1203 = 1
+cycle 134: Instruction: add ($t1,$t1,$t3): $t1=0
+cycle 135: Instruction: addi ($t4,$t4,1): $t4=1
+cycle 136: Instruction: addi ($t4,$t4,1): $t4=2
+cycle 137: Instruction: addi ($t4,$t4,1): $t4=3
+cycle 138: Instruction: sub ($t4,$t4,$t5): $t4=0
+cycle 139: Instruction beq ($t8,$zero,end,0)
+cycle 140: Instruction: sub ($t8,$t8,$t2): $t8=0
+cycle 141: Instruction j :Jump to label ID: loop
+cycle 142: Instruction: addi ($t6,$t6,20): $t6=1220
+cycle 143: DRAM Request Issued (sw)
+cycle 144-145: Accessing Column 196: memory address 1220-1223 = 0
+cycle 144: Instruction: add ($t1,$t1,$t3): $t1=0
+cycle 145: Instruction: addi ($t4,$t4,1): $t4=1
+cycle 146: Instruction: addi ($t4,$t4,1): $t4=2
+cycle 147: Instruction: addi ($t4,$t4,1): $t4=3
+cycle 148: Instruction: sub ($t4,$t4,$t5): $t4=0
+cycle 149: Instruction beq ($t8,$zero,end,1)
+cycle 150: DRAM Request Issued (sw)
+cycle 151-160: WriteBack Row 1 to DRAM
+cycle 161-170: Access Row 0 from DRAM
+cycle 171-172: Accessing Column 500: memory address 500-503 = 0
+cycle 173: DRAM Request Issued (lw)
+cycle 174-175: Accessing Column 500: $s5=0
+
+END OF EXECUTION. META DATA: 
+
+Number of times each instruction was executed: 
+
+[add: 11,sub: 21,mul: 0,slt: 1,addi: 50,bne: 0,beq: 12,lw: 2,sw: 13,j: 10]
+

@@ -1,0 +1,53 @@
+
+Total Number of Clock Cycles: 85
+
+Total Number of Clock Cycles after last Writeback to DRAM: 95
+
+Total Number of Row Buffer Updates: 5
+
+Memory content at the end of the execution:
+
+1000-1003: 1
+1020-1023: 2
+
+Every cycle description: 
+
+cycle 1: Instruction: addi ($t0,$zero,1): $t0=1
+cycle 2: Instruction: addi ($t1,$zero,2): $t1=2
+cycle 3: DRAM Request Issued (sw)
+cycle 4-13: Access Row 0 from DRAM
+cycle 14-15: Accessing Column 1000: memory address 1000-1003 = 1
+cycle 16: Instruction: add ($t4,$t1,$t2): $t4=2
+cycle 17: Instruction: addi ($s0,$s0,45): $s0=45
+cycle 18: DRAM Request Issued (lw)
+cycle 19-28: WriteBack Row 0 to DRAM
+cycle 29-38: Access Row 1 from DRAM
+cycle 39-40: Accessing Column 976: $t0=0
+cycle 41: DRAM Request Issued (lw)
+cycle 42-43: Accessing Column 976: $t0=0
+cycle 44: DRAM Request Issued (lw)
+cycle 45-46: Accessing Column 976: $t0=0
+cycle 47: Instruction bne ($t0,$zero,exit,0)
+cycle 48: Instruction: addi ($s1,$s0,45): $s1=90
+cycle 49: Instruction: addi ($s1,$s0,45): $s1=90
+cycle 50: Instruction: addi ($s0,$s0,45): $s0=90
+cycle 51: DRAM Request Issued (lw)
+cycle 52-53: Accessing Column 976: $t0=0
+cycle 54: DRAM Request Issued (lw)
+cycle 55-56: Accessing Column 976: $t0=0
+cycle 57: DRAM Request Issued (lw)
+cycle 58-59: Accessing Column 976: $t0=0
+cycle 60: Instruction: addi ($s3,$s0,45): $s3=135
+cycle 61: Instruction: addi ($s3,$s0,45): $s3=135
+cycle 62: DRAM Request Issued (sw)
+cycle 63-72: WriteBack Row 1 to DRAM
+cycle 73-82: Access Row 0 from DRAM
+cycle 83-84: Accessing Column 1020: memory address 1020-1023 = 2
+cycle 85: Instruction: addi ($s0,$s0,45): $s0=135
+
+END OF EXECUTION. META DATA: 
+
+Number of times each instruction was executed: 
+
+[add: 1,sub: 0,mul: 0,slt: 0,addi: 9,bne: 1,beq: 0,lw: 6,sw: 2,j: 0]
+

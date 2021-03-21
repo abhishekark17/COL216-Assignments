@@ -1,5 +1,5 @@
 
-Total Number of Cycles: 91
+Total Number of Clock Cycles: 101
 
 Total Number of Row Buffer Updates: 7
 
@@ -34,6 +34,7 @@ cycle 87: Instruction: add ($t3,$t3,$t2): $t3=3
 cycle 88: Instruction: addi ($s2,$zero,1028): $s2=1028
 cycle 89: DRAM Request Issued (sw)
 cycle 90-91: Accessing Column 4: memory address 1028-1031 = 3
+cycle 92-101: WriteBack Row 1 to DRAM
 
 END OF EXECUTION. META DATA: 
 

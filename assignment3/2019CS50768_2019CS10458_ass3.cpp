@@ -530,7 +530,7 @@ instruction readInst () {
   }
 }
 
-
+/*
 void preprocess () {  // checking if line has label: at the beginning;
   int labelIndex;
   currentInstNum = 1;
@@ -567,7 +567,43 @@ void preprocess () {  // checking if line has label: at the beginning;
   }
   return;
 }
+*/
+void preprocess () {  // checking if line has label: at the beginning;
+  int labelIndex;
+  currentInstNum = 1;
+  string tempLabel = "";
+  for (int i = 0; i < numberOfLine ; i++) {
+    CIRS = {0,0,0,0};   // re initializing CIRS to remove previous instructions data if any
+    bool isLabel = false;
+    currentInst = inputprogram[i];
+    RemoveSpaces();
+    if (currentInst != "") {
+      RemoveSpaces();
 
+      if (count(currentInst.begin(), currentInst.end(), ':') > 1) error.push_back("Syntax Error:"+to_string(currentInstNum)+": \": Error: more than one label");
+      labelIndex=currentInst.find(":");
+
+      if (labelIndex== -1) isLabel = false;
+      else if (labelIndex==0)   error.push_back("Syntax Error:"+to_string(currentInstNum)+": \":\" At The Beginning Not Accepted");
+      else {
+        tempLabel = currentInst.substr(0,labelIndex);
+        lableTable[tempLabel]=currentInstNum;
+        currentInst = currentInst.substr(labelIndex);
+        RemoveSpaces();
+        currentInst=currentInst.substr(1);
+        RemoveSpaces();
+        if(currentInst=="") continue;
+      }  
+    }
+    else continue;
+
+    instruction instObj = readInst();
+    iset.push_back(instObj);
+    numberofInst++;
+    currentInstNum++;
+  }
+  return;
+}
 
 void add (vector<int>& cirs) {
   registers[cirs[0]] = registers[cirs[1]] + registers[cirs[2]];
@@ -1040,7 +1076,7 @@ void execute2 (ofstream & out) {
     }
     
     numClockCycles++;
-    if (numClockCycles >= uptoClkCyc) {
+    if (numClockCycles > uptoClkCyc) {
       DRAMrequestIssued = false;
       lwInstRegisterID = -1;
       swInstMemAdd = -1;
@@ -1240,6 +1276,7 @@ void execute2 (ofstream & out) {
           int address;
           //if(typeOfarg == 0) address=offset + registers[currInst.cirs[2]];
           //else address = offset + currInst.cirs[2];
+          lwInstRegisterID = currInst.cirs[0];
           if (typeOfarg == 0) {
             address = offset + registers[currInst.cirs[2]];
             blockRegisterID = currInst.cirs[2];
@@ -1341,11 +1378,17 @@ int main (int argc, char** argv) {
 
   if (part2enabled) execute2(outstream);
   else execute1(outstream);
+  
+  if (currentRowInRowBuffer != -1) {
+    exectutionOutput.push_back("cycle " + to_string(max(numClockCycles,uptoClkCyc) + 1)  + "-" + to_string(max(numClockCycles,uptoClkCyc) + ROW_ACCESS_DELAY) + ": " + "WriteBack Row " + to_string(currentRowInRowBuffer) + " to DRAM" );
+    numClockCycles = max(numClockCycles,uptoClkCyc) + ROW_ACCESS_DELAY;
+  }
 
   if (error1 == "") {
     cout << endl; outstream << endl;
-    cout << "Total Number of Cycles: " << max (numClockCycles,uptoClkCyc) << endl << endl;
-    outstream << "Total Number of Cycles: " << max (numClockCycles,uptoClkCyc) << endl << endl;
+    cout << "Total Number of Clock Cycles: " << max (numClockCycles,uptoClkCyc) << endl << endl;
+    outstream << "Total Number of Clock Cycles: " << max (numClockCycles,uptoClkCyc) << endl << endl;
+
   
     cout << "Total Number of Row Buffer Updates: " << numRowBufferUpdates << endl << endl;
     outstream << "Total Number of Row Buffer Updates: " << numRowBufferUpdates << endl << endl;
@@ -1355,8 +1398,8 @@ int main (int argc, char** argv) {
 
     for(int i=numberofInst;i<(1<<18);i++){
       if(data123[i-numberofInst]!=0) {
-        cout<<(i)*4<<"-"<<(i)*4+3<<": "<<hex<<data123[i-numberofInst]<<dec<<endl;
-        outstream<<(i)*4<<"-"<<(i)*4+3<<": "<<hex<<data123[i-numberofInst]<<dec<<endl;
+        cout<<(i)*4<<"-"<<(i)*4+3<<": " << hex << data123[i-numberofInst] << dec << endl;
+        outstream<<(i)*4<<"-"<<(i)*4+3<<": " << hex << data123[i-numberofInst] << dec << endl;
       }
     }
     cout << endl ;  outstream << endl;
@@ -1364,10 +1407,12 @@ int main (int argc, char** argv) {
     cout << "Every cycle description: " << endl << endl;
     outstream <<  "Every cycle description: " << endl << endl;
 
+    
     for (string x : exectutionOutput) {
       cout << x << endl;
       outstream << x << endl;
     }
+
     cout << endl; outstream << endl;
     cout << "END OF EXECUTION. META DATA: " << endl << endl;
     outstream << "END OF EXECUTION. META DATA: " << endl << endl;

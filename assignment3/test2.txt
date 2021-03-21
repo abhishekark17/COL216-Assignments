@@ -1,8 +1,0 @@
-main:
-	addi $s0, $zero, 1000
-	
-	sw $t2, 0 ($s0)
-	
-	
-exit:
-    addi $t1, $t1, 1221
