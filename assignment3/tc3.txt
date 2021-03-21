@@ -1,0 +1,6 @@
+addi $t2, $t2, 1000
+lw $t1,0($t2)
+addi $t0,$t0,8
+addi $t0,$t0,8
+addi $t0,$t0,8
+addi $t2,$t2,8
