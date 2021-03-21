@@ -1,0 +1,3588 @@
+
+Total Number of Clock Cycles: 3706
+
+Total Number of Row Buffer Updates: 153
+
+Memory content at the end of the execution:
+
+10000-10003: 64
+10004-10007: 64
+10008-10011: 64
+10012-10015: 64
+10016-10019: 64
+10020-10023: 64
+10024-10027: 64
+10028-10031: 64
+10032-10035: 64
+10036-10039: 64
+10040-10043: 64
+10044-10047: 64
+10048-10051: 64
+10052-10055: 64
+10056-10059: 64
+10060-10063: 64
+10064-10067: 64
+10068-10071: 64
+10072-10075: 64
+10076-10079: 64
+10080-10083: 64
+10084-10087: 64
+10088-10091: 64
+10092-10095: 64
+10096-10099: 64
+10100-10103: 64
+10104-10107: 64
+10108-10111: 64
+10112-10115: 64
+10116-10119: 64
+10120-10123: 64
+10124-10127: 64
+10128-10131: 64
+10132-10135: 64
+10136-10139: 64
+10140-10143: 64
+10144-10147: 64
+10148-10151: 64
+10152-10155: 64
+10156-10159: 64
+10160-10163: 64
+10164-10167: 64
+10168-10171: 64
+10172-10175: 64
+10176-10179: 64
+10180-10183: 64
+10184-10187: 64
+10188-10191: 64
+10192-10195: 64
+10196-10199: 64
+10200-10203: 64
+10204-10207: 64
+10208-10211: 64
+10212-10215: 64
+10216-10219: 64
+10220-10223: 64
+10224-10227: 64
+10228-10231: 64
+10232-10235: 64
+10236-10239: 64
+10240-10243: 64
+10244-10247: 64
+10248-10251: 64
+10252-10255: 64
+10256-10259: 64
+10260-10263: 64
+10264-10267: 64
+10268-10271: 64
+10272-10275: 64
+10276-10279: 64
+10280-10283: 64
+10284-10287: 64
+10288-10291: 64
+10292-10295: 64
+10296-10299: 64
+10300-10303: 64
+10304-10307: 64
+10308-10311: 64
+10312-10315: 64
+10316-10319: 64
+10320-10323: 64
+10324-10327: 64
+10328-10331: 64
+10332-10335: 64
+10336-10339: 64
+10340-10343: 64
+10344-10347: 64
+10348-10351: 64
+10352-10355: 64
+10356-10359: 64
+10360-10363: 64
+10364-10367: 64
+10368-10371: 64
+10372-10375: 64
+10376-10379: 64
+10380-10383: 64
+10384-10387: 64
+10388-10391: 64
+10392-10395: 64
+10396-10399: 64
+10400-10403: 64
+10404-10407: 10c8e0
+
+Every cycle description: 
+
+cycle 1: Instruction: addi ($v0,$v0,10000): $v0=10000
+cycle 2: Instruction: addi ($at,$at,0): $at=0
+cycle 3: Instruction: addi ($v1,$v1,0): $v1=0
+cycle 4: Instruction: addi ($a0,$a0,100): $a0=100
+cycle 5: Instruction: addi ($t0,$t0,100): $t0=100
+cycle 6: Instruction: add ($t9,$t9,$t9): $t9=0
+cycle 7: Instruction: addi ($s0,$s0,1000): $s0=1000
+cycle 8: Instruction: addi ($s1,$s1,1050): $s1=1050
+cycle 9: Instruction: addi ($k0,$k0,0): $k0=0
+cycle 10: Instruction: addi ($s2,$s2,1): $s2=1
+cycle 11: Instruction: addi ($s3,$s3,100): $s3=100
+cycle 12: Instruction: addi ($s4,$s4,10): $s4=10
+cycle 13: Instruction: addi ($v1,$v1,1): $v1=1
+cycle 14: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 15: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 16: Instruction beq ($t6,$t7,equal,1)
+cycle 17: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 18: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 19: DRAM Request Issued (sw)
+cycle 20-29: Access Row 9 from DRAM
+cycle 30-31: Accessing Column 784: memory address 10000-10003 = 100
+cycle 32: Instruction: add ($v1,$v0,$s2): $v1=10001
+cycle 33: Instruction: add ($v1,$v0,$s2): $v1=10001
+cycle 34: Instruction: add ($v1,$v0,$s2): $v1=10001
+cycle 35: Instruction: add ($v1,$v0,$s2): $v1=10001
+cycle 36: Instruction: addi ($v1,$v1,1): $v1=10002
+cycle 37: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 38: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 39: Instruction: addi ($v1,$v1,1): $v1=10003
+cycle 40: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 41: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 42: Instruction: addi ($v0,$v0,4): $v0=10004
+cycle 43: Instruction beq ($k0,$s2,equalToOne,0)
+cycle 44: Instruction: add ($k0,$k0,$s2): $k0=1
+cycle 45: Instruction: addi ($at,$at,1): $at=1
+cycle 46: Instruction: sub ($a0,$a0,$s2): $a0=99
+cycle 47: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 48: Instruction: add ($s0,$s0,$s3): $s0=1100
+cycle 49: Instruction: add ($s1,$s1,$s3): $s1=1150
+cycle 50: Instruction beq ($a0,$zero,exit,0)
+cycle 51: Instruction j :Jump to label ID: loop1
+cycle 52: Instruction: addi ($v1,$v1,1): $v1=10004
+cycle 53: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 54: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 55: Instruction beq ($t6,$t7,equal,1)
+cycle 56: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 57: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 58: DRAM Request Issued (sw)
+cycle 59-60: Accessing Column 788: memory address 10004-10007 = 100
+cycle 61: Instruction: add ($v1,$v0,$s2): $v1=10005
+cycle 62: Instruction: add ($v1,$v0,$s2): $v1=10005
+cycle 63: Instruction: add ($v1,$v0,$s2): $v1=10005
+cycle 64: Instruction: add ($v1,$v0,$s2): $v1=10005
+cycle 65: Instruction: addi ($v1,$v1,1): $v1=10006
+cycle 66: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 67: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 68: Instruction: addi ($v1,$v1,1): $v1=10007
+cycle 69: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 70: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 71: Instruction: addi ($v0,$v0,4): $v0=10008
+cycle 72: Instruction beq ($k0,$s2,equalToOne,1)
+cycle 73: DRAM Request Issued (sw)
+cycle 74-75: Accessing Column 792: memory address 10008-10011 = 100
+cycle 76: Instruction: add ($t2,$t2,$s1): $t2=1150
+cycle 77: Instruction: add ($t2,$t2,$s1): $t2=2300
+cycle 78: Instruction: add ($t2,$t2,$s1): $t2=3450
+cycle 79: Instruction: add ($t2,$t2,$s1): $t2=4600
+cycle 80: Instruction: sub ($t2,$t2,$s1): $t2=3450
+cycle 81: Instruction: sub ($t2,$t2,$s1): $t2=2300
+cycle 82: Instruction: sub ($t2,$t2,$s1): $t2=1150
+cycle 83: Instruction: sub ($t2,$t2,$s1): $t2=0
+cycle 84: Instruction: sub ($k0,$k0,$s2): $k0=0
+cycle 85: DRAM Request Issued (lw)
+cycle 86-87: Accessing Column 792: $a3=100
+cycle 88: Instruction j :Jump to label ID: resume
+cycle 89: Instruction: addi ($at,$at,1): $at=2
+cycle 90: Instruction: sub ($a0,$a0,$s2): $a0=98
+cycle 91: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 92: Instruction: add ($s0,$s0,$s3): $s0=1200
+cycle 93: Instruction: add ($s1,$s1,$s3): $s1=1250
+cycle 94: Instruction beq ($a0,$zero,exit,0)
+cycle 95: Instruction j :Jump to label ID: loop1
+cycle 96: Instruction: addi ($v1,$v1,1): $v1=10008
+cycle 97: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 98: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 99: Instruction beq ($t6,$t7,equal,1)
+cycle 100: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 101: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 102: DRAM Request Issued (sw)
+cycle 103-104: Accessing Column 792: memory address 10008-10011 = 100
+cycle 105: Instruction: add ($v1,$v0,$s2): $v1=10009
+cycle 106: Instruction: add ($v1,$v0,$s2): $v1=10009
+cycle 107: Instruction: add ($v1,$v0,$s2): $v1=10009
+cycle 108: Instruction: add ($v1,$v0,$s2): $v1=10009
+cycle 109: Instruction: addi ($v1,$v1,1): $v1=10010
+cycle 110: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 111: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 112: Instruction: addi ($v1,$v1,1): $v1=10011
+cycle 113: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 114: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 115: Instruction: addi ($v0,$v0,4): $v0=10012
+cycle 116: Instruction beq ($k0,$s2,equalToOne,0)
+cycle 117: Instruction: add ($k0,$k0,$s2): $k0=1
+cycle 118: Instruction: addi ($at,$at,1): $at=3
+cycle 119: Instruction: sub ($a0,$a0,$s2): $a0=97
+cycle 120: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 121: Instruction: add ($s0,$s0,$s3): $s0=1300
+cycle 122: Instruction: add ($s1,$s1,$s3): $s1=1350
+cycle 123: Instruction beq ($a0,$zero,exit,0)
+cycle 124: Instruction j :Jump to label ID: loop1
+cycle 125: Instruction: addi ($v1,$v1,1): $v1=10012
+cycle 126: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 127: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 128: Instruction beq ($t6,$t7,equal,1)
+cycle 129: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 130: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 131: DRAM Request Issued (sw)
+cycle 132-133: Accessing Column 796: memory address 10012-10015 = 100
+cycle 134: Instruction: add ($v1,$v0,$s2): $v1=10013
+cycle 135: Instruction: add ($v1,$v0,$s2): $v1=10013
+cycle 136: Instruction: add ($v1,$v0,$s2): $v1=10013
+cycle 137: Instruction: add ($v1,$v0,$s2): $v1=10013
+cycle 138: Instruction: addi ($v1,$v1,1): $v1=10014
+cycle 139: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 140: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 141: Instruction: addi ($v1,$v1,1): $v1=10015
+cycle 142: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 143: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 144: Instruction: addi ($v0,$v0,4): $v0=10016
+cycle 145: Instruction beq ($k0,$s2,equalToOne,1)
+cycle 146: DRAM Request Issued (sw)
+cycle 147-148: Accessing Column 800: memory address 10016-10019 = 100
+cycle 149: Instruction: add ($t2,$t2,$s1): $t2=1350
+cycle 150: Instruction: add ($t2,$t2,$s1): $t2=2700
+cycle 151: Instruction: add ($t2,$t2,$s1): $t2=4050
+cycle 152: Instruction: add ($t2,$t2,$s1): $t2=5400
+cycle 153: Instruction: sub ($t2,$t2,$s1): $t2=4050
+cycle 154: Instruction: sub ($t2,$t2,$s1): $t2=2700
+cycle 155: Instruction: sub ($t2,$t2,$s1): $t2=1350
+cycle 156: Instruction: sub ($t2,$t2,$s1): $t2=0
+cycle 157: Instruction: sub ($k0,$k0,$s2): $k0=0
+cycle 158: DRAM Request Issued (lw)
+cycle 159-160: Accessing Column 800: $a3=100
+cycle 161: Instruction j :Jump to label ID: resume
+cycle 162: Instruction: addi ($at,$at,1): $at=4
+cycle 163: Instruction: sub ($a0,$a0,$s2): $a0=96
+cycle 164: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 165: Instruction: add ($s0,$s0,$s3): $s0=1400
+cycle 166: Instruction: add ($s1,$s1,$s3): $s1=1450
+cycle 167: Instruction beq ($a0,$zero,exit,0)
+cycle 168: Instruction j :Jump to label ID: loop1
+cycle 169: Instruction: addi ($v1,$v1,1): $v1=10016
+cycle 170: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 171: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 172: Instruction beq ($t6,$t7,equal,1)
+cycle 173: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 174: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 175: DRAM Request Issued (sw)
+cycle 176-177: Accessing Column 800: memory address 10016-10019 = 100
+cycle 178: Instruction: add ($v1,$v0,$s2): $v1=10017
+cycle 179: Instruction: add ($v1,$v0,$s2): $v1=10017
+cycle 180: Instruction: add ($v1,$v0,$s2): $v1=10017
+cycle 181: Instruction: add ($v1,$v0,$s2): $v1=10017
+cycle 182: Instruction: addi ($v1,$v1,1): $v1=10018
+cycle 183: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 184: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 185: Instruction: addi ($v1,$v1,1): $v1=10019
+cycle 186: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 187: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 188: Instruction: addi ($v0,$v0,4): $v0=10020
+cycle 189: Instruction beq ($k0,$s2,equalToOne,0)
+cycle 190: Instruction: add ($k0,$k0,$s2): $k0=1
+cycle 191: Instruction: addi ($at,$at,1): $at=5
+cycle 192: Instruction: sub ($a0,$a0,$s2): $a0=95
+cycle 193: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 194: Instruction: add ($s0,$s0,$s3): $s0=1500
+cycle 195: Instruction: add ($s1,$s1,$s3): $s1=1550
+cycle 196: Instruction beq ($a0,$zero,exit,0)
+cycle 197: Instruction j :Jump to label ID: loop1
+cycle 198: Instruction: addi ($v1,$v1,1): $v1=10020
+cycle 199: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 200: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 201: Instruction beq ($t6,$t7,equal,1)
+cycle 202: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 203: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 204: DRAM Request Issued (sw)
+cycle 205-206: Accessing Column 804: memory address 10020-10023 = 100
+cycle 207: Instruction: add ($v1,$v0,$s2): $v1=10021
+cycle 208: Instruction: add ($v1,$v0,$s2): $v1=10021
+cycle 209: Instruction: add ($v1,$v0,$s2): $v1=10021
+cycle 210: Instruction: add ($v1,$v0,$s2): $v1=10021
+cycle 211: Instruction: addi ($v1,$v1,1): $v1=10022
+cycle 212: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 213: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 214: Instruction: addi ($v1,$v1,1): $v1=10023
+cycle 215: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 216: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 217: Instruction: addi ($v0,$v0,4): $v0=10024
+cycle 218: Instruction beq ($k0,$s2,equalToOne,1)
+cycle 219: DRAM Request Issued (sw)
+cycle 220-221: Accessing Column 808: memory address 10024-10027 = 100
+cycle 222: Instruction: add ($t2,$t2,$s1): $t2=1550
+cycle 223: Instruction: add ($t2,$t2,$s1): $t2=3100
+cycle 224: Instruction: add ($t2,$t2,$s1): $t2=4650
+cycle 225: Instruction: add ($t2,$t2,$s1): $t2=6200
+cycle 226: Instruction: sub ($t2,$t2,$s1): $t2=4650
+cycle 227: Instruction: sub ($t2,$t2,$s1): $t2=3100
+cycle 228: Instruction: sub ($t2,$t2,$s1): $t2=1550
+cycle 229: Instruction: sub ($t2,$t2,$s1): $t2=0
+cycle 230: Instruction: sub ($k0,$k0,$s2): $k0=0
+cycle 231: DRAM Request Issued (lw)
+cycle 232-233: Accessing Column 808: $a3=100
+cycle 234: Instruction j :Jump to label ID: resume
+cycle 235: Instruction: addi ($at,$at,1): $at=6
+cycle 236: Instruction: sub ($a0,$a0,$s2): $a0=94
+cycle 237: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 238: Instruction: add ($s0,$s0,$s3): $s0=1600
+cycle 239: Instruction: add ($s1,$s1,$s3): $s1=1650
+cycle 240: Instruction beq ($a0,$zero,exit,0)
+cycle 241: Instruction j :Jump to label ID: loop1
+cycle 242: Instruction: addi ($v1,$v1,1): $v1=10024
+cycle 243: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 244: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 245: Instruction beq ($t6,$t7,equal,1)
+cycle 246: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 247: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 248: DRAM Request Issued (sw)
+cycle 249-250: Accessing Column 808: memory address 10024-10027 = 100
+cycle 251: Instruction: add ($v1,$v0,$s2): $v1=10025
+cycle 252: Instruction: add ($v1,$v0,$s2): $v1=10025
+cycle 253: Instruction: add ($v1,$v0,$s2): $v1=10025
+cycle 254: Instruction: add ($v1,$v0,$s2): $v1=10025
+cycle 255: Instruction: addi ($v1,$v1,1): $v1=10026
+cycle 256: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 257: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 258: Instruction: addi ($v1,$v1,1): $v1=10027
+cycle 259: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 260: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 261: Instruction: addi ($v0,$v0,4): $v0=10028
+cycle 262: Instruction beq ($k0,$s2,equalToOne,0)
+cycle 263: Instruction: add ($k0,$k0,$s2): $k0=1
+cycle 264: Instruction: addi ($at,$at,1): $at=7
+cycle 265: Instruction: sub ($a0,$a0,$s2): $a0=93
+cycle 266: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 267: Instruction: add ($s0,$s0,$s3): $s0=1700
+cycle 268: Instruction: add ($s1,$s1,$s3): $s1=1750
+cycle 269: Instruction beq ($a0,$zero,exit,0)
+cycle 270: Instruction j :Jump to label ID: loop1
+cycle 271: Instruction: addi ($v1,$v1,1): $v1=10028
+cycle 272: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 273: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 274: Instruction beq ($t6,$t7,equal,1)
+cycle 275: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 276: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 277: DRAM Request Issued (sw)
+cycle 278-279: Accessing Column 812: memory address 10028-10031 = 100
+cycle 280: Instruction: add ($v1,$v0,$s2): $v1=10029
+cycle 281: Instruction: add ($v1,$v0,$s2): $v1=10029
+cycle 282: Instruction: add ($v1,$v0,$s2): $v1=10029
+cycle 283: Instruction: add ($v1,$v0,$s2): $v1=10029
+cycle 284: Instruction: addi ($v1,$v1,1): $v1=10030
+cycle 285: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 286: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 287: Instruction: addi ($v1,$v1,1): $v1=10031
+cycle 288: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 289: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 290: Instruction: addi ($v0,$v0,4): $v0=10032
+cycle 291: Instruction beq ($k0,$s2,equalToOne,1)
+cycle 292: DRAM Request Issued (sw)
+cycle 293-294: Accessing Column 816: memory address 10032-10035 = 100
+cycle 295: Instruction: add ($t2,$t2,$s1): $t2=1750
+cycle 296: Instruction: add ($t2,$t2,$s1): $t2=3500
+cycle 297: Instruction: add ($t2,$t2,$s1): $t2=5250
+cycle 298: Instruction: add ($t2,$t2,$s1): $t2=7000
+cycle 299: Instruction: sub ($t2,$t2,$s1): $t2=5250
+cycle 300: Instruction: sub ($t2,$t2,$s1): $t2=3500
+cycle 301: Instruction: sub ($t2,$t2,$s1): $t2=1750
+cycle 302: Instruction: sub ($t2,$t2,$s1): $t2=0
+cycle 303: Instruction: sub ($k0,$k0,$s2): $k0=0
+cycle 304: DRAM Request Issued (lw)
+cycle 305-306: Accessing Column 816: $a3=100
+cycle 307: Instruction j :Jump to label ID: resume
+cycle 308: Instruction: addi ($at,$at,1): $at=8
+cycle 309: Instruction: sub ($a0,$a0,$s2): $a0=92
+cycle 310: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 311: Instruction: add ($s0,$s0,$s3): $s0=1800
+cycle 312: Instruction: add ($s1,$s1,$s3): $s1=1850
+cycle 313: Instruction beq ($a0,$zero,exit,0)
+cycle 314: Instruction j :Jump to label ID: loop1
+cycle 315: Instruction: addi ($v1,$v1,1): $v1=10032
+cycle 316: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 317: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 318: Instruction beq ($t6,$t7,equal,1)
+cycle 319: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 320: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 321: DRAM Request Issued (sw)
+cycle 322-323: Accessing Column 816: memory address 10032-10035 = 100
+cycle 324: Instruction: add ($v1,$v0,$s2): $v1=10033
+cycle 325: Instruction: add ($v1,$v0,$s2): $v1=10033
+cycle 326: Instruction: add ($v1,$v0,$s2): $v1=10033
+cycle 327: Instruction: add ($v1,$v0,$s2): $v1=10033
+cycle 328: Instruction: addi ($v1,$v1,1): $v1=10034
+cycle 329: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 330: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 331: Instruction: addi ($v1,$v1,1): $v1=10035
+cycle 332: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 333: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 334: Instruction: addi ($v0,$v0,4): $v0=10036
+cycle 335: Instruction beq ($k0,$s2,equalToOne,0)
+cycle 336: Instruction: add ($k0,$k0,$s2): $k0=1
+cycle 337: Instruction: addi ($at,$at,1): $at=9
+cycle 338: Instruction: sub ($a0,$a0,$s2): $a0=91
+cycle 339: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 340: Instruction: add ($s0,$s0,$s3): $s0=1900
+cycle 341: Instruction: add ($s1,$s1,$s3): $s1=1950
+cycle 342: Instruction beq ($a0,$zero,exit,0)
+cycle 343: Instruction j :Jump to label ID: loop1
+cycle 344: Instruction: addi ($v1,$v1,1): $v1=10036
+cycle 345: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 346: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 347: Instruction beq ($t6,$t7,equal,1)
+cycle 348: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 349: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 350: DRAM Request Issued (sw)
+cycle 351-352: Accessing Column 820: memory address 10036-10039 = 100
+cycle 353: Instruction: add ($v1,$v0,$s2): $v1=10037
+cycle 354: Instruction: add ($v1,$v0,$s2): $v1=10037
+cycle 355: Instruction: add ($v1,$v0,$s2): $v1=10037
+cycle 356: Instruction: add ($v1,$v0,$s2): $v1=10037
+cycle 357: Instruction: addi ($v1,$v1,1): $v1=10038
+cycle 358: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 359: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 360: Instruction: addi ($v1,$v1,1): $v1=10039
+cycle 361: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 362: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 363: Instruction: addi ($v0,$v0,4): $v0=10040
+cycle 364: Instruction beq ($k0,$s2,equalToOne,1)
+cycle 365: DRAM Request Issued (sw)
+cycle 366-367: Accessing Column 824: memory address 10040-10043 = 100
+cycle 368: Instruction: add ($t2,$t2,$s1): $t2=1950
+cycle 369: Instruction: add ($t2,$t2,$s1): $t2=3900
+cycle 370: Instruction: add ($t2,$t2,$s1): $t2=5850
+cycle 371: Instruction: add ($t2,$t2,$s1): $t2=7800
+cycle 372: Instruction: sub ($t2,$t2,$s1): $t2=5850
+cycle 373: Instruction: sub ($t2,$t2,$s1): $t2=3900
+cycle 374: Instruction: sub ($t2,$t2,$s1): $t2=1950
+cycle 375: Instruction: sub ($t2,$t2,$s1): $t2=0
+cycle 376: Instruction: sub ($k0,$k0,$s2): $k0=0
+cycle 377: DRAM Request Issued (lw)
+cycle 378-379: Accessing Column 824: $a3=100
+cycle 380: Instruction j :Jump to label ID: resume
+cycle 381: Instruction: addi ($at,$at,1): $at=10
+cycle 382: Instruction: sub ($a0,$a0,$s2): $a0=90
+cycle 383: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 384: Instruction: add ($s0,$s0,$s3): $s0=2000
+cycle 385: Instruction: add ($s1,$s1,$s3): $s1=2050
+cycle 386: Instruction beq ($a0,$zero,exit,0)
+cycle 387: Instruction j :Jump to label ID: loop1
+cycle 388: Instruction: addi ($v1,$v1,1): $v1=10040
+cycle 389: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 390: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 391: Instruction beq ($t6,$t7,equal,1)
+cycle 392: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 393: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 394: DRAM Request Issued (sw)
+cycle 395-396: Accessing Column 824: memory address 10040-10043 = 100
+cycle 397: Instruction: add ($v1,$v0,$s2): $v1=10041
+cycle 398: Instruction: add ($v1,$v0,$s2): $v1=10041
+cycle 399: Instruction: add ($v1,$v0,$s2): $v1=10041
+cycle 400: Instruction: add ($v1,$v0,$s2): $v1=10041
+cycle 401: Instruction: addi ($v1,$v1,1): $v1=10042
+cycle 402: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 403: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 404: Instruction: addi ($v1,$v1,1): $v1=10043
+cycle 405: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 406: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 407: Instruction: addi ($v0,$v0,4): $v0=10044
+cycle 408: Instruction beq ($k0,$s2,equalToOne,0)
+cycle 409: Instruction: add ($k0,$k0,$s2): $k0=1
+cycle 410: Instruction: addi ($at,$at,1): $at=11
+cycle 411: Instruction: sub ($a0,$a0,$s2): $a0=89
+cycle 412: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 413: Instruction: add ($s0,$s0,$s3): $s0=2100
+cycle 414: Instruction: add ($s1,$s1,$s3): $s1=2150
+cycle 415: Instruction beq ($a0,$zero,exit,0)
+cycle 416: Instruction j :Jump to label ID: loop1
+cycle 417: Instruction: addi ($v1,$v1,1): $v1=10044
+cycle 418: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 419: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 420: Instruction beq ($t6,$t7,equal,1)
+cycle 421: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 422: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 423: DRAM Request Issued (sw)
+cycle 424-425: Accessing Column 828: memory address 10044-10047 = 100
+cycle 426: Instruction: add ($v1,$v0,$s2): $v1=10045
+cycle 427: Instruction: add ($v1,$v0,$s2): $v1=10045
+cycle 428: Instruction: add ($v1,$v0,$s2): $v1=10045
+cycle 429: Instruction: add ($v1,$v0,$s2): $v1=10045
+cycle 430: Instruction: addi ($v1,$v1,1): $v1=10046
+cycle 431: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 432: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 433: Instruction: addi ($v1,$v1,1): $v1=10047
+cycle 434: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 435: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 436: Instruction: addi ($v0,$v0,4): $v0=10048
+cycle 437: Instruction beq ($k0,$s2,equalToOne,1)
+cycle 438: DRAM Request Issued (sw)
+cycle 439-440: Accessing Column 832: memory address 10048-10051 = 100
+cycle 441: Instruction: add ($t2,$t2,$s1): $t2=2150
+cycle 442: Instruction: add ($t2,$t2,$s1): $t2=4300
+cycle 443: Instruction: add ($t2,$t2,$s1): $t2=6450
+cycle 444: Instruction: add ($t2,$t2,$s1): $t2=8600
+cycle 445: Instruction: sub ($t2,$t2,$s1): $t2=6450
+cycle 446: Instruction: sub ($t2,$t2,$s1): $t2=4300
+cycle 447: Instruction: sub ($t2,$t2,$s1): $t2=2150
+cycle 448: Instruction: sub ($t2,$t2,$s1): $t2=0
+cycle 449: Instruction: sub ($k0,$k0,$s2): $k0=0
+cycle 450: DRAM Request Issued (lw)
+cycle 451-452: Accessing Column 832: $a3=100
+cycle 453: Instruction j :Jump to label ID: resume
+cycle 454: Instruction: addi ($at,$at,1): $at=12
+cycle 455: Instruction: sub ($a0,$a0,$s2): $a0=88
+cycle 456: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 457: Instruction: add ($s0,$s0,$s3): $s0=2200
+cycle 458: Instruction: add ($s1,$s1,$s3): $s1=2250
+cycle 459: Instruction beq ($a0,$zero,exit,0)
+cycle 460: Instruction j :Jump to label ID: loop1
+cycle 461: Instruction: addi ($v1,$v1,1): $v1=10048
+cycle 462: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 463: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 464: Instruction beq ($t6,$t7,equal,1)
+cycle 465: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 466: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 467: DRAM Request Issued (sw)
+cycle 468-469: Accessing Column 832: memory address 10048-10051 = 100
+cycle 470: Instruction: add ($v1,$v0,$s2): $v1=10049
+cycle 471: Instruction: add ($v1,$v0,$s2): $v1=10049
+cycle 472: Instruction: add ($v1,$v0,$s2): $v1=10049
+cycle 473: Instruction: add ($v1,$v0,$s2): $v1=10049
+cycle 474: Instruction: addi ($v1,$v1,1): $v1=10050
+cycle 475: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 476: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 477: Instruction: addi ($v1,$v1,1): $v1=10051
+cycle 478: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 479: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 480: Instruction: addi ($v0,$v0,4): $v0=10052
+cycle 481: Instruction beq ($k0,$s2,equalToOne,0)
+cycle 482: Instruction: add ($k0,$k0,$s2): $k0=1
+cycle 483: Instruction: addi ($at,$at,1): $at=13
+cycle 484: Instruction: sub ($a0,$a0,$s2): $a0=87
+cycle 485: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 486: Instruction: add ($s0,$s0,$s3): $s0=2300
+cycle 487: Instruction: add ($s1,$s1,$s3): $s1=2350
+cycle 488: Instruction beq ($a0,$zero,exit,0)
+cycle 489: Instruction j :Jump to label ID: loop1
+cycle 490: Instruction: addi ($v1,$v1,1): $v1=10052
+cycle 491: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 492: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 493: Instruction beq ($t6,$t7,equal,1)
+cycle 494: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 495: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 496: DRAM Request Issued (sw)
+cycle 497-498: Accessing Column 836: memory address 10052-10055 = 100
+cycle 499: Instruction: add ($v1,$v0,$s2): $v1=10053
+cycle 500: Instruction: add ($v1,$v0,$s2): $v1=10053
+cycle 501: Instruction: add ($v1,$v0,$s2): $v1=10053
+cycle 502: Instruction: add ($v1,$v0,$s2): $v1=10053
+cycle 503: Instruction: addi ($v1,$v1,1): $v1=10054
+cycle 504: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 505: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 506: Instruction: addi ($v1,$v1,1): $v1=10055
+cycle 507: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 508: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 509: Instruction: addi ($v0,$v0,4): $v0=10056
+cycle 510: Instruction beq ($k0,$s2,equalToOne,1)
+cycle 511: DRAM Request Issued (sw)
+cycle 512-513: Accessing Column 840: memory address 10056-10059 = 100
+cycle 514: Instruction: add ($t2,$t2,$s1): $t2=2350
+cycle 515: Instruction: add ($t2,$t2,$s1): $t2=4700
+cycle 516: Instruction: add ($t2,$t2,$s1): $t2=7050
+cycle 517: Instruction: add ($t2,$t2,$s1): $t2=9400
+cycle 518: Instruction: sub ($t2,$t2,$s1): $t2=7050
+cycle 519: Instruction: sub ($t2,$t2,$s1): $t2=4700
+cycle 520: Instruction: sub ($t2,$t2,$s1): $t2=2350
+cycle 521: Instruction: sub ($t2,$t2,$s1): $t2=0
+cycle 522: Instruction: sub ($k0,$k0,$s2): $k0=0
+cycle 523: DRAM Request Issued (lw)
+cycle 524-525: Accessing Column 840: $a3=100
+cycle 526: Instruction j :Jump to label ID: resume
+cycle 527: Instruction: addi ($at,$at,1): $at=14
+cycle 528: Instruction: sub ($a0,$a0,$s2): $a0=86
+cycle 529: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 530: Instruction: add ($s0,$s0,$s3): $s0=2400
+cycle 531: Instruction: add ($s1,$s1,$s3): $s1=2450
+cycle 532: Instruction beq ($a0,$zero,exit,0)
+cycle 533: Instruction j :Jump to label ID: loop1
+cycle 534: Instruction: addi ($v1,$v1,1): $v1=10056
+cycle 535: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 536: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 537: Instruction beq ($t6,$t7,equal,1)
+cycle 538: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 539: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 540: DRAM Request Issued (sw)
+cycle 541-542: Accessing Column 840: memory address 10056-10059 = 100
+cycle 543: Instruction: add ($v1,$v0,$s2): $v1=10057
+cycle 544: Instruction: add ($v1,$v0,$s2): $v1=10057
+cycle 545: Instruction: add ($v1,$v0,$s2): $v1=10057
+cycle 546: Instruction: add ($v1,$v0,$s2): $v1=10057
+cycle 547: Instruction: addi ($v1,$v1,1): $v1=10058
+cycle 548: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 549: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 550: Instruction: addi ($v1,$v1,1): $v1=10059
+cycle 551: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 552: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 553: Instruction: addi ($v0,$v0,4): $v0=10060
+cycle 554: Instruction beq ($k0,$s2,equalToOne,0)
+cycle 555: Instruction: add ($k0,$k0,$s2): $k0=1
+cycle 556: Instruction: addi ($at,$at,1): $at=15
+cycle 557: Instruction: sub ($a0,$a0,$s2): $a0=85
+cycle 558: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 559: Instruction: add ($s0,$s0,$s3): $s0=2500
+cycle 560: Instruction: add ($s1,$s1,$s3): $s1=2550
+cycle 561: Instruction beq ($a0,$zero,exit,0)
+cycle 562: Instruction j :Jump to label ID: loop1
+cycle 563: Instruction: addi ($v1,$v1,1): $v1=10060
+cycle 564: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 565: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 566: Instruction beq ($t6,$t7,equal,1)
+cycle 567: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 568: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 569: DRAM Request Issued (sw)
+cycle 570-571: Accessing Column 844: memory address 10060-10063 = 100
+cycle 572: Instruction: add ($v1,$v0,$s2): $v1=10061
+cycle 573: Instruction: add ($v1,$v0,$s2): $v1=10061
+cycle 574: Instruction: add ($v1,$v0,$s2): $v1=10061
+cycle 575: Instruction: add ($v1,$v0,$s2): $v1=10061
+cycle 576: Instruction: addi ($v1,$v1,1): $v1=10062
+cycle 577: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 578: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 579: Instruction: addi ($v1,$v1,1): $v1=10063
+cycle 580: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 581: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 582: Instruction: addi ($v0,$v0,4): $v0=10064
+cycle 583: Instruction beq ($k0,$s2,equalToOne,1)
+cycle 584: DRAM Request Issued (sw)
+cycle 585-586: Accessing Column 848: memory address 10064-10067 = 100
+cycle 587: Instruction: add ($t2,$t2,$s1): $t2=2550
+cycle 588: Instruction: add ($t2,$t2,$s1): $t2=5100
+cycle 589: Instruction: add ($t2,$t2,$s1): $t2=7650
+cycle 590: Instruction: add ($t2,$t2,$s1): $t2=10200
+cycle 591: Instruction: sub ($t2,$t2,$s1): $t2=7650
+cycle 592: Instruction: sub ($t2,$t2,$s1): $t2=5100
+cycle 593: Instruction: sub ($t2,$t2,$s1): $t2=2550
+cycle 594: Instruction: sub ($t2,$t2,$s1): $t2=0
+cycle 595: Instruction: sub ($k0,$k0,$s2): $k0=0
+cycle 596: DRAM Request Issued (lw)
+cycle 597-598: Accessing Column 848: $a3=100
+cycle 599: Instruction j :Jump to label ID: resume
+cycle 600: Instruction: addi ($at,$at,1): $at=16
+cycle 601: Instruction: sub ($a0,$a0,$s2): $a0=84
+cycle 602: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 603: Instruction: add ($s0,$s0,$s3): $s0=2600
+cycle 604: Instruction: add ($s1,$s1,$s3): $s1=2650
+cycle 605: Instruction beq ($a0,$zero,exit,0)
+cycle 606: Instruction j :Jump to label ID: loop1
+cycle 607: Instruction: addi ($v1,$v1,1): $v1=10064
+cycle 608: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 609: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 610: Instruction beq ($t6,$t7,equal,1)
+cycle 611: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 612: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 613: DRAM Request Issued (sw)
+cycle 614-615: Accessing Column 848: memory address 10064-10067 = 100
+cycle 616: Instruction: add ($v1,$v0,$s2): $v1=10065
+cycle 617: Instruction: add ($v1,$v0,$s2): $v1=10065
+cycle 618: Instruction: add ($v1,$v0,$s2): $v1=10065
+cycle 619: Instruction: add ($v1,$v0,$s2): $v1=10065
+cycle 620: Instruction: addi ($v1,$v1,1): $v1=10066
+cycle 621: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 622: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 623: Instruction: addi ($v1,$v1,1): $v1=10067
+cycle 624: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 625: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 626: Instruction: addi ($v0,$v0,4): $v0=10068
+cycle 627: Instruction beq ($k0,$s2,equalToOne,0)
+cycle 628: Instruction: add ($k0,$k0,$s2): $k0=1
+cycle 629: Instruction: addi ($at,$at,1): $at=17
+cycle 630: Instruction: sub ($a0,$a0,$s2): $a0=83
+cycle 631: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 632: Instruction: add ($s0,$s0,$s3): $s0=2700
+cycle 633: Instruction: add ($s1,$s1,$s3): $s1=2750
+cycle 634: Instruction beq ($a0,$zero,exit,0)
+cycle 635: Instruction j :Jump to label ID: loop1
+cycle 636: Instruction: addi ($v1,$v1,1): $v1=10068
+cycle 637: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 638: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 639: Instruction beq ($t6,$t7,equal,1)
+cycle 640: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 641: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 642: DRAM Request Issued (sw)
+cycle 643-644: Accessing Column 852: memory address 10068-10071 = 100
+cycle 645: Instruction: add ($v1,$v0,$s2): $v1=10069
+cycle 646: Instruction: add ($v1,$v0,$s2): $v1=10069
+cycle 647: Instruction: add ($v1,$v0,$s2): $v1=10069
+cycle 648: Instruction: add ($v1,$v0,$s2): $v1=10069
+cycle 649: Instruction: addi ($v1,$v1,1): $v1=10070
+cycle 650: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 651: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 652: Instruction: addi ($v1,$v1,1): $v1=10071
+cycle 653: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 654: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 655: Instruction: addi ($v0,$v0,4): $v0=10072
+cycle 656: Instruction beq ($k0,$s2,equalToOne,1)
+cycle 657: DRAM Request Issued (sw)
+cycle 658-659: Accessing Column 856: memory address 10072-10075 = 100
+cycle 660: Instruction: add ($t2,$t2,$s1): $t2=2750
+cycle 661: Instruction: add ($t2,$t2,$s1): $t2=5500
+cycle 662: Instruction: add ($t2,$t2,$s1): $t2=8250
+cycle 663: Instruction: add ($t2,$t2,$s1): $t2=11000
+cycle 664: Instruction: sub ($t2,$t2,$s1): $t2=8250
+cycle 665: Instruction: sub ($t2,$t2,$s1): $t2=5500
+cycle 666: Instruction: sub ($t2,$t2,$s1): $t2=2750
+cycle 667: Instruction: sub ($t2,$t2,$s1): $t2=0
+cycle 668: Instruction: sub ($k0,$k0,$s2): $k0=0
+cycle 669: DRAM Request Issued (lw)
+cycle 670-671: Accessing Column 856: $a3=100
+cycle 672: Instruction j :Jump to label ID: resume
+cycle 673: Instruction: addi ($at,$at,1): $at=18
+cycle 674: Instruction: sub ($a0,$a0,$s2): $a0=82
+cycle 675: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 676: Instruction: add ($s0,$s0,$s3): $s0=2800
+cycle 677: Instruction: add ($s1,$s1,$s3): $s1=2850
+cycle 678: Instruction beq ($a0,$zero,exit,0)
+cycle 679: Instruction j :Jump to label ID: loop1
+cycle 680: Instruction: addi ($v1,$v1,1): $v1=10072
+cycle 681: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 682: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 683: Instruction beq ($t6,$t7,equal,1)
+cycle 684: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 685: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 686: DRAM Request Issued (sw)
+cycle 687-688: Accessing Column 856: memory address 10072-10075 = 100
+cycle 689: Instruction: add ($v1,$v0,$s2): $v1=10073
+cycle 690: Instruction: add ($v1,$v0,$s2): $v1=10073
+cycle 691: Instruction: add ($v1,$v0,$s2): $v1=10073
+cycle 692: Instruction: add ($v1,$v0,$s2): $v1=10073
+cycle 693: Instruction: addi ($v1,$v1,1): $v1=10074
+cycle 694: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 695: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 696: Instruction: addi ($v1,$v1,1): $v1=10075
+cycle 697: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 698: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 699: Instruction: addi ($v0,$v0,4): $v0=10076
+cycle 700: Instruction beq ($k0,$s2,equalToOne,0)
+cycle 701: Instruction: add ($k0,$k0,$s2): $k0=1
+cycle 702: Instruction: addi ($at,$at,1): $at=19
+cycle 703: Instruction: sub ($a0,$a0,$s2): $a0=81
+cycle 704: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 705: Instruction: add ($s0,$s0,$s3): $s0=2900
+cycle 706: Instruction: add ($s1,$s1,$s3): $s1=2950
+cycle 707: Instruction beq ($a0,$zero,exit,0)
+cycle 708: Instruction j :Jump to label ID: loop1
+cycle 709: Instruction: addi ($v1,$v1,1): $v1=10076
+cycle 710: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 711: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 712: Instruction beq ($t6,$t7,equal,1)
+cycle 713: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 714: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 715: DRAM Request Issued (sw)
+cycle 716-717: Accessing Column 860: memory address 10076-10079 = 100
+cycle 718: Instruction: add ($v1,$v0,$s2): $v1=10077
+cycle 719: Instruction: add ($v1,$v0,$s2): $v1=10077
+cycle 720: Instruction: add ($v1,$v0,$s2): $v1=10077
+cycle 721: Instruction: add ($v1,$v0,$s2): $v1=10077
+cycle 722: Instruction: addi ($v1,$v1,1): $v1=10078
+cycle 723: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 724: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 725: Instruction: addi ($v1,$v1,1): $v1=10079
+cycle 726: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 727: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 728: Instruction: addi ($v0,$v0,4): $v0=10080
+cycle 729: Instruction beq ($k0,$s2,equalToOne,1)
+cycle 730: DRAM Request Issued (sw)
+cycle 731-732: Accessing Column 864: memory address 10080-10083 = 100
+cycle 733: Instruction: add ($t2,$t2,$s1): $t2=2950
+cycle 734: Instruction: add ($t2,$t2,$s1): $t2=5900
+cycle 735: Instruction: add ($t2,$t2,$s1): $t2=8850
+cycle 736: Instruction: add ($t2,$t2,$s1): $t2=11800
+cycle 737: Instruction: sub ($t2,$t2,$s1): $t2=8850
+cycle 738: Instruction: sub ($t2,$t2,$s1): $t2=5900
+cycle 739: Instruction: sub ($t2,$t2,$s1): $t2=2950
+cycle 740: Instruction: sub ($t2,$t2,$s1): $t2=0
+cycle 741: Instruction: sub ($k0,$k0,$s2): $k0=0
+cycle 742: DRAM Request Issued (lw)
+cycle 743-744: Accessing Column 864: $a3=100
+cycle 745: Instruction j :Jump to label ID: resume
+cycle 746: Instruction: addi ($at,$at,1): $at=20
+cycle 747: Instruction: sub ($a0,$a0,$s2): $a0=80
+cycle 748: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 749: Instruction: add ($s0,$s0,$s3): $s0=3000
+cycle 750: Instruction: add ($s1,$s1,$s3): $s1=3050
+cycle 751: Instruction beq ($a0,$zero,exit,0)
+cycle 752: Instruction j :Jump to label ID: loop1
+cycle 753: Instruction: addi ($v1,$v1,1): $v1=10080
+cycle 754: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 755: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 756: Instruction beq ($t6,$t7,equal,1)
+cycle 757: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 758: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 759: DRAM Request Issued (sw)
+cycle 760-761: Accessing Column 864: memory address 10080-10083 = 100
+cycle 762: Instruction: add ($v1,$v0,$s2): $v1=10081
+cycle 763: Instruction: add ($v1,$v0,$s2): $v1=10081
+cycle 764: Instruction: add ($v1,$v0,$s2): $v1=10081
+cycle 765: Instruction: add ($v1,$v0,$s2): $v1=10081
+cycle 766: Instruction: addi ($v1,$v1,1): $v1=10082
+cycle 767: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 768: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 769: Instruction: addi ($v1,$v1,1): $v1=10083
+cycle 770: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 771: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 772: Instruction: addi ($v0,$v0,4): $v0=10084
+cycle 773: Instruction beq ($k0,$s2,equalToOne,0)
+cycle 774: Instruction: add ($k0,$k0,$s2): $k0=1
+cycle 775: Instruction: addi ($at,$at,1): $at=21
+cycle 776: Instruction: sub ($a0,$a0,$s2): $a0=79
+cycle 777: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 778: Instruction: add ($s0,$s0,$s3): $s0=3100
+cycle 779: Instruction: add ($s1,$s1,$s3): $s1=3150
+cycle 780: Instruction beq ($a0,$zero,exit,0)
+cycle 781: Instruction j :Jump to label ID: loop1
+cycle 782: Instruction: addi ($v1,$v1,1): $v1=10084
+cycle 783: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 784: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 785: Instruction beq ($t6,$t7,equal,1)
+cycle 786: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 787: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 788: DRAM Request Issued (sw)
+cycle 789-790: Accessing Column 868: memory address 10084-10087 = 100
+cycle 791: Instruction: add ($v1,$v0,$s2): $v1=10085
+cycle 792: Instruction: add ($v1,$v0,$s2): $v1=10085
+cycle 793: Instruction: add ($v1,$v0,$s2): $v1=10085
+cycle 794: Instruction: add ($v1,$v0,$s2): $v1=10085
+cycle 795: Instruction: addi ($v1,$v1,1): $v1=10086
+cycle 796: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 797: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 798: Instruction: addi ($v1,$v1,1): $v1=10087
+cycle 799: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 800: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 801: Instruction: addi ($v0,$v0,4): $v0=10088
+cycle 802: Instruction beq ($k0,$s2,equalToOne,1)
+cycle 803: DRAM Request Issued (sw)
+cycle 804-805: Accessing Column 872: memory address 10088-10091 = 100
+cycle 806: Instruction: add ($t2,$t2,$s1): $t2=3150
+cycle 807: Instruction: add ($t2,$t2,$s1): $t2=6300
+cycle 808: Instruction: add ($t2,$t2,$s1): $t2=9450
+cycle 809: Instruction: add ($t2,$t2,$s1): $t2=12600
+cycle 810: Instruction: sub ($t2,$t2,$s1): $t2=9450
+cycle 811: Instruction: sub ($t2,$t2,$s1): $t2=6300
+cycle 812: Instruction: sub ($t2,$t2,$s1): $t2=3150
+cycle 813: Instruction: sub ($t2,$t2,$s1): $t2=0
+cycle 814: Instruction: sub ($k0,$k0,$s2): $k0=0
+cycle 815: DRAM Request Issued (lw)
+cycle 816-817: Accessing Column 872: $a3=100
+cycle 818: Instruction j :Jump to label ID: resume
+cycle 819: Instruction: addi ($at,$at,1): $at=22
+cycle 820: Instruction: sub ($a0,$a0,$s2): $a0=78
+cycle 821: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 822: Instruction: add ($s0,$s0,$s3): $s0=3200
+cycle 823: Instruction: add ($s1,$s1,$s3): $s1=3250
+cycle 824: Instruction beq ($a0,$zero,exit,0)
+cycle 825: Instruction j :Jump to label ID: loop1
+cycle 826: Instruction: addi ($v1,$v1,1): $v1=10088
+cycle 827: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 828: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 829: Instruction beq ($t6,$t7,equal,1)
+cycle 830: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 831: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 832: DRAM Request Issued (sw)
+cycle 833-834: Accessing Column 872: memory address 10088-10091 = 100
+cycle 835: Instruction: add ($v1,$v0,$s2): $v1=10089
+cycle 836: Instruction: add ($v1,$v0,$s2): $v1=10089
+cycle 837: Instruction: add ($v1,$v0,$s2): $v1=10089
+cycle 838: Instruction: add ($v1,$v0,$s2): $v1=10089
+cycle 839: Instruction: addi ($v1,$v1,1): $v1=10090
+cycle 840: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 841: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 842: Instruction: addi ($v1,$v1,1): $v1=10091
+cycle 843: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 844: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 845: Instruction: addi ($v0,$v0,4): $v0=10092
+cycle 846: Instruction beq ($k0,$s2,equalToOne,0)
+cycle 847: Instruction: add ($k0,$k0,$s2): $k0=1
+cycle 848: Instruction: addi ($at,$at,1): $at=23
+cycle 849: Instruction: sub ($a0,$a0,$s2): $a0=77
+cycle 850: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 851: Instruction: add ($s0,$s0,$s3): $s0=3300
+cycle 852: Instruction: add ($s1,$s1,$s3): $s1=3350
+cycle 853: Instruction beq ($a0,$zero,exit,0)
+cycle 854: Instruction j :Jump to label ID: loop1
+cycle 855: Instruction: addi ($v1,$v1,1): $v1=10092
+cycle 856: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 857: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 858: Instruction beq ($t6,$t7,equal,1)
+cycle 859: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 860: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 861: DRAM Request Issued (sw)
+cycle 862-863: Accessing Column 876: memory address 10092-10095 = 100
+cycle 864: Instruction: add ($v1,$v0,$s2): $v1=10093
+cycle 865: Instruction: add ($v1,$v0,$s2): $v1=10093
+cycle 866: Instruction: add ($v1,$v0,$s2): $v1=10093
+cycle 867: Instruction: add ($v1,$v0,$s2): $v1=10093
+cycle 868: Instruction: addi ($v1,$v1,1): $v1=10094
+cycle 869: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 870: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 871: Instruction: addi ($v1,$v1,1): $v1=10095
+cycle 872: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 873: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 874: Instruction: addi ($v0,$v0,4): $v0=10096
+cycle 875: Instruction beq ($k0,$s2,equalToOne,1)
+cycle 876: DRAM Request Issued (sw)
+cycle 877-878: Accessing Column 880: memory address 10096-10099 = 100
+cycle 879: Instruction: add ($t2,$t2,$s1): $t2=3350
+cycle 880: Instruction: add ($t2,$t2,$s1): $t2=6700
+cycle 881: Instruction: add ($t2,$t2,$s1): $t2=10050
+cycle 882: Instruction: add ($t2,$t2,$s1): $t2=13400
+cycle 883: Instruction: sub ($t2,$t2,$s1): $t2=10050
+cycle 884: Instruction: sub ($t2,$t2,$s1): $t2=6700
+cycle 885: Instruction: sub ($t2,$t2,$s1): $t2=3350
+cycle 886: Instruction: sub ($t2,$t2,$s1): $t2=0
+cycle 887: Instruction: sub ($k0,$k0,$s2): $k0=0
+cycle 888: DRAM Request Issued (lw)
+cycle 889-890: Accessing Column 880: $a3=100
+cycle 891: Instruction j :Jump to label ID: resume
+cycle 892: Instruction: addi ($at,$at,1): $at=24
+cycle 893: Instruction: sub ($a0,$a0,$s2): $a0=76
+cycle 894: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 895: Instruction: add ($s0,$s0,$s3): $s0=3400
+cycle 896: Instruction: add ($s1,$s1,$s3): $s1=3450
+cycle 897: Instruction beq ($a0,$zero,exit,0)
+cycle 898: Instruction j :Jump to label ID: loop1
+cycle 899: Instruction: addi ($v1,$v1,1): $v1=10096
+cycle 900: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 901: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 902: Instruction beq ($t6,$t7,equal,1)
+cycle 903: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 904: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 905: DRAM Request Issued (sw)
+cycle 906-907: Accessing Column 880: memory address 10096-10099 = 100
+cycle 908: Instruction: add ($v1,$v0,$s2): $v1=10097
+cycle 909: Instruction: add ($v1,$v0,$s2): $v1=10097
+cycle 910: Instruction: add ($v1,$v0,$s2): $v1=10097
+cycle 911: Instruction: add ($v1,$v0,$s2): $v1=10097
+cycle 912: Instruction: addi ($v1,$v1,1): $v1=10098
+cycle 913: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 914: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 915: Instruction: addi ($v1,$v1,1): $v1=10099
+cycle 916: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 917: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 918: Instruction: addi ($v0,$v0,4): $v0=10100
+cycle 919: Instruction beq ($k0,$s2,equalToOne,0)
+cycle 920: Instruction: add ($k0,$k0,$s2): $k0=1
+cycle 921: Instruction: addi ($at,$at,1): $at=25
+cycle 922: Instruction: sub ($a0,$a0,$s2): $a0=75
+cycle 923: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 924: Instruction: add ($s0,$s0,$s3): $s0=3500
+cycle 925: Instruction: add ($s1,$s1,$s3): $s1=3550
+cycle 926: Instruction beq ($a0,$zero,exit,0)
+cycle 927: Instruction j :Jump to label ID: loop1
+cycle 928: Instruction: addi ($v1,$v1,1): $v1=10100
+cycle 929: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 930: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 931: Instruction beq ($t6,$t7,equal,1)
+cycle 932: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 933: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 934: DRAM Request Issued (sw)
+cycle 935-936: Accessing Column 884: memory address 10100-10103 = 100
+cycle 937: Instruction: add ($v1,$v0,$s2): $v1=10101
+cycle 938: Instruction: add ($v1,$v0,$s2): $v1=10101
+cycle 939: Instruction: add ($v1,$v0,$s2): $v1=10101
+cycle 940: Instruction: add ($v1,$v0,$s2): $v1=10101
+cycle 941: Instruction: addi ($v1,$v1,1): $v1=10102
+cycle 942: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 943: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 944: Instruction: addi ($v1,$v1,1): $v1=10103
+cycle 945: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 946: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 947: Instruction: addi ($v0,$v0,4): $v0=10104
+cycle 948: Instruction beq ($k0,$s2,equalToOne,1)
+cycle 949: DRAM Request Issued (sw)
+cycle 950-951: Accessing Column 888: memory address 10104-10107 = 100
+cycle 952: Instruction: add ($t2,$t2,$s1): $t2=3550
+cycle 953: Instruction: add ($t2,$t2,$s1): $t2=7100
+cycle 954: Instruction: add ($t2,$t2,$s1): $t2=10650
+cycle 955: Instruction: add ($t2,$t2,$s1): $t2=14200
+cycle 956: Instruction: sub ($t2,$t2,$s1): $t2=10650
+cycle 957: Instruction: sub ($t2,$t2,$s1): $t2=7100
+cycle 958: Instruction: sub ($t2,$t2,$s1): $t2=3550
+cycle 959: Instruction: sub ($t2,$t2,$s1): $t2=0
+cycle 960: Instruction: sub ($k0,$k0,$s2): $k0=0
+cycle 961: DRAM Request Issued (lw)
+cycle 962-963: Accessing Column 888: $a3=100
+cycle 964: Instruction j :Jump to label ID: resume
+cycle 965: Instruction: addi ($at,$at,1): $at=26
+cycle 966: Instruction: sub ($a0,$a0,$s2): $a0=74
+cycle 967: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 968: Instruction: add ($s0,$s0,$s3): $s0=3600
+cycle 969: Instruction: add ($s1,$s1,$s3): $s1=3650
+cycle 970: Instruction beq ($a0,$zero,exit,0)
+cycle 971: Instruction j :Jump to label ID: loop1
+cycle 972: Instruction: addi ($v1,$v1,1): $v1=10104
+cycle 973: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 974: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 975: Instruction beq ($t6,$t7,equal,1)
+cycle 976: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 977: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 978: DRAM Request Issued (sw)
+cycle 979-980: Accessing Column 888: memory address 10104-10107 = 100
+cycle 981: Instruction: add ($v1,$v0,$s2): $v1=10105
+cycle 982: Instruction: add ($v1,$v0,$s2): $v1=10105
+cycle 983: Instruction: add ($v1,$v0,$s2): $v1=10105
+cycle 984: Instruction: add ($v1,$v0,$s2): $v1=10105
+cycle 985: Instruction: addi ($v1,$v1,1): $v1=10106
+cycle 986: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 987: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 988: Instruction: addi ($v1,$v1,1): $v1=10107
+cycle 989: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 990: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 991: Instruction: addi ($v0,$v0,4): $v0=10108
+cycle 992: Instruction beq ($k0,$s2,equalToOne,0)
+cycle 993: Instruction: add ($k0,$k0,$s2): $k0=1
+cycle 994: Instruction: addi ($at,$at,1): $at=27
+cycle 995: Instruction: sub ($a0,$a0,$s2): $a0=73
+cycle 996: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 997: Instruction: add ($s0,$s0,$s3): $s0=3700
+cycle 998: Instruction: add ($s1,$s1,$s3): $s1=3750
+cycle 999: Instruction beq ($a0,$zero,exit,0)
+cycle 1000: Instruction j :Jump to label ID: loop1
+cycle 1001: Instruction: addi ($v1,$v1,1): $v1=10108
+cycle 1002: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 1003: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 1004: Instruction beq ($t6,$t7,equal,1)
+cycle 1005: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 1006: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 1007: DRAM Request Issued (sw)
+cycle 1008-1009: Accessing Column 892: memory address 10108-10111 = 100
+cycle 1010: Instruction: add ($v1,$v0,$s2): $v1=10109
+cycle 1011: Instruction: add ($v1,$v0,$s2): $v1=10109
+cycle 1012: Instruction: add ($v1,$v0,$s2): $v1=10109
+cycle 1013: Instruction: add ($v1,$v0,$s2): $v1=10109
+cycle 1014: Instruction: addi ($v1,$v1,1): $v1=10110
+cycle 1015: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 1016: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 1017: Instruction: addi ($v1,$v1,1): $v1=10111
+cycle 1018: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 1019: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 1020: Instruction: addi ($v0,$v0,4): $v0=10112
+cycle 1021: Instruction beq ($k0,$s2,equalToOne,1)
+cycle 1022: DRAM Request Issued (sw)
+cycle 1023-1024: Accessing Column 896: memory address 10112-10115 = 100
+cycle 1025: Instruction: add ($t2,$t2,$s1): $t2=3750
+cycle 1026: Instruction: add ($t2,$t2,$s1): $t2=7500
+cycle 1027: Instruction: add ($t2,$t2,$s1): $t2=11250
+cycle 1028: Instruction: add ($t2,$t2,$s1): $t2=15000
+cycle 1029: Instruction: sub ($t2,$t2,$s1): $t2=11250
+cycle 1030: Instruction: sub ($t2,$t2,$s1): $t2=7500
+cycle 1031: Instruction: sub ($t2,$t2,$s1): $t2=3750
+cycle 1032: Instruction: sub ($t2,$t2,$s1): $t2=0
+cycle 1033: Instruction: sub ($k0,$k0,$s2): $k0=0
+cycle 1034: DRAM Request Issued (lw)
+cycle 1035-1036: Accessing Column 896: $a3=100
+cycle 1037: Instruction j :Jump to label ID: resume
+cycle 1038: Instruction: addi ($at,$at,1): $at=28
+cycle 1039: Instruction: sub ($a0,$a0,$s2): $a0=72
+cycle 1040: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 1041: Instruction: add ($s0,$s0,$s3): $s0=3800
+cycle 1042: Instruction: add ($s1,$s1,$s3): $s1=3850
+cycle 1043: Instruction beq ($a0,$zero,exit,0)
+cycle 1044: Instruction j :Jump to label ID: loop1
+cycle 1045: Instruction: addi ($v1,$v1,1): $v1=10112
+cycle 1046: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 1047: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 1048: Instruction beq ($t6,$t7,equal,1)
+cycle 1049: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 1050: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 1051: DRAM Request Issued (sw)
+cycle 1052-1053: Accessing Column 896: memory address 10112-10115 = 100
+cycle 1054: Instruction: add ($v1,$v0,$s2): $v1=10113
+cycle 1055: Instruction: add ($v1,$v0,$s2): $v1=10113
+cycle 1056: Instruction: add ($v1,$v0,$s2): $v1=10113
+cycle 1057: Instruction: add ($v1,$v0,$s2): $v1=10113
+cycle 1058: Instruction: addi ($v1,$v1,1): $v1=10114
+cycle 1059: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 1060: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 1061: Instruction: addi ($v1,$v1,1): $v1=10115
+cycle 1062: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 1063: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 1064: Instruction: addi ($v0,$v0,4): $v0=10116
+cycle 1065: Instruction beq ($k0,$s2,equalToOne,0)
+cycle 1066: Instruction: add ($k0,$k0,$s2): $k0=1
+cycle 1067: Instruction: addi ($at,$at,1): $at=29
+cycle 1068: Instruction: sub ($a0,$a0,$s2): $a0=71
+cycle 1069: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 1070: Instruction: add ($s0,$s0,$s3): $s0=3900
+cycle 1071: Instruction: add ($s1,$s1,$s3): $s1=3950
+cycle 1072: Instruction beq ($a0,$zero,exit,0)
+cycle 1073: Instruction j :Jump to label ID: loop1
+cycle 1074: Instruction: addi ($v1,$v1,1): $v1=10116
+cycle 1075: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 1076: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 1077: Instruction beq ($t6,$t7,equal,1)
+cycle 1078: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 1079: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 1080: DRAM Request Issued (sw)
+cycle 1081-1082: Accessing Column 900: memory address 10116-10119 = 100
+cycle 1083: Instruction: add ($v1,$v0,$s2): $v1=10117
+cycle 1084: Instruction: add ($v1,$v0,$s2): $v1=10117
+cycle 1085: Instruction: add ($v1,$v0,$s2): $v1=10117
+cycle 1086: Instruction: add ($v1,$v0,$s2): $v1=10117
+cycle 1087: Instruction: addi ($v1,$v1,1): $v1=10118
+cycle 1088: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 1089: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 1090: Instruction: addi ($v1,$v1,1): $v1=10119
+cycle 1091: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 1092: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 1093: Instruction: addi ($v0,$v0,4): $v0=10120
+cycle 1094: Instruction beq ($k0,$s2,equalToOne,1)
+cycle 1095: DRAM Request Issued (sw)
+cycle 1096-1097: Accessing Column 904: memory address 10120-10123 = 100
+cycle 1098: Instruction: add ($t2,$t2,$s1): $t2=3950
+cycle 1099: Instruction: add ($t2,$t2,$s1): $t2=7900
+cycle 1100: Instruction: add ($t2,$t2,$s1): $t2=11850
+cycle 1101: Instruction: add ($t2,$t2,$s1): $t2=15800
+cycle 1102: Instruction: sub ($t2,$t2,$s1): $t2=11850
+cycle 1103: Instruction: sub ($t2,$t2,$s1): $t2=7900
+cycle 1104: Instruction: sub ($t2,$t2,$s1): $t2=3950
+cycle 1105: Instruction: sub ($t2,$t2,$s1): $t2=0
+cycle 1106: Instruction: sub ($k0,$k0,$s2): $k0=0
+cycle 1107: DRAM Request Issued (lw)
+cycle 1108-1109: Accessing Column 904: $a3=100
+cycle 1110: Instruction j :Jump to label ID: resume
+cycle 1111: Instruction: addi ($at,$at,1): $at=30
+cycle 1112: Instruction: sub ($a0,$a0,$s2): $a0=70
+cycle 1113: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 1114: Instruction: add ($s0,$s0,$s3): $s0=4000
+cycle 1115: Instruction: add ($s1,$s1,$s3): $s1=4050
+cycle 1116: Instruction beq ($a0,$zero,exit,0)
+cycle 1117: Instruction j :Jump to label ID: loop1
+cycle 1118: Instruction: addi ($v1,$v1,1): $v1=10120
+cycle 1119: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 1120: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 1121: Instruction beq ($t6,$t7,equal,1)
+cycle 1122: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 1123: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 1124: DRAM Request Issued (sw)
+cycle 1125-1126: Accessing Column 904: memory address 10120-10123 = 100
+cycle 1127: Instruction: add ($v1,$v0,$s2): $v1=10121
+cycle 1128: Instruction: add ($v1,$v0,$s2): $v1=10121
+cycle 1129: Instruction: add ($v1,$v0,$s2): $v1=10121
+cycle 1130: Instruction: add ($v1,$v0,$s2): $v1=10121
+cycle 1131: Instruction: addi ($v1,$v1,1): $v1=10122
+cycle 1132: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 1133: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 1134: Instruction: addi ($v1,$v1,1): $v1=10123
+cycle 1135: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 1136: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 1137: Instruction: addi ($v0,$v0,4): $v0=10124
+cycle 1138: Instruction beq ($k0,$s2,equalToOne,0)
+cycle 1139: Instruction: add ($k0,$k0,$s2): $k0=1
+cycle 1140: Instruction: addi ($at,$at,1): $at=31
+cycle 1141: Instruction: sub ($a0,$a0,$s2): $a0=69
+cycle 1142: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 1143: Instruction: add ($s0,$s0,$s3): $s0=4100
+cycle 1144: Instruction: add ($s1,$s1,$s3): $s1=4150
+cycle 1145: Instruction beq ($a0,$zero,exit,0)
+cycle 1146: Instruction j :Jump to label ID: loop1
+cycle 1147: Instruction: addi ($v1,$v1,1): $v1=10124
+cycle 1148: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 1149: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 1150: Instruction beq ($t6,$t7,equal,1)
+cycle 1151: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 1152: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 1153: DRAM Request Issued (sw)
+cycle 1154-1155: Accessing Column 908: memory address 10124-10127 = 100
+cycle 1156: Instruction: add ($v1,$v0,$s2): $v1=10125
+cycle 1157: Instruction: add ($v1,$v0,$s2): $v1=10125
+cycle 1158: Instruction: add ($v1,$v0,$s2): $v1=10125
+cycle 1159: Instruction: add ($v1,$v0,$s2): $v1=10125
+cycle 1160: Instruction: addi ($v1,$v1,1): $v1=10126
+cycle 1161: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 1162: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 1163: Instruction: addi ($v1,$v1,1): $v1=10127
+cycle 1164: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 1165: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 1166: Instruction: addi ($v0,$v0,4): $v0=10128
+cycle 1167: Instruction beq ($k0,$s2,equalToOne,1)
+cycle 1168: DRAM Request Issued (sw)
+cycle 1169-1170: Accessing Column 912: memory address 10128-10131 = 100
+cycle 1171: Instruction: add ($t2,$t2,$s1): $t2=4150
+cycle 1172: Instruction: add ($t2,$t2,$s1): $t2=8300
+cycle 1173: Instruction: add ($t2,$t2,$s1): $t2=12450
+cycle 1174: Instruction: add ($t2,$t2,$s1): $t2=16600
+cycle 1175: Instruction: sub ($t2,$t2,$s1): $t2=12450
+cycle 1176: Instruction: sub ($t2,$t2,$s1): $t2=8300
+cycle 1177: Instruction: sub ($t2,$t2,$s1): $t2=4150
+cycle 1178: Instruction: sub ($t2,$t2,$s1): $t2=0
+cycle 1179: Instruction: sub ($k0,$k0,$s2): $k0=0
+cycle 1180: DRAM Request Issued (lw)
+cycle 1181-1182: Accessing Column 912: $a3=100
+cycle 1183: Instruction j :Jump to label ID: resume
+cycle 1184: Instruction: addi ($at,$at,1): $at=32
+cycle 1185: Instruction: sub ($a0,$a0,$s2): $a0=68
+cycle 1186: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 1187: Instruction: add ($s0,$s0,$s3): $s0=4200
+cycle 1188: Instruction: add ($s1,$s1,$s3): $s1=4250
+cycle 1189: Instruction beq ($a0,$zero,exit,0)
+cycle 1190: Instruction j :Jump to label ID: loop1
+cycle 1191: Instruction: addi ($v1,$v1,1): $v1=10128
+cycle 1192: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 1193: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 1194: Instruction beq ($t6,$t7,equal,1)
+cycle 1195: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 1196: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 1197: DRAM Request Issued (sw)
+cycle 1198-1199: Accessing Column 912: memory address 10128-10131 = 100
+cycle 1200: Instruction: add ($v1,$v0,$s2): $v1=10129
+cycle 1201: Instruction: add ($v1,$v0,$s2): $v1=10129
+cycle 1202: Instruction: add ($v1,$v0,$s2): $v1=10129
+cycle 1203: Instruction: add ($v1,$v0,$s2): $v1=10129
+cycle 1204: Instruction: addi ($v1,$v1,1): $v1=10130
+cycle 1205: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 1206: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 1207: Instruction: addi ($v1,$v1,1): $v1=10131
+cycle 1208: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 1209: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 1210: Instruction: addi ($v0,$v0,4): $v0=10132
+cycle 1211: Instruction beq ($k0,$s2,equalToOne,0)
+cycle 1212: Instruction: add ($k0,$k0,$s2): $k0=1
+cycle 1213: Instruction: addi ($at,$at,1): $at=33
+cycle 1214: Instruction: sub ($a0,$a0,$s2): $a0=67
+cycle 1215: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 1216: Instruction: add ($s0,$s0,$s3): $s0=4300
+cycle 1217: Instruction: add ($s1,$s1,$s3): $s1=4350
+cycle 1218: Instruction beq ($a0,$zero,exit,0)
+cycle 1219: Instruction j :Jump to label ID: loop1
+cycle 1220: Instruction: addi ($v1,$v1,1): $v1=10132
+cycle 1221: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 1222: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 1223: Instruction beq ($t6,$t7,equal,1)
+cycle 1224: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 1225: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 1226: DRAM Request Issued (sw)
+cycle 1227-1228: Accessing Column 916: memory address 10132-10135 = 100
+cycle 1229: Instruction: add ($v1,$v0,$s2): $v1=10133
+cycle 1230: Instruction: add ($v1,$v0,$s2): $v1=10133
+cycle 1231: Instruction: add ($v1,$v0,$s2): $v1=10133
+cycle 1232: Instruction: add ($v1,$v0,$s2): $v1=10133
+cycle 1233: Instruction: addi ($v1,$v1,1): $v1=10134
+cycle 1234: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 1235: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 1236: Instruction: addi ($v1,$v1,1): $v1=10135
+cycle 1237: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 1238: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 1239: Instruction: addi ($v0,$v0,4): $v0=10136
+cycle 1240: Instruction beq ($k0,$s2,equalToOne,1)
+cycle 1241: DRAM Request Issued (sw)
+cycle 1242-1243: Accessing Column 920: memory address 10136-10139 = 100
+cycle 1244: Instruction: add ($t2,$t2,$s1): $t2=4350
+cycle 1245: Instruction: add ($t2,$t2,$s1): $t2=8700
+cycle 1246: Instruction: add ($t2,$t2,$s1): $t2=13050
+cycle 1247: Instruction: add ($t2,$t2,$s1): $t2=17400
+cycle 1248: Instruction: sub ($t2,$t2,$s1): $t2=13050
+cycle 1249: Instruction: sub ($t2,$t2,$s1): $t2=8700
+cycle 1250: Instruction: sub ($t2,$t2,$s1): $t2=4350
+cycle 1251: Instruction: sub ($t2,$t2,$s1): $t2=0
+cycle 1252: Instruction: sub ($k0,$k0,$s2): $k0=0
+cycle 1253: DRAM Request Issued (lw)
+cycle 1254-1255: Accessing Column 920: $a3=100
+cycle 1256: Instruction j :Jump to label ID: resume
+cycle 1257: Instruction: addi ($at,$at,1): $at=34
+cycle 1258: Instruction: sub ($a0,$a0,$s2): $a0=66
+cycle 1259: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 1260: Instruction: add ($s0,$s0,$s3): $s0=4400
+cycle 1261: Instruction: add ($s1,$s1,$s3): $s1=4450
+cycle 1262: Instruction beq ($a0,$zero,exit,0)
+cycle 1263: Instruction j :Jump to label ID: loop1
+cycle 1264: Instruction: addi ($v1,$v1,1): $v1=10136
+cycle 1265: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 1266: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 1267: Instruction beq ($t6,$t7,equal,1)
+cycle 1268: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 1269: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 1270: DRAM Request Issued (sw)
+cycle 1271-1272: Accessing Column 920: memory address 10136-10139 = 100
+cycle 1273: Instruction: add ($v1,$v0,$s2): $v1=10137
+cycle 1274: Instruction: add ($v1,$v0,$s2): $v1=10137
+cycle 1275: Instruction: add ($v1,$v0,$s2): $v1=10137
+cycle 1276: Instruction: add ($v1,$v0,$s2): $v1=10137
+cycle 1277: Instruction: addi ($v1,$v1,1): $v1=10138
+cycle 1278: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 1279: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 1280: Instruction: addi ($v1,$v1,1): $v1=10139
+cycle 1281: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 1282: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 1283: Instruction: addi ($v0,$v0,4): $v0=10140
+cycle 1284: Instruction beq ($k0,$s2,equalToOne,0)
+cycle 1285: Instruction: add ($k0,$k0,$s2): $k0=1
+cycle 1286: Instruction: addi ($at,$at,1): $at=35
+cycle 1287: Instruction: sub ($a0,$a0,$s2): $a0=65
+cycle 1288: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 1289: Instruction: add ($s0,$s0,$s3): $s0=4500
+cycle 1290: Instruction: add ($s1,$s1,$s3): $s1=4550
+cycle 1291: Instruction beq ($a0,$zero,exit,0)
+cycle 1292: Instruction j :Jump to label ID: loop1
+cycle 1293: Instruction: addi ($v1,$v1,1): $v1=10140
+cycle 1294: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 1295: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 1296: Instruction beq ($t6,$t7,equal,1)
+cycle 1297: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 1298: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 1299: DRAM Request Issued (sw)
+cycle 1300-1301: Accessing Column 924: memory address 10140-10143 = 100
+cycle 1302: Instruction: add ($v1,$v0,$s2): $v1=10141
+cycle 1303: Instruction: add ($v1,$v0,$s2): $v1=10141
+cycle 1304: Instruction: add ($v1,$v0,$s2): $v1=10141
+cycle 1305: Instruction: add ($v1,$v0,$s2): $v1=10141
+cycle 1306: Instruction: addi ($v1,$v1,1): $v1=10142
+cycle 1307: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 1308: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 1309: Instruction: addi ($v1,$v1,1): $v1=10143
+cycle 1310: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 1311: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 1312: Instruction: addi ($v0,$v0,4): $v0=10144
+cycle 1313: Instruction beq ($k0,$s2,equalToOne,1)
+cycle 1314: DRAM Request Issued (sw)
+cycle 1315-1316: Accessing Column 928: memory address 10144-10147 = 100
+cycle 1317: Instruction: add ($t2,$t2,$s1): $t2=4550
+cycle 1318: Instruction: add ($t2,$t2,$s1): $t2=9100
+cycle 1319: Instruction: add ($t2,$t2,$s1): $t2=13650
+cycle 1320: Instruction: add ($t2,$t2,$s1): $t2=18200
+cycle 1321: Instruction: sub ($t2,$t2,$s1): $t2=13650
+cycle 1322: Instruction: sub ($t2,$t2,$s1): $t2=9100
+cycle 1323: Instruction: sub ($t2,$t2,$s1): $t2=4550
+cycle 1324: Instruction: sub ($t2,$t2,$s1): $t2=0
+cycle 1325: Instruction: sub ($k0,$k0,$s2): $k0=0
+cycle 1326: DRAM Request Issued (lw)
+cycle 1327-1328: Accessing Column 928: $a3=100
+cycle 1329: Instruction j :Jump to label ID: resume
+cycle 1330: Instruction: addi ($at,$at,1): $at=36
+cycle 1331: Instruction: sub ($a0,$a0,$s2): $a0=64
+cycle 1332: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 1333: Instruction: add ($s0,$s0,$s3): $s0=4600
+cycle 1334: Instruction: add ($s1,$s1,$s3): $s1=4650
+cycle 1335: Instruction beq ($a0,$zero,exit,0)
+cycle 1336: Instruction j :Jump to label ID: loop1
+cycle 1337: Instruction: addi ($v1,$v1,1): $v1=10144
+cycle 1338: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 1339: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 1340: Instruction beq ($t6,$t7,equal,1)
+cycle 1341: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 1342: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 1343: DRAM Request Issued (sw)
+cycle 1344-1345: Accessing Column 928: memory address 10144-10147 = 100
+cycle 1346: Instruction: add ($v1,$v0,$s2): $v1=10145
+cycle 1347: Instruction: add ($v1,$v0,$s2): $v1=10145
+cycle 1348: Instruction: add ($v1,$v0,$s2): $v1=10145
+cycle 1349: Instruction: add ($v1,$v0,$s2): $v1=10145
+cycle 1350: Instruction: addi ($v1,$v1,1): $v1=10146
+cycle 1351: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 1352: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 1353: Instruction: addi ($v1,$v1,1): $v1=10147
+cycle 1354: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 1355: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 1356: Instruction: addi ($v0,$v0,4): $v0=10148
+cycle 1357: Instruction beq ($k0,$s2,equalToOne,0)
+cycle 1358: Instruction: add ($k0,$k0,$s2): $k0=1
+cycle 1359: Instruction: addi ($at,$at,1): $at=37
+cycle 1360: Instruction: sub ($a0,$a0,$s2): $a0=63
+cycle 1361: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 1362: Instruction: add ($s0,$s0,$s3): $s0=4700
+cycle 1363: Instruction: add ($s1,$s1,$s3): $s1=4750
+cycle 1364: Instruction beq ($a0,$zero,exit,0)
+cycle 1365: Instruction j :Jump to label ID: loop1
+cycle 1366: Instruction: addi ($v1,$v1,1): $v1=10148
+cycle 1367: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 1368: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 1369: Instruction beq ($t6,$t7,equal,1)
+cycle 1370: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 1371: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 1372: DRAM Request Issued (sw)
+cycle 1373-1374: Accessing Column 932: memory address 10148-10151 = 100
+cycle 1375: Instruction: add ($v1,$v0,$s2): $v1=10149
+cycle 1376: Instruction: add ($v1,$v0,$s2): $v1=10149
+cycle 1377: Instruction: add ($v1,$v0,$s2): $v1=10149
+cycle 1378: Instruction: add ($v1,$v0,$s2): $v1=10149
+cycle 1379: Instruction: addi ($v1,$v1,1): $v1=10150
+cycle 1380: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 1381: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 1382: Instruction: addi ($v1,$v1,1): $v1=10151
+cycle 1383: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 1384: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 1385: Instruction: addi ($v0,$v0,4): $v0=10152
+cycle 1386: Instruction beq ($k0,$s2,equalToOne,1)
+cycle 1387: DRAM Request Issued (sw)
+cycle 1388-1389: Accessing Column 936: memory address 10152-10155 = 100
+cycle 1390: Instruction: add ($t2,$t2,$s1): $t2=4750
+cycle 1391: Instruction: add ($t2,$t2,$s1): $t2=9500
+cycle 1392: Instruction: add ($t2,$t2,$s1): $t2=14250
+cycle 1393: Instruction: add ($t2,$t2,$s1): $t2=19000
+cycle 1394: Instruction: sub ($t2,$t2,$s1): $t2=14250
+cycle 1395: Instruction: sub ($t2,$t2,$s1): $t2=9500
+cycle 1396: Instruction: sub ($t2,$t2,$s1): $t2=4750
+cycle 1397: Instruction: sub ($t2,$t2,$s1): $t2=0
+cycle 1398: Instruction: sub ($k0,$k0,$s2): $k0=0
+cycle 1399: DRAM Request Issued (lw)
+cycle 1400-1401: Accessing Column 936: $a3=100
+cycle 1402: Instruction j :Jump to label ID: resume
+cycle 1403: Instruction: addi ($at,$at,1): $at=38
+cycle 1404: Instruction: sub ($a0,$a0,$s2): $a0=62
+cycle 1405: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 1406: Instruction: add ($s0,$s0,$s3): $s0=4800
+cycle 1407: Instruction: add ($s1,$s1,$s3): $s1=4850
+cycle 1408: Instruction beq ($a0,$zero,exit,0)
+cycle 1409: Instruction j :Jump to label ID: loop1
+cycle 1410: Instruction: addi ($v1,$v1,1): $v1=10152
+cycle 1411: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 1412: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 1413: Instruction beq ($t6,$t7,equal,1)
+cycle 1414: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 1415: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 1416: DRAM Request Issued (sw)
+cycle 1417-1418: Accessing Column 936: memory address 10152-10155 = 100
+cycle 1419: Instruction: add ($v1,$v0,$s2): $v1=10153
+cycle 1420: Instruction: add ($v1,$v0,$s2): $v1=10153
+cycle 1421: Instruction: add ($v1,$v0,$s2): $v1=10153
+cycle 1422: Instruction: add ($v1,$v0,$s2): $v1=10153
+cycle 1423: Instruction: addi ($v1,$v1,1): $v1=10154
+cycle 1424: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 1425: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 1426: Instruction: addi ($v1,$v1,1): $v1=10155
+cycle 1427: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 1428: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 1429: Instruction: addi ($v0,$v0,4): $v0=10156
+cycle 1430: Instruction beq ($k0,$s2,equalToOne,0)
+cycle 1431: Instruction: add ($k0,$k0,$s2): $k0=1
+cycle 1432: Instruction: addi ($at,$at,1): $at=39
+cycle 1433: Instruction: sub ($a0,$a0,$s2): $a0=61
+cycle 1434: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 1435: Instruction: add ($s0,$s0,$s3): $s0=4900
+cycle 1436: Instruction: add ($s1,$s1,$s3): $s1=4950
+cycle 1437: Instruction beq ($a0,$zero,exit,0)
+cycle 1438: Instruction j :Jump to label ID: loop1
+cycle 1439: Instruction: addi ($v1,$v1,1): $v1=10156
+cycle 1440: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 1441: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 1442: Instruction beq ($t6,$t7,equal,1)
+cycle 1443: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 1444: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 1445: DRAM Request Issued (sw)
+cycle 1446-1447: Accessing Column 940: memory address 10156-10159 = 100
+cycle 1448: Instruction: add ($v1,$v0,$s2): $v1=10157
+cycle 1449: Instruction: add ($v1,$v0,$s2): $v1=10157
+cycle 1450: Instruction: add ($v1,$v0,$s2): $v1=10157
+cycle 1451: Instruction: add ($v1,$v0,$s2): $v1=10157
+cycle 1452: Instruction: addi ($v1,$v1,1): $v1=10158
+cycle 1453: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 1454: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 1455: Instruction: addi ($v1,$v1,1): $v1=10159
+cycle 1456: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 1457: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 1458: Instruction: addi ($v0,$v0,4): $v0=10160
+cycle 1459: Instruction beq ($k0,$s2,equalToOne,1)
+cycle 1460: DRAM Request Issued (sw)
+cycle 1461-1462: Accessing Column 944: memory address 10160-10163 = 100
+cycle 1463: Instruction: add ($t2,$t2,$s1): $t2=4950
+cycle 1464: Instruction: add ($t2,$t2,$s1): $t2=9900
+cycle 1465: Instruction: add ($t2,$t2,$s1): $t2=14850
+cycle 1466: Instruction: add ($t2,$t2,$s1): $t2=19800
+cycle 1467: Instruction: sub ($t2,$t2,$s1): $t2=14850
+cycle 1468: Instruction: sub ($t2,$t2,$s1): $t2=9900
+cycle 1469: Instruction: sub ($t2,$t2,$s1): $t2=4950
+cycle 1470: Instruction: sub ($t2,$t2,$s1): $t2=0
+cycle 1471: Instruction: sub ($k0,$k0,$s2): $k0=0
+cycle 1472: DRAM Request Issued (lw)
+cycle 1473-1474: Accessing Column 944: $a3=100
+cycle 1475: Instruction j :Jump to label ID: resume
+cycle 1476: Instruction: addi ($at,$at,1): $at=40
+cycle 1477: Instruction: sub ($a0,$a0,$s2): $a0=60
+cycle 1478: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 1479: Instruction: add ($s0,$s0,$s3): $s0=5000
+cycle 1480: Instruction: add ($s1,$s1,$s3): $s1=5050
+cycle 1481: Instruction beq ($a0,$zero,exit,0)
+cycle 1482: Instruction j :Jump to label ID: loop1
+cycle 1483: Instruction: addi ($v1,$v1,1): $v1=10160
+cycle 1484: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 1485: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 1486: Instruction beq ($t6,$t7,equal,1)
+cycle 1487: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 1488: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 1489: DRAM Request Issued (sw)
+cycle 1490-1491: Accessing Column 944: memory address 10160-10163 = 100
+cycle 1492: Instruction: add ($v1,$v0,$s2): $v1=10161
+cycle 1493: Instruction: add ($v1,$v0,$s2): $v1=10161
+cycle 1494: Instruction: add ($v1,$v0,$s2): $v1=10161
+cycle 1495: Instruction: add ($v1,$v0,$s2): $v1=10161
+cycle 1496: Instruction: addi ($v1,$v1,1): $v1=10162
+cycle 1497: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 1498: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 1499: Instruction: addi ($v1,$v1,1): $v1=10163
+cycle 1500: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 1501: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 1502: Instruction: addi ($v0,$v0,4): $v0=10164
+cycle 1503: Instruction beq ($k0,$s2,equalToOne,0)
+cycle 1504: Instruction: add ($k0,$k0,$s2): $k0=1
+cycle 1505: Instruction: addi ($at,$at,1): $at=41
+cycle 1506: Instruction: sub ($a0,$a0,$s2): $a0=59
+cycle 1507: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 1508: Instruction: add ($s0,$s0,$s3): $s0=5100
+cycle 1509: Instruction: add ($s1,$s1,$s3): $s1=5150
+cycle 1510: Instruction beq ($a0,$zero,exit,0)
+cycle 1511: Instruction j :Jump to label ID: loop1
+cycle 1512: Instruction: addi ($v1,$v1,1): $v1=10164
+cycle 1513: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 1514: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 1515: Instruction beq ($t6,$t7,equal,1)
+cycle 1516: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 1517: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 1518: DRAM Request Issued (sw)
+cycle 1519-1520: Accessing Column 948: memory address 10164-10167 = 100
+cycle 1521: Instruction: add ($v1,$v0,$s2): $v1=10165
+cycle 1522: Instruction: add ($v1,$v0,$s2): $v1=10165
+cycle 1523: Instruction: add ($v1,$v0,$s2): $v1=10165
+cycle 1524: Instruction: add ($v1,$v0,$s2): $v1=10165
+cycle 1525: Instruction: addi ($v1,$v1,1): $v1=10166
+cycle 1526: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 1527: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 1528: Instruction: addi ($v1,$v1,1): $v1=10167
+cycle 1529: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 1530: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 1531: Instruction: addi ($v0,$v0,4): $v0=10168
+cycle 1532: Instruction beq ($k0,$s2,equalToOne,1)
+cycle 1533: DRAM Request Issued (sw)
+cycle 1534-1535: Accessing Column 952: memory address 10168-10171 = 100
+cycle 1536: Instruction: add ($t2,$t2,$s1): $t2=5150
+cycle 1537: Instruction: add ($t2,$t2,$s1): $t2=10300
+cycle 1538: Instruction: add ($t2,$t2,$s1): $t2=15450
+cycle 1539: Instruction: add ($t2,$t2,$s1): $t2=20600
+cycle 1540: Instruction: sub ($t2,$t2,$s1): $t2=15450
+cycle 1541: Instruction: sub ($t2,$t2,$s1): $t2=10300
+cycle 1542: Instruction: sub ($t2,$t2,$s1): $t2=5150
+cycle 1543: Instruction: sub ($t2,$t2,$s1): $t2=0
+cycle 1544: Instruction: sub ($k0,$k0,$s2): $k0=0
+cycle 1545: DRAM Request Issued (lw)
+cycle 1546-1547: Accessing Column 952: $a3=100
+cycle 1548: Instruction j :Jump to label ID: resume
+cycle 1549: Instruction: addi ($at,$at,1): $at=42
+cycle 1550: Instruction: sub ($a0,$a0,$s2): $a0=58
+cycle 1551: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 1552: Instruction: add ($s0,$s0,$s3): $s0=5200
+cycle 1553: Instruction: add ($s1,$s1,$s3): $s1=5250
+cycle 1554: Instruction beq ($a0,$zero,exit,0)
+cycle 1555: Instruction j :Jump to label ID: loop1
+cycle 1556: Instruction: addi ($v1,$v1,1): $v1=10168
+cycle 1557: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 1558: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 1559: Instruction beq ($t6,$t7,equal,1)
+cycle 1560: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 1561: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 1562: DRAM Request Issued (sw)
+cycle 1563-1564: Accessing Column 952: memory address 10168-10171 = 100
+cycle 1565: Instruction: add ($v1,$v0,$s2): $v1=10169
+cycle 1566: Instruction: add ($v1,$v0,$s2): $v1=10169
+cycle 1567: Instruction: add ($v1,$v0,$s2): $v1=10169
+cycle 1568: Instruction: add ($v1,$v0,$s2): $v1=10169
+cycle 1569: Instruction: addi ($v1,$v1,1): $v1=10170
+cycle 1570: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 1571: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 1572: Instruction: addi ($v1,$v1,1): $v1=10171
+cycle 1573: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 1574: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 1575: Instruction: addi ($v0,$v0,4): $v0=10172
+cycle 1576: Instruction beq ($k0,$s2,equalToOne,0)
+cycle 1577: Instruction: add ($k0,$k0,$s2): $k0=1
+cycle 1578: Instruction: addi ($at,$at,1): $at=43
+cycle 1579: Instruction: sub ($a0,$a0,$s2): $a0=57
+cycle 1580: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 1581: Instruction: add ($s0,$s0,$s3): $s0=5300
+cycle 1582: Instruction: add ($s1,$s1,$s3): $s1=5350
+cycle 1583: Instruction beq ($a0,$zero,exit,0)
+cycle 1584: Instruction j :Jump to label ID: loop1
+cycle 1585: Instruction: addi ($v1,$v1,1): $v1=10172
+cycle 1586: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 1587: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 1588: Instruction beq ($t6,$t7,equal,1)
+cycle 1589: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 1590: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 1591: DRAM Request Issued (sw)
+cycle 1592-1593: Accessing Column 956: memory address 10172-10175 = 100
+cycle 1594: Instruction: add ($v1,$v0,$s2): $v1=10173
+cycle 1595: Instruction: add ($v1,$v0,$s2): $v1=10173
+cycle 1596: Instruction: add ($v1,$v0,$s2): $v1=10173
+cycle 1597: Instruction: add ($v1,$v0,$s2): $v1=10173
+cycle 1598: Instruction: addi ($v1,$v1,1): $v1=10174
+cycle 1599: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 1600: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 1601: Instruction: addi ($v1,$v1,1): $v1=10175
+cycle 1602: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 1603: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 1604: Instruction: addi ($v0,$v0,4): $v0=10176
+cycle 1605: Instruction beq ($k0,$s2,equalToOne,1)
+cycle 1606: DRAM Request Issued (sw)
+cycle 1607-1608: Accessing Column 960: memory address 10176-10179 = 100
+cycle 1609: Instruction: add ($t2,$t2,$s1): $t2=5350
+cycle 1610: Instruction: add ($t2,$t2,$s1): $t2=10700
+cycle 1611: Instruction: add ($t2,$t2,$s1): $t2=16050
+cycle 1612: Instruction: add ($t2,$t2,$s1): $t2=21400
+cycle 1613: Instruction: sub ($t2,$t2,$s1): $t2=16050
+cycle 1614: Instruction: sub ($t2,$t2,$s1): $t2=10700
+cycle 1615: Instruction: sub ($t2,$t2,$s1): $t2=5350
+cycle 1616: Instruction: sub ($t2,$t2,$s1): $t2=0
+cycle 1617: Instruction: sub ($k0,$k0,$s2): $k0=0
+cycle 1618: DRAM Request Issued (lw)
+cycle 1619-1620: Accessing Column 960: $a3=100
+cycle 1621: Instruction j :Jump to label ID: resume
+cycle 1622: Instruction: addi ($at,$at,1): $at=44
+cycle 1623: Instruction: sub ($a0,$a0,$s2): $a0=56
+cycle 1624: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 1625: Instruction: add ($s0,$s0,$s3): $s0=5400
+cycle 1626: Instruction: add ($s1,$s1,$s3): $s1=5450
+cycle 1627: Instruction beq ($a0,$zero,exit,0)
+cycle 1628: Instruction j :Jump to label ID: loop1
+cycle 1629: Instruction: addi ($v1,$v1,1): $v1=10176
+cycle 1630: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 1631: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 1632: Instruction beq ($t6,$t7,equal,1)
+cycle 1633: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 1634: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 1635: DRAM Request Issued (sw)
+cycle 1636-1637: Accessing Column 960: memory address 10176-10179 = 100
+cycle 1638: Instruction: add ($v1,$v0,$s2): $v1=10177
+cycle 1639: Instruction: add ($v1,$v0,$s2): $v1=10177
+cycle 1640: Instruction: add ($v1,$v0,$s2): $v1=10177
+cycle 1641: Instruction: add ($v1,$v0,$s2): $v1=10177
+cycle 1642: Instruction: addi ($v1,$v1,1): $v1=10178
+cycle 1643: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 1644: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 1645: Instruction: addi ($v1,$v1,1): $v1=10179
+cycle 1646: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 1647: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 1648: Instruction: addi ($v0,$v0,4): $v0=10180
+cycle 1649: Instruction beq ($k0,$s2,equalToOne,0)
+cycle 1650: Instruction: add ($k0,$k0,$s2): $k0=1
+cycle 1651: Instruction: addi ($at,$at,1): $at=45
+cycle 1652: Instruction: sub ($a0,$a0,$s2): $a0=55
+cycle 1653: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 1654: Instruction: add ($s0,$s0,$s3): $s0=5500
+cycle 1655: Instruction: add ($s1,$s1,$s3): $s1=5550
+cycle 1656: Instruction beq ($a0,$zero,exit,0)
+cycle 1657: Instruction j :Jump to label ID: loop1
+cycle 1658: Instruction: addi ($v1,$v1,1): $v1=10180
+cycle 1659: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 1660: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 1661: Instruction beq ($t6,$t7,equal,1)
+cycle 1662: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 1663: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 1664: DRAM Request Issued (sw)
+cycle 1665-1666: Accessing Column 964: memory address 10180-10183 = 100
+cycle 1667: Instruction: add ($v1,$v0,$s2): $v1=10181
+cycle 1668: Instruction: add ($v1,$v0,$s2): $v1=10181
+cycle 1669: Instruction: add ($v1,$v0,$s2): $v1=10181
+cycle 1670: Instruction: add ($v1,$v0,$s2): $v1=10181
+cycle 1671: Instruction: addi ($v1,$v1,1): $v1=10182
+cycle 1672: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 1673: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 1674: Instruction: addi ($v1,$v1,1): $v1=10183
+cycle 1675: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 1676: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 1677: Instruction: addi ($v0,$v0,4): $v0=10184
+cycle 1678: Instruction beq ($k0,$s2,equalToOne,1)
+cycle 1679: DRAM Request Issued (sw)
+cycle 1680-1681: Accessing Column 968: memory address 10184-10187 = 100
+cycle 1682: Instruction: add ($t2,$t2,$s1): $t2=5550
+cycle 1683: Instruction: add ($t2,$t2,$s1): $t2=11100
+cycle 1684: Instruction: add ($t2,$t2,$s1): $t2=16650
+cycle 1685: Instruction: add ($t2,$t2,$s1): $t2=22200
+cycle 1686: Instruction: sub ($t2,$t2,$s1): $t2=16650
+cycle 1687: Instruction: sub ($t2,$t2,$s1): $t2=11100
+cycle 1688: Instruction: sub ($t2,$t2,$s1): $t2=5550
+cycle 1689: Instruction: sub ($t2,$t2,$s1): $t2=0
+cycle 1690: Instruction: sub ($k0,$k0,$s2): $k0=0
+cycle 1691: DRAM Request Issued (lw)
+cycle 1692-1693: Accessing Column 968: $a3=100
+cycle 1694: Instruction j :Jump to label ID: resume
+cycle 1695: Instruction: addi ($at,$at,1): $at=46
+cycle 1696: Instruction: sub ($a0,$a0,$s2): $a0=54
+cycle 1697: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 1698: Instruction: add ($s0,$s0,$s3): $s0=5600
+cycle 1699: Instruction: add ($s1,$s1,$s3): $s1=5650
+cycle 1700: Instruction beq ($a0,$zero,exit,0)
+cycle 1701: Instruction j :Jump to label ID: loop1
+cycle 1702: Instruction: addi ($v1,$v1,1): $v1=10184
+cycle 1703: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 1704: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 1705: Instruction beq ($t6,$t7,equal,1)
+cycle 1706: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 1707: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 1708: DRAM Request Issued (sw)
+cycle 1709-1710: Accessing Column 968: memory address 10184-10187 = 100
+cycle 1711: Instruction: add ($v1,$v0,$s2): $v1=10185
+cycle 1712: Instruction: add ($v1,$v0,$s2): $v1=10185
+cycle 1713: Instruction: add ($v1,$v0,$s2): $v1=10185
+cycle 1714: Instruction: add ($v1,$v0,$s2): $v1=10185
+cycle 1715: Instruction: addi ($v1,$v1,1): $v1=10186
+cycle 1716: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 1717: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 1718: Instruction: addi ($v1,$v1,1): $v1=10187
+cycle 1719: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 1720: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 1721: Instruction: addi ($v0,$v0,4): $v0=10188
+cycle 1722: Instruction beq ($k0,$s2,equalToOne,0)
+cycle 1723: Instruction: add ($k0,$k0,$s2): $k0=1
+cycle 1724: Instruction: addi ($at,$at,1): $at=47
+cycle 1725: Instruction: sub ($a0,$a0,$s2): $a0=53
+cycle 1726: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 1727: Instruction: add ($s0,$s0,$s3): $s0=5700
+cycle 1728: Instruction: add ($s1,$s1,$s3): $s1=5750
+cycle 1729: Instruction beq ($a0,$zero,exit,0)
+cycle 1730: Instruction j :Jump to label ID: loop1
+cycle 1731: Instruction: addi ($v1,$v1,1): $v1=10188
+cycle 1732: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 1733: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 1734: Instruction beq ($t6,$t7,equal,1)
+cycle 1735: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 1736: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 1737: DRAM Request Issued (sw)
+cycle 1738-1739: Accessing Column 972: memory address 10188-10191 = 100
+cycle 1740: Instruction: add ($v1,$v0,$s2): $v1=10189
+cycle 1741: Instruction: add ($v1,$v0,$s2): $v1=10189
+cycle 1742: Instruction: add ($v1,$v0,$s2): $v1=10189
+cycle 1743: Instruction: add ($v1,$v0,$s2): $v1=10189
+cycle 1744: Instruction: addi ($v1,$v1,1): $v1=10190
+cycle 1745: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 1746: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 1747: Instruction: addi ($v1,$v1,1): $v1=10191
+cycle 1748: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 1749: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 1750: Instruction: addi ($v0,$v0,4): $v0=10192
+cycle 1751: Instruction beq ($k0,$s2,equalToOne,1)
+cycle 1752: DRAM Request Issued (sw)
+cycle 1753-1754: Accessing Column 976: memory address 10192-10195 = 100
+cycle 1755: Instruction: add ($t2,$t2,$s1): $t2=5750
+cycle 1756: Instruction: add ($t2,$t2,$s1): $t2=11500
+cycle 1757: Instruction: add ($t2,$t2,$s1): $t2=17250
+cycle 1758: Instruction: add ($t2,$t2,$s1): $t2=23000
+cycle 1759: Instruction: sub ($t2,$t2,$s1): $t2=17250
+cycle 1760: Instruction: sub ($t2,$t2,$s1): $t2=11500
+cycle 1761: Instruction: sub ($t2,$t2,$s1): $t2=5750
+cycle 1762: Instruction: sub ($t2,$t2,$s1): $t2=0
+cycle 1763: Instruction: sub ($k0,$k0,$s2): $k0=0
+cycle 1764: DRAM Request Issued (lw)
+cycle 1765-1766: Accessing Column 976: $a3=100
+cycle 1767: Instruction j :Jump to label ID: resume
+cycle 1768: Instruction: addi ($at,$at,1): $at=48
+cycle 1769: Instruction: sub ($a0,$a0,$s2): $a0=52
+cycle 1770: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 1771: Instruction: add ($s0,$s0,$s3): $s0=5800
+cycle 1772: Instruction: add ($s1,$s1,$s3): $s1=5850
+cycle 1773: Instruction beq ($a0,$zero,exit,0)
+cycle 1774: Instruction j :Jump to label ID: loop1
+cycle 1775: Instruction: addi ($v1,$v1,1): $v1=10192
+cycle 1776: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 1777: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 1778: Instruction beq ($t6,$t7,equal,1)
+cycle 1779: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 1780: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 1781: DRAM Request Issued (sw)
+cycle 1782-1783: Accessing Column 976: memory address 10192-10195 = 100
+cycle 1784: Instruction: add ($v1,$v0,$s2): $v1=10193
+cycle 1785: Instruction: add ($v1,$v0,$s2): $v1=10193
+cycle 1786: Instruction: add ($v1,$v0,$s2): $v1=10193
+cycle 1787: Instruction: add ($v1,$v0,$s2): $v1=10193
+cycle 1788: Instruction: addi ($v1,$v1,1): $v1=10194
+cycle 1789: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 1790: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 1791: Instruction: addi ($v1,$v1,1): $v1=10195
+cycle 1792: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 1793: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 1794: Instruction: addi ($v0,$v0,4): $v0=10196
+cycle 1795: Instruction beq ($k0,$s2,equalToOne,0)
+cycle 1796: Instruction: add ($k0,$k0,$s2): $k0=1
+cycle 1797: Instruction: addi ($at,$at,1): $at=49
+cycle 1798: Instruction: sub ($a0,$a0,$s2): $a0=51
+cycle 1799: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 1800: Instruction: add ($s0,$s0,$s3): $s0=5900
+cycle 1801: Instruction: add ($s1,$s1,$s3): $s1=5950
+cycle 1802: Instruction beq ($a0,$zero,exit,0)
+cycle 1803: Instruction j :Jump to label ID: loop1
+cycle 1804: Instruction: addi ($v1,$v1,1): $v1=10196
+cycle 1805: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 1806: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 1807: Instruction beq ($t6,$t7,equal,1)
+cycle 1808: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 1809: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 1810: DRAM Request Issued (sw)
+cycle 1811-1812: Accessing Column 980: memory address 10196-10199 = 100
+cycle 1813: Instruction: add ($v1,$v0,$s2): $v1=10197
+cycle 1814: Instruction: add ($v1,$v0,$s2): $v1=10197
+cycle 1815: Instruction: add ($v1,$v0,$s2): $v1=10197
+cycle 1816: Instruction: add ($v1,$v0,$s2): $v1=10197
+cycle 1817: Instruction: addi ($v1,$v1,1): $v1=10198
+cycle 1818: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 1819: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 1820: Instruction: addi ($v1,$v1,1): $v1=10199
+cycle 1821: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 1822: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 1823: Instruction: addi ($v0,$v0,4): $v0=10200
+cycle 1824: Instruction beq ($k0,$s2,equalToOne,1)
+cycle 1825: DRAM Request Issued (sw)
+cycle 1826-1827: Accessing Column 984: memory address 10200-10203 = 100
+cycle 1828: Instruction: add ($t2,$t2,$s1): $t2=5950
+cycle 1829: Instruction: add ($t2,$t2,$s1): $t2=11900
+cycle 1830: Instruction: add ($t2,$t2,$s1): $t2=17850
+cycle 1831: Instruction: add ($t2,$t2,$s1): $t2=23800
+cycle 1832: Instruction: sub ($t2,$t2,$s1): $t2=17850
+cycle 1833: Instruction: sub ($t2,$t2,$s1): $t2=11900
+cycle 1834: Instruction: sub ($t2,$t2,$s1): $t2=5950
+cycle 1835: Instruction: sub ($t2,$t2,$s1): $t2=0
+cycle 1836: Instruction: sub ($k0,$k0,$s2): $k0=0
+cycle 1837: DRAM Request Issued (lw)
+cycle 1838-1839: Accessing Column 984: $a3=100
+cycle 1840: Instruction j :Jump to label ID: resume
+cycle 1841: Instruction: addi ($at,$at,1): $at=50
+cycle 1842: Instruction: sub ($a0,$a0,$s2): $a0=50
+cycle 1843: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 1844: Instruction: add ($s0,$s0,$s3): $s0=6000
+cycle 1845: Instruction: add ($s1,$s1,$s3): $s1=6050
+cycle 1846: Instruction beq ($a0,$zero,exit,0)
+cycle 1847: Instruction j :Jump to label ID: loop1
+cycle 1848: Instruction: addi ($v1,$v1,1): $v1=10200
+cycle 1849: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 1850: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 1851: Instruction beq ($t6,$t7,equal,1)
+cycle 1852: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 1853: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 1854: DRAM Request Issued (sw)
+cycle 1855-1856: Accessing Column 984: memory address 10200-10203 = 100
+cycle 1857: Instruction: add ($v1,$v0,$s2): $v1=10201
+cycle 1858: Instruction: add ($v1,$v0,$s2): $v1=10201
+cycle 1859: Instruction: add ($v1,$v0,$s2): $v1=10201
+cycle 1860: Instruction: add ($v1,$v0,$s2): $v1=10201
+cycle 1861: Instruction: addi ($v1,$v1,1): $v1=10202
+cycle 1862: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 1863: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 1864: Instruction: addi ($v1,$v1,1): $v1=10203
+cycle 1865: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 1866: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 1867: Instruction: addi ($v0,$v0,4): $v0=10204
+cycle 1868: Instruction beq ($k0,$s2,equalToOne,0)
+cycle 1869: Instruction: add ($k0,$k0,$s2): $k0=1
+cycle 1870: Instruction: addi ($at,$at,1): $at=51
+cycle 1871: Instruction: sub ($a0,$a0,$s2): $a0=49
+cycle 1872: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 1873: Instruction: add ($s0,$s0,$s3): $s0=6100
+cycle 1874: Instruction: add ($s1,$s1,$s3): $s1=6150
+cycle 1875: Instruction beq ($a0,$zero,exit,0)
+cycle 1876: Instruction j :Jump to label ID: loop1
+cycle 1877: Instruction: addi ($v1,$v1,1): $v1=10204
+cycle 1878: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 1879: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 1880: Instruction beq ($t6,$t7,equal,1)
+cycle 1881: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 1882: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 1883: DRAM Request Issued (sw)
+cycle 1884-1885: Accessing Column 988: memory address 10204-10207 = 100
+cycle 1886: Instruction: add ($v1,$v0,$s2): $v1=10205
+cycle 1887: Instruction: add ($v1,$v0,$s2): $v1=10205
+cycle 1888: Instruction: add ($v1,$v0,$s2): $v1=10205
+cycle 1889: Instruction: add ($v1,$v0,$s2): $v1=10205
+cycle 1890: Instruction: addi ($v1,$v1,1): $v1=10206
+cycle 1891: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 1892: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 1893: Instruction: addi ($v1,$v1,1): $v1=10207
+cycle 1894: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 1895: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 1896: Instruction: addi ($v0,$v0,4): $v0=10208
+cycle 1897: Instruction beq ($k0,$s2,equalToOne,1)
+cycle 1898: DRAM Request Issued (sw)
+cycle 1899-1900: Accessing Column 992: memory address 10208-10211 = 100
+cycle 1901: Instruction: add ($t2,$t2,$s1): $t2=6150
+cycle 1902: Instruction: add ($t2,$t2,$s1): $t2=12300
+cycle 1903: Instruction: add ($t2,$t2,$s1): $t2=18450
+cycle 1904: Instruction: add ($t2,$t2,$s1): $t2=24600
+cycle 1905: Instruction: sub ($t2,$t2,$s1): $t2=18450
+cycle 1906: Instruction: sub ($t2,$t2,$s1): $t2=12300
+cycle 1907: Instruction: sub ($t2,$t2,$s1): $t2=6150
+cycle 1908: Instruction: sub ($t2,$t2,$s1): $t2=0
+cycle 1909: Instruction: sub ($k0,$k0,$s2): $k0=0
+cycle 1910: DRAM Request Issued (lw)
+cycle 1911-1912: Accessing Column 992: $a3=100
+cycle 1913: Instruction j :Jump to label ID: resume
+cycle 1914: Instruction: addi ($at,$at,1): $at=52
+cycle 1915: Instruction: sub ($a0,$a0,$s2): $a0=48
+cycle 1916: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 1917: Instruction: add ($s0,$s0,$s3): $s0=6200
+cycle 1918: Instruction: add ($s1,$s1,$s3): $s1=6250
+cycle 1919: Instruction beq ($a0,$zero,exit,0)
+cycle 1920: Instruction j :Jump to label ID: loop1
+cycle 1921: Instruction: addi ($v1,$v1,1): $v1=10208
+cycle 1922: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 1923: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 1924: Instruction beq ($t6,$t7,equal,1)
+cycle 1925: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 1926: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 1927: DRAM Request Issued (sw)
+cycle 1928-1929: Accessing Column 992: memory address 10208-10211 = 100
+cycle 1930: Instruction: add ($v1,$v0,$s2): $v1=10209
+cycle 1931: Instruction: add ($v1,$v0,$s2): $v1=10209
+cycle 1932: Instruction: add ($v1,$v0,$s2): $v1=10209
+cycle 1933: Instruction: add ($v1,$v0,$s2): $v1=10209
+cycle 1934: Instruction: addi ($v1,$v1,1): $v1=10210
+cycle 1935: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 1936: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 1937: Instruction: addi ($v1,$v1,1): $v1=10211
+cycle 1938: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 1939: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 1940: Instruction: addi ($v0,$v0,4): $v0=10212
+cycle 1941: Instruction beq ($k0,$s2,equalToOne,0)
+cycle 1942: Instruction: add ($k0,$k0,$s2): $k0=1
+cycle 1943: Instruction: addi ($at,$at,1): $at=53
+cycle 1944: Instruction: sub ($a0,$a0,$s2): $a0=47
+cycle 1945: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 1946: Instruction: add ($s0,$s0,$s3): $s0=6300
+cycle 1947: Instruction: add ($s1,$s1,$s3): $s1=6350
+cycle 1948: Instruction beq ($a0,$zero,exit,0)
+cycle 1949: Instruction j :Jump to label ID: loop1
+cycle 1950: Instruction: addi ($v1,$v1,1): $v1=10212
+cycle 1951: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 1952: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 1953: Instruction beq ($t6,$t7,equal,1)
+cycle 1954: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 1955: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 1956: DRAM Request Issued (sw)
+cycle 1957-1958: Accessing Column 996: memory address 10212-10215 = 100
+cycle 1959: Instruction: add ($v1,$v0,$s2): $v1=10213
+cycle 1960: Instruction: add ($v1,$v0,$s2): $v1=10213
+cycle 1961: Instruction: add ($v1,$v0,$s2): $v1=10213
+cycle 1962: Instruction: add ($v1,$v0,$s2): $v1=10213
+cycle 1963: Instruction: addi ($v1,$v1,1): $v1=10214
+cycle 1964: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 1965: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 1966: Instruction: addi ($v1,$v1,1): $v1=10215
+cycle 1967: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 1968: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 1969: Instruction: addi ($v0,$v0,4): $v0=10216
+cycle 1970: Instruction beq ($k0,$s2,equalToOne,1)
+cycle 1971: DRAM Request Issued (sw)
+cycle 1972-1973: Accessing Column 1000: memory address 10216-10219 = 100
+cycle 1974: Instruction: add ($t2,$t2,$s1): $t2=6350
+cycle 1975: Instruction: add ($t2,$t2,$s1): $t2=12700
+cycle 1976: Instruction: add ($t2,$t2,$s1): $t2=19050
+cycle 1977: Instruction: add ($t2,$t2,$s1): $t2=25400
+cycle 1978: Instruction: sub ($t2,$t2,$s1): $t2=19050
+cycle 1979: Instruction: sub ($t2,$t2,$s1): $t2=12700
+cycle 1980: Instruction: sub ($t2,$t2,$s1): $t2=6350
+cycle 1981: Instruction: sub ($t2,$t2,$s1): $t2=0
+cycle 1982: Instruction: sub ($k0,$k0,$s2): $k0=0
+cycle 1983: DRAM Request Issued (lw)
+cycle 1984-1985: Accessing Column 1000: $a3=100
+cycle 1986: Instruction j :Jump to label ID: resume
+cycle 1987: Instruction: addi ($at,$at,1): $at=54
+cycle 1988: Instruction: sub ($a0,$a0,$s2): $a0=46
+cycle 1989: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 1990: Instruction: add ($s0,$s0,$s3): $s0=6400
+cycle 1991: Instruction: add ($s1,$s1,$s3): $s1=6450
+cycle 1992: Instruction beq ($a0,$zero,exit,0)
+cycle 1993: Instruction j :Jump to label ID: loop1
+cycle 1994: Instruction: addi ($v1,$v1,1): $v1=10216
+cycle 1995: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 1996: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 1997: Instruction beq ($t6,$t7,equal,1)
+cycle 1998: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 1999: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 2000: DRAM Request Issued (sw)
+cycle 2001-2002: Accessing Column 1000: memory address 10216-10219 = 100
+cycle 2003: Instruction: add ($v1,$v0,$s2): $v1=10217
+cycle 2004: Instruction: add ($v1,$v0,$s2): $v1=10217
+cycle 2005: Instruction: add ($v1,$v0,$s2): $v1=10217
+cycle 2006: Instruction: add ($v1,$v0,$s2): $v1=10217
+cycle 2007: Instruction: addi ($v1,$v1,1): $v1=10218
+cycle 2008: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 2009: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 2010: Instruction: addi ($v1,$v1,1): $v1=10219
+cycle 2011: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 2012: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 2013: Instruction: addi ($v0,$v0,4): $v0=10220
+cycle 2014: Instruction beq ($k0,$s2,equalToOne,0)
+cycle 2015: Instruction: add ($k0,$k0,$s2): $k0=1
+cycle 2016: Instruction: addi ($at,$at,1): $at=55
+cycle 2017: Instruction: sub ($a0,$a0,$s2): $a0=45
+cycle 2018: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 2019: Instruction: add ($s0,$s0,$s3): $s0=6500
+cycle 2020: Instruction: add ($s1,$s1,$s3): $s1=6550
+cycle 2021: Instruction beq ($a0,$zero,exit,0)
+cycle 2022: Instruction j :Jump to label ID: loop1
+cycle 2023: Instruction: addi ($v1,$v1,1): $v1=10220
+cycle 2024: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 2025: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 2026: Instruction beq ($t6,$t7,equal,1)
+cycle 2027: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 2028: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 2029: DRAM Request Issued (sw)
+cycle 2030-2031: Accessing Column 1004: memory address 10220-10223 = 100
+cycle 2032: Instruction: add ($v1,$v0,$s2): $v1=10221
+cycle 2033: Instruction: add ($v1,$v0,$s2): $v1=10221
+cycle 2034: Instruction: add ($v1,$v0,$s2): $v1=10221
+cycle 2035: Instruction: add ($v1,$v0,$s2): $v1=10221
+cycle 2036: Instruction: addi ($v1,$v1,1): $v1=10222
+cycle 2037: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 2038: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 2039: Instruction: addi ($v1,$v1,1): $v1=10223
+cycle 2040: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 2041: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 2042: Instruction: addi ($v0,$v0,4): $v0=10224
+cycle 2043: Instruction beq ($k0,$s2,equalToOne,1)
+cycle 2044: DRAM Request Issued (sw)
+cycle 2045-2046: Accessing Column 1008: memory address 10224-10227 = 100
+cycle 2047: Instruction: add ($t2,$t2,$s1): $t2=6550
+cycle 2048: Instruction: add ($t2,$t2,$s1): $t2=13100
+cycle 2049: Instruction: add ($t2,$t2,$s1): $t2=19650
+cycle 2050: Instruction: add ($t2,$t2,$s1): $t2=26200
+cycle 2051: Instruction: sub ($t2,$t2,$s1): $t2=19650
+cycle 2052: Instruction: sub ($t2,$t2,$s1): $t2=13100
+cycle 2053: Instruction: sub ($t2,$t2,$s1): $t2=6550
+cycle 2054: Instruction: sub ($t2,$t2,$s1): $t2=0
+cycle 2055: Instruction: sub ($k0,$k0,$s2): $k0=0
+cycle 2056: DRAM Request Issued (lw)
+cycle 2057-2058: Accessing Column 1008: $a3=100
+cycle 2059: Instruction j :Jump to label ID: resume
+cycle 2060: Instruction: addi ($at,$at,1): $at=56
+cycle 2061: Instruction: sub ($a0,$a0,$s2): $a0=44
+cycle 2062: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 2063: Instruction: add ($s0,$s0,$s3): $s0=6600
+cycle 2064: Instruction: add ($s1,$s1,$s3): $s1=6650
+cycle 2065: Instruction beq ($a0,$zero,exit,0)
+cycle 2066: Instruction j :Jump to label ID: loop1
+cycle 2067: Instruction: addi ($v1,$v1,1): $v1=10224
+cycle 2068: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 2069: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 2070: Instruction beq ($t6,$t7,equal,1)
+cycle 2071: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 2072: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 2073: DRAM Request Issued (sw)
+cycle 2074-2075: Accessing Column 1008: memory address 10224-10227 = 100
+cycle 2076: Instruction: add ($v1,$v0,$s2): $v1=10225
+cycle 2077: Instruction: add ($v1,$v0,$s2): $v1=10225
+cycle 2078: Instruction: add ($v1,$v0,$s2): $v1=10225
+cycle 2079: Instruction: add ($v1,$v0,$s2): $v1=10225
+cycle 2080: Instruction: addi ($v1,$v1,1): $v1=10226
+cycle 2081: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 2082: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 2083: Instruction: addi ($v1,$v1,1): $v1=10227
+cycle 2084: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 2085: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 2086: Instruction: addi ($v0,$v0,4): $v0=10228
+cycle 2087: Instruction beq ($k0,$s2,equalToOne,0)
+cycle 2088: Instruction: add ($k0,$k0,$s2): $k0=1
+cycle 2089: Instruction: addi ($at,$at,1): $at=57
+cycle 2090: Instruction: sub ($a0,$a0,$s2): $a0=43
+cycle 2091: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 2092: Instruction: add ($s0,$s0,$s3): $s0=6700
+cycle 2093: Instruction: add ($s1,$s1,$s3): $s1=6750
+cycle 2094: Instruction beq ($a0,$zero,exit,0)
+cycle 2095: Instruction j :Jump to label ID: loop1
+cycle 2096: Instruction: addi ($v1,$v1,1): $v1=10228
+cycle 2097: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 2098: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 2099: Instruction beq ($t6,$t7,equal,1)
+cycle 2100: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 2101: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 2102: DRAM Request Issued (sw)
+cycle 2103-2104: Accessing Column 1012: memory address 10228-10231 = 100
+cycle 2105: Instruction: add ($v1,$v0,$s2): $v1=10229
+cycle 2106: Instruction: add ($v1,$v0,$s2): $v1=10229
+cycle 2107: Instruction: add ($v1,$v0,$s2): $v1=10229
+cycle 2108: Instruction: add ($v1,$v0,$s2): $v1=10229
+cycle 2109: Instruction: addi ($v1,$v1,1): $v1=10230
+cycle 2110: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 2111: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 2112: Instruction: addi ($v1,$v1,1): $v1=10231
+cycle 2113: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 2114: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 2115: Instruction: addi ($v0,$v0,4): $v0=10232
+cycle 2116: Instruction beq ($k0,$s2,equalToOne,1)
+cycle 2117: DRAM Request Issued (sw)
+cycle 2118-2119: Accessing Column 1016: memory address 10232-10235 = 100
+cycle 2120: Instruction: add ($t2,$t2,$s1): $t2=6750
+cycle 2121: Instruction: add ($t2,$t2,$s1): $t2=13500
+cycle 2122: Instruction: add ($t2,$t2,$s1): $t2=20250
+cycle 2123: Instruction: add ($t2,$t2,$s1): $t2=27000
+cycle 2124: Instruction: sub ($t2,$t2,$s1): $t2=20250
+cycle 2125: Instruction: sub ($t2,$t2,$s1): $t2=13500
+cycle 2126: Instruction: sub ($t2,$t2,$s1): $t2=6750
+cycle 2127: Instruction: sub ($t2,$t2,$s1): $t2=0
+cycle 2128: Instruction: sub ($k0,$k0,$s2): $k0=0
+cycle 2129: DRAM Request Issued (lw)
+cycle 2130-2131: Accessing Column 1016: $a3=100
+cycle 2132: Instruction j :Jump to label ID: resume
+cycle 2133: Instruction: addi ($at,$at,1): $at=58
+cycle 2134: Instruction: sub ($a0,$a0,$s2): $a0=42
+cycle 2135: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 2136: Instruction: add ($s0,$s0,$s3): $s0=6800
+cycle 2137: Instruction: add ($s1,$s1,$s3): $s1=6850
+cycle 2138: Instruction beq ($a0,$zero,exit,0)
+cycle 2139: Instruction j :Jump to label ID: loop1
+cycle 2140: Instruction: addi ($v1,$v1,1): $v1=10232
+cycle 2141: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 2142: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 2143: Instruction beq ($t6,$t7,equal,1)
+cycle 2144: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 2145: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 2146: DRAM Request Issued (sw)
+cycle 2147-2148: Accessing Column 1016: memory address 10232-10235 = 100
+cycle 2149: Instruction: add ($v1,$v0,$s2): $v1=10233
+cycle 2150: Instruction: add ($v1,$v0,$s2): $v1=10233
+cycle 2151: Instruction: add ($v1,$v0,$s2): $v1=10233
+cycle 2152: Instruction: add ($v1,$v0,$s2): $v1=10233
+cycle 2153: Instruction: addi ($v1,$v1,1): $v1=10234
+cycle 2154: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 2155: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 2156: Instruction: addi ($v1,$v1,1): $v1=10235
+cycle 2157: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 2158: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 2159: Instruction: addi ($v0,$v0,4): $v0=10236
+cycle 2160: Instruction beq ($k0,$s2,equalToOne,0)
+cycle 2161: Instruction: add ($k0,$k0,$s2): $k0=1
+cycle 2162: Instruction: addi ($at,$at,1): $at=59
+cycle 2163: Instruction: sub ($a0,$a0,$s2): $a0=41
+cycle 2164: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 2165: Instruction: add ($s0,$s0,$s3): $s0=6900
+cycle 2166: Instruction: add ($s1,$s1,$s3): $s1=6950
+cycle 2167: Instruction beq ($a0,$zero,exit,0)
+cycle 2168: Instruction j :Jump to label ID: loop1
+cycle 2169: Instruction: addi ($v1,$v1,1): $v1=10236
+cycle 2170: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 2171: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 2172: Instruction beq ($t6,$t7,equal,1)
+cycle 2173: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 2174: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 2175: DRAM Request Issued (sw)
+cycle 2176-2177: Accessing Column 1020: memory address 10236-10239 = 100
+cycle 2178: Instruction: add ($v1,$v0,$s2): $v1=10237
+cycle 2179: Instruction: add ($v1,$v0,$s2): $v1=10237
+cycle 2180: Instruction: add ($v1,$v0,$s2): $v1=10237
+cycle 2181: Instruction: add ($v1,$v0,$s2): $v1=10237
+cycle 2182: Instruction: addi ($v1,$v1,1): $v1=10238
+cycle 2183: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 2184: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 2185: Instruction: addi ($v1,$v1,1): $v1=10239
+cycle 2186: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 2187: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 2188: Instruction: addi ($v0,$v0,4): $v0=10240
+cycle 2189: Instruction beq ($k0,$s2,equalToOne,1)
+cycle 2190: DRAM Request Issued (sw)
+cycle 2191-2200: WriteBack Row 9 to DRAM
+cycle 2201-2210: Access Row 10 from DRAM
+cycle 2211-2212: Accessing Column 0: memory address 10240-10243 = 100
+cycle 2213: Instruction: add ($t2,$t2,$s1): $t2=6950
+cycle 2214: Instruction: add ($t2,$t2,$s1): $t2=13900
+cycle 2215: Instruction: add ($t2,$t2,$s1): $t2=20850
+cycle 2216: Instruction: add ($t2,$t2,$s1): $t2=27800
+cycle 2217: Instruction: sub ($t2,$t2,$s1): $t2=20850
+cycle 2218: Instruction: sub ($t2,$t2,$s1): $t2=13900
+cycle 2219: Instruction: sub ($t2,$t2,$s1): $t2=6950
+cycle 2220: Instruction: sub ($t2,$t2,$s1): $t2=0
+cycle 2221: Instruction: sub ($k0,$k0,$s2): $k0=0
+cycle 2222: DRAM Request Issued (lw)
+cycle 2223-2224: Accessing Column 0: $a3=100
+cycle 2225: Instruction j :Jump to label ID: resume
+cycle 2226: Instruction: addi ($at,$at,1): $at=60
+cycle 2227: Instruction: sub ($a0,$a0,$s2): $a0=40
+cycle 2228: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 2229: Instruction: add ($s0,$s0,$s3): $s0=7000
+cycle 2230: Instruction: add ($s1,$s1,$s3): $s1=7050
+cycle 2231: Instruction beq ($a0,$zero,exit,0)
+cycle 2232: Instruction j :Jump to label ID: loop1
+cycle 2233: Instruction: addi ($v1,$v1,1): $v1=10240
+cycle 2234: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 2235: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 2236: Instruction beq ($t6,$t7,equal,1)
+cycle 2237: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 2238: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 2239: DRAM Request Issued (sw)
+cycle 2240-2241: Accessing Column 0: memory address 10240-10243 = 100
+cycle 2242: Instruction: add ($v1,$v0,$s2): $v1=10241
+cycle 2243: Instruction: add ($v1,$v0,$s2): $v1=10241
+cycle 2244: Instruction: add ($v1,$v0,$s2): $v1=10241
+cycle 2245: Instruction: add ($v1,$v0,$s2): $v1=10241
+cycle 2246: Instruction: addi ($v1,$v1,1): $v1=10242
+cycle 2247: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 2248: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 2249: Instruction: addi ($v1,$v1,1): $v1=10243
+cycle 2250: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 2251: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 2252: Instruction: addi ($v0,$v0,4): $v0=10244
+cycle 2253: Instruction beq ($k0,$s2,equalToOne,0)
+cycle 2254: Instruction: add ($k0,$k0,$s2): $k0=1
+cycle 2255: Instruction: addi ($at,$at,1): $at=61
+cycle 2256: Instruction: sub ($a0,$a0,$s2): $a0=39
+cycle 2257: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 2258: Instruction: add ($s0,$s0,$s3): $s0=7100
+cycle 2259: Instruction: add ($s1,$s1,$s3): $s1=7150
+cycle 2260: Instruction beq ($a0,$zero,exit,0)
+cycle 2261: Instruction j :Jump to label ID: loop1
+cycle 2262: Instruction: addi ($v1,$v1,1): $v1=10244
+cycle 2263: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 2264: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 2265: Instruction beq ($t6,$t7,equal,1)
+cycle 2266: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 2267: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 2268: DRAM Request Issued (sw)
+cycle 2269-2270: Accessing Column 4: memory address 10244-10247 = 100
+cycle 2271: Instruction: add ($v1,$v0,$s2): $v1=10245
+cycle 2272: Instruction: add ($v1,$v0,$s2): $v1=10245
+cycle 2273: Instruction: add ($v1,$v0,$s2): $v1=10245
+cycle 2274: Instruction: add ($v1,$v0,$s2): $v1=10245
+cycle 2275: Instruction: addi ($v1,$v1,1): $v1=10246
+cycle 2276: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 2277: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 2278: Instruction: addi ($v1,$v1,1): $v1=10247
+cycle 2279: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 2280: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 2281: Instruction: addi ($v0,$v0,4): $v0=10248
+cycle 2282: Instruction beq ($k0,$s2,equalToOne,1)
+cycle 2283: DRAM Request Issued (sw)
+cycle 2284-2285: Accessing Column 8: memory address 10248-10251 = 100
+cycle 2286: Instruction: add ($t2,$t2,$s1): $t2=7150
+cycle 2287: Instruction: add ($t2,$t2,$s1): $t2=14300
+cycle 2288: Instruction: add ($t2,$t2,$s1): $t2=21450
+cycle 2289: Instruction: add ($t2,$t2,$s1): $t2=28600
+cycle 2290: Instruction: sub ($t2,$t2,$s1): $t2=21450
+cycle 2291: Instruction: sub ($t2,$t2,$s1): $t2=14300
+cycle 2292: Instruction: sub ($t2,$t2,$s1): $t2=7150
+cycle 2293: Instruction: sub ($t2,$t2,$s1): $t2=0
+cycle 2294: Instruction: sub ($k0,$k0,$s2): $k0=0
+cycle 2295: DRAM Request Issued (lw)
+cycle 2296-2297: Accessing Column 8: $a3=100
+cycle 2298: Instruction j :Jump to label ID: resume
+cycle 2299: Instruction: addi ($at,$at,1): $at=62
+cycle 2300: Instruction: sub ($a0,$a0,$s2): $a0=38
+cycle 2301: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 2302: Instruction: add ($s0,$s0,$s3): $s0=7200
+cycle 2303: Instruction: add ($s1,$s1,$s3): $s1=7250
+cycle 2304: Instruction beq ($a0,$zero,exit,0)
+cycle 2305: Instruction j :Jump to label ID: loop1
+cycle 2306: Instruction: addi ($v1,$v1,1): $v1=10248
+cycle 2307: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 2308: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 2309: Instruction beq ($t6,$t7,equal,1)
+cycle 2310: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 2311: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 2312: DRAM Request Issued (sw)
+cycle 2313-2314: Accessing Column 8: memory address 10248-10251 = 100
+cycle 2315: Instruction: add ($v1,$v0,$s2): $v1=10249
+cycle 2316: Instruction: add ($v1,$v0,$s2): $v1=10249
+cycle 2317: Instruction: add ($v1,$v0,$s2): $v1=10249
+cycle 2318: Instruction: add ($v1,$v0,$s2): $v1=10249
+cycle 2319: Instruction: addi ($v1,$v1,1): $v1=10250
+cycle 2320: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 2321: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 2322: Instruction: addi ($v1,$v1,1): $v1=10251
+cycle 2323: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 2324: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 2325: Instruction: addi ($v0,$v0,4): $v0=10252
+cycle 2326: Instruction beq ($k0,$s2,equalToOne,0)
+cycle 2327: Instruction: add ($k0,$k0,$s2): $k0=1
+cycle 2328: Instruction: addi ($at,$at,1): $at=63
+cycle 2329: Instruction: sub ($a0,$a0,$s2): $a0=37
+cycle 2330: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 2331: Instruction: add ($s0,$s0,$s3): $s0=7300
+cycle 2332: Instruction: add ($s1,$s1,$s3): $s1=7350
+cycle 2333: Instruction beq ($a0,$zero,exit,0)
+cycle 2334: Instruction j :Jump to label ID: loop1
+cycle 2335: Instruction: addi ($v1,$v1,1): $v1=10252
+cycle 2336: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 2337: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 2338: Instruction beq ($t6,$t7,equal,1)
+cycle 2339: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 2340: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 2341: DRAM Request Issued (sw)
+cycle 2342-2343: Accessing Column 12: memory address 10252-10255 = 100
+cycle 2344: Instruction: add ($v1,$v0,$s2): $v1=10253
+cycle 2345: Instruction: add ($v1,$v0,$s2): $v1=10253
+cycle 2346: Instruction: add ($v1,$v0,$s2): $v1=10253
+cycle 2347: Instruction: add ($v1,$v0,$s2): $v1=10253
+cycle 2348: Instruction: addi ($v1,$v1,1): $v1=10254
+cycle 2349: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 2350: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 2351: Instruction: addi ($v1,$v1,1): $v1=10255
+cycle 2352: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 2353: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 2354: Instruction: addi ($v0,$v0,4): $v0=10256
+cycle 2355: Instruction beq ($k0,$s2,equalToOne,1)
+cycle 2356: DRAM Request Issued (sw)
+cycle 2357-2358: Accessing Column 16: memory address 10256-10259 = 100
+cycle 2359: Instruction: add ($t2,$t2,$s1): $t2=7350
+cycle 2360: Instruction: add ($t2,$t2,$s1): $t2=14700
+cycle 2361: Instruction: add ($t2,$t2,$s1): $t2=22050
+cycle 2362: Instruction: add ($t2,$t2,$s1): $t2=29400
+cycle 2363: Instruction: sub ($t2,$t2,$s1): $t2=22050
+cycle 2364: Instruction: sub ($t2,$t2,$s1): $t2=14700
+cycle 2365: Instruction: sub ($t2,$t2,$s1): $t2=7350
+cycle 2366: Instruction: sub ($t2,$t2,$s1): $t2=0
+cycle 2367: Instruction: sub ($k0,$k0,$s2): $k0=0
+cycle 2368: DRAM Request Issued (lw)
+cycle 2369-2370: Accessing Column 16: $a3=100
+cycle 2371: Instruction j :Jump to label ID: resume
+cycle 2372: Instruction: addi ($at,$at,1): $at=64
+cycle 2373: Instruction: sub ($a0,$a0,$s2): $a0=36
+cycle 2374: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 2375: Instruction: add ($s0,$s0,$s3): $s0=7400
+cycle 2376: Instruction: add ($s1,$s1,$s3): $s1=7450
+cycle 2377: Instruction beq ($a0,$zero,exit,0)
+cycle 2378: Instruction j :Jump to label ID: loop1
+cycle 2379: Instruction: addi ($v1,$v1,1): $v1=10256
+cycle 2380: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 2381: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 2382: Instruction beq ($t6,$t7,equal,1)
+cycle 2383: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 2384: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 2385: DRAM Request Issued (sw)
+cycle 2386-2387: Accessing Column 16: memory address 10256-10259 = 100
+cycle 2388: Instruction: add ($v1,$v0,$s2): $v1=10257
+cycle 2389: Instruction: add ($v1,$v0,$s2): $v1=10257
+cycle 2390: Instruction: add ($v1,$v0,$s2): $v1=10257
+cycle 2391: Instruction: add ($v1,$v0,$s2): $v1=10257
+cycle 2392: Instruction: addi ($v1,$v1,1): $v1=10258
+cycle 2393: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 2394: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 2395: Instruction: addi ($v1,$v1,1): $v1=10259
+cycle 2396: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 2397: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 2398: Instruction: addi ($v0,$v0,4): $v0=10260
+cycle 2399: Instruction beq ($k0,$s2,equalToOne,0)
+cycle 2400: Instruction: add ($k0,$k0,$s2): $k0=1
+cycle 2401: Instruction: addi ($at,$at,1): $at=65
+cycle 2402: Instruction: sub ($a0,$a0,$s2): $a0=35
+cycle 2403: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 2404: Instruction: add ($s0,$s0,$s3): $s0=7500
+cycle 2405: Instruction: add ($s1,$s1,$s3): $s1=7550
+cycle 2406: Instruction beq ($a0,$zero,exit,0)
+cycle 2407: Instruction j :Jump to label ID: loop1
+cycle 2408: Instruction: addi ($v1,$v1,1): $v1=10260
+cycle 2409: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 2410: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 2411: Instruction beq ($t6,$t7,equal,1)
+cycle 2412: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 2413: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 2414: DRAM Request Issued (sw)
+cycle 2415-2416: Accessing Column 20: memory address 10260-10263 = 100
+cycle 2417: Instruction: add ($v1,$v0,$s2): $v1=10261
+cycle 2418: Instruction: add ($v1,$v0,$s2): $v1=10261
+cycle 2419: Instruction: add ($v1,$v0,$s2): $v1=10261
+cycle 2420: Instruction: add ($v1,$v0,$s2): $v1=10261
+cycle 2421: Instruction: addi ($v1,$v1,1): $v1=10262
+cycle 2422: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 2423: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 2424: Instruction: addi ($v1,$v1,1): $v1=10263
+cycle 2425: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 2426: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 2427: Instruction: addi ($v0,$v0,4): $v0=10264
+cycle 2428: Instruction beq ($k0,$s2,equalToOne,1)
+cycle 2429: DRAM Request Issued (sw)
+cycle 2430-2431: Accessing Column 24: memory address 10264-10267 = 100
+cycle 2432: Instruction: add ($t2,$t2,$s1): $t2=7550
+cycle 2433: Instruction: add ($t2,$t2,$s1): $t2=15100
+cycle 2434: Instruction: add ($t2,$t2,$s1): $t2=22650
+cycle 2435: Instruction: add ($t2,$t2,$s1): $t2=30200
+cycle 2436: Instruction: sub ($t2,$t2,$s1): $t2=22650
+cycle 2437: Instruction: sub ($t2,$t2,$s1): $t2=15100
+cycle 2438: Instruction: sub ($t2,$t2,$s1): $t2=7550
+cycle 2439: Instruction: sub ($t2,$t2,$s1): $t2=0
+cycle 2440: Instruction: sub ($k0,$k0,$s2): $k0=0
+cycle 2441: DRAM Request Issued (lw)
+cycle 2442-2443: Accessing Column 24: $a3=100
+cycle 2444: Instruction j :Jump to label ID: resume
+cycle 2445: Instruction: addi ($at,$at,1): $at=66
+cycle 2446: Instruction: sub ($a0,$a0,$s2): $a0=34
+cycle 2447: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 2448: Instruction: add ($s0,$s0,$s3): $s0=7600
+cycle 2449: Instruction: add ($s1,$s1,$s3): $s1=7650
+cycle 2450: Instruction beq ($a0,$zero,exit,0)
+cycle 2451: Instruction j :Jump to label ID: loop1
+cycle 2452: Instruction: addi ($v1,$v1,1): $v1=10264
+cycle 2453: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 2454: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 2455: Instruction beq ($t6,$t7,equal,1)
+cycle 2456: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 2457: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 2458: DRAM Request Issued (sw)
+cycle 2459-2460: Accessing Column 24: memory address 10264-10267 = 100
+cycle 2461: Instruction: add ($v1,$v0,$s2): $v1=10265
+cycle 2462: Instruction: add ($v1,$v0,$s2): $v1=10265
+cycle 2463: Instruction: add ($v1,$v0,$s2): $v1=10265
+cycle 2464: Instruction: add ($v1,$v0,$s2): $v1=10265
+cycle 2465: Instruction: addi ($v1,$v1,1): $v1=10266
+cycle 2466: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 2467: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 2468: Instruction: addi ($v1,$v1,1): $v1=10267
+cycle 2469: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 2470: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 2471: Instruction: addi ($v0,$v0,4): $v0=10268
+cycle 2472: Instruction beq ($k0,$s2,equalToOne,0)
+cycle 2473: Instruction: add ($k0,$k0,$s2): $k0=1
+cycle 2474: Instruction: addi ($at,$at,1): $at=67
+cycle 2475: Instruction: sub ($a0,$a0,$s2): $a0=33
+cycle 2476: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 2477: Instruction: add ($s0,$s0,$s3): $s0=7700
+cycle 2478: Instruction: add ($s1,$s1,$s3): $s1=7750
+cycle 2479: Instruction beq ($a0,$zero,exit,0)
+cycle 2480: Instruction j :Jump to label ID: loop1
+cycle 2481: Instruction: addi ($v1,$v1,1): $v1=10268
+cycle 2482: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 2483: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 2484: Instruction beq ($t6,$t7,equal,1)
+cycle 2485: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 2486: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 2487: DRAM Request Issued (sw)
+cycle 2488-2489: Accessing Column 28: memory address 10268-10271 = 100
+cycle 2490: Instruction: add ($v1,$v0,$s2): $v1=10269
+cycle 2491: Instruction: add ($v1,$v0,$s2): $v1=10269
+cycle 2492: Instruction: add ($v1,$v0,$s2): $v1=10269
+cycle 2493: Instruction: add ($v1,$v0,$s2): $v1=10269
+cycle 2494: Instruction: addi ($v1,$v1,1): $v1=10270
+cycle 2495: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 2496: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 2497: Instruction: addi ($v1,$v1,1): $v1=10271
+cycle 2498: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 2499: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 2500: Instruction: addi ($v0,$v0,4): $v0=10272
+cycle 2501: Instruction beq ($k0,$s2,equalToOne,1)
+cycle 2502: DRAM Request Issued (sw)
+cycle 2503-2504: Accessing Column 32: memory address 10272-10275 = 100
+cycle 2505: Instruction: add ($t2,$t2,$s1): $t2=7750
+cycle 2506: Instruction: add ($t2,$t2,$s1): $t2=15500
+cycle 2507: Instruction: add ($t2,$t2,$s1): $t2=23250
+cycle 2508: Instruction: add ($t2,$t2,$s1): $t2=31000
+cycle 2509: Instruction: sub ($t2,$t2,$s1): $t2=23250
+cycle 2510: Instruction: sub ($t2,$t2,$s1): $t2=15500
+cycle 2511: Instruction: sub ($t2,$t2,$s1): $t2=7750
+cycle 2512: Instruction: sub ($t2,$t2,$s1): $t2=0
+cycle 2513: Instruction: sub ($k0,$k0,$s2): $k0=0
+cycle 2514: DRAM Request Issued (lw)
+cycle 2515-2516: Accessing Column 32: $a3=100
+cycle 2517: Instruction j :Jump to label ID: resume
+cycle 2518: Instruction: addi ($at,$at,1): $at=68
+cycle 2519: Instruction: sub ($a0,$a0,$s2): $a0=32
+cycle 2520: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 2521: Instruction: add ($s0,$s0,$s3): $s0=7800
+cycle 2522: Instruction: add ($s1,$s1,$s3): $s1=7850
+cycle 2523: Instruction beq ($a0,$zero,exit,0)
+cycle 2524: Instruction j :Jump to label ID: loop1
+cycle 2525: Instruction: addi ($v1,$v1,1): $v1=10272
+cycle 2526: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 2527: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 2528: Instruction beq ($t6,$t7,equal,1)
+cycle 2529: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 2530: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 2531: DRAM Request Issued (sw)
+cycle 2532-2533: Accessing Column 32: memory address 10272-10275 = 100
+cycle 2534: Instruction: add ($v1,$v0,$s2): $v1=10273
+cycle 2535: Instruction: add ($v1,$v0,$s2): $v1=10273
+cycle 2536: Instruction: add ($v1,$v0,$s2): $v1=10273
+cycle 2537: Instruction: add ($v1,$v0,$s2): $v1=10273
+cycle 2538: Instruction: addi ($v1,$v1,1): $v1=10274
+cycle 2539: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 2540: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 2541: Instruction: addi ($v1,$v1,1): $v1=10275
+cycle 2542: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 2543: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 2544: Instruction: addi ($v0,$v0,4): $v0=10276
+cycle 2545: Instruction beq ($k0,$s2,equalToOne,0)
+cycle 2546: Instruction: add ($k0,$k0,$s2): $k0=1
+cycle 2547: Instruction: addi ($at,$at,1): $at=69
+cycle 2548: Instruction: sub ($a0,$a0,$s2): $a0=31
+cycle 2549: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 2550: Instruction: add ($s0,$s0,$s3): $s0=7900
+cycle 2551: Instruction: add ($s1,$s1,$s3): $s1=7950
+cycle 2552: Instruction beq ($a0,$zero,exit,0)
+cycle 2553: Instruction j :Jump to label ID: loop1
+cycle 2554: Instruction: addi ($v1,$v1,1): $v1=10276
+cycle 2555: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 2556: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 2557: Instruction beq ($t6,$t7,equal,1)
+cycle 2558: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 2559: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 2560: DRAM Request Issued (sw)
+cycle 2561-2562: Accessing Column 36: memory address 10276-10279 = 100
+cycle 2563: Instruction: add ($v1,$v0,$s2): $v1=10277
+cycle 2564: Instruction: add ($v1,$v0,$s2): $v1=10277
+cycle 2565: Instruction: add ($v1,$v0,$s2): $v1=10277
+cycle 2566: Instruction: add ($v1,$v0,$s2): $v1=10277
+cycle 2567: Instruction: addi ($v1,$v1,1): $v1=10278
+cycle 2568: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 2569: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 2570: Instruction: addi ($v1,$v1,1): $v1=10279
+cycle 2571: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 2572: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 2573: Instruction: addi ($v0,$v0,4): $v0=10280
+cycle 2574: Instruction beq ($k0,$s2,equalToOne,1)
+cycle 2575: DRAM Request Issued (sw)
+cycle 2576-2577: Accessing Column 40: memory address 10280-10283 = 100
+cycle 2578: Instruction: add ($t2,$t2,$s1): $t2=7950
+cycle 2579: Instruction: add ($t2,$t2,$s1): $t2=15900
+cycle 2580: Instruction: add ($t2,$t2,$s1): $t2=23850
+cycle 2581: Instruction: add ($t2,$t2,$s1): $t2=31800
+cycle 2582: Instruction: sub ($t2,$t2,$s1): $t2=23850
+cycle 2583: Instruction: sub ($t2,$t2,$s1): $t2=15900
+cycle 2584: Instruction: sub ($t2,$t2,$s1): $t2=7950
+cycle 2585: Instruction: sub ($t2,$t2,$s1): $t2=0
+cycle 2586: Instruction: sub ($k0,$k0,$s2): $k0=0
+cycle 2587: DRAM Request Issued (lw)
+cycle 2588-2589: Accessing Column 40: $a3=100
+cycle 2590: Instruction j :Jump to label ID: resume
+cycle 2591: Instruction: addi ($at,$at,1): $at=70
+cycle 2592: Instruction: sub ($a0,$a0,$s2): $a0=30
+cycle 2593: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 2594: Instruction: add ($s0,$s0,$s3): $s0=8000
+cycle 2595: Instruction: add ($s1,$s1,$s3): $s1=8050
+cycle 2596: Instruction beq ($a0,$zero,exit,0)
+cycle 2597: Instruction j :Jump to label ID: loop1
+cycle 2598: Instruction: addi ($v1,$v1,1): $v1=10280
+cycle 2599: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 2600: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 2601: Instruction beq ($t6,$t7,equal,1)
+cycle 2602: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 2603: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 2604: DRAM Request Issued (sw)
+cycle 2605-2606: Accessing Column 40: memory address 10280-10283 = 100
+cycle 2607: Instruction: add ($v1,$v0,$s2): $v1=10281
+cycle 2608: Instruction: add ($v1,$v0,$s2): $v1=10281
+cycle 2609: Instruction: add ($v1,$v0,$s2): $v1=10281
+cycle 2610: Instruction: add ($v1,$v0,$s2): $v1=10281
+cycle 2611: Instruction: addi ($v1,$v1,1): $v1=10282
+cycle 2612: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 2613: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 2614: Instruction: addi ($v1,$v1,1): $v1=10283
+cycle 2615: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 2616: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 2617: Instruction: addi ($v0,$v0,4): $v0=10284
+cycle 2618: Instruction beq ($k0,$s2,equalToOne,0)
+cycle 2619: Instruction: add ($k0,$k0,$s2): $k0=1
+cycle 2620: Instruction: addi ($at,$at,1): $at=71
+cycle 2621: Instruction: sub ($a0,$a0,$s2): $a0=29
+cycle 2622: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 2623: Instruction: add ($s0,$s0,$s3): $s0=8100
+cycle 2624: Instruction: add ($s1,$s1,$s3): $s1=8150
+cycle 2625: Instruction beq ($a0,$zero,exit,0)
+cycle 2626: Instruction j :Jump to label ID: loop1
+cycle 2627: Instruction: addi ($v1,$v1,1): $v1=10284
+cycle 2628: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 2629: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 2630: Instruction beq ($t6,$t7,equal,1)
+cycle 2631: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 2632: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 2633: DRAM Request Issued (sw)
+cycle 2634-2635: Accessing Column 44: memory address 10284-10287 = 100
+cycle 2636: Instruction: add ($v1,$v0,$s2): $v1=10285
+cycle 2637: Instruction: add ($v1,$v0,$s2): $v1=10285
+cycle 2638: Instruction: add ($v1,$v0,$s2): $v1=10285
+cycle 2639: Instruction: add ($v1,$v0,$s2): $v1=10285
+cycle 2640: Instruction: addi ($v1,$v1,1): $v1=10286
+cycle 2641: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 2642: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 2643: Instruction: addi ($v1,$v1,1): $v1=10287
+cycle 2644: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 2645: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 2646: Instruction: addi ($v0,$v0,4): $v0=10288
+cycle 2647: Instruction beq ($k0,$s2,equalToOne,1)
+cycle 2648: DRAM Request Issued (sw)
+cycle 2649-2650: Accessing Column 48: memory address 10288-10291 = 100
+cycle 2651: Instruction: add ($t2,$t2,$s1): $t2=8150
+cycle 2652: Instruction: add ($t2,$t2,$s1): $t2=16300
+cycle 2653: Instruction: add ($t2,$t2,$s1): $t2=24450
+cycle 2654: Instruction: add ($t2,$t2,$s1): $t2=32600
+cycle 2655: Instruction: sub ($t2,$t2,$s1): $t2=24450
+cycle 2656: Instruction: sub ($t2,$t2,$s1): $t2=16300
+cycle 2657: Instruction: sub ($t2,$t2,$s1): $t2=8150
+cycle 2658: Instruction: sub ($t2,$t2,$s1): $t2=0
+cycle 2659: Instruction: sub ($k0,$k0,$s2): $k0=0
+cycle 2660: DRAM Request Issued (lw)
+cycle 2661-2662: Accessing Column 48: $a3=100
+cycle 2663: Instruction j :Jump to label ID: resume
+cycle 2664: Instruction: addi ($at,$at,1): $at=72
+cycle 2665: Instruction: sub ($a0,$a0,$s2): $a0=28
+cycle 2666: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 2667: Instruction: add ($s0,$s0,$s3): $s0=8200
+cycle 2668: Instruction: add ($s1,$s1,$s3): $s1=8250
+cycle 2669: Instruction beq ($a0,$zero,exit,0)
+cycle 2670: Instruction j :Jump to label ID: loop1
+cycle 2671: Instruction: addi ($v1,$v1,1): $v1=10288
+cycle 2672: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 2673: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 2674: Instruction beq ($t6,$t7,equal,1)
+cycle 2675: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 2676: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 2677: DRAM Request Issued (sw)
+cycle 2678-2679: Accessing Column 48: memory address 10288-10291 = 100
+cycle 2680: Instruction: add ($v1,$v0,$s2): $v1=10289
+cycle 2681: Instruction: add ($v1,$v0,$s2): $v1=10289
+cycle 2682: Instruction: add ($v1,$v0,$s2): $v1=10289
+cycle 2683: Instruction: add ($v1,$v0,$s2): $v1=10289
+cycle 2684: Instruction: addi ($v1,$v1,1): $v1=10290
+cycle 2685: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 2686: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 2687: Instruction: addi ($v1,$v1,1): $v1=10291
+cycle 2688: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 2689: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 2690: Instruction: addi ($v0,$v0,4): $v0=10292
+cycle 2691: Instruction beq ($k0,$s2,equalToOne,0)
+cycle 2692: Instruction: add ($k0,$k0,$s2): $k0=1
+cycle 2693: Instruction: addi ($at,$at,1): $at=73
+cycle 2694: Instruction: sub ($a0,$a0,$s2): $a0=27
+cycle 2695: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 2696: Instruction: add ($s0,$s0,$s3): $s0=8300
+cycle 2697: Instruction: add ($s1,$s1,$s3): $s1=8350
+cycle 2698: Instruction beq ($a0,$zero,exit,0)
+cycle 2699: Instruction j :Jump to label ID: loop1
+cycle 2700: Instruction: addi ($v1,$v1,1): $v1=10292
+cycle 2701: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 2702: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 2703: Instruction beq ($t6,$t7,equal,1)
+cycle 2704: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 2705: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 2706: DRAM Request Issued (sw)
+cycle 2707-2708: Accessing Column 52: memory address 10292-10295 = 100
+cycle 2709: Instruction: add ($v1,$v0,$s2): $v1=10293
+cycle 2710: Instruction: add ($v1,$v0,$s2): $v1=10293
+cycle 2711: Instruction: add ($v1,$v0,$s2): $v1=10293
+cycle 2712: Instruction: add ($v1,$v0,$s2): $v1=10293
+cycle 2713: Instruction: addi ($v1,$v1,1): $v1=10294
+cycle 2714: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 2715: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 2716: Instruction: addi ($v1,$v1,1): $v1=10295
+cycle 2717: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 2718: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 2719: Instruction: addi ($v0,$v0,4): $v0=10296
+cycle 2720: Instruction beq ($k0,$s2,equalToOne,1)
+cycle 2721: DRAM Request Issued (sw)
+cycle 2722-2723: Accessing Column 56: memory address 10296-10299 = 100
+cycle 2724: Instruction: add ($t2,$t2,$s1): $t2=8350
+cycle 2725: Instruction: add ($t2,$t2,$s1): $t2=16700
+cycle 2726: Instruction: add ($t2,$t2,$s1): $t2=25050
+cycle 2727: Instruction: add ($t2,$t2,$s1): $t2=33400
+cycle 2728: Instruction: sub ($t2,$t2,$s1): $t2=25050
+cycle 2729: Instruction: sub ($t2,$t2,$s1): $t2=16700
+cycle 2730: Instruction: sub ($t2,$t2,$s1): $t2=8350
+cycle 2731: Instruction: sub ($t2,$t2,$s1): $t2=0
+cycle 2732: Instruction: sub ($k0,$k0,$s2): $k0=0
+cycle 2733: DRAM Request Issued (lw)
+cycle 2734-2735: Accessing Column 56: $a3=100
+cycle 2736: Instruction j :Jump to label ID: resume
+cycle 2737: Instruction: addi ($at,$at,1): $at=74
+cycle 2738: Instruction: sub ($a0,$a0,$s2): $a0=26
+cycle 2739: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 2740: Instruction: add ($s0,$s0,$s3): $s0=8400
+cycle 2741: Instruction: add ($s1,$s1,$s3): $s1=8450
+cycle 2742: Instruction beq ($a0,$zero,exit,0)
+cycle 2743: Instruction j :Jump to label ID: loop1
+cycle 2744: Instruction: addi ($v1,$v1,1): $v1=10296
+cycle 2745: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 2746: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 2747: Instruction beq ($t6,$t7,equal,1)
+cycle 2748: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 2749: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 2750: DRAM Request Issued (sw)
+cycle 2751-2752: Accessing Column 56: memory address 10296-10299 = 100
+cycle 2753: Instruction: add ($v1,$v0,$s2): $v1=10297
+cycle 2754: Instruction: add ($v1,$v0,$s2): $v1=10297
+cycle 2755: Instruction: add ($v1,$v0,$s2): $v1=10297
+cycle 2756: Instruction: add ($v1,$v0,$s2): $v1=10297
+cycle 2757: Instruction: addi ($v1,$v1,1): $v1=10298
+cycle 2758: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 2759: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 2760: Instruction: addi ($v1,$v1,1): $v1=10299
+cycle 2761: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 2762: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 2763: Instruction: addi ($v0,$v0,4): $v0=10300
+cycle 2764: Instruction beq ($k0,$s2,equalToOne,0)
+cycle 2765: Instruction: add ($k0,$k0,$s2): $k0=1
+cycle 2766: Instruction: addi ($at,$at,1): $at=75
+cycle 2767: Instruction: sub ($a0,$a0,$s2): $a0=25
+cycle 2768: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 2769: Instruction: add ($s0,$s0,$s3): $s0=8500
+cycle 2770: Instruction: add ($s1,$s1,$s3): $s1=8550
+cycle 2771: Instruction beq ($a0,$zero,exit,0)
+cycle 2772: Instruction j :Jump to label ID: loop1
+cycle 2773: Instruction: addi ($v1,$v1,1): $v1=10300
+cycle 2774: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 2775: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 2776: Instruction beq ($t6,$t7,equal,1)
+cycle 2777: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 2778: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 2779: DRAM Request Issued (sw)
+cycle 2780-2781: Accessing Column 60: memory address 10300-10303 = 100
+cycle 2782: Instruction: add ($v1,$v0,$s2): $v1=10301
+cycle 2783: Instruction: add ($v1,$v0,$s2): $v1=10301
+cycle 2784: Instruction: add ($v1,$v0,$s2): $v1=10301
+cycle 2785: Instruction: add ($v1,$v0,$s2): $v1=10301
+cycle 2786: Instruction: addi ($v1,$v1,1): $v1=10302
+cycle 2787: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 2788: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 2789: Instruction: addi ($v1,$v1,1): $v1=10303
+cycle 2790: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 2791: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 2792: Instruction: addi ($v0,$v0,4): $v0=10304
+cycle 2793: Instruction beq ($k0,$s2,equalToOne,1)
+cycle 2794: DRAM Request Issued (sw)
+cycle 2795-2796: Accessing Column 64: memory address 10304-10307 = 100
+cycle 2797: Instruction: add ($t2,$t2,$s1): $t2=8550
+cycle 2798: Instruction: add ($t2,$t2,$s1): $t2=17100
+cycle 2799: Instruction: add ($t2,$t2,$s1): $t2=25650
+cycle 2800: Instruction: add ($t2,$t2,$s1): $t2=34200
+cycle 2801: Instruction: sub ($t2,$t2,$s1): $t2=25650
+cycle 2802: Instruction: sub ($t2,$t2,$s1): $t2=17100
+cycle 2803: Instruction: sub ($t2,$t2,$s1): $t2=8550
+cycle 2804: Instruction: sub ($t2,$t2,$s1): $t2=0
+cycle 2805: Instruction: sub ($k0,$k0,$s2): $k0=0
+cycle 2806: DRAM Request Issued (lw)
+cycle 2807-2808: Accessing Column 64: $a3=100
+cycle 2809: Instruction j :Jump to label ID: resume
+cycle 2810: Instruction: addi ($at,$at,1): $at=76
+cycle 2811: Instruction: sub ($a0,$a0,$s2): $a0=24
+cycle 2812: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 2813: Instruction: add ($s0,$s0,$s3): $s0=8600
+cycle 2814: Instruction: add ($s1,$s1,$s3): $s1=8650
+cycle 2815: Instruction beq ($a0,$zero,exit,0)
+cycle 2816: Instruction j :Jump to label ID: loop1
+cycle 2817: Instruction: addi ($v1,$v1,1): $v1=10304
+cycle 2818: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 2819: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 2820: Instruction beq ($t6,$t7,equal,1)
+cycle 2821: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 2822: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 2823: DRAM Request Issued (sw)
+cycle 2824-2825: Accessing Column 64: memory address 10304-10307 = 100
+cycle 2826: Instruction: add ($v1,$v0,$s2): $v1=10305
+cycle 2827: Instruction: add ($v1,$v0,$s2): $v1=10305
+cycle 2828: Instruction: add ($v1,$v0,$s2): $v1=10305
+cycle 2829: Instruction: add ($v1,$v0,$s2): $v1=10305
+cycle 2830: Instruction: addi ($v1,$v1,1): $v1=10306
+cycle 2831: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 2832: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 2833: Instruction: addi ($v1,$v1,1): $v1=10307
+cycle 2834: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 2835: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 2836: Instruction: addi ($v0,$v0,4): $v0=10308
+cycle 2837: Instruction beq ($k0,$s2,equalToOne,0)
+cycle 2838: Instruction: add ($k0,$k0,$s2): $k0=1
+cycle 2839: Instruction: addi ($at,$at,1): $at=77
+cycle 2840: Instruction: sub ($a0,$a0,$s2): $a0=23
+cycle 2841: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 2842: Instruction: add ($s0,$s0,$s3): $s0=8700
+cycle 2843: Instruction: add ($s1,$s1,$s3): $s1=8750
+cycle 2844: Instruction beq ($a0,$zero,exit,0)
+cycle 2845: Instruction j :Jump to label ID: loop1
+cycle 2846: Instruction: addi ($v1,$v1,1): $v1=10308
+cycle 2847: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 2848: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 2849: Instruction beq ($t6,$t7,equal,1)
+cycle 2850: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 2851: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 2852: DRAM Request Issued (sw)
+cycle 2853-2854: Accessing Column 68: memory address 10308-10311 = 100
+cycle 2855: Instruction: add ($v1,$v0,$s2): $v1=10309
+cycle 2856: Instruction: add ($v1,$v0,$s2): $v1=10309
+cycle 2857: Instruction: add ($v1,$v0,$s2): $v1=10309
+cycle 2858: Instruction: add ($v1,$v0,$s2): $v1=10309
+cycle 2859: Instruction: addi ($v1,$v1,1): $v1=10310
+cycle 2860: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 2861: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 2862: Instruction: addi ($v1,$v1,1): $v1=10311
+cycle 2863: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 2864: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 2865: Instruction: addi ($v0,$v0,4): $v0=10312
+cycle 2866: Instruction beq ($k0,$s2,equalToOne,1)
+cycle 2867: DRAM Request Issued (sw)
+cycle 2868-2869: Accessing Column 72: memory address 10312-10315 = 100
+cycle 2870: Instruction: add ($t2,$t2,$s1): $t2=8750
+cycle 2871: Instruction: add ($t2,$t2,$s1): $t2=17500
+cycle 2872: Instruction: add ($t2,$t2,$s1): $t2=26250
+cycle 2873: Instruction: add ($t2,$t2,$s1): $t2=35000
+cycle 2874: Instruction: sub ($t2,$t2,$s1): $t2=26250
+cycle 2875: Instruction: sub ($t2,$t2,$s1): $t2=17500
+cycle 2876: Instruction: sub ($t2,$t2,$s1): $t2=8750
+cycle 2877: Instruction: sub ($t2,$t2,$s1): $t2=0
+cycle 2878: Instruction: sub ($k0,$k0,$s2): $k0=0
+cycle 2879: DRAM Request Issued (lw)
+cycle 2880-2881: Accessing Column 72: $a3=100
+cycle 2882: Instruction j :Jump to label ID: resume
+cycle 2883: Instruction: addi ($at,$at,1): $at=78
+cycle 2884: Instruction: sub ($a0,$a0,$s2): $a0=22
+cycle 2885: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 2886: Instruction: add ($s0,$s0,$s3): $s0=8800
+cycle 2887: Instruction: add ($s1,$s1,$s3): $s1=8850
+cycle 2888: Instruction beq ($a0,$zero,exit,0)
+cycle 2889: Instruction j :Jump to label ID: loop1
+cycle 2890: Instruction: addi ($v1,$v1,1): $v1=10312
+cycle 2891: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 2892: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 2893: Instruction beq ($t6,$t7,equal,1)
+cycle 2894: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 2895: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 2896: DRAM Request Issued (sw)
+cycle 2897-2898: Accessing Column 72: memory address 10312-10315 = 100
+cycle 2899: Instruction: add ($v1,$v0,$s2): $v1=10313
+cycle 2900: Instruction: add ($v1,$v0,$s2): $v1=10313
+cycle 2901: Instruction: add ($v1,$v0,$s2): $v1=10313
+cycle 2902: Instruction: add ($v1,$v0,$s2): $v1=10313
+cycle 2903: Instruction: addi ($v1,$v1,1): $v1=10314
+cycle 2904: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 2905: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 2906: Instruction: addi ($v1,$v1,1): $v1=10315
+cycle 2907: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 2908: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 2909: Instruction: addi ($v0,$v0,4): $v0=10316
+cycle 2910: Instruction beq ($k0,$s2,equalToOne,0)
+cycle 2911: Instruction: add ($k0,$k0,$s2): $k0=1
+cycle 2912: Instruction: addi ($at,$at,1): $at=79
+cycle 2913: Instruction: sub ($a0,$a0,$s2): $a0=21
+cycle 2914: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 2915: Instruction: add ($s0,$s0,$s3): $s0=8900
+cycle 2916: Instruction: add ($s1,$s1,$s3): $s1=8950
+cycle 2917: Instruction beq ($a0,$zero,exit,0)
+cycle 2918: Instruction j :Jump to label ID: loop1
+cycle 2919: Instruction: addi ($v1,$v1,1): $v1=10316
+cycle 2920: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 2921: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 2922: Instruction beq ($t6,$t7,equal,1)
+cycle 2923: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 2924: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 2925: DRAM Request Issued (sw)
+cycle 2926-2927: Accessing Column 76: memory address 10316-10319 = 100
+cycle 2928: Instruction: add ($v1,$v0,$s2): $v1=10317
+cycle 2929: Instruction: add ($v1,$v0,$s2): $v1=10317
+cycle 2930: Instruction: add ($v1,$v0,$s2): $v1=10317
+cycle 2931: Instruction: add ($v1,$v0,$s2): $v1=10317
+cycle 2932: Instruction: addi ($v1,$v1,1): $v1=10318
+cycle 2933: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 2934: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 2935: Instruction: addi ($v1,$v1,1): $v1=10319
+cycle 2936: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 2937: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 2938: Instruction: addi ($v0,$v0,4): $v0=10320
+cycle 2939: Instruction beq ($k0,$s2,equalToOne,1)
+cycle 2940: DRAM Request Issued (sw)
+cycle 2941-2942: Accessing Column 80: memory address 10320-10323 = 100
+cycle 2943: Instruction: add ($t2,$t2,$s1): $t2=8950
+cycle 2944: Instruction: add ($t2,$t2,$s1): $t2=17900
+cycle 2945: Instruction: add ($t2,$t2,$s1): $t2=26850
+cycle 2946: Instruction: add ($t2,$t2,$s1): $t2=35800
+cycle 2947: Instruction: sub ($t2,$t2,$s1): $t2=26850
+cycle 2948: Instruction: sub ($t2,$t2,$s1): $t2=17900
+cycle 2949: Instruction: sub ($t2,$t2,$s1): $t2=8950
+cycle 2950: Instruction: sub ($t2,$t2,$s1): $t2=0
+cycle 2951: Instruction: sub ($k0,$k0,$s2): $k0=0
+cycle 2952: DRAM Request Issued (lw)
+cycle 2953-2954: Accessing Column 80: $a3=100
+cycle 2955: Instruction j :Jump to label ID: resume
+cycle 2956: Instruction: addi ($at,$at,1): $at=80
+cycle 2957: Instruction: sub ($a0,$a0,$s2): $a0=20
+cycle 2958: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 2959: Instruction: add ($s0,$s0,$s3): $s0=9000
+cycle 2960: Instruction: add ($s1,$s1,$s3): $s1=9050
+cycle 2961: Instruction beq ($a0,$zero,exit,0)
+cycle 2962: Instruction j :Jump to label ID: loop1
+cycle 2963: Instruction: addi ($v1,$v1,1): $v1=10320
+cycle 2964: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 2965: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 2966: Instruction beq ($t6,$t7,equal,1)
+cycle 2967: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 2968: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 2969: DRAM Request Issued (sw)
+cycle 2970-2971: Accessing Column 80: memory address 10320-10323 = 100
+cycle 2972: Instruction: add ($v1,$v0,$s2): $v1=10321
+cycle 2973: Instruction: add ($v1,$v0,$s2): $v1=10321
+cycle 2974: Instruction: add ($v1,$v0,$s2): $v1=10321
+cycle 2975: Instruction: add ($v1,$v0,$s2): $v1=10321
+cycle 2976: Instruction: addi ($v1,$v1,1): $v1=10322
+cycle 2977: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 2978: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 2979: Instruction: addi ($v1,$v1,1): $v1=10323
+cycle 2980: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 2981: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 2982: Instruction: addi ($v0,$v0,4): $v0=10324
+cycle 2983: Instruction beq ($k0,$s2,equalToOne,0)
+cycle 2984: Instruction: add ($k0,$k0,$s2): $k0=1
+cycle 2985: Instruction: addi ($at,$at,1): $at=81
+cycle 2986: Instruction: sub ($a0,$a0,$s2): $a0=19
+cycle 2987: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 2988: Instruction: add ($s0,$s0,$s3): $s0=9100
+cycle 2989: Instruction: add ($s1,$s1,$s3): $s1=9150
+cycle 2990: Instruction beq ($a0,$zero,exit,0)
+cycle 2991: Instruction j :Jump to label ID: loop1
+cycle 2992: Instruction: addi ($v1,$v1,1): $v1=10324
+cycle 2993: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 2994: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 2995: Instruction beq ($t6,$t7,equal,1)
+cycle 2996: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 2997: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 2998: DRAM Request Issued (sw)
+cycle 2999-3000: Accessing Column 84: memory address 10324-10327 = 100
+cycle 3001: Instruction: add ($v1,$v0,$s2): $v1=10325
+cycle 3002: Instruction: add ($v1,$v0,$s2): $v1=10325
+cycle 3003: Instruction: add ($v1,$v0,$s2): $v1=10325
+cycle 3004: Instruction: add ($v1,$v0,$s2): $v1=10325
+cycle 3005: Instruction: addi ($v1,$v1,1): $v1=10326
+cycle 3006: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 3007: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 3008: Instruction: addi ($v1,$v1,1): $v1=10327
+cycle 3009: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 3010: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 3011: Instruction: addi ($v0,$v0,4): $v0=10328
+cycle 3012: Instruction beq ($k0,$s2,equalToOne,1)
+cycle 3013: DRAM Request Issued (sw)
+cycle 3014-3015: Accessing Column 88: memory address 10328-10331 = 100
+cycle 3016: Instruction: add ($t2,$t2,$s1): $t2=9150
+cycle 3017: Instruction: add ($t2,$t2,$s1): $t2=18300
+cycle 3018: Instruction: add ($t2,$t2,$s1): $t2=27450
+cycle 3019: Instruction: add ($t2,$t2,$s1): $t2=36600
+cycle 3020: Instruction: sub ($t2,$t2,$s1): $t2=27450
+cycle 3021: Instruction: sub ($t2,$t2,$s1): $t2=18300
+cycle 3022: Instruction: sub ($t2,$t2,$s1): $t2=9150
+cycle 3023: Instruction: sub ($t2,$t2,$s1): $t2=0
+cycle 3024: Instruction: sub ($k0,$k0,$s2): $k0=0
+cycle 3025: DRAM Request Issued (lw)
+cycle 3026-3027: Accessing Column 88: $a3=100
+cycle 3028: Instruction j :Jump to label ID: resume
+cycle 3029: Instruction: addi ($at,$at,1): $at=82
+cycle 3030: Instruction: sub ($a0,$a0,$s2): $a0=18
+cycle 3031: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 3032: Instruction: add ($s0,$s0,$s3): $s0=9200
+cycle 3033: Instruction: add ($s1,$s1,$s3): $s1=9250
+cycle 3034: Instruction beq ($a0,$zero,exit,0)
+cycle 3035: Instruction j :Jump to label ID: loop1
+cycle 3036: Instruction: addi ($v1,$v1,1): $v1=10328
+cycle 3037: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 3038: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 3039: Instruction beq ($t6,$t7,equal,1)
+cycle 3040: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 3041: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 3042: DRAM Request Issued (sw)
+cycle 3043-3044: Accessing Column 88: memory address 10328-10331 = 100
+cycle 3045: Instruction: add ($v1,$v0,$s2): $v1=10329
+cycle 3046: Instruction: add ($v1,$v0,$s2): $v1=10329
+cycle 3047: Instruction: add ($v1,$v0,$s2): $v1=10329
+cycle 3048: Instruction: add ($v1,$v0,$s2): $v1=10329
+cycle 3049: Instruction: addi ($v1,$v1,1): $v1=10330
+cycle 3050: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 3051: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 3052: Instruction: addi ($v1,$v1,1): $v1=10331
+cycle 3053: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 3054: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 3055: Instruction: addi ($v0,$v0,4): $v0=10332
+cycle 3056: Instruction beq ($k0,$s2,equalToOne,0)
+cycle 3057: Instruction: add ($k0,$k0,$s2): $k0=1
+cycle 3058: Instruction: addi ($at,$at,1): $at=83
+cycle 3059: Instruction: sub ($a0,$a0,$s2): $a0=17
+cycle 3060: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 3061: Instruction: add ($s0,$s0,$s3): $s0=9300
+cycle 3062: Instruction: add ($s1,$s1,$s3): $s1=9350
+cycle 3063: Instruction beq ($a0,$zero,exit,0)
+cycle 3064: Instruction j :Jump to label ID: loop1
+cycle 3065: Instruction: addi ($v1,$v1,1): $v1=10332
+cycle 3066: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 3067: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 3068: Instruction beq ($t6,$t7,equal,1)
+cycle 3069: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 3070: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 3071: DRAM Request Issued (sw)
+cycle 3072-3073: Accessing Column 92: memory address 10332-10335 = 100
+cycle 3074: Instruction: add ($v1,$v0,$s2): $v1=10333
+cycle 3075: Instruction: add ($v1,$v0,$s2): $v1=10333
+cycle 3076: Instruction: add ($v1,$v0,$s2): $v1=10333
+cycle 3077: Instruction: add ($v1,$v0,$s2): $v1=10333
+cycle 3078: Instruction: addi ($v1,$v1,1): $v1=10334
+cycle 3079: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 3080: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 3081: Instruction: addi ($v1,$v1,1): $v1=10335
+cycle 3082: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 3083: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 3084: Instruction: addi ($v0,$v0,4): $v0=10336
+cycle 3085: Instruction beq ($k0,$s2,equalToOne,1)
+cycle 3086: DRAM Request Issued (sw)
+cycle 3087-3088: Accessing Column 96: memory address 10336-10339 = 100
+cycle 3089: Instruction: add ($t2,$t2,$s1): $t2=9350
+cycle 3090: Instruction: add ($t2,$t2,$s1): $t2=18700
+cycle 3091: Instruction: add ($t2,$t2,$s1): $t2=28050
+cycle 3092: Instruction: add ($t2,$t2,$s1): $t2=37400
+cycle 3093: Instruction: sub ($t2,$t2,$s1): $t2=28050
+cycle 3094: Instruction: sub ($t2,$t2,$s1): $t2=18700
+cycle 3095: Instruction: sub ($t2,$t2,$s1): $t2=9350
+cycle 3096: Instruction: sub ($t2,$t2,$s1): $t2=0
+cycle 3097: Instruction: sub ($k0,$k0,$s2): $k0=0
+cycle 3098: DRAM Request Issued (lw)
+cycle 3099-3100: Accessing Column 96: $a3=100
+cycle 3101: Instruction j :Jump to label ID: resume
+cycle 3102: Instruction: addi ($at,$at,1): $at=84
+cycle 3103: Instruction: sub ($a0,$a0,$s2): $a0=16
+cycle 3104: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 3105: Instruction: add ($s0,$s0,$s3): $s0=9400
+cycle 3106: Instruction: add ($s1,$s1,$s3): $s1=9450
+cycle 3107: Instruction beq ($a0,$zero,exit,0)
+cycle 3108: Instruction j :Jump to label ID: loop1
+cycle 3109: Instruction: addi ($v1,$v1,1): $v1=10336
+cycle 3110: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 3111: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 3112: Instruction beq ($t6,$t7,equal,1)
+cycle 3113: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 3114: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 3115: DRAM Request Issued (sw)
+cycle 3116-3117: Accessing Column 96: memory address 10336-10339 = 100
+cycle 3118: Instruction: add ($v1,$v0,$s2): $v1=10337
+cycle 3119: Instruction: add ($v1,$v0,$s2): $v1=10337
+cycle 3120: Instruction: add ($v1,$v0,$s2): $v1=10337
+cycle 3121: Instruction: add ($v1,$v0,$s2): $v1=10337
+cycle 3122: Instruction: addi ($v1,$v1,1): $v1=10338
+cycle 3123: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 3124: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 3125: Instruction: addi ($v1,$v1,1): $v1=10339
+cycle 3126: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 3127: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 3128: Instruction: addi ($v0,$v0,4): $v0=10340
+cycle 3129: Instruction beq ($k0,$s2,equalToOne,0)
+cycle 3130: Instruction: add ($k0,$k0,$s2): $k0=1
+cycle 3131: Instruction: addi ($at,$at,1): $at=85
+cycle 3132: Instruction: sub ($a0,$a0,$s2): $a0=15
+cycle 3133: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 3134: Instruction: add ($s0,$s0,$s3): $s0=9500
+cycle 3135: Instruction: add ($s1,$s1,$s3): $s1=9550
+cycle 3136: Instruction beq ($a0,$zero,exit,0)
+cycle 3137: Instruction j :Jump to label ID: loop1
+cycle 3138: Instruction: addi ($v1,$v1,1): $v1=10340
+cycle 3139: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 3140: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 3141: Instruction beq ($t6,$t7,equal,1)
+cycle 3142: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 3143: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 3144: DRAM Request Issued (sw)
+cycle 3145-3146: Accessing Column 100: memory address 10340-10343 = 100
+cycle 3147: Instruction: add ($v1,$v0,$s2): $v1=10341
+cycle 3148: Instruction: add ($v1,$v0,$s2): $v1=10341
+cycle 3149: Instruction: add ($v1,$v0,$s2): $v1=10341
+cycle 3150: Instruction: add ($v1,$v0,$s2): $v1=10341
+cycle 3151: Instruction: addi ($v1,$v1,1): $v1=10342
+cycle 3152: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 3153: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 3154: Instruction: addi ($v1,$v1,1): $v1=10343
+cycle 3155: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 3156: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 3157: Instruction: addi ($v0,$v0,4): $v0=10344
+cycle 3158: Instruction beq ($k0,$s2,equalToOne,1)
+cycle 3159: DRAM Request Issued (sw)
+cycle 3160-3161: Accessing Column 104: memory address 10344-10347 = 100
+cycle 3162: Instruction: add ($t2,$t2,$s1): $t2=9550
+cycle 3163: Instruction: add ($t2,$t2,$s1): $t2=19100
+cycle 3164: Instruction: add ($t2,$t2,$s1): $t2=28650
+cycle 3165: Instruction: add ($t2,$t2,$s1): $t2=38200
+cycle 3166: Instruction: sub ($t2,$t2,$s1): $t2=28650
+cycle 3167: Instruction: sub ($t2,$t2,$s1): $t2=19100
+cycle 3168: Instruction: sub ($t2,$t2,$s1): $t2=9550
+cycle 3169: Instruction: sub ($t2,$t2,$s1): $t2=0
+cycle 3170: Instruction: sub ($k0,$k0,$s2): $k0=0
+cycle 3171: DRAM Request Issued (lw)
+cycle 3172-3173: Accessing Column 104: $a3=100
+cycle 3174: Instruction j :Jump to label ID: resume
+cycle 3175: Instruction: addi ($at,$at,1): $at=86
+cycle 3176: Instruction: sub ($a0,$a0,$s2): $a0=14
+cycle 3177: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 3178: Instruction: add ($s0,$s0,$s3): $s0=9600
+cycle 3179: Instruction: add ($s1,$s1,$s3): $s1=9650
+cycle 3180: Instruction beq ($a0,$zero,exit,0)
+cycle 3181: Instruction j :Jump to label ID: loop1
+cycle 3182: Instruction: addi ($v1,$v1,1): $v1=10344
+cycle 3183: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 3184: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 3185: Instruction beq ($t6,$t7,equal,1)
+cycle 3186: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 3187: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 3188: DRAM Request Issued (sw)
+cycle 3189-3190: Accessing Column 104: memory address 10344-10347 = 100
+cycle 3191: Instruction: add ($v1,$v0,$s2): $v1=10345
+cycle 3192: Instruction: add ($v1,$v0,$s2): $v1=10345
+cycle 3193: Instruction: add ($v1,$v0,$s2): $v1=10345
+cycle 3194: Instruction: add ($v1,$v0,$s2): $v1=10345
+cycle 3195: Instruction: addi ($v1,$v1,1): $v1=10346
+cycle 3196: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 3197: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 3198: Instruction: addi ($v1,$v1,1): $v1=10347
+cycle 3199: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 3200: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 3201: Instruction: addi ($v0,$v0,4): $v0=10348
+cycle 3202: Instruction beq ($k0,$s2,equalToOne,0)
+cycle 3203: Instruction: add ($k0,$k0,$s2): $k0=1
+cycle 3204: Instruction: addi ($at,$at,1): $at=87
+cycle 3205: Instruction: sub ($a0,$a0,$s2): $a0=13
+cycle 3206: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 3207: Instruction: add ($s0,$s0,$s3): $s0=9700
+cycle 3208: Instruction: add ($s1,$s1,$s3): $s1=9750
+cycle 3209: Instruction beq ($a0,$zero,exit,0)
+cycle 3210: Instruction j :Jump to label ID: loop1
+cycle 3211: Instruction: addi ($v1,$v1,1): $v1=10348
+cycle 3212: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 3213: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 3214: Instruction beq ($t6,$t7,equal,1)
+cycle 3215: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 3216: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 3217: DRAM Request Issued (sw)
+cycle 3218-3219: Accessing Column 108: memory address 10348-10351 = 100
+cycle 3220: Instruction: add ($v1,$v0,$s2): $v1=10349
+cycle 3221: Instruction: add ($v1,$v0,$s2): $v1=10349
+cycle 3222: Instruction: add ($v1,$v0,$s2): $v1=10349
+cycle 3223: Instruction: add ($v1,$v0,$s2): $v1=10349
+cycle 3224: Instruction: addi ($v1,$v1,1): $v1=10350
+cycle 3225: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 3226: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 3227: Instruction: addi ($v1,$v1,1): $v1=10351
+cycle 3228: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 3229: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 3230: Instruction: addi ($v0,$v0,4): $v0=10352
+cycle 3231: Instruction beq ($k0,$s2,equalToOne,1)
+cycle 3232: DRAM Request Issued (sw)
+cycle 3233-3234: Accessing Column 112: memory address 10352-10355 = 100
+cycle 3235: Instruction: add ($t2,$t2,$s1): $t2=9750
+cycle 3236: Instruction: add ($t2,$t2,$s1): $t2=19500
+cycle 3237: Instruction: add ($t2,$t2,$s1): $t2=29250
+cycle 3238: Instruction: add ($t2,$t2,$s1): $t2=39000
+cycle 3239: Instruction: sub ($t2,$t2,$s1): $t2=29250
+cycle 3240: Instruction: sub ($t2,$t2,$s1): $t2=19500
+cycle 3241: Instruction: sub ($t2,$t2,$s1): $t2=9750
+cycle 3242: Instruction: sub ($t2,$t2,$s1): $t2=0
+cycle 3243: Instruction: sub ($k0,$k0,$s2): $k0=0
+cycle 3244: DRAM Request Issued (lw)
+cycle 3245-3246: Accessing Column 112: $a3=100
+cycle 3247: Instruction j :Jump to label ID: resume
+cycle 3248: Instruction: addi ($at,$at,1): $at=88
+cycle 3249: Instruction: sub ($a0,$a0,$s2): $a0=12
+cycle 3250: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 3251: Instruction: add ($s0,$s0,$s3): $s0=9800
+cycle 3252: Instruction: add ($s1,$s1,$s3): $s1=9850
+cycle 3253: Instruction beq ($a0,$zero,exit,0)
+cycle 3254: Instruction j :Jump to label ID: loop1
+cycle 3255: Instruction: addi ($v1,$v1,1): $v1=10352
+cycle 3256: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 3257: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 3258: Instruction beq ($t6,$t7,equal,1)
+cycle 3259: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 3260: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 3261: DRAM Request Issued (sw)
+cycle 3262-3263: Accessing Column 112: memory address 10352-10355 = 100
+cycle 3264: Instruction: add ($v1,$v0,$s2): $v1=10353
+cycle 3265: Instruction: add ($v1,$v0,$s2): $v1=10353
+cycle 3266: Instruction: add ($v1,$v0,$s2): $v1=10353
+cycle 3267: Instruction: add ($v1,$v0,$s2): $v1=10353
+cycle 3268: Instruction: addi ($v1,$v1,1): $v1=10354
+cycle 3269: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 3270: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 3271: Instruction: addi ($v1,$v1,1): $v1=10355
+cycle 3272: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 3273: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 3274: Instruction: addi ($v0,$v0,4): $v0=10356
+cycle 3275: Instruction beq ($k0,$s2,equalToOne,0)
+cycle 3276: Instruction: add ($k0,$k0,$s2): $k0=1
+cycle 3277: Instruction: addi ($at,$at,1): $at=89
+cycle 3278: Instruction: sub ($a0,$a0,$s2): $a0=11
+cycle 3279: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 3280: Instruction: add ($s0,$s0,$s3): $s0=9900
+cycle 3281: Instruction: add ($s1,$s1,$s3): $s1=9950
+cycle 3282: Instruction beq ($a0,$zero,exit,0)
+cycle 3283: Instruction j :Jump to label ID: loop1
+cycle 3284: Instruction: addi ($v1,$v1,1): $v1=10356
+cycle 3285: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 3286: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 3287: Instruction beq ($t6,$t7,equal,1)
+cycle 3288: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 3289: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 3290: DRAM Request Issued (sw)
+cycle 3291-3292: Accessing Column 116: memory address 10356-10359 = 100
+cycle 3293: Instruction: add ($v1,$v0,$s2): $v1=10357
+cycle 3294: Instruction: add ($v1,$v0,$s2): $v1=10357
+cycle 3295: Instruction: add ($v1,$v0,$s2): $v1=10357
+cycle 3296: Instruction: add ($v1,$v0,$s2): $v1=10357
+cycle 3297: Instruction: addi ($v1,$v1,1): $v1=10358
+cycle 3298: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 3299: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 3300: Instruction: addi ($v1,$v1,1): $v1=10359
+cycle 3301: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 3302: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 3303: Instruction: addi ($v0,$v0,4): $v0=10360
+cycle 3304: Instruction beq ($k0,$s2,equalToOne,1)
+cycle 3305: DRAM Request Issued (sw)
+cycle 3306-3307: Accessing Column 120: memory address 10360-10363 = 100
+cycle 3308: Instruction: add ($t2,$t2,$s1): $t2=9950
+cycle 3309: Instruction: add ($t2,$t2,$s1): $t2=19900
+cycle 3310: Instruction: add ($t2,$t2,$s1): $t2=29850
+cycle 3311: Instruction: add ($t2,$t2,$s1): $t2=39800
+cycle 3312: Instruction: sub ($t2,$t2,$s1): $t2=29850
+cycle 3313: Instruction: sub ($t2,$t2,$s1): $t2=19900
+cycle 3314: Instruction: sub ($t2,$t2,$s1): $t2=9950
+cycle 3315: Instruction: sub ($t2,$t2,$s1): $t2=0
+cycle 3316: Instruction: sub ($k0,$k0,$s2): $k0=0
+cycle 3317: DRAM Request Issued (lw)
+cycle 3318-3319: Accessing Column 120: $a3=100
+cycle 3320: Instruction j :Jump to label ID: resume
+cycle 3321: Instruction: addi ($at,$at,1): $at=90
+cycle 3322: Instruction: sub ($a0,$a0,$s2): $a0=10
+cycle 3323: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 3324: Instruction: add ($s0,$s0,$s3): $s0=10000
+cycle 3325: Instruction: add ($s1,$s1,$s3): $s1=10050
+cycle 3326: Instruction beq ($a0,$zero,exit,0)
+cycle 3327: Instruction j :Jump to label ID: loop1
+cycle 3328: Instruction: addi ($v1,$v1,1): $v1=10360
+cycle 3329: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 3330: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 3331: Instruction beq ($t6,$t7,equal,1)
+cycle 3332: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 3333: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 3334: DRAM Request Issued (sw)
+cycle 3335-3336: Accessing Column 120: memory address 10360-10363 = 100
+cycle 3337: Instruction: add ($v1,$v0,$s2): $v1=10361
+cycle 3338: Instruction: add ($v1,$v0,$s2): $v1=10361
+cycle 3339: Instruction: add ($v1,$v0,$s2): $v1=10361
+cycle 3340: Instruction: add ($v1,$v0,$s2): $v1=10361
+cycle 3341: Instruction: addi ($v1,$v1,1): $v1=10362
+cycle 3342: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 3343: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 3344: Instruction: addi ($v1,$v1,1): $v1=10363
+cycle 3345: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 3346: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 3347: Instruction: addi ($v0,$v0,4): $v0=10364
+cycle 3348: Instruction beq ($k0,$s2,equalToOne,0)
+cycle 3349: Instruction: add ($k0,$k0,$s2): $k0=1
+cycle 3350: Instruction: addi ($at,$at,1): $at=91
+cycle 3351: Instruction: sub ($a0,$a0,$s2): $a0=9
+cycle 3352: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 3353: Instruction: add ($s0,$s0,$s3): $s0=10100
+cycle 3354: Instruction: add ($s1,$s1,$s3): $s1=10150
+cycle 3355: Instruction beq ($a0,$zero,exit,0)
+cycle 3356: Instruction j :Jump to label ID: loop1
+cycle 3357: Instruction: addi ($v1,$v1,1): $v1=10364
+cycle 3358: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 3359: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 3360: Instruction beq ($t6,$t7,equal,1)
+cycle 3361: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 3362: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 3363: DRAM Request Issued (sw)
+cycle 3364-3365: Accessing Column 124: memory address 10364-10367 = 100
+cycle 3366: Instruction: add ($v1,$v0,$s2): $v1=10365
+cycle 3367: Instruction: add ($v1,$v0,$s2): $v1=10365
+cycle 3368: Instruction: add ($v1,$v0,$s2): $v1=10365
+cycle 3369: Instruction: add ($v1,$v0,$s2): $v1=10365
+cycle 3370: Instruction: addi ($v1,$v1,1): $v1=10366
+cycle 3371: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 3372: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 3373: Instruction: addi ($v1,$v1,1): $v1=10367
+cycle 3374: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 3375: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 3376: Instruction: addi ($v0,$v0,4): $v0=10368
+cycle 3377: Instruction beq ($k0,$s2,equalToOne,1)
+cycle 3378: DRAM Request Issued (sw)
+cycle 3379-3380: Accessing Column 128: memory address 10368-10371 = 100
+cycle 3381: Instruction: add ($t2,$t2,$s1): $t2=10150
+cycle 3382: Instruction: add ($t2,$t2,$s1): $t2=20300
+cycle 3383: Instruction: add ($t2,$t2,$s1): $t2=30450
+cycle 3384: Instruction: add ($t2,$t2,$s1): $t2=40600
+cycle 3385: Instruction: sub ($t2,$t2,$s1): $t2=30450
+cycle 3386: Instruction: sub ($t2,$t2,$s1): $t2=20300
+cycle 3387: Instruction: sub ($t2,$t2,$s1): $t2=10150
+cycle 3388: Instruction: sub ($t2,$t2,$s1): $t2=0
+cycle 3389: Instruction: sub ($k0,$k0,$s2): $k0=0
+cycle 3390: DRAM Request Issued (lw)
+cycle 3391-3392: Accessing Column 128: $a3=100
+cycle 3393: Instruction j :Jump to label ID: resume
+cycle 3394: Instruction: addi ($at,$at,1): $at=92
+cycle 3395: Instruction: sub ($a0,$a0,$s2): $a0=8
+cycle 3396: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 3397: Instruction: add ($s0,$s0,$s3): $s0=10200
+cycle 3398: Instruction: add ($s1,$s1,$s3): $s1=10250
+cycle 3399: Instruction beq ($a0,$zero,exit,0)
+cycle 3400: Instruction j :Jump to label ID: loop1
+cycle 3401: Instruction: addi ($v1,$v1,1): $v1=10368
+cycle 3402: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 3403: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 3404: Instruction beq ($t6,$t7,equal,1)
+cycle 3405: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 3406: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 3407: DRAM Request Issued (sw)
+cycle 3408-3409: Accessing Column 128: memory address 10368-10371 = 100
+cycle 3410: Instruction: add ($v1,$v0,$s2): $v1=10369
+cycle 3411: Instruction: add ($v1,$v0,$s2): $v1=10369
+cycle 3412: Instruction: add ($v1,$v0,$s2): $v1=10369
+cycle 3413: Instruction: add ($v1,$v0,$s2): $v1=10369
+cycle 3414: Instruction: addi ($v1,$v1,1): $v1=10370
+cycle 3415: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 3416: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 3417: Instruction: addi ($v1,$v1,1): $v1=10371
+cycle 3418: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 3419: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 3420: Instruction: addi ($v0,$v0,4): $v0=10372
+cycle 3421: Instruction beq ($k0,$s2,equalToOne,0)
+cycle 3422: Instruction: add ($k0,$k0,$s2): $k0=1
+cycle 3423: Instruction: addi ($at,$at,1): $at=93
+cycle 3424: Instruction: sub ($a0,$a0,$s2): $a0=7
+cycle 3425: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 3426: Instruction: add ($s0,$s0,$s3): $s0=10300
+cycle 3427: Instruction: add ($s1,$s1,$s3): $s1=10350
+cycle 3428: Instruction beq ($a0,$zero,exit,0)
+cycle 3429: Instruction j :Jump to label ID: loop1
+cycle 3430: Instruction: addi ($v1,$v1,1): $v1=10372
+cycle 3431: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 3432: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 3433: Instruction beq ($t6,$t7,equal,1)
+cycle 3434: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 3435: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 3436: DRAM Request Issued (sw)
+cycle 3437-3438: Accessing Column 132: memory address 10372-10375 = 100
+cycle 3439: Instruction: add ($v1,$v0,$s2): $v1=10373
+cycle 3440: Instruction: add ($v1,$v0,$s2): $v1=10373
+cycle 3441: Instruction: add ($v1,$v0,$s2): $v1=10373
+cycle 3442: Instruction: add ($v1,$v0,$s2): $v1=10373
+cycle 3443: Instruction: addi ($v1,$v1,1): $v1=10374
+cycle 3444: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 3445: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 3446: Instruction: addi ($v1,$v1,1): $v1=10375
+cycle 3447: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 3448: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 3449: Instruction: addi ($v0,$v0,4): $v0=10376
+cycle 3450: Instruction beq ($k0,$s2,equalToOne,1)
+cycle 3451: DRAM Request Issued (sw)
+cycle 3452-3453: Accessing Column 136: memory address 10376-10379 = 100
+cycle 3454: Instruction: add ($t2,$t2,$s1): $t2=10350
+cycle 3455: Instruction: add ($t2,$t2,$s1): $t2=20700
+cycle 3456: Instruction: add ($t2,$t2,$s1): $t2=31050
+cycle 3457: Instruction: add ($t2,$t2,$s1): $t2=41400
+cycle 3458: Instruction: sub ($t2,$t2,$s1): $t2=31050
+cycle 3459: Instruction: sub ($t2,$t2,$s1): $t2=20700
+cycle 3460: Instruction: sub ($t2,$t2,$s1): $t2=10350
+cycle 3461: Instruction: sub ($t2,$t2,$s1): $t2=0
+cycle 3462: Instruction: sub ($k0,$k0,$s2): $k0=0
+cycle 3463: DRAM Request Issued (lw)
+cycle 3464-3465: Accessing Column 136: $a3=100
+cycle 3466: Instruction j :Jump to label ID: resume
+cycle 3467: Instruction: addi ($at,$at,1): $at=94
+cycle 3468: Instruction: sub ($a0,$a0,$s2): $a0=6
+cycle 3469: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 3470: Instruction: add ($s0,$s0,$s3): $s0=10400
+cycle 3471: Instruction: add ($s1,$s1,$s3): $s1=10450
+cycle 3472: Instruction beq ($a0,$zero,exit,0)
+cycle 3473: Instruction j :Jump to label ID: loop1
+cycle 3474: Instruction: addi ($v1,$v1,1): $v1=10376
+cycle 3475: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 3476: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 3477: Instruction beq ($t6,$t7,equal,1)
+cycle 3478: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 3479: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 3480: DRAM Request Issued (sw)
+cycle 3481-3482: Accessing Column 136: memory address 10376-10379 = 100
+cycle 3483: Instruction: add ($v1,$v0,$s2): $v1=10377
+cycle 3484: Instruction: add ($v1,$v0,$s2): $v1=10377
+cycle 3485: Instruction: add ($v1,$v0,$s2): $v1=10377
+cycle 3486: Instruction: add ($v1,$v0,$s2): $v1=10377
+cycle 3487: Instruction: addi ($v1,$v1,1): $v1=10378
+cycle 3488: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 3489: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 3490: Instruction: addi ($v1,$v1,1): $v1=10379
+cycle 3491: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 3492: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 3493: Instruction: addi ($v0,$v0,4): $v0=10380
+cycle 3494: Instruction beq ($k0,$s2,equalToOne,0)
+cycle 3495: Instruction: add ($k0,$k0,$s2): $k0=1
+cycle 3496: Instruction: addi ($at,$at,1): $at=95
+cycle 3497: Instruction: sub ($a0,$a0,$s2): $a0=5
+cycle 3498: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 3499: Instruction: add ($s0,$s0,$s3): $s0=10500
+cycle 3500: Instruction: add ($s1,$s1,$s3): $s1=10550
+cycle 3501: Instruction beq ($a0,$zero,exit,0)
+cycle 3502: Instruction j :Jump to label ID: loop1
+cycle 3503: Instruction: addi ($v1,$v1,1): $v1=10380
+cycle 3504: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 3505: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 3506: Instruction beq ($t6,$t7,equal,1)
+cycle 3507: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 3508: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 3509: DRAM Request Issued (sw)
+cycle 3510-3511: Accessing Column 140: memory address 10380-10383 = 100
+cycle 3512: Instruction: add ($v1,$v0,$s2): $v1=10381
+cycle 3513: Instruction: add ($v1,$v0,$s2): $v1=10381
+cycle 3514: Instruction: add ($v1,$v0,$s2): $v1=10381
+cycle 3515: Instruction: add ($v1,$v0,$s2): $v1=10381
+cycle 3516: Instruction: addi ($v1,$v1,1): $v1=10382
+cycle 3517: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 3518: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 3519: Instruction: addi ($v1,$v1,1): $v1=10383
+cycle 3520: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 3521: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 3522: Instruction: addi ($v0,$v0,4): $v0=10384
+cycle 3523: Instruction beq ($k0,$s2,equalToOne,1)
+cycle 3524: DRAM Request Issued (sw)
+cycle 3525-3526: Accessing Column 144: memory address 10384-10387 = 100
+cycle 3527: Instruction: add ($t2,$t2,$s1): $t2=10550
+cycle 3528: Instruction: add ($t2,$t2,$s1): $t2=21100
+cycle 3529: Instruction: add ($t2,$t2,$s1): $t2=31650
+cycle 3530: Instruction: add ($t2,$t2,$s1): $t2=42200
+cycle 3531: Instruction: sub ($t2,$t2,$s1): $t2=31650
+cycle 3532: Instruction: sub ($t2,$t2,$s1): $t2=21100
+cycle 3533: Instruction: sub ($t2,$t2,$s1): $t2=10550
+cycle 3534: Instruction: sub ($t2,$t2,$s1): $t2=0
+cycle 3535: Instruction: sub ($k0,$k0,$s2): $k0=0
+cycle 3536: DRAM Request Issued (lw)
+cycle 3537-3538: Accessing Column 144: $a3=100
+cycle 3539: Instruction j :Jump to label ID: resume
+cycle 3540: Instruction: addi ($at,$at,1): $at=96
+cycle 3541: Instruction: sub ($a0,$a0,$s2): $a0=4
+cycle 3542: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 3543: Instruction: add ($s0,$s0,$s3): $s0=10600
+cycle 3544: Instruction: add ($s1,$s1,$s3): $s1=10650
+cycle 3545: Instruction beq ($a0,$zero,exit,0)
+cycle 3546: Instruction j :Jump to label ID: loop1
+cycle 3547: Instruction: addi ($v1,$v1,1): $v1=10384
+cycle 3548: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 3549: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 3550: Instruction beq ($t6,$t7,equal,1)
+cycle 3551: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 3552: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 3553: DRAM Request Issued (sw)
+cycle 3554-3555: Accessing Column 144: memory address 10384-10387 = 100
+cycle 3556: Instruction: add ($v1,$v0,$s2): $v1=10385
+cycle 3557: Instruction: add ($v1,$v0,$s2): $v1=10385
+cycle 3558: Instruction: add ($v1,$v0,$s2): $v1=10385
+cycle 3559: Instruction: add ($v1,$v0,$s2): $v1=10385
+cycle 3560: Instruction: addi ($v1,$v1,1): $v1=10386
+cycle 3561: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 3562: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 3563: Instruction: addi ($v1,$v1,1): $v1=10387
+cycle 3564: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 3565: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 3566: Instruction: addi ($v0,$v0,4): $v0=10388
+cycle 3567: Instruction beq ($k0,$s2,equalToOne,0)
+cycle 3568: Instruction: add ($k0,$k0,$s2): $k0=1
+cycle 3569: Instruction: addi ($at,$at,1): $at=97
+cycle 3570: Instruction: sub ($a0,$a0,$s2): $a0=3
+cycle 3571: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 3572: Instruction: add ($s0,$s0,$s3): $s0=10700
+cycle 3573: Instruction: add ($s1,$s1,$s3): $s1=10750
+cycle 3574: Instruction beq ($a0,$zero,exit,0)
+cycle 3575: Instruction j :Jump to label ID: loop1
+cycle 3576: Instruction: addi ($v1,$v1,1): $v1=10388
+cycle 3577: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 3578: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 3579: Instruction beq ($t6,$t7,equal,1)
+cycle 3580: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 3581: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 3582: DRAM Request Issued (sw)
+cycle 3583-3584: Accessing Column 148: memory address 10388-10391 = 100
+cycle 3585: Instruction: add ($v1,$v0,$s2): $v1=10389
+cycle 3586: Instruction: add ($v1,$v0,$s2): $v1=10389
+cycle 3587: Instruction: add ($v1,$v0,$s2): $v1=10389
+cycle 3588: Instruction: add ($v1,$v0,$s2): $v1=10389
+cycle 3589: Instruction: addi ($v1,$v1,1): $v1=10390
+cycle 3590: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 3591: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 3592: Instruction: addi ($v1,$v1,1): $v1=10391
+cycle 3593: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 3594: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 3595: Instruction: addi ($v0,$v0,4): $v0=10392
+cycle 3596: Instruction beq ($k0,$s2,equalToOne,1)
+cycle 3597: DRAM Request Issued (sw)
+cycle 3598-3599: Accessing Column 152: memory address 10392-10395 = 100
+cycle 3600: Instruction: add ($t2,$t2,$s1): $t2=10750
+cycle 3601: Instruction: add ($t2,$t2,$s1): $t2=21500
+cycle 3602: Instruction: add ($t2,$t2,$s1): $t2=32250
+cycle 3603: Instruction: add ($t2,$t2,$s1): $t2=43000
+cycle 3604: Instruction: sub ($t2,$t2,$s1): $t2=32250
+cycle 3605: Instruction: sub ($t2,$t2,$s1): $t2=21500
+cycle 3606: Instruction: sub ($t2,$t2,$s1): $t2=10750
+cycle 3607: Instruction: sub ($t2,$t2,$s1): $t2=0
+cycle 3608: Instruction: sub ($k0,$k0,$s2): $k0=0
+cycle 3609: DRAM Request Issued (lw)
+cycle 3610-3611: Accessing Column 152: $a3=100
+cycle 3612: Instruction j :Jump to label ID: resume
+cycle 3613: Instruction: addi ($at,$at,1): $at=98
+cycle 3614: Instruction: sub ($a0,$a0,$s2): $a0=2
+cycle 3615: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 3616: Instruction: add ($s0,$s0,$s3): $s0=10800
+cycle 3617: Instruction: add ($s1,$s1,$s3): $s1=10850
+cycle 3618: Instruction beq ($a0,$zero,exit,0)
+cycle 3619: Instruction j :Jump to label ID: loop1
+cycle 3620: Instruction: addi ($v1,$v1,1): $v1=10392
+cycle 3621: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 3622: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 3623: Instruction beq ($t6,$t7,equal,1)
+cycle 3624: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 3625: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 3626: DRAM Request Issued (sw)
+cycle 3627-3628: Accessing Column 152: memory address 10392-10395 = 100
+cycle 3629: Instruction: add ($v1,$v0,$s2): $v1=10393
+cycle 3630: Instruction: add ($v1,$v0,$s2): $v1=10393
+cycle 3631: Instruction: add ($v1,$v0,$s2): $v1=10393
+cycle 3632: Instruction: add ($v1,$v0,$s2): $v1=10393
+cycle 3633: Instruction: addi ($v1,$v1,1): $v1=10394
+cycle 3634: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 3635: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 3636: Instruction: addi ($v1,$v1,1): $v1=10395
+cycle 3637: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 3638: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 3639: Instruction: addi ($v0,$v0,4): $v0=10396
+cycle 3640: Instruction beq ($k0,$s2,equalToOne,0)
+cycle 3641: Instruction: add ($k0,$k0,$s2): $k0=1
+cycle 3642: Instruction: addi ($at,$at,1): $at=99
+cycle 3643: Instruction: sub ($a0,$a0,$s2): $a0=1
+cycle 3644: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 3645: Instruction: add ($s0,$s0,$s3): $s0=10900
+cycle 3646: Instruction: add ($s1,$s1,$s3): $s1=10950
+cycle 3647: Instruction beq ($a0,$zero,exit,0)
+cycle 3648: Instruction j :Jump to label ID: loop1
+cycle 3649: Instruction: addi ($v1,$v1,1): $v1=10396
+cycle 3650: Instruction: slt ($t6,$t0,$s0): $t6=1
+cycle 3651: Instruction: slt ($t7,$t0,$s1): $t7=1
+cycle 3652: Instruction beq ($t6,$t7,equal,1)
+cycle 3653: Instruction beq ($t6,$zero,greaterThanWindow,0)
+cycle 3654: Instruction beq ($t6,$s2,lessThanWindow,1)
+cycle 3655: DRAM Request Issued (sw)
+cycle 3656-3657: Accessing Column 156: memory address 10396-10399 = 100
+cycle 3658: Instruction: add ($v1,$v0,$s2): $v1=10397
+cycle 3659: Instruction: add ($v1,$v0,$s2): $v1=10397
+cycle 3660: Instruction: add ($v1,$v0,$s2): $v1=10397
+cycle 3661: Instruction: add ($v1,$v0,$s2): $v1=10397
+cycle 3662: Instruction: addi ($v1,$v1,1): $v1=10398
+cycle 3663: Instruction: slt ($t5,$t0,$s1): $t5=1
+cycle 3664: Instruction beq ($t5,$s2,greaterThanWindow,1)
+cycle 3665: Instruction: addi ($v1,$v1,1): $v1=10399
+cycle 3666: Instruction: slt ($t8,$t0,$s1): $t8=1
+cycle 3667: Instruction beq ($t8,$s2,insideWindow,1)
+cycle 3668: Instruction: addi ($v0,$v0,4): $v0=10400
+cycle 3669: Instruction beq ($k0,$s2,equalToOne,1)
+cycle 3670: DRAM Request Issued (sw)
+cycle 3671-3672: Accessing Column 160: memory address 10400-10403 = 100
+cycle 3673: Instruction: add ($t2,$t2,$s1): $t2=10950
+cycle 3674: Instruction: add ($t2,$t2,$s1): $t2=21900
+cycle 3675: Instruction: add ($t2,$t2,$s1): $t2=32850
+cycle 3676: Instruction: add ($t2,$t2,$s1): $t2=43800
+cycle 3677: Instruction: sub ($t2,$t2,$s1): $t2=32850
+cycle 3678: Instruction: sub ($t2,$t2,$s1): $t2=21900
+cycle 3679: Instruction: sub ($t2,$t2,$s1): $t2=10950
+cycle 3680: Instruction: sub ($t2,$t2,$s1): $t2=0
+cycle 3681: Instruction: sub ($k0,$k0,$s2): $k0=0
+cycle 3682: DRAM Request Issued (lw)
+cycle 3683-3684: Accessing Column 160: $a3=100
+cycle 3685: Instruction j :Jump to label ID: resume
+cycle 3686: Instruction: addi ($at,$at,1): $at=100
+cycle 3687: Instruction: sub ($a0,$a0,$s2): $a0=0
+cycle 3688: Instruction: addi ($t0,$zero,100): $t0=100
+cycle 3689: Instruction: add ($s0,$s0,$s3): $s0=11000
+cycle 3690: Instruction: add ($s1,$s1,$s3): $s1=11050
+cycle 3691: Instruction beq ($a0,$zero,exit,1)
+cycle 3692: Instruction: Mul ($ra,$t0,$s0): $ra=1100000
+cycle 3693: Instruction: addi ($v0,$v0,4): $v0=10404
+cycle 3694: DRAM Request Issued (sw)
+cycle 3695-3696: Accessing Column 164: memory address 10404-10407 = 1100000
+cycle 3697-3706: WriteBack Row 10 to DRAM
+
+END OF EXECUTION. META DATA: 
+
+Number of times each instruction was executed: 
+
+[add: 851,sub: 350,mul: 1,slt: 400,addi: 612,bne: 0,beq: 700,lw: 50,sw: 151,j: 149]
+

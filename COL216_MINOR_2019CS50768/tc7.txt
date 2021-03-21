@@ -4,4 +4,8 @@ addi $s7, $s7, 3000
 lw $t2, 0 ($s0)
 addi $s1, $s1, 2000
 addi $s1, $s1, 2000
+addi  $s0, $s0, 1000
+addi $t1, $t1, 2000
+sw $s0, 0 ($t1) 
+lw $t0 , 0 ($s0)
 sw $t0, 0 ($s7)

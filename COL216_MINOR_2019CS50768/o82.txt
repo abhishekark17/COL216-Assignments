@@ -1,13 +1,11 @@
 
-Total Number of Clock Cycles: 19
-
-Total Number of Clock Cycles after last Writeback to DRAM: 29
+Total Number of Clock Cycles: 29
 
 Total Number of Row Buffer Updates: 3
 
 Memory content at the end of the execution:
 
-1000-1003: 2000
+1000-1003: 7d0
 
 Every cycle description: 
 
@@ -24,6 +22,7 @@ cycle 17: DRAM Request Issued (sw)
 cycle 18-19: Accessing Column 1000: memory address 1000-1003 = 2000
 cycle 18: Instruction bne ($t0,$t7,exit,1)
 cycle 19: Instruction: addi ($s1,$s1,1): $s1=1
+cycle 20-29: WriteBack Row 0 to DRAM
 
 END OF EXECUTION. META DATA: 
 

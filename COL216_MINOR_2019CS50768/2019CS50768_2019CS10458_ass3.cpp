@@ -803,7 +803,7 @@ void execute1 (ofstream & out) {
     }
     
     numClockCycles++;
-    if (numClockCycles >= uptoClkCyc) {
+    if (numClockCycles > uptoClkCyc) {
       DRAMrequestIssued = false;
       lwInstRegisterID = -1;
       swInstMemAdd = -1;
@@ -1003,6 +1003,7 @@ void execute1 (ofstream & out) {
           int address;
           //if(typeOfarg == 0) address=offset + registers[currInst.cirs[2]];
           //else address = offset + currInst.cirs[2];
+          lwInstRegisterID = currInst.cirs[0];
           if (typeOfarg == 0) {
             address = offset + registers[currInst.cirs[2]];
             blockRegisterID = currInst.cirs[2];
@@ -1049,7 +1050,15 @@ void execute1 (ofstream & out) {
         break;
       }
 
-      case 9: { //j       // note that j instruction can always be executed regardless of DRAM calls.
+      case 9: { //j       // note that here j instruction needs to wait before the DRAM calls are finished.
+
+        if ( (DRAMrequestIssued == false)) {}
+        else {  // you cannot execute the instruction currently and cannot go forward => wait
+          numClockCycles =  uptoClkCyc + 1;
+          DRAMrequestIssued = false;    // that request has been completed now and we have that register's value in that register after loading from memory.
+          lwInstRegisterID = -1; swInstMemAdd = -1;
+          blockRegisterID = -1; blockMemoryAdd = -1;
+        }
         j (currInst.cirs,currInst.label);
         numOfInst[9]++;
         exectutionOutput.push_back("cycle " + to_string(numClockCycles) + ": Instruction j :" + "Jump to label ID: " + currInst.label);
