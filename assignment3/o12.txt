@@ -1,0 +1,22 @@
+
+Total Number of Cycles: 14
+
+Total Number of Row Buffer Updates: 1
+
+Memory content at the end of the execution:
+
+
+Every cycle description: 
+
+cycle 1: Instruction: addi ($t2,$t2,1000): $t2=1000
+cycle 2: DRAM Request Issued (lw)
+cycle 3-12: Access Row 0 from DRAM
+cycle 13-14: Accessing Column 1000: $t1=0
+cycle 3: Instruction: addi ($t2,$t2,8): $t2=1008
+
+END OF EXECUTION. META DATA: 
+
+Number of times each instruction was executed: 
+
+[add: 0,sub: 0,mul: 0,slt: 0,addi: 2,bne: 0,beq: 0,lw: 1,sw: 0,j: 0]
+

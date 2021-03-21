@@ -1,0 +1,36 @@
+
+Total Number of Cycles: 84
+
+Memory content at the end of the execution:
+
+1000-1003: 1
+1020-1023: 2
+
+Every cycle description: 
+
+cycle 1: $t0=1
+cycle 2: $t1=2
+cycle 3: DRAM Request Issued
+cycle 4-15: memory address 1000-1003 = 1
+cycle 16: $t4=2
+cycle 17: $s0=45
+cycle 18: DRAM Request Issued
+cycle 19-40: $t0=0
+cycle 41: DRAM Request Issued
+cycle 42-43: $t0=0
+cycle 44: DRAM Request Issued
+cycle 45-46: $t0=0
+cycle 47: $s1=90
+cycle 48: $s1=90
+cycle 49: $s0=90
+cycle 50: DRAM Request Issued
+cycle 51-52: $t0=0
+cycle 53: DRAM Request Issued
+cycle 54-55: $t0=0
+cycle 56: DRAM Request Issued
+cycle 57-58: $t0=0
+cycle 59: $s3=135
+cycle 60: $s3=135
+cycle 61: DRAM Request Issued
+cycle 62-83: memory address 1020-1023 = 2
+cycle 84: $s0=135
