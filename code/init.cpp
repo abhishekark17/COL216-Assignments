@@ -49,6 +49,29 @@ vector<string> exectutionOutput;
 bool switchOnBranch = false;
 bool DRAMrequestIssued = false;
 
+// DECLARATIONS FOR MINOR EXAM END
+// for every instruction
+unordered_set<int> cannotUseRegisters;
+unordered_set<int> cannotChangeRegisters;
+unordered_set<int> cannotUseMemory;
+unordered_set<int> cannotChangeMemory;
+// vector[0] = cannotUseRegisters;
+// vector[1] = cannotChangeRegisters;
+// vector[2] = cannotUseMemory;
+// vector[3] = cannotChangeMemory;
+unordered_map<int,int> BlockRegToInstAdd;
+unordered_map<int,int> BlockMemoryToInstAdd;
+unordered_map<int,vector<unordered_set<int>>> InstAddToBlocks;
+
+
+// global
+unordered_set<int> cannotUseRegistersG;
+unordered_set<int> cannotChangeRegistersG;
+unordered_set<int> cannotUseMemoryG;
+unordered_set<int> cannotChangeMemoryG;
+
+
+
 
 // Used to read raw input MIPS file and store individual lines in inputProgram.
 void readFile(string file)

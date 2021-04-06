@@ -5,6 +5,7 @@
 #include <fstream>
 #include <unordered_set>
 
+#include <queue>
 #ifndef init_H
 #define init_H 
 
@@ -71,6 +72,22 @@ extern int pc;   // program counter  //
 
 
 //  IMPORTANT DECLARATIONS FOR MINOR EXAM
+
+extern unordered_set<int> cannotUseRegisters;
+extern unordered_set<int> cannotChangeRegisters;
+extern unordered_set<int> cannotUseMemory;
+extern unordered_set<int> cannotChangeMemory;
+
+extern unordered_map<int,int> BlockRegToInstAdd;
+extern unordered_map<int,int> BlockMemoryToInstAdd;
+extern unordered_map<int,vector<unordered_set<int>>> InstAddToBlocks;
+
+
+// global
+extern unordered_set<int> cannotUseRegistersG;
+extern unordered_set<int> cannotChangeRegistersG;
+extern unordered_set<int> cannotUseMemoryG;
+extern unordered_set<int> cannotChangeMemoryG;
 
 extern bool part2enabled;
 extern const int numDramRows, numDramCols;
