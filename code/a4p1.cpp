@@ -1,7 +1,37 @@
 #include "a4p1.hpp"
-
 //////////////////////////////////////////////////////////////////////////////////////////////////////////// THIS IS FOR PART 1 OF THE ASSIGNMENT ///////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
+int getAddress (instruction& curInst) {
+    int offset = curInst.cirs[1];
+    int typeOfarg = curInst.cirs[3];
+    int address;
+    if (typeOfarg == 0)
+    {
+        address = offset + registers[curInst.cirs[2]];
+        blockRegisterID = curInst.cirs[2];
+    }
+    else
+    {
+        address = offset + curInst.cirs[2];
+        blockMemoryAdd = address;
+    }
+    return address;
+}
+
+void intializerowToInsSet () {
+    for (auto& x : InstAddToBlocks) {
+        int instructionAdd = x.first;
+
+       if (InstAddToFreq[instructionAdd] > 0)  {
+           instruction curInst = iset[instructionAdd-1];
+           int address = getAddress(curInst);
+            int wantedRow = getRowOfRowBuffer(address);
+            cout<< "inst address " << instructionAdd << "wanted row " << wantedRow << endl;
+            rowToInsSet[wantedRow].insert(instructionAdd);
+       }
+    }
+    return;
+}
 
 // * assume that inside bracket always register. 
 /* *
@@ -15,6 +45,8 @@
 * r2 cannot change, but can use r2
 * mem address (offset + r2) cannot change, cannot use 
 */
+
+
 void exeLW (ofstream &out,instruction currInst) {
     exectutionOutput.push_back("cycle " + to_string(numClockCycles) + ": " + "DRAM Request Issued (lw)");
     DRAMrequestIssued = true;
@@ -135,42 +167,65 @@ void exeSW (ofstream &out,instruction currInst) {
 }
 
 void eraseAllBlocks (int insAddr) {
-    vector<unordered_set<int>> blockedByInsAddr = InstAddToBlocks[insAddr];
-    // vector[0] = cannotUseRegisters;
-    // vector[1] = cannotChangeRegisters;
-    // vector[2] = cannotUseMemory;
-    // vector[3] = cannotChangeMemory;
-    for (int reg : blockedByInsAddr[0]) {
-        cannotUseRegistersG.erase(reg);
-        ////uBlockRegToInstAdd.erase(reg);
+    cout<< InstAddToFreq[insAddr] <<endl;
+    if (InstAddToFreq[insAddr] == 1) {
+        vector<unordered_set<int>> blockedByInsAddr = InstAddToBlocks[insAddr];
+        // vector[0] = cannotUseRegisters;
+        // vector[1] = cannotChangeRegisters;
+        // vector[2] = cannotUseMemory;
+        // vector[3] = cannotChangeMemory;
+        cout << "H1" << endl;
+        cout << "inst addressssss" << insAddr << endl;
+        //cout << blockedByInsAddr << endl;
+        
+        for (int reg : blockedByInsAddr[0]) {
+            cout << "reg " << rrmap[reg] << endl;
+            cout << cannotUseRegistersG.size() << "this is size\n";
+            cannotUseRegistersG.erase(reg);
+            cout << cannotUseRegistersG.size() << "this is size\n";
+            ////uBlockRegToInstAdd.erase(reg);
+        }
+        cout << "H2" << endl;
+        for (int reg : blockedByInsAddr[1]) {
+            cannotChangeRegistersG.erase(reg);
+            ////cBlockRegToInstAdd.erase(reg);
+        }
+        cout << "H3" << endl;
+        for (int mem : blockedByInsAddr[2]) {
+            cannotUseMemoryG.erase(mem);
+            ////uBlockMemoryToInstAdd.erase(mem);
+        }
+        cout << "H4" << endl;
+        for (int mem : blockedByInsAddr[3]) {
+            cannotChangeMemoryG.erase(mem);
+            ////cBlockMemoryToInstAdd.erase(mem);
+        }
+        cout << "H5" << endl;
+        //InstAddToBlocks.erase(insAddr);
+        cout << "H6" << endl;
     }
-    for (int reg : blockedByInsAddr[1]) {
-        cannotChangeRegistersG.erase(reg);
-        ////cBlockRegToInstAdd.erase(reg);
-    }
-    for (int mem : blockedByInsAddr[2]) {
-        cannotUseMemoryG.erase(mem);
-        ////uBlockMemoryToInstAdd.erase(mem);
-    }
-    for (int mem : blockedByInsAddr[3]) {
-        cannotChangeMemoryG.erase(mem);
-        ////cBlockMemoryToInstAdd.erase(mem);
-    }
-    InstAddToBlocks.erase(insAddr);
+    InstAddToFreq[insAddr]--;
     return;
 }
 
 void exeAllBlkingInstAdd (ofstream &out,instruction currInst , int upto) {
     for (int regPos = 0; regPos <= upto; regPos++) {
-        cout << "regPos: " << currInst.cirs[regPos] << endl;
+        cout << "register: " << currInst.cirs[regPos] << endl;
         if (cannotUseRegistersG.find(currInst.cirs[regPos]) != cannotUseRegistersG.end()) {
-            cout << "caught regPos: " << currInst.cirs[regPos] << endl;
+            cout << "caught register: " << currInst.cirs[regPos] << endl;
+            cout << "opid: " << currInst.opID << endl;
+            //cout << exectutionOutput << endl;
             queue<int> ublkRegQueue = uBlockRegToInstAddQueue[currInst.cirs[regPos]];
+            cout << "ublkRegQueue size: " << ublkRegQueue.size() << endl;
             while (!ublkRegQueue.empty()) {
                 int insAddr = ublkRegQueue.front();
-                if (iset[insAddr].opID == 7) exeLW (out,iset[insAddr]);
-                else if (iset[insAddr].opID == 8) exeSW (out,iset[insAddr]);
+                cout << "insAddr inside while loop: " << insAddr << endl;
+                cout<< "This is opID" << iset[insAddr-1].opID <<endl;
+                if (iset[insAddr-1].opID == 7) exeLW (out,iset[insAddr-1]);
+                else if (iset[insAddr-1].opID == 8) exeSW (out,iset[insAddr-1]);
+                cout << "hello\n";
                 eraseAllBlocks(insAddr);
+                cout << "hello2\n";
 
                 if (DRAMrequestIssued) {
                     numClockCycles = uptoClkCyc + 1;
@@ -185,8 +240,8 @@ void exeAllBlkingInstAdd (ofstream &out,instruction currInst , int upto) {
         queue<int> cblkRegQueue = cBlockRegToInstAddQueue[currInst.cirs[0]];
         while (!cblkRegQueue.empty()) {
             int insAddr = cblkRegQueue.front();
-            if (iset[insAddr].opID == 7) exeLW (out,iset[insAddr]);
-            else if (iset[insAddr].opID == 8) exeSW (out,iset[insAddr]);
+            if (iset[insAddr-1].opID == 7) exeLW (out,iset[insAddr-1]);
+            else if (iset[insAddr-1].opID == 8) exeSW (out,iset[insAddr-1]);
             eraseAllBlocks(insAddr);
 
             if (DRAMrequestIssued) {
@@ -223,8 +278,8 @@ void exeAllBlkingInstBne (ofstream &out,instruction currInst, int upto) {
             queue<int> ublkRegQueue = uBlockRegToInstAddQueue[currInst.cirs[regPos]];
             while (!ublkRegQueue.empty()) {
                 int insAddr = ublkRegQueue.front();
-                if (iset[insAddr].opID == 7) exeLW (out,iset[insAddr]);
-                else if (iset[insAddr].opID == 8) exeSW (out,iset[insAddr]);
+                if (iset[insAddr-1].opID == 7) exeLW (out,iset[insAddr-1]);
+                else if (iset[insAddr-1].opID == 8) exeSW (out,iset[insAddr-1]);
                 eraseAllBlocks(insAddr);
 
                 if (DRAMrequestIssued) {
@@ -260,10 +315,10 @@ void execute1a4(ofstream &out)
         if (numClockCycles > uptoClkCyc)
         {
             DRAMrequestIssued = false;
-            lwInstRegisterID = -1;
-            swInstMemAdd = -1;
-            blockRegisterID = -1;
-            blockMemoryAdd = -1;
+            //lwInstRegisterID = -1;
+            //swInstMemAdd = -1;
+            //blockRegisterID = -1;
+            //blockMemoryAdd = -1;
         }
         instruction currInst = iset[pc - 1];
         pc++;
@@ -419,7 +474,7 @@ void execute1a4(ofstream &out)
                     cannotUseRegistersG.find (currInst.cirs[2]) == cannotUseRegistersG.end() && 
                     cannotUseMemoryG.find(address) == cannotUseMemoryG.end()))
             {   // * Here we should execute immediately.
-
+    
                 exeLW(out,currInst);
             }
             else // * even if row buffer is same, if some registers are blocked, then we will need to execute 
@@ -433,12 +488,18 @@ void execute1a4(ofstream &out)
                 cannotChangeRegisters.clear();
 
                 cannotChangeMemory.insert(address);
+                cannotUseRegisters.insert(currInst.cirs[2]);
+                cannotUseMemory.insert(address);
                 cannotChangeRegisters.insert(currInst.cirs[2]);
+                
                 cannotChangeRegisters.insert(currInst.cirs[0]);
                 cannotUseRegisters.insert(currInst.cirs[0]);
 
                 cannotChangeMemoryG.insert(address);
+                cannotUseMemoryG.insert(address);
                 cannotChangeRegistersG.insert(currInst.cirs[2]);
+                cannotUseRegistersG.insert(currInst.cirs[2]);
+                
                 cannotChangeRegistersG.insert(currInst.cirs[0]);
                 cannotUseRegistersG.insert(currInst.cirs[0]);
                 vector<unordered_set<int>> temp (4);
@@ -448,11 +509,17 @@ void execute1a4(ofstream &out)
                 temp[2] = cannotUseMemory;
                 temp[3] = cannotChangeMemory;
                 //cout << "Hello2\n";
-                InstAddToBlocks[pc] = temp;
-                uBlockRegToInstAddQueue[currInst.cirs[0]].push(pc);
-                cBlockRegToInstAddQueue[currInst.cirs[0]].push(pc);
-                cBlockRegToInstAddQueue[currInst.cirs[2]].push(pc);
-                cBlockMemoryToInstAddQueue[address].push(pc);
+                InstAddToBlocks[pc-1] = temp;
+                InstAddToFreq[pc-1]++;
+                cout << "first register " << currInst.cirs[0] <<" instruction frequency lw" <<  InstAddToFreq[pc-1] << " pc ="<< pc<<  endl;
+                uBlockRegToInstAddQueue[currInst.cirs[0]].push(pc-1);
+                uBlockRegToInstAddQueue[currInst.cirs[2]].push(pc-1);
+
+
+                cBlockRegToInstAddQueue[currInst.cirs[0]].push(pc-1);
+                cBlockRegToInstAddQueue[currInst.cirs[2]].push(pc-1);
+                cBlockMemoryToInstAddQueue[address].push(pc-1);
+                uBlockRegToInstAddQueue[address].push(pc-1);
                 //cout << "hello3\n";
             }    
             
@@ -495,14 +562,18 @@ void execute1a4(ofstream &out)
             else if (currentRowInRowBuffer == -1 ||(currentRowInRowBuffer == wantedRow && 
                     cannotUseRegistersG.find (currInst.cirs[0]) == cannotUseRegistersG.end() && 
                     cannotUseRegistersG.find (currInst.cirs[2]) == cannotUseRegistersG.end() &&
-                    cannotChangeMemoryG.find(address) == cannotChangeMemoryG.end()))
+                    cannotChangeMemoryG.find(address) == cannotChangeMemoryG.end()) && 
+                    cannotUseMemoryG.find(address) == cannotUseMemoryG.end() )
+                    
             { // * can execute similar to lw case
                 exeSW(out,currInst);
+                cout << "gone hereerer" << endl;
             }
-                
+            
             else
             {   // * postpone similar to lw case
                 numClockCycles--;
+                cout << "hee" << endl;
                 cannotChangeMemory.clear();
                 cannotChangeRegisters.clear();
                 cannotUseMemory.clear();
@@ -512,24 +583,32 @@ void execute1a4(ofstream &out)
                 cannotUseMemory.insert(address);
                 cannotChangeRegisters.insert(currInst.cirs[2]);
                 cannotChangeRegisters.insert(currInst.cirs[0]);
+                cannotUseRegisters.insert(currInst.cirs[2]);
+                cannotUseRegisters.insert(currInst.cirs[0]);
 
                 cannotChangeMemoryG.insert(address);
                 cannotUseMemoryG.insert(address);
                 cannotChangeRegistersG.insert(currInst.cirs[2]);
                 cannotChangeRegistersG.insert(currInst.cirs[0]);
-                
+                cannotUseRegistersG.insert(currInst.cirs[2]);
+                cannotUseRegistersG.insert(currInst.cirs[0]);
                 vector<unordered_set<int>> temp (4);
 
                 temp[0] = cannotUseRegisters;
                 temp[1] = cannotChangeRegisters;
                 temp[2] = cannotUseMemory;
                 temp[3] = cannotChangeMemory;
+                cout << temp[0].size() << " "<< temp[1].size() << " "<< temp[2].size() << " "<< temp[3].size() << "\n";
+                InstAddToBlocks[pc-1] = temp;
+                InstAddToFreq[pc-1]++;
+                cout << "first register " << currInst.cirs[0] <<" instruction frequency sw" <<  InstAddToFreq[pc-1] << " pc ="<< pc<<  endl;
+                cBlockRegToInstAddQueue[currInst.cirs[0]].push(pc-1);
+                cBlockRegToInstAddQueue[currInst.cirs[2]].push(pc-1);
+                cBlockMemoryToInstAddQueue[address].push(pc-1);
+                uBlockMemoryToInstAddQueue[address].push(pc-1);
 
-                InstAddToBlocks[pc] = temp;
-                cBlockRegToInstAddQueue[currInst.cirs[0]].push(pc);
-                cBlockRegToInstAddQueue[currInst.cirs[2]].push(pc);
-                cBlockMemoryToInstAddQueue[address].push(pc);
-                uBlockMemoryToInstAddQueue[address].push(pc);
+                uBlockRegToInstAddQueue[currInst.cirs[0]].push(pc-1);
+                uBlockRegToInstAddQueue[currInst.cirs[2]].push(pc-1);
             }
             break;
         }
@@ -552,39 +631,221 @@ void execute1a4(ofstream &out)
         };
     }
     //cout << "Hello4\n";
-/*
-    for (auto itr = InstAddToBlocks.begin(); itr != InstAddToBlocks.end(); itr++) {
-        int instructionAdd = itr->first;
-        if (iset[instructionAdd].opID == 7) exeLW (out,iset[instructionAdd]);
-        else if (iset[instructionAdd].opID == 8) exeSW (out,iset[instructionAdd]);
-        eraseAllBlocks(instructionAdd);
-        if (DRAMrequestIssued) {
-            numClockCycles = uptoClkCyc + 1;
-            DRAMrequestIssued = false;
+
+   for (auto & x : InstAddToBlocks) {
+       int instructionAdd = x.first;
+
+       if (InstAddToFreq[instructionAdd] > 0)  {
+           instruction curInst = iset[instructionAdd-1];
+       int offset = curInst.cirs[1];
+       int typeOfarg = curInst.cirs[3];
+       int address;
+        if (typeOfarg == 0)
+        {
+            address = offset + registers[curInst.cirs[2]];
+            blockRegisterID = curInst.cirs[2];
+        }
+        else
+        {
+            address = offset + curInst.cirs[2];
+            blockMemoryAdd = address;
+        }
+        int wantedRow = getRowOfRowBuffer(address);
+        cout << "currentRowInRowBuffer " << currentRowInRowBuffer << " " << "wantedRow " << wantedRow << endl;
+        if (currentRowInRowBuffer == wantedRow) {
+            bool done = true;
+            while (done && InstAddToFreq[instructionAdd] > 0) {
+                cout << "Haha" << " " << instructionAdd << endl;
+                 
+                if (iset[instructionAdd-1].opID == 7){
+                    auto itr = cannotUseRegistersG.find(curInst.cirs[0]);
+                    auto itr2 = cannotUseRegistersG.find(curInst.cirs[2]);
+                    auto itr3 = cannotChangeRegistersG.find(curInst.cirs[0]);
+                    auto itr4 = cannotUseMemoryG.find(address);
+                    if(itr != cannotUseRegistersG.end()) cannotUseRegistersG.erase(itr); 
+                    if(itr2 != cannotUseRegistersG.end()) cannotUseRegistersG.erase(itr2); 
+                    if(itr3 != cannotChangeRegistersG.end()) cannotChangeRegistersG.erase(itr3);
+                    if(itr4 != cannotUseMemoryG.end()) cannotUseMemoryG.erase(itr4);
+
+                    if(cannotChangeRegistersG.find (curInst.cirs[0]) == cannotChangeRegistersG.end() &&
+                    cannotUseRegistersG.find (curInst.cirs[0]) == cannotUseRegistersG.end() && 
+                    cannotUseRegistersG.find (curInst.cirs[2]) == cannotUseRegistersG.end() && 
+                    cannotUseMemoryG.find(address) == cannotUseMemoryG.end()) {
+                        exeLW (out,iset[instructionAdd-1]);
+                        InstAddToFreq[instructionAdd]--;
+                        cout<<"abfasdfadsf "<< instructionAdd <<endl;
+                        //eraseAllBlocks(instructionAdd);
+
+                } 
+                    
+                }
+                
+                else if (iset[instructionAdd-1].opID == 8) {
+                    auto itr = cannotUseRegistersG.find(curInst.cirs[0]);
+                    auto itr2 = cannotUseRegistersG.find(curInst.cirs[2]);
+                    auto itr3 = cannotChangeMemoryG.find(address);
+                    auto itr4 = cannotUseMemoryG.find(address);
+                    if(itr != cannotUseRegistersG.end()) cannotUseRegistersG.erase(itr); 
+                    if(itr2 != cannotUseRegistersG.end()) cannotUseRegistersG.erase(itr2); 
+                    if(itr3 != cannotChangeMemoryG.end()) cannotChangeMemoryG.erase(itr3);
+                    if(itr4 != cannotUseMemoryG.end()) cannotUseMemoryG.erase(itr4);
+
+                    if (cannotUseRegistersG.find (curInst.cirs[0]) == cannotUseRegistersG.end() && 
+                    cannotUseRegistersG.find (curInst.cirs[2]) == cannotUseRegistersG.end() &&
+                    cannotChangeMemoryG.find(address) == cannotChangeMemoryG.end() && 
+                    cannotUseMemoryG.find(address) == cannotUseMemoryG.end())
+                    {
+                        exeSW (out,iset[instructionAdd-1]);
+                        cout<<"abfasdfadf "<< instructionAdd <<endl;
+                        InstAddToFreq[instructionAdd]--;
+                        //eraseAllBlocks(instructionAdd);
+                    }
+                } 
+                     
+                else done = false;
+                cout << "Yes2\n";
+                if (InstAddToFreq[instructionAdd] == 0) {
+                    vector<unordered_set<int>> blockedByInsAddr = InstAddToBlocks[instructionAdd];
+
+                    for (int reg : blockedByInsAddr[0]) cannotUseRegistersG.erase(reg);
+                    for (int reg : blockedByInsAddr[1]) cannotChangeRegistersG.erase(reg);
+                    for (int mem : blockedByInsAddr[2]) cannotUseMemoryG.erase(mem);
+                    for (int mem : blockedByInsAddr[3]) cannotChangeMemoryG.erase(mem);
+                }
+                //InstAddToFreq[instructionAdd]--;
+                
+                cout << "Yes3\n";
+                if (DRAMrequestIssued) {
+                    numClockCycles = uptoClkCyc + 1;
+                    DRAMrequestIssued = false;
+                }
+            }
+        }
+       }
+       
+   }
+    //int counterr = 0;
+    // * Begin with instructions with current row buffer ... 
+
+    intializerowToInsSet();
+
+    for (auto & x :rowToInsSet) {
+        int rownum = x.first;
+        for (auto & instructionAdd : rowToInsSet[rownum]) {
+            instruction curInst = iset[instructionAdd-1];
+            int address = getAddress(curInst);
+            cout<< "inst address " << instructionAdd << " row num " <<rownum << endl;
+            bool done = true;
+            while (done && InstAddToFreq[instructionAdd] > 0) {
+                for (int x : cannotUseRegistersG) cout << rrmap[x] << " inside cannotUseRegistersG\n";
+                for (int x : cannotChangeRegistersG) cout << rrmap[x] << " inside cannotChangeRegistersG\n";
+                for (int x : cannotUseMemoryG) cout << x << " inside cannotUseMemoryG\n";
+                for (int x : cannotChangeMemoryG) cout << x << " inside cannotChangeMemoryG\n";
+                cout << "Haha" << " " << instructionAdd << endl;
+                
+                if (iset[instructionAdd-1].opID == 7){
+                    auto itr = cannotUseRegistersG.find(curInst.cirs[0]);
+                    auto itr2 = cannotUseRegistersG.find(curInst.cirs[2]);
+                    auto itr3 = cannotChangeRegistersG.find(curInst.cirs[0]);
+                    auto itr4 = cannotUseMemoryG.find(address);
+                    if(itr != cannotUseRegistersG.end()) cannotUseRegistersG.erase(itr); 
+                    if(itr2 != cannotUseRegistersG.end()) cannotUseRegistersG.erase(itr2); 
+                    if(itr3 != cannotChangeRegistersG.end()) cannotChangeRegistersG.erase(itr3);
+                    if(itr4 != cannotUseMemoryG.end()) cannotUseMemoryG.erase(itr4);
+
+                    if(cannotChangeRegistersG.find (curInst.cirs[0]) == cannotChangeRegistersG.end() &&
+                    cannotUseRegistersG.find (curInst.cirs[0]) == cannotUseRegistersG.end() && 
+                    cannotUseRegistersG.find (curInst.cirs[2]) == cannotUseRegistersG.end() && 
+                    cannotUseMemoryG.find(address) == cannotUseMemoryG.end()) {
+                        exeLW (out,iset[instructionAdd-1]);
+                        InstAddToFreq[instructionAdd]--;
+                        cout<<"abfasdfadsf "<< instructionAdd <<endl;
+                        //eraseAllBlocks(instructionAdd);
+
+                } 
+                    
+                }
+                
+                else if (iset[instructionAdd-1].opID == 8) {
+                    auto itr = cannotUseRegistersG.find(curInst.cirs[0]);
+                    auto itr2 = cannotUseRegistersG.find(curInst.cirs[2]);
+                    auto itr3 = cannotChangeMemoryG.find(address);
+                    auto itr4 = cannotUseMemoryG.find(address);
+                    if(itr != cannotUseRegistersG.end()) cannotUseRegistersG.erase(itr); 
+                    if(itr2 != cannotUseRegistersG.end()) cannotUseRegistersG.erase(itr2); 
+                    if(itr3 != cannotChangeMemoryG.end()) cannotChangeMemoryG.erase(itr3);
+                    if(itr4 != cannotUseMemoryG.end()) cannotUseMemoryG.erase(itr4);
+
+                    if (cannotUseRegistersG.find (curInst.cirs[0]) == cannotUseRegistersG.end() && 
+                    cannotUseRegistersG.find (curInst.cirs[2]) == cannotUseRegistersG.end() &&
+                    cannotChangeMemoryG.find(address) == cannotChangeMemoryG.end() && 
+                    cannotUseMemoryG.find(address) == cannotUseMemoryG.end())
+                    {
+                        exeSW (out,iset[instructionAdd-1]);
+                        cout<<"abfasdfadf "<< instructionAdd <<endl;
+                        InstAddToFreq[instructionAdd]--;
+                        //eraseAllBlocks(instructionAdd);
+                    }
+                }
+
+                else done = false;
+                cout << "Yes2\n";
+                if (InstAddToFreq[instructionAdd] == 0) {
+                    vector<unordered_set<int>> blockedByInsAddr = InstAddToBlocks[instructionAdd];
+
+                    for (int reg : blockedByInsAddr[0]) cannotUseRegistersG.erase(reg);
+                    for (int reg : blockedByInsAddr[1]) cannotChangeRegistersG.erase(reg);
+                    for (int mem : blockedByInsAddr[2]) cannotUseMemoryG.erase(mem);
+                    for (int mem : blockedByInsAddr[3]) cannotChangeMemoryG.erase(mem);
+                }
+                //InstAddToFreq[instructionAdd]--;
+                
+                cout << "Yes3\n";
+                if (DRAMrequestIssued) {
+                    numClockCycles = uptoClkCyc + 1;
+                    DRAMrequestIssued = false;
+                }
+            }
         }
     }
-    */
-    //int counterr = 0;
+    
+    
+    
+    
+    
+
+
+
+    // * FINAL 
     for (auto& x : InstAddToBlocks) {
         //counterr++;
         //cout << "Haha" << counterr << endl;
+        
         int instructionAdd = x.first;
-        //cout << "Haha" << counterr << " " << instructionAdd << endl;
-        if (iset[instructionAdd].opID == 7) exeLW (out,iset[instructionAdd]);
-        //cout << "Yes1\n";
-        if (iset[instructionAdd].opID == 8) exeSW (out,iset[instructionAdd]);
-        //cout << "Yes2\n";
+        
+        while (InstAddToFreq[instructionAdd] > 0) {
+            //cout << "Haha" << counterr << " " << instructionAdd << endl;
+            if (iset[instructionAdd-1].opID == 7) exeLW (out,iset[instructionAdd-1]);
+            //cout << "Yes1\n";
+            if (iset[instructionAdd-1].opID == 8) exeSW (out,iset[instructionAdd-1]);
+            //cout << "Yes2\n";
+            if (InstAddToFreq[instructionAdd] == 1) {
+                vector<unordered_set<int>> blockedByInsAddr = InstAddToBlocks[instructionAdd];
 
-        vector<unordered_set<int>> blockedByInsAddr = InstAddToBlocks[instructionAdd];
-        for (int reg : blockedByInsAddr[0]) cannotUseRegistersG.erase(reg);
-        for (int reg : blockedByInsAddr[1]) cannotChangeRegistersG.erase(reg);
-        for (int mem : blockedByInsAddr[2]) cannotUseMemoryG.erase(mem);
-        for (int mem : blockedByInsAddr[3]) cannotChangeMemoryG.erase(mem);
-        //cout << "Yes3\n";
-        if (DRAMrequestIssued) {
-            numClockCycles = uptoClkCyc + 1;
-            DRAMrequestIssued = false;
+                for (int reg : blockedByInsAddr[0]) cannotUseRegistersG.erase(reg);
+                for (int reg : blockedByInsAddr[1]) cannotChangeRegistersG.erase(reg);
+                for (int mem : blockedByInsAddr[2]) cannotUseMemoryG.erase(mem);
+                for (int mem : blockedByInsAddr[3]) cannotChangeMemoryG.erase(mem);
+            }
+            InstAddToFreq[instructionAdd]--;
+            
+            //cout << "Yes3\n";
+            if (DRAMrequestIssued) {
+                numClockCycles = uptoClkCyc + 1;
+                DRAMrequestIssued = false;
+            }
         }
+        
         //cout << "Yes4\n";
     }
     //cout << "hello5\n";

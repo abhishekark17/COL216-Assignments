@@ -5,7 +5,9 @@
 #include <fstream>
 #include <unordered_set>
 #include <map>
+#include <set> 
 #include <queue>
+#include <iterator>
 #ifndef init_H
 #define init_H 
 
@@ -83,13 +85,16 @@ extern unordered_map<int,queue<int>> uBlockMemoryToInstAddQueue;
 extern unordered_map<int,queue<int>> cBlockRegToInstAddQueue;
 extern unordered_map<int,queue<int>> cBlockMemoryToInstAddQueue;
 extern map<int,vector<unordered_set<int>>> InstAddToBlocks;
-
+extern unordered_map<int,int> InstAddToFreq;
 
 // global
-extern unordered_set<int> cannotUseRegistersG;
-extern unordered_set<int> cannotChangeRegistersG;
-extern unordered_set<int> cannotUseMemoryG;
-extern unordered_set<int> cannotChangeMemoryG;
+extern multiset<int> cannotUseRegistersG;
+extern multiset<int> cannotChangeRegistersG;
+extern multiset<int> cannotUseMemoryG;
+extern multiset<int> cannotChangeMemoryG;
+
+
+extern unordered_map<int,set<int>> rowToInsSet;
 
 extern bool part2enabled;
 extern const int numDramRows, numDramCols;

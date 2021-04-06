@@ -67,12 +67,13 @@ unordered_map<int,queue<int>> cBlockMemoryToInstAddQueue;
 
 map<int,vector<unordered_set<int>>> InstAddToBlocks;
 
-
+unordered_map<int,int> InstAddToFreq;
+unordered_map<int,set<int>> rowToInsSet;
 // global
-unordered_set<int> cannotUseRegistersG;
-unordered_set<int> cannotChangeRegistersG;
-unordered_set<int> cannotUseMemoryG;
-unordered_set<int> cannotChangeMemoryG;
+multiset<int> cannotUseRegistersG;
+multiset<int> cannotChangeRegistersG;
+multiset<int> cannotUseMemoryG;
+multiset<int> cannotChangeMemoryG;
 
 
 
