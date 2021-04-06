@@ -51,8 +51,9 @@ int main(int argc, char **argv)
 
 	if (part2enabled)
 		execute2(outstream);
-	else
-		execute1(outstream);
+	else 
+		execute1a4 (outstream);
+		//execute1(outstream);
 
 	if (currentRowInRowBuffer != -1)
 	{

@@ -4,20 +4,20 @@
 #include <unordered_map>
 #include <fstream>
 #include <unordered_set>
-
+#include <map>
 #include <queue>
 #ifndef init_H
 #define init_H 
 
 using namespace std;
 
-/*
+/* *
 CIRS DEFINITION FOR VARIOUS INSTRUCTIONS:
 add,sub,mul, slt := [register1 ,register2 ,register3 , NotUsed]
 addi := [register1,register2,immediateValue,NotUsed]
 lw, sw := [register1, offset , last register , 0] // 0 if register is there as last arguement inside parenthesis
        := [register1, offset ,address , 1]  // 1 if address given as argument inside braces
-bne, beq := [register1, register2, NotUsed, NotUsed]
+*bne, beq := [register1, register2, NotUsed, NotUsed]
 j  := [NotUsed, NotUsed, NotUsed, NotUsed]
 */
 
@@ -78,9 +78,11 @@ extern unordered_set<int> cannotChangeRegisters;
 extern unordered_set<int> cannotUseMemory;
 extern unordered_set<int> cannotChangeMemory;
 
-extern unordered_map<int,int> BlockRegToInstAdd;
-extern unordered_map<int,int> BlockMemoryToInstAdd;
-extern unordered_map<int,vector<unordered_set<int>>> InstAddToBlocks;
+extern unordered_map<int,queue<int>> uBlockRegToInstAddQueue;
+extern unordered_map<int,queue<int>> uBlockMemoryToInstAddQueue;
+extern unordered_map<int,queue<int>> cBlockRegToInstAddQueue;
+extern unordered_map<int,queue<int>> cBlockMemoryToInstAddQueue;
+extern map<int,vector<unordered_set<int>>> InstAddToBlocks;
 
 
 // global
