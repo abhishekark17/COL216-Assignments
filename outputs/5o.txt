@@ -1,5 +1,5 @@
 
-Total Number of Clock Cycles: 104
+Total Number of Clock Cycles: 74
 
 Total Number of Row Buffer Updates: 3
 
@@ -39,36 +39,11 @@ cycle 58: DRAM Request Issued (lw)
 cycle 59-60: Accessing Column 904: $v0=0
 cycle 61: DRAM Request Issued (lw)
 cycle 62-63: Accessing Column 904: $v0=0
-cycle 64: DRAM Request Issued (lw)
-cycle 65-74: WriteBack Row 2 to DRAM
-cycle 75-84: Access Row 4 from DRAM
-cycle 85-66: Accessing Column 904: $v0=0
-cycle 67: DRAM Request Issued (lw)
-cycle 68-69: Accessing Column 904: $v0=0
-cycle 70: DRAM Request Issued (lw)
-cycle 71-72: Accessing Column 904: $v0=0
-cycle 73: DRAM Request Issued (lw)
-cycle 74-75: Accessing Column 904: $v0=0
-cycle 76: DRAM Request Issued (lw)
-cycle 77-78: Accessing Column 904: $v0=0
-cycle 79: DRAM Request Issued (lw)
-cycle 80-89: WriteBack Row 2 to DRAM
-cycle 90-99: Access Row 4 from DRAM
-cycle 100-81: Accessing Column 904: $v0=0
-cycle 82: DRAM Request Issued (lw)
-cycle 83-84: Accessing Column 904: $v0=0
-cycle 85: DRAM Request Issued (lw)
-cycle 86-87: Accessing Column 904: $v0=0
-cycle 88: DRAM Request Issued (lw)
-cycle 89-90: Accessing Column 904: $v0=0
-cycle 91: DRAM Request Issued (lw)
-cycle 92-93: Accessing Column 904: $v0=0
-cycle 94: Instruction: add ($t0,$v0,$at): $t0=0
-cycle 95-104: WriteBack Row 4 to DRAM
+cycle 64: Instruction: add ($t0,$v0,$at): $t0=0
+cycle 65-74: WriteBack Row 4 to DRAM
 
 END OF EXECUTION. META DATA: 
 
 Number of times each instruction was executed: 
 
-[add: 1,sub: 0,mul: 0,slt: 0,addi: 6,bne: 0,beq: 5,lw: 15,sw: 1,j: 4]
-
+[add: 1,sub: 0,mul: 0,slt: 0,addi: 6,bne: 0,beq: 5,lw: 5,sw: 1,j: 4]

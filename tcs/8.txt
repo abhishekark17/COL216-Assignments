@@ -1,0 +1,12 @@
+
+addi $t0, $t0, 1000
+addi $t1, $t1, 2500
+addi $t2, $t2, 5000
+addi $t3, $t3, 7500
+addi $t4, $t4, 10000
+
+sw $t3, 1000 ($zero)
+sw $t1, 2500 ($zero)
+sw $t2, 1004 ($zero)
+sw $t4, 2504 ($zero)
+sw $t4, 2496 ($zero)

@@ -80,10 +80,10 @@ extern unordered_set<int> cannotChangeRegisters;
 extern unordered_set<int> cannotUseMemory;
 extern unordered_set<int> cannotChangeMemory;
 
-extern unordered_map<int,queue<int>> uBlockRegToInstAddQueue;
-extern unordered_map<int,queue<int>> uBlockMemoryToInstAddQueue;
-extern unordered_map<int,queue<int>> cBlockRegToInstAddQueue;
-extern unordered_map<int,queue<int>> cBlockMemoryToInstAddQueue;
+extern unordered_map<int,deque<int>> uBlockRegToInstAddQueue;
+extern unordered_map<int,deque<int>> uBlockMemoryToInstAddQueue;
+extern unordered_map<int,deque<int>> cBlockRegToInstAddQueue;
+extern unordered_map<int,deque<int>> cBlockMemoryToInstAddQueue;
 extern map<int,vector<unordered_set<int>>> InstAddToBlocks;
 extern unordered_map<int,int> InstAddToFreq;
 

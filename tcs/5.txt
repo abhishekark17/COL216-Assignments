@@ -1,13 +1,13 @@
-addi $1, $1, 5
-sw $1, 2500 ($0)
+addi $t1, $t1, 5
+sw $t1, 2500 ($0)
 main: 
-    addi $1, $1, -1
-    lw $2, 5000 ($0)
-    beq $1, $0, label
+    addi $t1, $1t, -1
+    lw $t2, 5000 ($zero)
+    beq $t1, $zero, label
     j main
 
 label:
-    add $t0, $2, $1
+    add $t0, $t2, $t1
 
 
 

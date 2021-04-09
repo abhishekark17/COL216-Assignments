@@ -60,10 +60,10 @@ unordered_set<int> cannotChangeMemory;
 // vector[2] = cannotUseMemory;
 // vector[3] = cannotChangeMemory;
 
-unordered_map<int,queue<int>> uBlockRegToInstAddQueue;
-unordered_map<int,queue<int>> uBlockMemoryToInstAddQueue;
-unordered_map<int,queue<int>> cBlockRegToInstAddQueue;
-unordered_map<int,queue<int>> cBlockMemoryToInstAddQueue;
+unordered_map<int,deque<int>> uBlockRegToInstAddQueue;
+unordered_map<int,deque<int>> uBlockMemoryToInstAddQueue;
+unordered_map<int,deque<int>> cBlockRegToInstAddQueue;
+unordered_map<int,deque<int>> cBlockMemoryToInstAddQueue;
 
 map<int,vector<unordered_set<int>>> InstAddToBlocks;
 
