@@ -962,6 +962,7 @@ void execute1a4(ofstream &out)
             break;
         }
         };
+        if (registers[0] != 0) error1 = "Zero register cannot be modified";
     }
 
 
@@ -1140,7 +1141,6 @@ void execute1a4(ofstream &out)
             cout << "counter at pos 240 :" << counter<<endl;counter++;
             InstAddToFreq[instructionAdd]--;
             
-            //cout << "Yes3\n";
             if (DRAMrequestIssued) {
                 cout << "counter at pos 241 :" << counter<<endl;counter++;
                 numClockCycles = uptoClkCyc + 1;
@@ -1156,7 +1156,7 @@ void execute1a4(ofstream &out)
         cannotUseRegistersG.empty() && cannotChangeRegistersG.empty())) 
     {
             cout << "counter at pos 245 :" << counter<<endl;counter++;
-            cout << "Unknown Error: All Registers and Memory Addresses should be free by now but some are busy\n";
+            cout << "RUNTIME WARNING: All Registers and Memory Addresses should be free by now but some are busy\n";
     }
     if (error1 != "")
     {

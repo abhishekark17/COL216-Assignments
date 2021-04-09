@@ -1,0 +1,8 @@
+main: addi $1, $0, 5
+    j label
+
+label:
+    add $t0, $t0, $1
+
+
+

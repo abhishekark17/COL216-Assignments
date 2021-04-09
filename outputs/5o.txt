@@ -1,0 +1,20 @@
+
+Total Number of Clock Cycles: 3
+
+Total Number of Row Buffer Updates: 0
+
+Memory content at the end of the execution:
+
+
+Every cycle description: 
+
+cycle 1: Instruction: addi ($at,$zero,5): $at=5
+cycle 2: Instruction j :Jump to label ID: label
+cycle 3: Instruction: add ($t0,$t0,$at): $t0=5
+
+END OF EXECUTION. META DATA: 
+
+Number of times each instruction was executed: 
+
+[add: 1,sub: 0,mul: 0,slt: 0,addi: 1,bne: 0,beq: 0,lw: 0,sw: 0,j: 1]
+
