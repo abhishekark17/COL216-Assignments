@@ -50,7 +50,7 @@ int main(int argc, char **argv)
 	}
 
 	if (part2enabled)
-		execute2(outstream);
+		execute2a4(outstream);
 	else 
 		execute1a4 (outstream);
 		//execute1(outstream);

@@ -1,4 +1,4 @@
-#include "a4p1.hpp"
+#include "a4p2.hpp"
 
 // * assume that inside bracket always register.
 /* *
@@ -13,121 +13,11 @@
 * mem address (offset + r2) cannot change, cannot use 
 */
 
-void exeLW(ofstream &out, instruction currInst, int instAddr,bool erase);
-void exeAllBlkingInstLW(ofstream &out, instruction currInst, int upto,int ia);
-void exeAllBlkingInstSW(ofstream &out, instruction currInst, int upto,int ia);
-int getAddress(instruction &curInst);
+void exeLW2(ofstream &out, instruction currInst, int instAddr,bool erase);
+void exeAllBlkingInstLW2(ofstream &out, instruction currInst, int upto,int ia);
+void exeAllBlkingInstSW2(ofstream &out, instruction currInst, int upto,int ia);
 
-void removeInstFromDeque(deque<int> &mydeq, int insAddr)
-{
-    deque<int>::iterator itr = mydeq.begin();
-    while (itr != mydeq.end())
-    {
-        if (*itr == insAddr)
-        {
-            mydeq.erase(itr);
-            break;
-        }
-        itr++;
-    }
-    return;
-}
-
-bool ifLW(instruction &curInst, int address)
-{
-    return cannotChangeRegistersG.find(curInst.cirs[0]) == cannotChangeRegistersG.end() &&
-           cannotUseRegistersG.find(curInst.cirs[0]) == cannotUseRegistersG.end() &&
-           cannotChangeRegistersG.find(curInst.cirs[2]) == cannotChangeRegistersG.end() &&
-           cannotChangeMemoryG.find(address) == cannotChangeMemoryG.end();
-}
-bool ifSW(instruction &curInst, int address)
-{
-    return cannotChangeRegistersG.find(curInst.cirs[0]) == cannotChangeRegistersG.end() &&
-           cannotChangeRegistersG.find(curInst.cirs[2]) == cannotChangeRegistersG.end() &&
-           cannotChangeMemoryG.find(address) == cannotChangeMemoryG.end() &&
-           cannotUseMemoryG.find(address) == cannotUseMemoryG.end();
-}
-void eraseIfP_URG(int reg)
-{
-    auto itr = cannotUseRegistersG.find(reg);
-    if (itr != cannotUseRegistersG.end())
-        cannotUseRegistersG.erase(itr);
-    return;
-}
-void eraseIfP_CRG(int reg)
-{
-    auto itr = cannotChangeRegistersG.find(reg);
-    if (itr != cannotChangeRegistersG.end())
-        cannotChangeRegistersG.erase(itr);
-    return;
-}
-void eraseIfP_UMG(int mem)
-{
-    auto itr = cannotUseMemoryG.find(mem);
-    if (itr != cannotUseMemoryG.end())
-        cannotUseMemoryG.erase(itr);
-    return;
-}
-void eraseIfP_CMG(int mem)
-{
-    auto itr = cannotChangeMemoryG.find(mem);
-    if (itr != cannotChangeMemoryG.end())
-        cannotChangeMemoryG.erase(itr);
-    return;
-}
-
-void eraseIfP_LW(instruction curInst)
-{
-    eraseIfP_URG(curInst.cirs[0]);
-    eraseIfP_CRG(curInst.cirs[2]);
-    eraseIfP_CRG(curInst.cirs[0]);
-    eraseIfP_CMG(getAddress(curInst));
-    return;
-}
-
-void eraseIfP_SW(instruction curInst)
-{
-    eraseIfP_CRG(curInst.cirs[0]);
-    eraseIfP_CRG(curInst.cirs[2]);
-    eraseIfP_CMG(getAddress(curInst));
-    eraseIfP_UMG(getAddress(curInst));
-    return;
-}
-
-int getAddress(instruction &curInst)
-{
-    int offset = curInst.cirs[1];
-    int typeOfarg = curInst.cirs[3];
-    int address;
-    if (typeOfarg == 0)
-    {
-        address = offset + registers[curInst.cirs[2]];
-        blockRegisterID = curInst.cirs[2];
-    }
-    else
-    {
-        address = offset + curInst.cirs[2];
-        blockMemoryAdd = address;
-    }
-    return address;
-}
-
-void intializerowToInsSet()
-{
-    for (auto &x : InstAddToBlocks)
-    {
-        int instructionAdd = x.first;
-        if (InstAddToFreq[instructionAdd] > 0)
-        {
-            instruction curInst = iset[instructionAdd - 1];
-            int address = getAddress(curInst);
-            int wantedRow = getRowOfRowBuffer(address);
-            rowToInsSet[wantedRow].insert(instructionAdd);
-        }
-    }
-}
-
-void exeLW(ofstream &out, instruction currInst, int instAddr, bool erase)
+void exeLW2(ofstream &out, instruction currInst, int instAddr, bool erase)
 {
 
     // cout << "instAddr inside exeLW :" << instAddr << endl;
@@ -137,9 +27,16 @@ void exeLW(ofstream &out, instruction currInst, int instAddr, bool erase)
         error1 = "BAD ADDRESS (lw)";
     if (erase) eraseIfP_LW(currInst);
     // cout << "before exeAllBlkingInstLW" << endl;
-    exeAllBlkingInstLW(out, currInst, 2,instAddr);
+    exeAllBlkingInstLW2(out, currInst, 2,instAddr);
     // cout << "after exeAllBlkingInstLW" << endl;
     int prevRow = currentRowInRowBuffer;
+
+    if (DRAMrequestIssued)
+                {
+                    numClockCycles = uptoClkCyc + 1;
+                    DRAMrequestIssued = false;
+                }
+
     DRAMrequestIssued = true;
     exectutionOutput.push_back("cycle " + to_string(numClockCycles) + ": " + "DRAM Request Issued (lw)");
 
@@ -174,7 +71,7 @@ void exeLW(ofstream &out, instruction currInst, int instAddr, bool erase)
     numOfInst[7]++;
 }
 
-void exeSW(ofstream &out, instruction currInst, int instAddr, bool erase)
+void exeSW2(ofstream &out, instruction currInst, int instAddr, bool erase)
 {
     // cout << "entered exeSw " << endl;
     int address = getAddress(currInst);
@@ -182,7 +79,12 @@ void exeSW(ofstream &out, instruction currInst, int instAddr, bool erase)
     if (wantedRow < 0)
         error1 = "BAD ADDRESS (sw)";
     if (erase) eraseIfP_SW(currInst);
-    exeAllBlkingInstSW(out, currInst, 2,instAddr);
+    exeAllBlkingInstSW2(out, currInst, 2,instAddr);
+    if (DRAMrequestIssued)
+    {
+        numClockCycles = uptoClkCyc + 1;
+        DRAMrequestIssued = false;
+    }
     DRAMrequestIssued = true;
     int prevRow = currentRowInRowBuffer;
     exectutionOutput.push_back("cycle " + to_string(numClockCycles) + ": " + "DRAM Request Issued (sw)");
@@ -218,70 +120,36 @@ void exeSW(ofstream &out, instruction currInst, int instAddr, bool erase)
         exectutionOutput.push_back("cycle " + to_string(numClockCycles + (2 * ROW_ACCESS_DELAY) + 1) + "-" + to_string(uptoClkCyc) + ": " + "Accessing Column " + to_string(getColOfRowBuffer(address)) + ": memory address " + to_string(address) + "-" + to_string(address + 3) + " = " + to_string(registers[currInst.cirs[0]]));
     }
     numOfInst[8]++;
-    // cout << "exited exeSw " << endl;
+    //cout << "clk cycle just before exiting sw " << numClockCycles << endl;
+     //cout << "exited exeSw " << endl;
 }
 
-void eraseAllBlocks(int insAddr)
-{
-    vector<unordered_set<int>> blockedByInsAddr = InstAddToBlocks[insAddr];
-    // vector[0] = cannotUseRegisters;
-    // vector[1] = cannotChangeRegisters;
-    // vector[2] = cannotUseMemory;
-    // vector[3] = cannotChangeMemory;
-    for (int reg : blockedByInsAddr[0])
-    {
-        auto itr = cannotUseRegistersG.find(reg);
-        if (itr != cannotUseRegistersG.end())
-            cannotUseRegistersG.erase(itr);
-    }
-    for (int reg : blockedByInsAddr[1])
-    {
-        auto itr = cannotChangeRegistersG.find(reg);
-        if (itr != cannotChangeRegistersG.end())
-            cannotChangeRegistersG.erase(itr);
-    }
-    for (int mem : blockedByInsAddr[2])
-    {
-        auto itr = cannotUseMemoryG.find(mem);
-        if (itr != cannotUseMemoryG.end())
-            cannotUseMemoryG.erase(itr);
-    }
-    for (int mem : blockedByInsAddr[3])
-    {
-
-        auto itr = cannotChangeMemoryG.find(mem);
-        if (itr != cannotChangeMemoryG.end())
-            cannotChangeMemoryG.erase(itr);
-    }
-    InstAddToFreq[insAddr] = max(InstAddToFreq[insAddr] - 1, 0);
-}
-
-void removeAndExeOPID7(ofstream &out, instruction &curInst, int insAddr)
+void removeAndExeOPID72(ofstream &out, instruction &curInst, int insAddr)
 {
     if (iset[insAddr - 1].opID == 7 && InstAddToFreq[insAddr] > 0)
     {
         //eraseIfP_LW(curInst);
-        exeLW(out, iset[insAddr - 1], insAddr,true);
+        exeLW2(out, iset[insAddr - 1], insAddr,true);
         
         //eraseAllBlocks(instructionAdd);
     }
 }
 
-void removeAndExeOPID8(ofstream &out, instruction &curInst, int insAddr)
+void removeAndExeOPID82(ofstream &out, instruction &curInst, int insAddr)
 {
     // cout << "entered remove and execute opid 8" << endl;
     if (iset[insAddr - 1].opID == 8 && InstAddToFreq[insAddr] > 0)
     {
         //eraseIfP_SW(curInst);
         // cout << "called exeSw and currinst address was " << insAddr << endl;
-        exeSW(out, iset[insAddr - 1], insAddr,true);
+        exeSW2(out, iset[insAddr - 1], insAddr,true);
         
         //eraseAllBlocks(instructionAdd);
     }
     // cout << "exited remove and execute opid 8" << endl;
 }
 
-void exeAllBlkingInstAdd(ofstream &out, instruction currInst, int upto)
+void exeAllBlkingInstAdd2(ofstream &out, instruction currInst, int upto)
 {
     for (int regPos = 0; regPos <= upto; regPos++)
     {
@@ -298,17 +166,17 @@ void exeAllBlkingInstAdd(ofstream &out, instruction currInst, int upto)
                 cBlockRegToInstAddQueue[currInst.cirs[regPos]] = cblkRegQueue;
                 uBlockRegToInstAddQueue[currInst.cirs[regPos]] = ublkRegQueue;
 
-                removeAndExeOPID7(out, currInst, insAddr);
-                removeAndExeOPID8(out, currInst, insAddr);
+                removeAndExeOPID72(out, currInst, insAddr);
+                removeAndExeOPID82(out, currInst, insAddr);
                 ublkRegQueue = uBlockRegToInstAddQueue[currInst.cirs[regPos]];
                 cblkRegQueue=cBlockRegToInstAddQueue[currInst.cirs[regPos]];
 
                 //eraseAllBlocks(insAddr);
-                if (DRAMrequestIssued)
-                {
-                    numClockCycles = uptoClkCyc + 1;
-                    DRAMrequestIssued = false;
-                }
+                // if (DRAMrequestIssued)
+                // {
+                //     numClockCycles = uptoClkCyc + 1;
+                //     DRAMrequestIssued = false;
+                // }
                 //ublkRegQueue.pop();
             }
         }
@@ -327,20 +195,20 @@ void exeAllBlkingInstAdd(ofstream &out, instruction currInst, int upto)
             //ublkRegQueue.erase(remove(ublkRegQueue.begin(), ublkRegQueue.end(), insAddr), ublkRegQueue.end());
             uBlockRegToInstAddQueue[currInst.cirs[0]] = ublkRegQueue;
 
-            removeAndExeOPID7(out, currInst, insAddr);
-            removeAndExeOPID8(out, currInst, insAddr);
+            removeAndExeOPID72(out, currInst, insAddr);
+            removeAndExeOPID82(out, currInst, insAddr);
             cblkRegQueue = cBlockRegToInstAddQueue[currInst.cirs[0]];
             //eraseAllBlocks(insAddr);
-            if (DRAMrequestIssued)
-            {
-                numClockCycles = uptoClkCyc + 1;
-                DRAMrequestIssued = false;
-            }
+            // if (DRAMrequestIssued)
+            // {
+            //     numClockCycles = uptoClkCyc + 1;
+            //     DRAMrequestIssued = false;
+            // }
         }
     }
 }
 
-void exeAllBlkingInstLW(ofstream &out, instruction currInst, int upto, int ia)
+void exeAllBlkingInstLW2(ofstream &out, instruction currInst, int upto, int ia)
 {
     //eraseIfP_LW(currInst);
     // cout << "entered exeAllBlkingInstLW for ia " << ia << endl;
@@ -373,16 +241,16 @@ void exeAllBlkingInstLW(ofstream &out, instruction currInst, int upto, int ia)
                     uBlockRegToInstAddQueue[currInst.cirs[regPos]] = ublkRegQueue;
                     cBlockRegToInstAddQueue[currInst.cirs[regPos]] = cblkRegQueue;
 
-                    removeAndExeOPID7(out, currInst, insAddr);
-                    removeAndExeOPID8(out, currInst, insAddr);
+                    removeAndExeOPID72(out, currInst, insAddr);
+                    removeAndExeOPID82(out, currInst, insAddr);
                     ublkRegQueue = uBlockRegToInstAddQueue[currInst.cirs[regPos]];
                     cblkRegQueue = cBlockRegToInstAddQueue[currInst.cirs[regPos]];
                     //eraseAllBlocks(insAddr);
-                    if (DRAMrequestIssued)
-                    {
-                        numClockCycles = uptoClkCyc + 1;
-                        DRAMrequestIssued = false;
-                    }
+                    // if (DRAMrequestIssued)
+                    // {
+                    //     numClockCycles = uptoClkCyc + 1;
+                    //     DRAMrequestIssued = false;
+                    // }
                     //ublkRegQueue.pop();
                 }
                 
@@ -420,16 +288,16 @@ void exeAllBlkingInstLW(ofstream &out, instruction currInst, int upto, int ia)
                 cBlockRegToInstAddQueue[currInst.cirs[0]] = cblkRegQueue;
                 //cblkRegQueue = cBlockRegToInstAddQueue[currInst.cirs[0]];
 
-                removeAndExeOPID7(out, currInst, insAddr);
-                removeAndExeOPID8(out, currInst, insAddr);
+                removeAndExeOPID72(out, currInst, insAddr);
+                removeAndExeOPID82(out, currInst, insAddr);
                 cblkRegQueue = cBlockRegToInstAddQueue[currInst.cirs[0]];
                 ublkRegQueue=uBlockRegToInstAddQueue[currInst.cirs[0]];
                 //eraseAllBlocks(insAddr);
-                if (DRAMrequestIssued)
-                {
-                    numClockCycles = uptoClkCyc + 1;
-                    DRAMrequestIssued = false;
-                }
+                // if (DRAMrequestIssued)
+                // {
+                //     numClockCycles = uptoClkCyc + 1;
+                //     DRAMrequestIssued = false;
+                // }
             }
             
         }
@@ -453,15 +321,15 @@ void exeAllBlkingInstLW(ofstream &out, instruction currInst, int upto, int ia)
                 ublkMemQueue.pop_front();
                 uBlockMemoryToInstAddQueue[getAddress(currInst)] = ublkMemQueue;
 
-                removeAndExeOPID7(out, currInst, insAddr);
-                removeAndExeOPID8(out, currInst, insAddr);
+                removeAndExeOPID72(out, currInst, insAddr);
+                removeAndExeOPID82(out, currInst, insAddr);
                 //eraseAllBlocks(insAddr);
                 ublkMemQueue = uBlockMemoryToInstAddQueue[getAddress(currInst)];
-                if (DRAMrequestIssued)
-                {
-                    numClockCycles = uptoClkCyc + 1;
-                    DRAMrequestIssued = false;
-                }
+                // if (DRAMrequestIssued)
+                // {
+                //     numClockCycles = uptoClkCyc + 1;
+                //     DRAMrequestIssued = false;
+                // }
             }
             
         }
@@ -469,7 +337,7 @@ void exeAllBlkingInstLW(ofstream &out, instruction currInst, int upto, int ia)
     // cout << "exited exeAllBlkingInstLW for ia :" << ia << endl;
 }
 
-void exeAllBlkingInstSW(ofstream &out, instruction currInst, int upto,int ia)
+void exeAllBlkingInstSW2(ofstream &out, instruction currInst, int upto,int ia)
 {
     //eraseIfP_SW(currInst);
     for (int regPos = 0; regPos <= upto; regPos += 2)
@@ -494,15 +362,15 @@ void exeAllBlkingInstSW(ofstream &out, instruction currInst, int upto,int ia)
                     ublkRegQueue.pop_front();
                     uBlockRegToInstAddQueue[currInst.cirs[regPos]] = ublkRegQueue;
 
-                    removeAndExeOPID7(out, currInst, insAddr);
-                    removeAndExeOPID8(out, currInst, insAddr);
+                    removeAndExeOPID72(out, currInst, insAddr);
+                    removeAndExeOPID82(out, currInst, insAddr);
                     ublkRegQueue = uBlockRegToInstAddQueue[currInst.cirs[regPos]];
                     //eraseAllBlocks(insAddr);
-                    if (DRAMrequestIssued)
-                    {
-                        numClockCycles = uptoClkCyc + 1;
-                        DRAMrequestIssued = false;
-                    }
+                    // if (DRAMrequestIssued)
+                    // {
+                    //     numClockCycles = uptoClkCyc + 1;
+                    //     DRAMrequestIssued = false;
+                    // }
                 }
                 
             }
@@ -534,16 +402,16 @@ void exeAllBlkingInstSW(ofstream &out, instruction currInst, int upto,int ia)
                 removeInstFromDeque(cblkMemQueue, insAddr);
                 cBlockMemoryToInstAddQueue[getAddress(currInst)] = cblkMemQueue;
 
-                removeAndExeOPID7(out, currInst, insAddr);
-                removeAndExeOPID8(out, currInst, insAddr);
+                removeAndExeOPID72(out, currInst, insAddr);
+                removeAndExeOPID82(out, currInst, insAddr);
                 ublkMemQueue = uBlockMemoryToInstAddQueue[getAddress(currInst)];
                 cblkMemQueue = cBlockMemoryToInstAddQueue[getAddress(currInst)];
                 //eraseAllBlocks(insAddr);
-                if (DRAMrequestIssued)
-                {
-                    numClockCycles = uptoClkCyc + 1;
-                    DRAMrequestIssued = false;
-                }
+                // if (DRAMrequestIssued)
+                // {
+                //     numClockCycles = uptoClkCyc + 1;
+                //     DRAMrequestIssued = false;
+                // }
             }
             
         }
@@ -572,28 +440,28 @@ void exeAllBlkingInstSW(ofstream &out, instruction currInst, int upto,int ia)
                 cBlockMemoryToInstAddQueue[getAddress(currInst)] = cblkMemQueue;
                 uBlockMemoryToInstAddQueue[getAddress(currInst)] = ublkMemQueue;
 
-                removeAndExeOPID7(out, currInst, insAddr);
-                removeAndExeOPID8(out, currInst, insAddr);
+                removeAndExeOPID72(out, currInst, insAddr);
+                removeAndExeOPID82(out, currInst, insAddr);
 
                 //eraseAllBlocks(insAddr);
                 cblkMemQueue = cBlockMemoryToInstAddQueue[getAddress(currInst)];
                 ublkMemQueue = uBlockMemoryToInstAddQueue[getAddress(currInst)];
-                if (DRAMrequestIssued)
-                {
-                    numClockCycles = uptoClkCyc + 1;
-                    DRAMrequestIssued = false;
-                }
+                // if (DRAMrequestIssued)
+                // {
+                //     numClockCycles = uptoClkCyc + 1;
+                //     DRAMrequestIssued = false;
+                // }
             }
             
         }
     }
 }
 
-void exeAllBlkingInstSub(ofstream &out, instruction currInst, int upto) { exeAllBlkingInstAdd(out, currInst, upto); }
-void exeAllBlkingInstMul(ofstream &out, instruction currInst, int upto) { exeAllBlkingInstAdd(out, currInst, upto); }
-void exeAllBlkingInstSlt(ofstream &out, instruction currInst, int upto) { exeAllBlkingInstAdd(out, currInst, upto); }
-void exeAllBlkingInstAddi(ofstream &out, instruction currInst, int upto) { exeAllBlkingInstAdd(out, currInst, upto); }
-void exeAllBlkingInstBne(ofstream &out, instruction currInst, int upto)
+void exeAllBlkingInstSub2(ofstream &out, instruction currInst, int upto) { exeAllBlkingInstAdd2(out, currInst, upto); }
+void exeAllBlkingInstMul2(ofstream &out, instruction currInst, int upto) { exeAllBlkingInstAdd2(out, currInst, upto); }
+void exeAllBlkingInstSlt2(ofstream &out, instruction currInst, int upto) { exeAllBlkingInstAdd2(out, currInst, upto); }
+void exeAllBlkingInstAddi2(ofstream &out, instruction currInst, int upto) { exeAllBlkingInstAdd2(out, currInst, upto); }
+void exeAllBlkingInstBne2(ofstream &out, instruction currInst, int upto)
 {
     for (int regPos = 0; regPos <= upto; regPos++)
     {
@@ -608,15 +476,15 @@ void exeAllBlkingInstBne(ofstream &out, instruction currInst, int upto)
                 ublkRegQueue.pop_front();
                 uBlockRegToInstAddQueue[currInst.cirs[regPos]] = ublkRegQueue;
 
-                removeAndExeOPID7(out, currInst, insAddr);
-                removeAndExeOPID8(out, currInst, insAddr);
+                removeAndExeOPID72(out, currInst, insAddr);
+                removeAndExeOPID82(out, currInst, insAddr);
                 //eraseAllBlocks(insAddr);
                 ublkRegQueue = uBlockRegToInstAddQueue[currInst.cirs[regPos]];
-                if (DRAMrequestIssued)
-                {
-                    numClockCycles = uptoClkCyc + 1;
-                    DRAMrequestIssued = false;
-                }
+                // if (DRAMrequestIssued)
+                // {
+                //     numClockCycles = uptoClkCyc + 1;
+                //     DRAMrequestIssued = false;
+                // }
                 //ublkRegQueue.pop();
             
         
@@ -624,9 +492,46 @@ void exeAllBlkingInstBne(ofstream &out, instruction currInst, int upto)
         }
     }
 }
-void exeAllBlkingInstBeq(ofstream &out, instruction currInst, int upto) { exeAllBlkingInstBne(out, currInst, upto); }
+void exeAllBlkingInstBeq2(ofstream &out, instruction currInst, int upto) { exeAllBlkingInstBne2(out, currInst, upto); }
 
-void execute1a4(ofstream &out)
+/*
+case 0: { //add 
+        if ((DRAMrequestIssued == false) || (DRAMrequestIssued && (lwInstRegisterID != currInst.cirs[0]) && (lwInstRegisterID != currInst.cirs[1]) && (lwInstRegisterID != currInst.cirs[2]) && (blockRegisterID != currInst.cirs[0]) && (blockRegisterID != currInst.cirs[1]) && (blockRegisterID != currInst.cirs[2])     ) ) {}
+        // DRAMrequestIssued = true now 
+        else {  // you cannot execute the instruction currently and cannot go forward => wait
+          numClockCycles =  uptoClkCyc + 1;
+          DRAMrequestIssued = false;    // that request has been completed now and we have that register's value in that register after loading from memory.
+          lwInstRegisterID = -1; swInstMemAdd = -1;
+          blockRegisterID = -1; blockMemoryAdd = -1;
+        }
+
+        add (currInst.cirs);
+        exectutionOutput.push_back("cycle " + to_string(numClockCycles) +": " + "Instruction: add (" + rrmap.at(currInst.cirs[0]) + "," + rrmap.at(currInst.cirs[1]) + "," + rrmap.at(currInst.cirs[2]) + ")" +  ": " + rrmap.at(currInst.cirs[0]) + "=" + to_string(registers[currInst.cirs[0]]) );
+        numOfInst[0]++;
+        
+        break;
+      }
+*/
+
+
+
+bool ifAdd (instruction& curInst) {
+    return (cannotChangeRegistersG.find(curInst.cirs[0]) != cannotChangeRegistersG.end() &&
+    cannotUseRegistersG.find(curInst.cirs[0]) != cannotUseRegistersG.end() &&
+    cannotUseRegistersG.find(curInst.cirs[1]) != cannotUseRegistersG.end() &&
+    cannotUseRegistersG.find(curInst.cirs[2]) != cannotUseRegistersG.end());
+}
+bool ifAddi (instruction& curInst) {
+    return (cannotChangeRegistersG.find(curInst.cirs[0]) != cannotChangeRegistersG.end() &&
+    cannotUseRegistersG.find(curInst.cirs[0]) != cannotUseRegistersG.end() &&
+    cannotUseRegistersG.find(curInst.cirs[1]) != cannotUseRegistersG.end());
+}
+
+bool ifBne (instruction& curInst) {
+    return (cannotUseRegistersG.find(curInst.cirs[0]) != cannotUseRegistersG.end() &&
+    cannotUseRegistersG.find(curInst.cirs[1]) != cannotUseRegistersG.end());
+}
+void execute2a4 (ofstream &out)
 {
     while (pc <= maxInstructions)
     {
@@ -644,57 +549,80 @@ void execute1a4(ofstream &out)
         {
         case 0:
         { // *add
-            if (DRAMrequestIssued)
-            {
-                numClockCycles = uptoClkCyc + 1;
-                DRAMrequestIssued = false;
+            // if (DRAMrequestIssued)
+            // {
+            //     numClockCycles = uptoClkCyc + 1;
+            //     DRAMrequestIssued = false;
+            // }
+            //cout << "clockcycle before add before" << numClockCycles << endl;
+            if (ifAdd(currInst)) {
+                if (DRAMrequestIssued) {
+                    numClockCycles = uptoClkCyc + 1;
+                    DRAMrequestIssued = false;
+                }
+                exeAllBlkingInstAdd2(out, currInst, 2);
             }
-            exeAllBlkingInstAdd(out, currInst, 2);
+            //cout << "clockcycle before add after" << numClockCycles << endl;
             add(currInst.cirs);
-
             exectutionOutput.push_back("cycle " + to_string(numClockCycles) + ": " + "Instruction: add (" + rrmap.at(currInst.cirs[0]) + "," + rrmap.at(currInst.cirs[1]) + "," + rrmap.at(currInst.cirs[2]) + ")" + ": " + rrmap.at(currInst.cirs[0]) + "=" + to_string(registers[currInst.cirs[0]]));
             numOfInst[0]++;
-
             break;
         }
         case 1:
         { // *sub
-            if (DRAMrequestIssued)
-            {
-                numClockCycles = uptoClkCyc + 1;
-                DRAMrequestIssued = false;
+            // if (DRAMrequestIssued)
+            // {
+            //     numClockCycles = uptoClkCyc + 1;
+            //     DRAMrequestIssued = false;
+            // }
+            if (ifAdd(currInst)) {
+                if (DRAMrequestIssued) {
+                    numClockCycles = uptoClkCyc + 1;
+                    DRAMrequestIssued = false;
+                }
+                exeAllBlkingInstSub2(out, currInst, 2);
             }
-            exeAllBlkingInstSub(out, currInst, 2);
-
+            
             sub(currInst.cirs);
             exectutionOutput.push_back("cycle " + to_string(numClockCycles) + ": " + "Instruction: sub (" + rrmap.at(currInst.cirs[0]) + "," + rrmap.at(currInst.cirs[1]) + "," + rrmap.at(currInst.cirs[2]) + ")" + ": " + rrmap.at(currInst.cirs[0]) + "=" + to_string(registers[currInst.cirs[0]]));
             numOfInst[1]++;
-
             break;
         }
         case 2:
         { // *mul
-            if (DRAMrequestIssued)
-            {
-                numClockCycles = uptoClkCyc + 1;
-                DRAMrequestIssued = false;
+            // if (DRAMrequestIssued)
+            // {
+            //     numClockCycles = uptoClkCyc + 1;
+            //     DRAMrequestIssued = false;
+            // }
+            if (ifAdd(currInst)) {
+                if (DRAMrequestIssued) {
+                    numClockCycles = uptoClkCyc + 1;
+                    DRAMrequestIssued = false;
+                }
+                exeAllBlkingInstMul2(out, currInst, 2);
             }
-            exeAllBlkingInstMul(out, currInst, 2);
+            
             mul(currInst.cirs);
-
             exectutionOutput.push_back("cycle " + to_string(numClockCycles) + ": " + "Instruction: Mul (" + rrmap.at(currInst.cirs[0]) + "," + rrmap.at(currInst.cirs[1]) + "," + rrmap.at(currInst.cirs[2]) + ")" + ": " + rrmap.at(currInst.cirs[0]) + "=" + to_string(registers[currInst.cirs[0]]));
             numOfInst[2]++;
             break;
         }
         case 3:
         { // *slt
-            if (DRAMrequestIssued)
-            {
-                numClockCycles = uptoClkCyc + 1;
-                DRAMrequestIssued = false;
+            // if (DRAMrequestIssued)
+            // {
+            //     numClockCycles = uptoClkCyc + 1;
+            //     DRAMrequestIssued = false;
+            // }
+            if (ifAdd(currInst)) {
+                if (DRAMrequestIssued) {
+                    numClockCycles = uptoClkCyc + 1;
+                    DRAMrequestIssued = false;
+                }
+                exeAllBlkingInstSlt2(out, currInst, 2);
             }
-            exeAllBlkingInstSlt(out, currInst, 2);
-
+            
             slt(currInst.cirs);
             exectutionOutput.push_back("cycle " + to_string(numClockCycles) + ": " + "Instruction: slt (" + rrmap.at(currInst.cirs[0]) + "," + rrmap.at(currInst.cirs[1]) + "," + rrmap.at(currInst.cirs[2]) + ")" + ": " + rrmap.at(currInst.cirs[0]) + "=" + to_string(registers[currInst.cirs[0]]));
             numOfInst[3]++;
@@ -703,18 +631,22 @@ void execute1a4(ofstream &out)
 
         case 4:
         { // *addi
-            if (DRAMrequestIssued)
-            {
-                numClockCycles = uptoClkCyc + 1;
-                DRAMrequestIssued = false;
+            // if (DRAMrequestIssued)
+            // {
+            //     numClockCycles = uptoClkCyc + 1;
+            //     DRAMrequestIssued = false;
+            // }
+            if (ifAddi(currInst)) {
+                if (DRAMrequestIssued) {
+                    numClockCycles = uptoClkCyc + 1;
+                    DRAMrequestIssued = false;
+                }
+                exeAllBlkingInstAddi2(out, currInst, 1);
             }
-
-            exeAllBlkingInstAddi(out, currInst, 1);
-
+            
             addi(currInst.cirs);
             exectutionOutput.push_back("cycle " + to_string(numClockCycles) + ": " + "Instruction: addi (" + rrmap.at(currInst.cirs[0]) + "," + rrmap.at(currInst.cirs[1]) + "," + to_string(currInst.cirs[2]) + ")" + ": " + rrmap.at(currInst.cirs[0]) + "=" + to_string(registers[currInst.cirs[0]]));
             numOfInst[4]++;
-
             break;
         }
 
@@ -722,12 +654,19 @@ void execute1a4(ofstream &out)
         // *HENCE WAIT UNTILL ALL CLOCK CYCLES TO LOAD THE NECESSARY REGISTER AND THEN EXECUTE THE CURRENT COMMAND.
         case 5:
         { // *bne
-            if (DRAMrequestIssued)
-            {
-                numClockCycles = uptoClkCyc + 1;
-                DRAMrequestIssued = false;
+            // if (DRAMrequestIssued)
+            // {
+            //     numClockCycles = uptoClkCyc + 1;
+            //     DRAMrequestIssued = false;
+            // }
+            if (ifBne(currInst)) {
+                if (DRAMrequestIssued) {
+                    numClockCycles = uptoClkCyc + 1;
+                    DRAMrequestIssued = false;
+                }
+                exeAllBlkingInstBne2(out, currInst,1);
             }
-            exeAllBlkingInstBne(out, currInst, 1);
+            
 
             bne(currInst.cirs, currInst.label);
             exectutionOutput.push_back("cycle " + to_string(numClockCycles) + ": Instruction bne (" + rrmap.at(currInst.cirs[0]) + "," + rrmap.at(currInst.cirs[1]) + "," + currInst.label + "," + to_string(switchOnBranch) + ")");
@@ -736,12 +675,19 @@ void execute1a4(ofstream &out)
         }
         case 6:
         { // *beq
-            if (DRAMrequestIssued)
-            {
-                numClockCycles = uptoClkCyc + 1;
-                DRAMrequestIssued = false;
+            // if (DRAMrequestIssued)
+            // {
+            //     numClockCycles = uptoClkCyc + 1;
+            //     DRAMrequestIssued = false;
+            // }
+            if (ifBne(currInst)) {
+                if (DRAMrequestIssued) {
+                    numClockCycles = uptoClkCyc + 1;
+                    DRAMrequestIssued = false;
+                }
+                exeAllBlkingInstBne2(out, currInst, 1);
             }
-            exeAllBlkingInstBeq(out, currInst, 1);
+            
 
             beq(currInst.cirs, currInst.label);
             exectutionOutput.push_back("cycle " + to_string(numClockCycles) + ": Instruction beq (" + rrmap.at(currInst.cirs[0]) + "," + rrmap.at(currInst.cirs[1]) + "," + currInst.label + "," + to_string(switchOnBranch) + ")");
@@ -750,11 +696,11 @@ void execute1a4(ofstream &out)
         }
         case 7:
         { //lw
-            if (DRAMrequestIssued)
-            {
-                numClockCycles = uptoClkCyc + 1;
-                DRAMrequestIssued = false;
-            }
+            // if (DRAMrequestIssued)
+            // {
+            //     numClockCycles = uptoClkCyc + 1;
+            //     DRAMrequestIssued = false;
+            // }
             
             int address = getAddress(currInst);
             int prevRow = currentRowInRowBuffer;
@@ -765,7 +711,12 @@ void execute1a4(ofstream &out)
             else if (currentRowInRowBuffer == -1 || (currentRowInRowBuffer == wantedRow &&
                                                      ifLW(currInst, address)))
             { // * Here we should execute immediately.
-                exeLW(out, currInst, pc - 1,false);
+                if (DRAMrequestIssued)
+                {
+                    numClockCycles = uptoClkCyc + 1;
+                    DRAMrequestIssued = false;
+                }
+                exeLW2(out, currInst, pc - 1,false);
             }
             else // * even if row buffer is same, if some registers are blocked, then we will need to execute
                 // * the blocked instructions first, which may change the row buffer, hence do not execute if some are blocked.
@@ -805,11 +756,11 @@ void execute1a4(ofstream &out)
 
         case 8:
         { //sw
-            if (DRAMrequestIssued)
-            {
-                numClockCycles = uptoClkCyc + 1;
-                DRAMrequestIssued = false;
-            }
+            // if (DRAMrequestIssued)
+            // {
+            //     numClockCycles = uptoClkCyc + 1;
+            //     DRAMrequestIssued = false;
+            // }
 
             int address = getAddress(currInst);
             int wantedRow = getRowOfRowBuffer(address);
@@ -819,7 +770,12 @@ void execute1a4(ofstream &out)
             else if (currentRowInRowBuffer == -1 || (currentRowInRowBuffer == wantedRow &&
                                                      ifSW(currInst, address)))
             { // * can execute similar to lw case
-                exeSW(out, currInst, pc - 1, false);
+                if (DRAMrequestIssued)
+                {
+                    numClockCycles = uptoClkCyc + 1;
+                    DRAMrequestIssued = false;
+                }
+                exeSW2(out, currInst, pc - 1, false);
             }
 
             else
@@ -860,11 +816,11 @@ void execute1a4(ofstream &out)
 
         case 9:
         { //j       // note that here j instruction needs to wait before the DRAM calls are finished.
-            if (DRAMrequestIssued)
-            {
-                numClockCycles = uptoClkCyc + 1;
-                DRAMrequestIssued = false;
-            }
+            // if (DRAMrequestIssued)
+            // {
+            //     numClockCycles = uptoClkCyc + 1;
+            //     DRAMrequestIssued = false;
+            // }
             j(currInst.cirs, currInst.label);
             numOfInst[9]++;
             exectutionOutput.push_back("cycle " + to_string(numClockCycles) + ": Instruction j :" + "Jump to label ID: " + currInst.label);
@@ -876,8 +832,6 @@ void execute1a4(ofstream &out)
     }
 
     numClockCycles++;
-
-
 
     int counter = 0;
 
@@ -900,7 +854,7 @@ void execute1a4(ofstream &out)
                         eraseIfP_LW(curInst);
                         if (ifLW(curInst, address))
                         {
-                            exeLW(out, iset[instructionAdd - 1], instructionAdd,false);
+                            exeLW2(out, iset[instructionAdd - 1], instructionAdd,false);
                             //eraseAllBlocks(instructionAdd);
                         }
                     }
@@ -909,7 +863,7 @@ void execute1a4(ofstream &out)
                         eraseIfP_SW(curInst);
                         if (ifSW(curInst, address))
                         {
-                            exeSW(out, iset[instructionAdd - 1], instructionAdd,false);
+                            exeSW2(out, iset[instructionAdd - 1], instructionAdd,false);
                             
                             //eraseAllBlocks(instructionAdd);
                         }
@@ -930,11 +884,11 @@ void execute1a4(ofstream &out)
                             cannotChangeMemoryG.erase(mem);
                     }
                     //InstAddToFreq[instructionAdd]--;
-                    if (DRAMrequestIssued)
-                    {
-                        numClockCycles = uptoClkCyc + 1;
-                        DRAMrequestIssued = false;
-                    }
+                    // if (DRAMrequestIssued)
+                    // {
+                    //     numClockCycles = uptoClkCyc + 1;
+                    //     DRAMrequestIssued = false;
+                    // }
                 }
             }
         }
@@ -1053,10 +1007,10 @@ void execute1a4(ofstream &out)
                 // cout << "counter at pos : 2 :" << counter << endl; counter++;
                 //eraseIfP_LW(iset[instructionAdd - 1]);
                 //exeLW(out, iset[instructionAdd - 1], instructionAdd,true);
-                if (ifLW(iset[instructionAdd - 1],getAddress(iset[instructionAdd - 1]))) exeLW(out,iset[instructionAdd-1],instructionAdd,true);
+                if (ifLW(iset[instructionAdd - 1],getAddress(iset[instructionAdd - 1]))) exeLW2(out,iset[instructionAdd-1],instructionAdd,true);
                 else {
                     eraseIfP_LW(iset[instructionAdd - 1]);
-                    exeAllBlkingInstLW(out,iset[instructionAdd-1],2,instructionAdd);
+                    exeAllBlkingInstLW2(out,iset[instructionAdd-1],2,instructionAdd);
                 }
                 // cout << InstAddToFreq[instructionAdd] << " this is InstAddToFreq[instructionAdd] after" << "  inst address  "<<instructionAdd << endl; 
                 // cout << "counter at pos : 3 :" << counter << endl; counter++;
@@ -1066,10 +1020,10 @@ void execute1a4(ofstream &out)
                 // cout << "counter at pos : 4 :" << counter << endl; counter++;
                 //eraseIfP_SW(iset[instructionAdd - 1]);
                 //exeSW(out, iset[instructionAdd - 1], instructionAdd,true);
-                if (ifSW (iset[instructionAdd - 1],getAddress(iset[instructionAdd - 1]))) exeSW(out,iset[instructionAdd - 1],instructionAdd,true);
+                if (ifSW (iset[instructionAdd - 1],getAddress(iset[instructionAdd - 1]))) exeSW2(out,iset[instructionAdd - 1],instructionAdd,true);
                 else {
                     eraseIfP_SW(iset[instructionAdd - 1]);
-                    exeAllBlkingInstSW(out,iset[instructionAdd-1],2,instructionAdd);
+                    exeAllBlkingInstSW2(out,iset[instructionAdd-1],2,instructionAdd);
                 }
                 // cout << "counter at pos : 5 :" << counter << endl; counter++;
             }
@@ -1088,11 +1042,11 @@ void execute1a4(ofstream &out)
             }*/
 
             
-            if (DRAMrequestIssued)
-            {
-                numClockCycles = uptoClkCyc + 1;
-                DRAMrequestIssued = false;
-            }
+            // if (DRAMrequestIssued)
+            // {
+            //     numClockCycles = uptoClkCyc + 1;
+            //     DRAMrequestIssued = false;
+            // }
         }
     }
     numClockCycles--;

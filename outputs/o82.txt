@@ -1,0 +1,41 @@
+
+Total Number of Clock Cycles: 60
+
+Total Number of Row Buffer Updates: 7
+
+Memory content at the end of the execution:
+
+1000-1003: 1d4c
+1004-1007: 1388
+2496-2499: 2710
+2500-2503: 9c4
+2504-2507: 2710
+
+Every cycle description: 
+
+cycle 1: Instruction: addi ($t0,$t0,1000): $t0=1000
+cycle 2: Instruction: addi ($t1,$t1,2500): $t1=2500
+cycle 3: Instruction: addi ($t2,$t2,5000): $t2=5000
+cycle 4: Instruction: addi ($t3,$t3,7500): $t3=7500
+cycle 5: Instruction: addi ($t4,$t4,10000): $t4=10000
+cycle 6: DRAM Request Issued (sw)
+cycle 7-16: Access Row 0 from DRAM
+cycle 17-18: Accessing Column 1000: memory address 1000-1003 = 7500
+cycle 19: DRAM Request Issued (sw)
+cycle 20-21: Accessing Column 1004: memory address 1004-1007 = 5000
+cycle 22: DRAM Request Issued (sw)
+cycle 23-32: WriteBack Row 0 to DRAM
+cycle 33-42: Access Row 2 from DRAM
+cycle 43-44: Accessing Column 448: memory address 2496-2499 = 10000
+cycle 45: DRAM Request Issued (sw)
+cycle 46-47: Accessing Column 456: memory address 2504-2507 = 10000
+cycle 48: DRAM Request Issued (sw)
+cycle 49-50: Accessing Column 452: memory address 2500-2503 = 2500
+cycle 51-60: WriteBack Row 2 to DRAM
+
+END OF EXECUTION. META DATA: 
+
+Number of times each instruction was executed: 
+
+[add: 0,sub: 0,mul: 0,slt: 0,addi: 5,bne: 0,beq: 0,lw: 0,sw: 5,j: 0]
+

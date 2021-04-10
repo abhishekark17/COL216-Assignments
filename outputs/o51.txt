@@ -35,9 +35,9 @@ cycle 52: DRAM Request Issued (lw)
 cycle 53-54: Accessing Column 904: $t2=0
 cycle 55: DRAM Request Issued (lw)
 cycle 56-57: Accessing Column 904: $t2=0
-cycle 58: DRAM Request Issued (lw)
-cycle 59-60: Accessing Column 904: $t2=0
-cycle 61: Instruction: add ($t0,$t2,$t1): $t0=0
+cycle 58: Instruction: add ($t0,$t2,$t1): $t0=0
+cycle 59: DRAM Request Issued (lw)
+cycle 60-61: Accessing Column 904: $t2=0
 cycle 62: DRAM Request Issued (lw)
 cycle 63-64: Accessing Column 904: $t2=0
 cycle 65-74: WriteBack Row 4 to DRAM

@@ -1,5 +1,5 @@
 
-Total Number of Clock Cycles: 92
+Total Number of Clock Cycles: 89
 
 Total Number of Row Buffer Updates: 4
 
@@ -34,13 +34,11 @@ cycle 74: DRAM Request Issued (lw)
 cycle 75-76: Accessing Column 784: $s1=0
 cycle 77: DRAM Request Issued (lw)
 cycle 78-79: Accessing Column 784: $s1=0
-cycle 80: DRAM Request Issued (lw)
-cycle 81-82: Accessing Column 784: $s1=0
-cycle 83-92: WriteBack Row 9 to DRAM
+cycle 80-89: WriteBack Row 9 to DRAM
 
 END OF EXECUTION. META DATA: 
 
 Number of times each instruction was executed: 
 
-[add: 0,sub: 0,mul: 0,slt: 0,addi: 5,bne: 0,beq: 0,lw: 8,sw: 1,j: 0]
+[add: 0,sub: 0,mul: 0,slt: 0,addi: 5,bne: 0,beq: 0,lw: 7,sw: 1,j: 0]
 

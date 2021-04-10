@@ -1,0 +1,50 @@
+
+Total Number of Clock Cycles: 62
+
+Total Number of Row Buffer Updates: 3
+
+Memory content at the end of the execution:
+
+2500-2503: 5
+
+Every cycle description: 
+
+cycle 1: Instruction: addi ($t1,$t1,5): $t1=5
+cycle 2: DRAM Request Issued (sw)
+cycle 3-12: Access Row 2 from DRAM
+cycle 13-14: Accessing Column 452: memory address 2500-2503 = 5
+cycle 3: Instruction: addi ($t1,$t1,-1): $t1=4
+cycle 4: Instruction beq ($t1,$zero,label,0)
+cycle 5: Instruction j :Jump to label ID: main
+cycle 6: Instruction: addi ($t1,$t1,-1): $t1=3
+cycle 7: Instruction beq ($t1,$zero,label,0)
+cycle 8: Instruction j :Jump to label ID: main
+cycle 9: Instruction: addi ($t1,$t1,-1): $t1=2
+cycle 10: Instruction beq ($t1,$zero,label,0)
+cycle 11: Instruction j :Jump to label ID: main
+cycle 12: Instruction: addi ($t1,$t1,-1): $t1=1
+cycle 13: Instruction beq ($t1,$zero,label,0)
+cycle 14: Instruction j :Jump to label ID: main
+cycle 15: Instruction: addi ($t1,$t1,-1): $t1=0
+cycle 16: Instruction beq ($t1,$zero,label,1)
+cycle 17: Instruction: add ($t0,$t2,$t1): $t0=0
+cycle 18: DRAM Request Issued (lw)
+cycle 19-28: WriteBack Row 2 to DRAM
+cycle 29-38: Access Row 4 from DRAM
+cycle 39-40: Accessing Column 904: $t2=0
+cycle 41: DRAM Request Issued (lw)
+cycle 42-43: Accessing Column 904: $t2=0
+cycle 44: DRAM Request Issued (lw)
+cycle 45-46: Accessing Column 904: $t2=0
+cycle 47: DRAM Request Issued (lw)
+cycle 48-49: Accessing Column 904: $t2=0
+cycle 50: DRAM Request Issued (lw)
+cycle 51-52: Accessing Column 904: $t2=0
+cycle 53-62: WriteBack Row 4 to DRAM
+
+END OF EXECUTION. META DATA: 
+
+Number of times each instruction was executed: 
+
+[add: 1,sub: 0,mul: 0,slt: 0,addi: 6,bne: 0,beq: 5,lw: 5,sw: 1,j: 4]
+
