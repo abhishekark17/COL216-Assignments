@@ -26,16 +26,16 @@ cycle 23: DRAM Request Issued (lw)
 cycle 24-25: Accessing Column 1000: $t5=1
 cycle 26: DRAM Request Issued (lw)
 cycle 27-28: Accessing Column 1004: $t7=3
-cycle 29: DRAM Request Issued (sw)
+cycle 29: DRAM Request Issued (lw)
 cycle 30-39: WriteBack Row 0 to DRAM
 cycle 40-49: Access Row 2 from DRAM
-cycle 50-51: Accessing Column 456: memory address 2504-2507 = 0
-cycle 52: DRAM Request Issued (lw)
-cycle 53-54: Accessing Column 456: $t8=0
-cycle 55: DRAM Request Issued (sw)
-cycle 56-57: Accessing Column 452: memory address 2500-2503 = 2
-cycle 58: DRAM Request Issued (lw)
-cycle 59-60: Accessing Column 452: $t6=2
+cycle 50-51: Accessing Column 456: $t8=0
+cycle 52: DRAM Request Issued (sw)
+cycle 53-54: Accessing Column 456: memory address 2504-2507 = 0
+cycle 55: DRAM Request Issued (lw)
+cycle 56-57: Accessing Column 452: $t6=0
+cycle 58: DRAM Request Issued (sw)
+cycle 59-60: Accessing Column 452: memory address 2500-2503 = 2
 cycle 61-70: WriteBack Row 2 to DRAM
 
 END OF EXECUTION. META DATA: 

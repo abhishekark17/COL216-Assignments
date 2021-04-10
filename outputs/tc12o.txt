@@ -1,7 +1,7 @@
 
-Total Number of Clock Cycles: 103
+Total Number of Clock Cycles: 89
 
-Total Number of Row Buffer Updates: 7
+Total Number of Row Buffer Updates: 4
 
 Memory content at the end of the execution:
 
@@ -20,23 +20,25 @@ cycle 19: DRAM Request Issued (sw)
 cycle 20-29: WriteBack Row 4 to DRAM
 cycle 30-39: Access Row 1 from DRAM
 cycle 40-41: Accessing Column 176: memory address 1200-1203 = 0
-cycle 42: DRAM Request Issued (sw)
-cycle 43-44: Accessing Column 176: memory address 1200-1203 = 0
-cycle 45: DRAM Request Issued (lw)
-cycle 46-55: WriteBack Row 1 to DRAM
-cycle 56-65: Access Row 9 from DRAM
+cycle 42: DRAM Request Issued (lw)
+cycle 43-52: WriteBack Row 1 to DRAM
+cycle 53-62: Access Row 9 from DRAM
+cycle 63-64: Accessing Column 784: $s1=0
+cycle 65: DRAM Request Issued (lw)
 cycle 66-67: Accessing Column 784: $s1=0
 cycle 68: DRAM Request Issued (lw)
 cycle 69-70: Accessing Column 784: $s1=0
-cycle 71: DRAM Request Issued (sw)
-cycle 72-81: WriteBack Row 9 to DRAM
-cycle 82-91: Access Row 1 from DRAM
-cycle 92-93: Accessing Column 176: memory address 1200-1203 = 0
-cycle 94-103: WriteBack Row 1 to DRAM
+cycle 71: DRAM Request Issued (lw)
+cycle 72-73: Accessing Column 784: $s1=0
+cycle 74: DRAM Request Issued (lw)
+cycle 75-76: Accessing Column 784: $s1=0
+cycle 77: DRAM Request Issued (lw)
+cycle 78-79: Accessing Column 784: $s1=0
+cycle 80-89: WriteBack Row 9 to DRAM
 
 END OF EXECUTION. META DATA: 
 
 Number of times each instruction was executed: 
 
-[add: 0,sub: 0,mul: 0,slt: 0,addi: 5,bne: 0,beq: 0,lw: 3,sw: 3,j: 0]
+[add: 0,sub: 0,mul: 0,slt: 0,addi: 5,bne: 0,beq: 0,lw: 7,sw: 1,j: 0]
 

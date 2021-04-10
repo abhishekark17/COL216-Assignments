@@ -26,11 +26,11 @@ cycle 20-21: Accessing Column 1004: memory address 1004-1007 = 5000
 cycle 22: DRAM Request Issued (sw)
 cycle 23-32: WriteBack Row 0 to DRAM
 cycle 33-42: Access Row 2 from DRAM
-cycle 43-44: Accessing Column 452: memory address 2500-2503 = 2500
+cycle 43-44: Accessing Column 448: memory address 2496-2499 = 10000
 cycle 45: DRAM Request Issued (sw)
 cycle 46-47: Accessing Column 456: memory address 2504-2507 = 10000
 cycle 48: DRAM Request Issued (sw)
-cycle 49-50: Accessing Column 448: memory address 2496-2499 = 10000
+cycle 49-50: Accessing Column 452: memory address 2500-2503 = 2500
 cycle 51-60: WriteBack Row 2 to DRAM
 
 END OF EXECUTION. META DATA: 

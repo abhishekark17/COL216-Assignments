@@ -6,7 +6,7 @@ Total Number of Row Buffer Updates: 6
 Memory content at the end of the execution:
 
 5000-5003: 1838
-10000-10003: 1
+10000-10003: 1389
 
 Every cycle description: 
 
@@ -19,18 +19,18 @@ cycle 6: DRAM Request Issued (sw)
 cycle 7-16: Access Row 6 from DRAM
 cycle 17-18: Accessing Column 56: memory address 6200-6203 = 0
 cycle 19: Instruction: addi ($s0,$t2,1200): $s0=6200
-cycle 20: Instruction: addi ($v0,$v0,1): $v0=1
-cycle 21: DRAM Request Issued (sw)
-cycle 22-31: WriteBack Row 6 to DRAM
-cycle 32-41: Access Row 9 from DRAM
-cycle 42-43: Accessing Column 784: memory address 10000-10003 = 1
-cycle 44: Instruction: addi ($v0,$v0,1): $v0=2
-cycle 45: Instruction: addi ($v0,$v0,1): $v0=3
-cycle 46: DRAM Request Issued (sw)
-cycle 47-56: WriteBack Row 9 to DRAM
-cycle 57-66: Access Row 4 from DRAM
-cycle 67-68: Accessing Column 904: memory address 5000-5003 = 6200
-cycle 69-78: WriteBack Row 4 to DRAM
+cycle 20: DRAM Request Issued (sw)
+cycle 21-30: WriteBack Row 6 to DRAM
+cycle 31-40: Access Row 4 from DRAM
+cycle 41-42: Accessing Column 904: memory address 5000-5003 = 6200
+cycle 43: Instruction: addi ($t2,$t2,1): $t2=5001
+cycle 44: DRAM Request Issued (sw)
+cycle 45-54: WriteBack Row 4 to DRAM
+cycle 55-64: Access Row 9 from DRAM
+cycle 65-66: Accessing Column 784: memory address 10000-10003 = 5001
+cycle 67: Instruction: addi ($t2,$t2,1): $t2=5002
+cycle 68: Instruction: addi ($v0,$t2,1): $v0=5003
+cycle 69-78: WriteBack Row 9 to DRAM
 
 END OF EXECUTION. META DATA: 
 

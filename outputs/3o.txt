@@ -1,7 +1,7 @@
 
-Total Number of Clock Cycles: 91
+Total Number of Clock Cycles: 111
 
-Total Number of Row Buffer Updates: 7
+Total Number of Row Buffer Updates: 8
 
 Memory content at the end of the execution:
 
@@ -27,19 +27,21 @@ cycle 24: DRAM Request Issued (lw)
 cycle 25-26: Accessing Column 1000: $t5=1
 cycle 27: DRAM Request Issued (lw)
 cycle 28-29: Accessing Column 1004: $t7=3
-cycle 30: DRAM Request Issued (lw)
+cycle 30: DRAM Request Issued (sw)
 cycle 31-40: WriteBack Row 0 to DRAM
-cycle 41-50: Access Row 3 from DRAM
-cycle 51-52: Accessing Column 928: $t6=0
-cycle 53: DRAM Request Issued (sw)
-cycle 54-63: WriteBack Row 3 to DRAM
-cycle 64-73: Access Row 2 from DRAM
-cycle 74-75: Accessing Column 452: memory address 2500-2503 = 2
-cycle 76: DRAM Request Issued (sw)
-cycle 77-78: Accessing Column 456: memory address 2504-2507 = 0
-cycle 79: DRAM Request Issued (lw)
-cycle 80-81: Accessing Column 456: $t8=0
-cycle 82-91: WriteBack Row 2 to DRAM
+cycle 41-50: Access Row 2 from DRAM
+cycle 51-52: Accessing Column 456: memory address 2504-2507 = 0
+cycle 53: DRAM Request Issued (lw)
+cycle 54-55: Accessing Column 456: $t8=0
+cycle 56: DRAM Request Issued (lw)
+cycle 57-66: WriteBack Row 2 to DRAM
+cycle 67-76: Access Row 3 from DRAM
+cycle 77-78: Accessing Column 928: $t6=0
+cycle 79: DRAM Request Issued (sw)
+cycle 80-89: WriteBack Row 3 to DRAM
+cycle 90-99: Access Row 2 from DRAM
+cycle 100-101: Accessing Column 452: memory address 2500-2503 = 2
+cycle 102-111: WriteBack Row 2 to DRAM
 
 END OF EXECUTION. META DATA: 
 
