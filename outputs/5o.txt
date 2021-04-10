@@ -9,37 +9,37 @@ Memory content at the end of the execution:
 
 Every cycle description: 
 
-cycle 1: Instruction: addi ($at,$at,5): $at=5
+cycle 1: Instruction: addi ($t1,$t1,5): $t1=5
 cycle 2: DRAM Request Issued (sw)
 cycle 3-12: Access Row 2 from DRAM
 cycle 13-14: Accessing Column 452: memory address 2500-2503 = 5
-cycle 15: Instruction: addi ($at,$at,-1): $at=4
-cycle 16: Instruction beq ($at,$zero,label,0)
+cycle 15: Instruction: addi ($t1,$t1,-1): $t1=4
+cycle 16: Instruction beq ($t1,$zero,label,0)
 cycle 17: Instruction j :Jump to label ID: main
-cycle 18: Instruction: addi ($at,$at,-1): $at=3
-cycle 19: Instruction beq ($at,$zero,label,0)
+cycle 18: Instruction: addi ($t1,$t1,-1): $t1=3
+cycle 19: Instruction beq ($t1,$zero,label,0)
 cycle 20: Instruction j :Jump to label ID: main
-cycle 21: Instruction: addi ($at,$at,-1): $at=2
-cycle 22: Instruction beq ($at,$zero,label,0)
+cycle 21: Instruction: addi ($t1,$t1,-1): $t1=2
+cycle 22: Instruction beq ($t1,$zero,label,0)
 cycle 23: Instruction j :Jump to label ID: main
-cycle 24: Instruction: addi ($at,$at,-1): $at=1
-cycle 25: Instruction beq ($at,$zero,label,0)
+cycle 24: Instruction: addi ($t1,$t1,-1): $t1=1
+cycle 25: Instruction beq ($t1,$zero,label,0)
 cycle 26: Instruction j :Jump to label ID: main
-cycle 27: Instruction: addi ($at,$at,-1): $at=0
-cycle 28: Instruction beq ($at,$zero,label,1)
+cycle 27: Instruction: addi ($t1,$t1,-1): $t1=0
+cycle 28: Instruction beq ($t1,$zero,label,1)
 cycle 29: DRAM Request Issued (lw)
 cycle 30-39: WriteBack Row 2 to DRAM
 cycle 40-49: Access Row 4 from DRAM
-cycle 50-51: Accessing Column 904: $v0=0
+cycle 50-51: Accessing Column 904: $t2=0
 cycle 52: DRAM Request Issued (lw)
-cycle 53-54: Accessing Column 904: $v0=0
+cycle 53-54: Accessing Column 904: $t2=0
 cycle 55: DRAM Request Issued (lw)
-cycle 56-57: Accessing Column 904: $v0=0
+cycle 56-57: Accessing Column 904: $t2=0
 cycle 58: DRAM Request Issued (lw)
-cycle 59-60: Accessing Column 904: $v0=0
-cycle 61: DRAM Request Issued (lw)
-cycle 62-63: Accessing Column 904: $v0=0
-cycle 64: Instruction: add ($t0,$v0,$at): $t0=0
+cycle 59-60: Accessing Column 904: $t2=0
+cycle 61: Instruction: add ($t0,$t2,$t1): $t0=0
+cycle 62: DRAM Request Issued (lw)
+cycle 63-64: Accessing Column 904: $t2=0
 cycle 65-74: WriteBack Row 4 to DRAM
 
 END OF EXECUTION. META DATA: 
@@ -47,3 +47,4 @@ END OF EXECUTION. META DATA:
 Number of times each instruction was executed: 
 
 [add: 1,sub: 0,mul: 0,slt: 0,addi: 6,bne: 0,beq: 5,lw: 5,sw: 1,j: 4]
+

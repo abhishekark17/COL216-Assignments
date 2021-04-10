@@ -1,7 +1,7 @@
 
-Total Number of Clock Cycles: 99
+Total Number of Clock Cycles: 102
 
-Total Number of Row Buffer Updates: 8
+Total Number of Row Buffer Updates: 9
 
 Memory content at the end of the execution:
 
@@ -63,11 +63,13 @@ cycle 75-84: Access Row 9 from DRAM
 cycle 85-86: Accessing Column 784: memory address 10000-10003 = 0
 cycle 87: DRAM Request Issued (sw)
 cycle 88-89: Accessing Column 784: memory address 10000-10003 = 0
-cycle 90-99: WriteBack Row 9 to DRAM
+cycle 90: DRAM Request Issued (sw)
+cycle 91-92: Accessing Column 784: memory address 10000-10003 = 0
+cycle 93-102: WriteBack Row 9 to DRAM
 
 END OF EXECUTION. META DATA: 
 
 Number of times each instruction was executed: 
 
-[add: 2,sub: 0,mul: 0,slt: 4,addi: 19,bne: 4,beq: 0,lw: 4,sw: 6,j: 0]
+[add: 2,sub: 0,mul: 0,slt: 4,addi: 19,bne: 4,beq: 0,lw: 4,sw: 7,j: 0]
 

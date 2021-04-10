@@ -113,6 +113,8 @@ extern vector<string> exectutionOutput;
 extern bool switchOnBranch;
 extern bool DRAMrequestIssued;
 
+extern unordered_map<int,vector<multiset<int>>> InstAddToUptoBlocks;
+
 
 pair<int,int> getActualRowColFromAddress (int address);
 int getRowOfRowBuffer (int address);

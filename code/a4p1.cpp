@@ -13,9 +13,9 @@
 * mem address (offset + r2) cannot change, cannot use 
 */
 
-void exeLW(ofstream &out, instruction currInst, int instAddr);
-void exeAllBlkingInstLW(ofstream &out, instruction currInst, int upto);
-void exeAllBlkingInstSW(ofstream &out, instruction currInst, int upto);
+void exeLW(ofstream &out, instruction currInst, int instAddr,bool erase);
+void exeAllBlkingInstLW(ofstream &out, instruction currInst, int upto,int ia);
+void exeAllBlkingInstSW(ofstream &out, instruction currInst, int upto,int ia);
 int getAddress(instruction &curInst);
 
 void removeInstFromDeque(deque<int> &mydeq, int insAddr)
@@ -127,16 +127,18 @@ void intializerowToInsSet()
     }
 }
 
-void exeLW(ofstream &out, instruction currInst, int instAddr)
+void exeLW(ofstream &out, instruction currInst, int instAddr, bool erase)
 {
 
-    ////lwInstRegisterID = currInst.cirs[0];
+    cout << "instAddr inside exeLW :" << instAddr << endl;
     int address = getAddress(currInst);
     int wantedRow = getRowOfRowBuffer(address);
     if (wantedRow < 0)
         error1 = "BAD ADDRESS (lw)";
-    
-    exeAllBlkingInstLW(out, currInst, 2);
+    if (erase) eraseIfP_LW(currInst);
+    cout << "before exeAllBlkingInstLW" << endl;
+    exeAllBlkingInstLW(out, currInst, 2,instAddr);
+    cout << "after exeAllBlkingInstLW" << endl;
     int prevRow = currentRowInRowBuffer;
     DRAMrequestIssued = true;
     exectutionOutput.push_back("cycle " + to_string(numClockCycles) + ": " + "DRAM Request Issued (lw)");
@@ -154,7 +156,7 @@ void exeLW(ofstream &out, instruction currInst, int instAddr)
     }
 
     lw(currInst.cirs);
-
+    InstAddToFreq[instAddr] = max(InstAddToFreq[instAddr] - 1, 0);
     if (prevRow == -1)
     {
         exectutionOutput.push_back("cycle " + to_string(numClockCycles + 1) + "-" + to_string(numClockCycles + ROW_ACCESS_DELAY) + ": " + "Access Row " + to_string(wantedRow) + " from DRAM");
@@ -172,15 +174,15 @@ void exeLW(ofstream &out, instruction currInst, int instAddr)
     numOfInst[7]++;
 }
 
-void exeSW(ofstream &out, instruction currInst, int instAddr)
+void exeSW(ofstream &out, instruction currInst, int instAddr, bool erase)
 {
-
+    cout << "entered exeSw " << endl;
     int address = getAddress(currInst);
     int wantedRow = getRowOfRowBuffer(address);
     if (wantedRow < 0)
         error1 = "BAD ADDRESS (sw)";
-    
-    exeAllBlkingInstSW(out, currInst, 2);
+    if (erase) eraseIfP_SW(currInst);
+    exeAllBlkingInstSW(out, currInst, 2,instAddr);
     DRAMrequestIssued = true;
     int prevRow = currentRowInRowBuffer;
     exectutionOutput.push_back("cycle " + to_string(numClockCycles) + ": " + "DRAM Request Issued (sw)");
@@ -198,6 +200,7 @@ void exeSW(ofstream &out, instruction currInst, int instAddr)
     }
 
     sw(currInst.cirs);
+    InstAddToFreq[instAddr] = max(InstAddToFreq[instAddr] - 1, 0);
     numRowBufferUpdates++;
 
     if (prevRow == -1)
@@ -215,6 +218,7 @@ void exeSW(ofstream &out, instruction currInst, int instAddr)
         exectutionOutput.push_back("cycle " + to_string(numClockCycles + (2 * ROW_ACCESS_DELAY) + 1) + "-" + to_string(uptoClkCyc) + ": " + "Accessing Column " + to_string(getColOfRowBuffer(address)) + ": memory address " + to_string(address) + "-" + to_string(address + 3) + " = " + to_string(registers[currInst.cirs[0]]));
     }
     numOfInst[8]++;
+    cout << "exited exeSw " << endl;
 }
 
 void eraseAllBlocks(int insAddr)
@@ -256,22 +260,25 @@ void removeAndExeOPID7(ofstream &out, instruction &curInst, int insAddr)
 {
     if (iset[insAddr - 1].opID == 7 && InstAddToFreq[insAddr] > 0)
     {
-        eraseIfP_LW(curInst);
-        exeLW(out, iset[insAddr - 1], insAddr);
-        InstAddToFreq[insAddr] = max(InstAddToFreq[insAddr] - 1, 0);
+        //eraseIfP_LW(curInst);
+        exeLW(out, iset[insAddr - 1], insAddr,true);
+        
         //eraseAllBlocks(instructionAdd);
     }
 }
 
 void removeAndExeOPID8(ofstream &out, instruction &curInst, int insAddr)
 {
+    cout << "entered remove and execute opid 8" << endl;
     if (iset[insAddr - 1].opID == 8 && InstAddToFreq[insAddr] > 0)
     {
-        eraseIfP_SW(curInst);
-        exeSW(out, iset[insAddr - 1], insAddr);
-        InstAddToFreq[insAddr] = max(InstAddToFreq[insAddr] - 1, 0);
+        //eraseIfP_SW(curInst);
+        cout << "called exeSw and currinst address was " << insAddr << endl;
+        exeSW(out, iset[insAddr - 1], insAddr,true);
+        
         //eraseAllBlocks(instructionAdd);
     }
+    cout << "exited remove and execute opid 8" << endl;
 }
 
 void exeAllBlkingInstAdd(ofstream &out, instruction currInst, int upto)
@@ -332,110 +339,81 @@ void exeAllBlkingInstAdd(ofstream &out, instruction currInst, int upto)
     }
 }
 
-void exeAllBlkingInstLW(ofstream &out, instruction currInst, int upto)
+void exeAllBlkingInstLW(ofstream &out, instruction currInst, int upto, int ia)
 {
-    eraseIfP_LW(currInst);
+    //eraseIfP_LW(currInst);
+    cout << "entered exeAllBlkingInstLW " << endl;
     for (int regPos = 0; regPos <= upto; regPos += 2)
     {
         if (cannotUseRegistersG.find(currInst.cirs[regPos]) != cannotUseRegistersG.end())
         {
-            eraseIfP_URG(currInst.cirs[regPos]);
-            if (regPos == 0)
-                eraseIfP_CRG(currInst.cirs[regPos]);
+            cout << "should not enter here" <<endl;
+            cout << "caught cannot use registers G inside eabilw :" << rrmap[currInst.cirs[regPos]] << endl;
+            // eraseIfP_URG(currInst.cirs[regPos]);
+            // if (regPos == 0)
+            //     eraseIfP_CRG(currInst.cirs[regPos]);
 
             deque<int> ublkRegQueue = uBlockRegToInstAddQueue[currInst.cirs[regPos]];
             deque<int> cblkRegQueue = cBlockRegToInstAddQueue[currInst.cirs[regPos]];
+            bool removedself = false;
             while (!ublkRegQueue.empty())
             {
                 int insAddr = ublkRegQueue.front();
+                if (removedself == false && ia == insAddr) {
                 ublkRegQueue.pop_front();
-                removeInstFromDeque(cblkRegQueue, insAddr);
-                uBlockRegToInstAddQueue[currInst.cirs[regPos]] = ublkRegQueue;
-                cBlockRegToInstAddQueue[currInst.cirs[regPos]] = cblkRegQueue;
+                removedself = true;
+                }  
+                if (!ublkRegQueue.empty()) {
+                    ublkRegQueue.pop_front();
+                    removeInstFromDeque(cblkRegQueue, insAddr);
+                    uBlockRegToInstAddQueue[currInst.cirs[regPos]] = ublkRegQueue;
+                    cBlockRegToInstAddQueue[currInst.cirs[regPos]] = cblkRegQueue;
 
-                removeAndExeOPID7(out, currInst, insAddr);
-                removeAndExeOPID8(out, currInst, insAddr);
-                ublkRegQueue = uBlockRegToInstAddQueue[currInst.cirs[regPos]];
-                //eraseAllBlocks(insAddr);
-                if (DRAMrequestIssued)
-                {
-                    numClockCycles = uptoClkCyc + 1;
-                    DRAMrequestIssued = false;
+                    removeAndExeOPID7(out, currInst, insAddr);
+                    removeAndExeOPID8(out, currInst, insAddr);
+                    ublkRegQueue = uBlockRegToInstAddQueue[currInst.cirs[regPos]];
+                    //eraseAllBlocks(insAddr);
+                    if (DRAMrequestIssued)
+                    {
+                        numClockCycles = uptoClkCyc + 1;
+                        DRAMrequestIssued = false;
+                    }
+                    //ublkRegQueue.pop();
                 }
-                //ublkRegQueue.pop();
+                
             }
         }
     }
 
     if (cannotChangeRegistersG.find(currInst.cirs[0]) != cannotChangeRegistersG.end())
     {
-        eraseIfP_CRG(currInst.cirs[0]);
-        eraseIfP_URG(currInst.cirs[0]);
+        cout << "should print caught cannot change register : " << rrmap[currInst.cirs[0]] << endl;
+        // eraseIfP_CRG(currInst.cirs[0]);
+        // eraseIfP_URG(currInst.cirs[0]);
 
         deque<int> cblkRegQueue = cBlockRegToInstAddQueue[currInst.cirs[0]];
         deque<int> ublkRegQueue = uBlockRegToInstAddQueue[currInst.cirs[0]];
+        bool removedself = false;
         while (!cblkRegQueue.empty())
         {
+            
             int insAddr = cblkRegQueue.front();
-            cblkRegQueue.pop_front();
-            removeInstFromDeque(ublkRegQueue, insAddr);
-            uBlockRegToInstAddQueue[currInst.cirs[0]] = ublkRegQueue;
-            cBlockRegToInstAddQueue[currInst.cirs[0]] = cblkRegQueue;
-            //cblkRegQueue = cBlockRegToInstAddQueue[currInst.cirs[0]];
-
-            removeAndExeOPID7(out, currInst, insAddr);
-            removeAndExeOPID8(out, currInst, insAddr);
-            cblkRegQueue = cBlockRegToInstAddQueue[currInst.cirs[0]];
-            //eraseAllBlocks(insAddr);
-            if (DRAMrequestIssued)
-            {
-                numClockCycles = uptoClkCyc + 1;
-                DRAMrequestIssued = false;
+            if (removedself == false && ia == insAddr) {
+                cblkRegQueue.pop_front();
+                removedself = true;
             }
-        }
-    }
-
-    if (cannotUseMemoryG.find(getAddress(currInst)) != cannotUseMemoryG.end())
-    {
-        eraseIfP_UMG(getAddress(currInst));
-        deque<int> ublkMemQueue = uBlockMemoryToInstAddQueue[getAddress(currInst)];
-        while (!ublkMemQueue.empty())
-        {
-            int insAddr = ublkMemQueue.front();
-            ublkMemQueue.pop_front();
-            uBlockMemoryToInstAddQueue[getAddress(currInst)] = ublkMemQueue;
-
-            removeAndExeOPID7(out, currInst, insAddr);
-            removeAndExeOPID8(out, currInst, insAddr);
-            //eraseAllBlocks(insAddr);
-            ublkMemQueue = uBlockMemoryToInstAddQueue[getAddress(currInst)];
-            if (DRAMrequestIssued)
-            {
-                numClockCycles = uptoClkCyc + 1;
-                DRAMrequestIssued = false;
-            }
-        }
-    }
-}
-
-void exeAllBlkingInstSW(ofstream &out, instruction currInst, int upto)
-{
-    eraseIfP_SW(currInst);
-    for (int regPos = 0; regPos <= upto; regPos += 2)
-    {
-        if (cannotUseRegistersG.find(currInst.cirs[regPos]) != cannotUseRegistersG.end())
-        {
-            eraseIfP_URG(currInst.cirs[regPos]);
-            deque<int> ublkRegQueue = uBlockRegToInstAddQueue[currInst.cirs[regPos]];
-            while (!ublkRegQueue.empty())
-            {
-                int insAddr = ublkRegQueue.front();
-                ublkRegQueue.pop_front();
-                uBlockRegToInstAddQueue[currInst.cirs[regPos]] = ublkRegQueue;
+            if (!cblkRegQueue.empty()) {
+                insAddr = cblkRegQueue.front();
+                cout << insAddr << " front instruction address   op id :" << currInst.opID   << endl;
+                cblkRegQueue.pop_front();
+                removeInstFromDeque(ublkRegQueue, insAddr);
+                uBlockRegToInstAddQueue[currInst.cirs[0]] = ublkRegQueue;
+                cBlockRegToInstAddQueue[currInst.cirs[0]] = cblkRegQueue;
+                //cblkRegQueue = cBlockRegToInstAddQueue[currInst.cirs[0]];
 
                 removeAndExeOPID7(out, currInst, insAddr);
                 removeAndExeOPID8(out, currInst, insAddr);
-                ublkRegQueue = uBlockRegToInstAddQueue[currInst.cirs[regPos]];
+                cblkRegQueue = cBlockRegToInstAddQueue[currInst.cirs[0]];
                 //eraseAllBlocks(insAddr);
                 if (DRAMrequestIssued)
                 {
@@ -443,59 +421,150 @@ void exeAllBlkingInstSW(ofstream &out, instruction currInst, int upto)
                     DRAMrequestIssued = false;
                 }
             }
+            
         }
     }
 
     if (cannotUseMemoryG.find(getAddress(currInst)) != cannotUseMemoryG.end())
     {
-        eraseIfP_UMG(getAddress(currInst));
-
+        //eraseIfP_UMG(getAddress(currInst));
         deque<int> ublkMemQueue = uBlockMemoryToInstAddQueue[getAddress(currInst)];
-        deque<int> cblkMemQueue = cBlockMemoryToInstAddQueue[getAddress(currInst)];
+        bool removedself = false;
         while (!ublkMemQueue.empty())
         {
             int insAddr = ublkMemQueue.front();
-            ublkMemQueue.pop_front();
-            uBlockMemoryToInstAddQueue[getAddress(currInst)] = ublkMemQueue;
-            removeInstFromDeque(cblkMemQueue, insAddr);
-            cBlockMemoryToInstAddQueue[getAddress(currInst)] = cblkMemQueue;
-
-            removeAndExeOPID7(out, currInst, insAddr);
-            removeAndExeOPID8(out, currInst, insAddr);
-            ublkMemQueue = uBlockMemoryToInstAddQueue[getAddress(currInst)];
-            //eraseAllBlocks(insAddr);
-            if (DRAMrequestIssued)
-            {
-                numClockCycles = uptoClkCyc + 1;
-                DRAMrequestIssued = false;
+            if (removedself == false && ia == insAddr) {
+                ublkMemQueue.pop_front();
+                removedself = true;
             }
+            if (!ublkMemQueue.empty()) {
+                int insAddr = ublkMemQueue.front();
+                ublkMemQueue.pop_front();
+                uBlockMemoryToInstAddQueue[getAddress(currInst)] = ublkMemQueue;
+
+                removeAndExeOPID7(out, currInst, insAddr);
+                removeAndExeOPID8(out, currInst, insAddr);
+                //eraseAllBlocks(insAddr);
+                ublkMemQueue = uBlockMemoryToInstAddQueue[getAddress(currInst)];
+                if (DRAMrequestIssued)
+                {
+                    numClockCycles = uptoClkCyc + 1;
+                    DRAMrequestIssued = false;
+                }
+            }
+            
+        }
+    }
+    cout << "exited exeAllBlkingInstLW " << endl;
+}
+
+void exeAllBlkingInstSW(ofstream &out, instruction currInst, int upto,int ia)
+{
+    //eraseIfP_SW(currInst);
+    for (int regPos = 0; regPos <= upto; regPos += 2)
+    {
+        if (cannotUseRegistersG.find(currInst.cirs[regPos]) != cannotUseRegistersG.end())
+        {
+            cout << "caught cannot change register inside sw : " << rrmap[currInst.cirs[regPos]] << endl;
+            // eraseIfP_URG(currInst.cirs[regPos]);
+            deque<int> ublkRegQueue = uBlockRegToInstAddQueue[currInst.cirs[regPos]];
+            bool removedself = false;
+            while (!ublkRegQueue.empty())
+            {
+                int insAddr = ublkRegQueue.front();
+
+                if (removedself == false && ia == insAddr) {
+                    removedself = true;
+                    ublkRegQueue.pop_front();
+                }
+                if (!ublkRegQueue.empty()) {
+                    int insAddr = ublkRegQueue.front();
+                    ublkRegQueue.pop_front();
+                    uBlockRegToInstAddQueue[currInst.cirs[regPos]] = ublkRegQueue;
+
+                    removeAndExeOPID7(out, currInst, insAddr);
+                    removeAndExeOPID8(out, currInst, insAddr);
+                    ublkRegQueue = uBlockRegToInstAddQueue[currInst.cirs[regPos]];
+                    //eraseAllBlocks(insAddr);
+                    if (DRAMrequestIssued)
+                    {
+                        numClockCycles = uptoClkCyc + 1;
+                        DRAMrequestIssued = false;
+                    }
+                }
+                
+            }
+        }
+    }
+
+    if (cannotUseMemoryG.find(getAddress(currInst)) != cannotUseMemoryG.end())
+    {
+        //eraseIfP_UMG(getAddress(currInst));
+
+        deque<int> ublkMemQueue = uBlockMemoryToInstAddQueue[getAddress(currInst)];
+        deque<int> cblkMemQueue = cBlockMemoryToInstAddQueue[getAddress(currInst)];
+        bool removedself = false;
+        while (!ublkMemQueue.empty())
+        {
+            int insAddr = ublkMemQueue.front();
+            if (removedself == false && ia == insAddr) {
+                    removedself = true;
+                    ublkMemQueue.pop_front();
+            }
+            if (!ublkMemQueue.empty()) {
+                int insAddr = ublkMemQueue.front();
+                ublkMemQueue.pop_front();
+
+                uBlockMemoryToInstAddQueue[getAddress(currInst)] = ublkMemQueue;
+                removeInstFromDeque(cblkMemQueue, insAddr);
+                cBlockMemoryToInstAddQueue[getAddress(currInst)] = cblkMemQueue;
+
+                removeAndExeOPID7(out, currInst, insAddr);
+                removeAndExeOPID8(out, currInst, insAddr);
+                ublkMemQueue = uBlockMemoryToInstAddQueue[getAddress(currInst)];
+                //eraseAllBlocks(insAddr);
+                if (DRAMrequestIssued)
+                {
+                    numClockCycles = uptoClkCyc + 1;
+                    DRAMrequestIssued = false;
+                }
+            }
+            
         }
     }
 
     if (cannotChangeMemoryG.find(getAddress(currInst)) != cannotChangeMemoryG.end())
     {
-        eraseIfP_CMG(getAddress(currInst));
+        //eraseIfP_CMG(getAddress(currInst));
         deque<int> ublkMemQueue = uBlockMemoryToInstAddQueue[getAddress(currInst)];
         deque<int> cblkMemQueue = cBlockMemoryToInstAddQueue[getAddress(currInst)];
+        bool removedself = false;
         while (!cblkMemQueue.empty())
         {
-
             int insAddr = cblkMemQueue.front();
-            cblkMemQueue.pop_front();
-            removeInstFromDeque(ublkMemQueue, insAddr);
-            cBlockMemoryToInstAddQueue[getAddress(currInst)] = cblkMemQueue;
-            uBlockMemoryToInstAddQueue[getAddress(currInst)] = ublkMemQueue;
-
-            removeAndExeOPID7(out, currInst, insAddr);
-            removeAndExeOPID8(out, currInst, insAddr);
-
-            //eraseAllBlocks(insAddr);
-            cblkMemQueue = cBlockMemoryToInstAddQueue[getAddress(currInst)];
-            if (DRAMrequestIssued)
-            {
-                numClockCycles = uptoClkCyc + 1;
-                DRAMrequestIssued = false;
+            if (removedself == false && insAddr == ia) {
+                removedself = true;
+                cblkMemQueue.pop_front();
             }
+            if (!cblkMemQueue.empty()) {
+                int insAddr = cblkMemQueue.front();
+                cblkMemQueue.pop_front();
+                removeInstFromDeque(ublkMemQueue, insAddr);
+                cBlockMemoryToInstAddQueue[getAddress(currInst)] = cblkMemQueue;
+                uBlockMemoryToInstAddQueue[getAddress(currInst)] = ublkMemQueue;
+
+                removeAndExeOPID7(out, currInst, insAddr);
+                removeAndExeOPID8(out, currInst, insAddr);
+
+                //eraseAllBlocks(insAddr);
+                cblkMemQueue = cBlockMemoryToInstAddQueue[getAddress(currInst)];
+                if (DRAMrequestIssued)
+                {
+                    numClockCycles = uptoClkCyc + 1;
+                    DRAMrequestIssued = false;
+                }
+            }
+            
         }
     }
 }
@@ -510,8 +579,9 @@ void exeAllBlkingInstBne(ofstream &out, instruction currInst, int upto)
     {
         if (cannotUseRegistersG.find(currInst.cirs[regPos]) != cannotUseRegistersG.end())
         {
-            eraseIfP_URG(currInst.cirs[regPos]);
+            // eraseIfP_URG(currInst.cirs[regPos]);
             deque<int> ublkRegQueue = uBlockRegToInstAddQueue[currInst.cirs[regPos]];
+            
             while (!ublkRegQueue.empty())
             {
                 int insAddr = ublkRegQueue.front();
@@ -528,6 +598,8 @@ void exeAllBlkingInstBne(ofstream &out, instruction currInst, int upto)
                     DRAMrequestIssued = false;
                 }
                 //ublkRegQueue.pop();
+            
+        
             }
         }
     }
@@ -673,7 +745,7 @@ void execute1a4(ofstream &out)
             else if (currentRowInRowBuffer == -1 || (currentRowInRowBuffer == wantedRow &&
                                                      ifLW(currInst, address)))
             { // * Here we should execute immediately.
-                exeLW(out, currInst, pc - 1);
+                exeLW(out, currInst, pc - 1,false);
             }
             else // * even if row buffer is same, if some registers are blocked, then we will need to execute
                 // * the blocked instructions first, which may change the row buffer, hence do not execute if some are blocked.
@@ -727,7 +799,7 @@ void execute1a4(ofstream &out)
             else if (currentRowInRowBuffer == -1 || (currentRowInRowBuffer == wantedRow &&
                                                      ifSW(currInst, address)))
             { // * can execute similar to lw case
-                exeSW(out, currInst, pc - 1);
+                exeSW(out, currInst, pc - 1, false);
             }
 
             else
@@ -785,6 +857,11 @@ void execute1a4(ofstream &out)
 
     numClockCycles++;
 
+
+
+    int counter = 0;
+
+
     for (auto &x : InstAddToBlocks)
     {
         int instructionAdd = x.first;
@@ -803,8 +880,7 @@ void execute1a4(ofstream &out)
                         eraseIfP_LW(curInst);
                         if (ifLW(curInst, address))
                         {
-                            exeLW(out, iset[instructionAdd - 1], instructionAdd);
-                            InstAddToFreq[instructionAdd]--;
+                            exeLW(out, iset[instructionAdd - 1], instructionAdd,false);
                             //eraseAllBlocks(instructionAdd);
                         }
                     }
@@ -813,8 +889,8 @@ void execute1a4(ofstream &out)
                         eraseIfP_SW(curInst);
                         if (ifSW(curInst, address))
                         {
-                            exeSW(out, iset[instructionAdd - 1], instructionAdd);
-                            InstAddToFreq[instructionAdd]--;
+                            exeSW(out, iset[instructionAdd - 1], instructionAdd,false);
+                            
                             //eraseAllBlocks(instructionAdd);
                         }
                     }
@@ -845,74 +921,128 @@ void execute1a4(ofstream &out)
         //
     }
 
-    intializerowToInsSet();
+    // intializerowToInsSet();
 
-    for (auto &x : rowToInsSet)
-    {
-        int rownum = x.first;
-        for (auto &instructionAdd : rowToInsSet[rownum])
-        {
-            instruction curInst = iset[instructionAdd - 1];
-            int address = getAddress(curInst);
-            bool done = true;
-            while (done && InstAddToFreq[instructionAdd] > 0)
-            {
-                if (iset[instructionAdd - 1].opID == 7)
-                {
-                    eraseIfP_LW(curInst);
-                    if (ifLW(curInst, address))
-                    {
-                        exeLW(out, iset[instructionAdd - 1], instructionAdd);
-                        InstAddToFreq[instructionAdd]--;
-                        //eraseAllBlocks(instructionAdd);
-                    }
-                }
+    // for (auto &x : rowToInsSet)
+    // {
+    //     int rownum = x.first;
+    //     for (auto &instructionAdd : rowToInsSet[rownum])
+    //     {
+    //         instruction curInst = iset[instructionAdd - 1];
+    //         int address = getAddress(curInst);
+    //         bool done = true;
+    //         cout << "counter at pos : a :" << counter << endl; counter++; 
+    //         while (done && InstAddToFreq[instructionAdd] > 0)
+    //         {
+    //             cout << "counter at pos : b :" << counter << endl; counter++; 
+    //             if (iset[instructionAdd - 1].opID == 7)
+    //             {
+    //                 cout << "counter at pos : c :" << counter << endl; counter++; 
+    //                 bool flag=false;
+    //                 multiset<int> tempCRG=cannotChangeRegistersG;
+    //                 multiset<int> tempURG=cannotUseRegistersG;
+    //                 multiset<int> tempCMG=cannotChangeMemoryG;
+    //                 multiset<int> tempUMG=cannotUseMemoryG;
+    //                 for (auto x : cannotChangeRegistersG) cout << "printing here before :" << rrmap[x] << " insaddr :" << instructionAdd << endl;
+    //                 eraseIfP_LW(curInst);
+    //                 for (auto x : cannotChangeRegistersG) cout << "printing here after:" << rrmap[x] << " insaddr :" << instructionAdd << endl;
+    //                 if (ifLW(curInst, address))
+    //                 {
+    //                     cout << "counter at pos : d :" << counter << endl; counter++; 
+    //                     flag=true;
+    //                     exeLW(out, iset[instructionAdd - 1], instructionAdd);
+    //                     InstAddToFreq[instructionAdd]--;
+    //                     //eraseAllBlocks(instructionAdd);
+    //                 }
+    //                 if(!flag){
+    //                     cannotChangeRegistersG=tempCRG;
+    //                     cannotUseRegistersG=tempURG;
+    //                     cannotChangeMemoryG=tempCMG;
+    //                     cannotUseMemoryG=tempUMG;
+    //                     done = false;
+    //                 }
+    //             }
 
-                else if (iset[instructionAdd - 1].opID == 8)
-                {
-                    eraseIfP_SW(curInst);
-                    if (ifSW(curInst, address))
-                    {
-                        exeSW(out, iset[instructionAdd - 1], instructionAdd);
-                        InstAddToFreq[instructionAdd]--;
-                        //eraseAllBlocks(instructionAdd);
-                    }
-                }
-                else
-                    done = false;
+    //             else if (iset[instructionAdd - 1].opID == 8)
+    //             {
+    //                 cout << "counter at pos : e :" << counter << endl; counter++; 
+    //                 bool flag=false;
+    //                 multiset<int> tempCRG=cannotChangeRegistersG;
+    //                 multiset<int> tempURG=cannotUseRegistersG;
+    //                 multiset<int> tempCMG=cannotChangeMemoryG;
+    //                 multiset<int> tempUMG=cannotUseMemoryG;
+    //                 eraseIfP_SW(curInst);
+    //                 if (ifSW(curInst, address))
+    //                 {
+    //                     cout << "counter at pos : f :" << counter << endl; counter++;
+    //                     flag=true; 
+    //                     exeSW(out, iset[instructionAdd - 1], instructionAdd);
+    //                     InstAddToFreq[instructionAdd]--;
+    //                     //eraseAllBlocks(instructionAdd);
+    //                 }
+    //                 if (!flag) {
+    //                     cannotChangeRegistersG=tempCRG;
+    //                     cannotUseRegistersG=tempURG;
+    //                     cannotChangeMemoryG=tempCMG;
+    //                     cannotUseMemoryG=tempUMG;
+    //                     done = false;
+    //                 }
+    //             }
+    //             else
+    //                 done = false;
 
-                if (InstAddToFreq[instructionAdd] == 0)
-                {
-                    vector<unordered_set<int>> blockedByInsAddr = InstAddToBlocks[instructionAdd];
-                    for (int reg : blockedByInsAddr[0])
-                        cannotUseRegistersG.erase(reg);
-                    for (int reg : blockedByInsAddr[1])
-                        cannotChangeRegistersG.erase(reg);
-                    for (int mem : blockedByInsAddr[2])
-                        cannotUseMemoryG.erase(mem);
-                    for (int mem : blockedByInsAddr[3])
-                        cannotChangeMemoryG.erase(mem);
-                }
-                //InstAddToFreq[instructionAdd]--;
-                if (DRAMrequestIssued)
-                {
-                    numClockCycles = uptoClkCyc + 1;
-                    DRAMrequestIssued = false;
-                }
-            }
-        }
-    }
+    //             if (InstAddToFreq[instructionAdd] == 0)
+    //             {
+    //                 vector<unordered_set<int>> blockedByInsAddr = InstAddToBlocks[instructionAdd];
+    //                 for (int reg : blockedByInsAddr[0])
+    //                     cannotUseRegistersG.erase(reg);
+    //                 for (int reg : blockedByInsAddr[1])
+    //                     cannotChangeRegistersG.erase(reg);
+    //                 for (int mem : blockedByInsAddr[2])
+    //                     cannotUseMemoryG.erase(mem);
+    //                 for (int mem : blockedByInsAddr[3])
+    //                     cannotChangeMemoryG.erase(mem);
+    //             }
+    //             //InstAddToFreq[instructionAdd]--;
+    //             if (DRAMrequestIssued)
+    //             {
+    //                 numClockCycles = uptoClkCyc + 1;
+    //                 DRAMrequestIssued = false;
+    //             }
+    //         }
+    //     }
+    // }
 
     // * FINAL
-    for (auto &x : InstAddToBlocks)
+
+    
+    //for (auto &x : InstAddToBlocks)
+    
+  
+    // rbegin() returns to the last value of map
+    for (auto x = InstAddToBlocks.rbegin(); x != InstAddToBlocks.rend(); x++) 
     {
-        int instructionAdd = x.first;
+        int instructionAdd = x->first;
         while (InstAddToFreq[instructionAdd] > 0)
         {
-            if (iset[instructionAdd - 1].opID == 7)
-                exeLW(out, iset[instructionAdd - 1], instructionAdd);
-            if (iset[instructionAdd - 1].opID == 8)
-                exeSW(out, iset[instructionAdd - 1], instructionAdd);
+            cout << InstAddToFreq[instructionAdd] << " this is InstAddToFreq[instructionAdd]before"<< "  inst address  "<<instructionAdd << endl;
+            cout << "counter at pos : 1 :" << counter << endl; counter++;
+            
+            if (InstAddToFreq[instructionAdd] > 0 && iset[instructionAdd - 1].opID == 7){
+                cout << "counter at pos : 2 :" << counter << endl; counter++;
+                //eraseIfP_LW(iset[instructionAdd - 1]);
+                exeLW(out, iset[instructionAdd - 1], instructionAdd,true);
+                cout << InstAddToFreq[instructionAdd] << " this is InstAddToFreq[instructionAdd] after" << "  inst address  "<<instructionAdd << endl; 
+                cout << "counter at pos : 3 :" << counter << endl; counter++;
+            }
+                
+            else if (InstAddToFreq[instructionAdd] > 0 && iset[instructionAdd - 1].opID == 8) {
+                cout << "counter at pos : 4 :" << counter << endl; counter++;
+                //eraseIfP_SW(iset[instructionAdd - 1]);
+                exeSW(out, iset[instructionAdd - 1], instructionAdd,true);
+                cout << "counter at pos : 5 :" << counter << endl; counter++;
+            }
+                /*
             if (InstAddToFreq[instructionAdd] == 1)
             {
                 vector<unordered_set<int>> blockedByInsAddr = InstAddToBlocks[instructionAdd];
@@ -924,9 +1054,9 @@ void execute1a4(ofstream &out)
                     cannotUseMemoryG.erase(mem);
                 for (int mem : blockedByInsAddr[3])
                     cannotChangeMemoryG.erase(mem);
-            }
+            }*/
 
-            InstAddToFreq[instructionAdd]--;
+            
             if (DRAMrequestIssued)
             {
                 numClockCycles = uptoClkCyc + 1;
