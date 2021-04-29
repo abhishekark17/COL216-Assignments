@@ -22,6 +22,11 @@ public:
     int getMemory (int address) {
         return memory->at(address);
     }
+    void setRowBuffer (int row) {currentRow = row;}
+    int getRowBuffer () {return currentRow;}
+    void setColBuffer (int col) {currentCol = col;}
+    int getColBuffer () {return currentCol;}
+    
     ~DRAM();
     
 

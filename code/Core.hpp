@@ -57,10 +57,14 @@ private:
 
     vector<Request*> requestQueue;
     int minCost;
+    Request * minCostRequest;
 
     int findMinCost () {
         for (auto i : requestQueue) {
-            minCost = min (minCost, i->cost);
+            if(minCost<(i->cost)) {
+                minCost=i->cost;
+                minCostRequest = i;
+            }
         }
     }
 
@@ -89,6 +93,9 @@ public:
         preprocess();   // * Now our iset is ready
     }
 
+    Request* getRequestWithMinCost () {
+        return minCostRequest;
+    }
 
     int getMinCost () {return minCost;}
     ~CORE();
