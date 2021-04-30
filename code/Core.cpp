@@ -367,6 +367,7 @@ void CORE::offsetType()
         }
     }
     offset = stoi(buffer);
+    offset += offsetOfCore;
 
     CIRS[1] = offset;
     return;
@@ -533,8 +534,105 @@ void CORE::preprocess()
             continue;
 
         instruction instObj = readInst();
-        iset.push_back(instObj);
+        iset->push_back(instObj);
         numberofInst++;
         currentInstNum++;
     }
+}
+
+
+
+
+
+
+
+
+////////////////////////////////////////////////////
+
+void CORE::add(vector<int> &cirs)
+{
+    registers[cirs[0]] = registers[cirs[1]] + registers[cirs[2]];
+    
+    return;
+}
+void CORE::sub(vector<int> &cirs)
+{
+    registers[cirs[0]] = registers[cirs[1]] - registers[cirs[2]];
+    return;
+}
+void CORE::mul(vector<int> &cirs)
+{
+    registers[cirs[0]] = registers[cirs[1]] * registers[cirs[2]];
+    return;
+}
+void CORE::addi(vector<int> &cirs)
+{
+    registers[cirs[0]] = registers[cirs[1]] + cirs[2];
+    return;
+}
+void CORE::bne(vector<int> &cirs, string &label)
+{
+    if (lableTable.find(label) == lableTable.end())
+    {
+        runtimeError = "Error: Label Not Found";
+        return;
+    }
+    if (registers[cirs[0]] != registers[cirs[1]])
+    {
+        if (lableTable.find(label) != lableTable.end())
+        {
+            pc = lableTable[label];
+            switchOnBranch = true;
+        }
+        else
+        {
+            runtimeError = "Error: Label Not Found";
+            return;
+        }
+    }
+    else
+        switchOnBranch = false;
+    return;
+}
+void CORE::beq(vector<int> &cirs, string &label)
+{
+    if (lableTable.find(label) == lableTable.end())
+    {
+        runtimeError = "Error: Label Not Found";
+        return;
+    }
+
+    if (registers[cirs[0]] == registers[cirs[1]])
+    {
+        if (lableTable.find(label) != lableTable.end())
+        {
+            pc = lableTable[label];
+            switchOnBranch = true;
+        }
+        else
+        {
+            runtimeError = "Error: Label Not Found";
+            return;
+        }
+    }
+    else
+        switchOnBranch = false;
+    return;
+}
+
+void CORE::slt(vector<int> &cirs)
+{
+    if (registers[cirs[1]] < registers[cirs[2]])
+        registers[cirs[0]] = 1;
+    else
+        registers[cirs[0]] = 0;
+    return;
+}
+
+
+
+void CORE::j(vector<int> &cirs, string &label)
+{
+    pc = lableTable[label];
+    return;
 }
