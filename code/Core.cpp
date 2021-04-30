@@ -1,4 +1,234 @@
-#include "Core.hpp"    
+#include "Core.hpp"   
+
+
+
+
+
+CORE::CORE (string inFileName, int id, string outFileName,int nc,int DramCols,int DramRows)
+    {
+        core_id = id;
+        runtimeError = "";
+        error = *(new vector<string>());
+        CIRS = *(new vector<int>());
+        sizeOfData = 0;
+        numOfInst = *(new vector<int>());
+        numberofInst = 0;
+        numCores = nc;
+        Dramcols = DramCols;
+        Dramrows = DramRows;
+        offsetOfCore = ((id-1)*((Dramcols)/numCores))*Dramrows;
+        registers = new vector<int>(32,0);
+        lableTable = *(new unordered_map <string,int>());
+        uniqueLabelID = *(new unordered_map <int,string>());
+        numberOfLine = 0;
+        currentInstNum = 0;
+        maxInstructions = 0;
+        currentInst = "";
+        labelNumber = 0;
+        pc = 1;
+        inputFileName = inFileName;   
+        outputFileName = outFileName;
+        inputprogram =*(new vector<string>());
+        iset = new vector<instruction*> ();
+        requestQueue = new vector<Request*>();
+        minCost = 0;
+        minCostRequest = nullptr;
+        freeBuffer = new vector<Request*>();
+        stalled = false;
+        stallIfFull = false;
+        stallingRequest = nullptr;
+        switchOnBranch = false;
+        writingFromDRAM = false;
+        switchOnBranch = false;
+
+        rmap = *(new unordered_map<string,int> ());
+        rrmap = *(new unordered_map<int,string> ());
+        
+        initialize_registers();
+
+        for (int i = 0; i < 4; i++) {
+            CIRS.push_back(0);
+        }
+        
+        for (int i = 0; i < 10; i++) {
+            numOfInst.push_back(0);
+        }
+        //cout << "2222" <<endl;
+        
+        //cout << "3333" <<endl;
+        minCost = INT_MAX;
+        //cout << "pos 2" <<endl;
+        lexFile (inputFileName); // * Now our inputprogram is ready to parse
+        //cout << "pos 3" <<endl;
+
+        
+        preprocess();   // * Now our iset is ready
+        //cout << "pos 4" <<endl;
+        
+        stalled = false;
+        stallIfFull = false;
+        stallingRequest = nullptr;
+    }
+
+void CORE::printIset () {
+    cout << endl << "for core number " << core_id << endl;
+    for (auto i = iset->begin(); i != iset->end(); i++) {
+        cout << (*i)->opID << " " <<(*i)->cirs[0] << " " << (*i)->cirs[1] << " " <<(*i)->cirs[2] << endl;
+    }
+}
+
+void CORE::run (MRM *memoryRequestManager) {
+    // cout << "entered 1 run " << core_id<<endl;
+    if (stalled) return;
+    if (pc > iset->size()) {
+        smoothExit();
+        return;
+    }
+    instruction* currentInstruction = new instruction ();
+    cout <<"hello1" <<endl;
+    if (stallingRequest != nullptr) currentInstruction = stallingRequest->inst;
+    else {
+        if (freeBuffer->size() > 0) {
+            cout << "hello2" << endl;
+            currentInstruction = freeBuffer->at(0)->inst;
+            freeBuffer->erase (freeBuffer->begin());
+        }
+        else {
+            cout << "hello3" <<endl;
+            printIset();
+            cout << pc<<" "<<iset->at(pc-1)->opID << " adsfasdfasdf " << core_id << endl;
+            currentInstruction = iset->at (pc - 1);
+            pc++;
+        }
+    }
+    cout << "outside switch " << core_id<<"   " << currentInstruction->opID << endl;
+    switch (currentInstruction->opID) {
+        case 0: {
+            Request * request = new Request(0,core_id,currentInstruction);
+            bool dependent = memoryRequestManager->checkDependencies(core_id, request);
+            if (dependent) {
+                bool enqueued = memoryRequestManager->enqueueRequest (core_id,request);
+                if (!enqueued) stall(request,true);
+                
+            }
+            else {
+                add (currentInstruction->cirs);
+                cout<<" coreId: "<<core_id<<"\t"<<" Instruction: add (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + rrmap.at(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" + to_string(registers->at(currentInstruction->cirs[0]));
+                numOfInst[0]++;
+            }
+            break;
+        }
+        case 1: {
+            Request * request = new Request(0,core_id,currentInstruction);
+            bool dependent = memoryRequestManager->checkDependencies(core_id, request);
+            if (dependent) {
+                bool enqueued = memoryRequestManager->enqueueRequest (core_id,request);
+                if (!enqueued) stall(request,true);
+            }
+            else {
+                sub (currentInstruction->cirs);
+                cout<<" coreId: "<<core_id<<"\t"<<" Instruction: sub (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + rrmap.at(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" + to_string(registers->at(currentInstruction->cirs[0]));
+                numOfInst[1]++;
+            }
+            break;
+        }
+        case 2: {
+            Request * request = new Request(0,core_id,currentInstruction);
+            bool dependent = memoryRequestManager->checkDependencies(core_id, request);
+            if (dependent) {
+                bool enqueued = memoryRequestManager->enqueueRequest (core_id,request);
+                if (!enqueued) stall(request,true);
+            }
+            else {
+                mul (currentInstruction->cirs);
+                cout<<" coreId: "<< core_id<<"\t"<<" Instruction: mul (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + rrmap.at(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" +to_string(registers->at(currentInstruction->cirs[0])) ;
+                numOfInst[2]++;
+            }
+            break;
+        }
+        case 3: {
+            Request * request = new Request(0,core_id,currentInstruction);
+            bool dependent = memoryRequestManager->checkDependencies(core_id, request);
+            if (dependent) {
+                bool enqueued = memoryRequestManager->enqueueRequest (core_id,request);
+                if (!enqueued) stall(request,true);
+            }
+            else {
+                slt (currentInstruction->cirs);
+                cout<<" coreId: "<<core_id<<"\t"<< " Instruction: slt (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + rrmap.at(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" + to_string(registers->at(currentInstruction->cirs[0]));
+                numOfInst[3]++;
+            }
+            break;
+        }
+        case 4: {
+
+            cout << "in addi " << core_id << endl;
+            Request * request = new Request(0,core_id,currentInstruction);
+            bool dependent = memoryRequestManager->checkDependencies(core_id, request);
+            if (dependent) {
+                bool enqueued = memoryRequestManager->enqueueRequest (core_id,request);
+                if (!enqueued) stall(request,true);
+            }
+            else {
+                addi (currentInstruction->cirs);
+                cout<<" coreId: "<<core_id<<"\t"<<"Instruction: addi (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + to_string(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" + to_string(registers->at(currentInstruction->cirs[0]));
+                numOfInst[4]++;
+            }
+            break;
+        }
+        case 5: {
+            Request * request = new Request(0,core_id,currentInstruction);
+            bool dependent = memoryRequestManager->checkDependencies(core_id, request);
+            if (dependent) {
+                bool enqueued = memoryRequestManager->enqueueRequest (core_id,request);
+                if (!enqueued) stall(request,true);
+                else stall(request,false);
+            }
+            else {
+                bne (currentInstruction->cirs, currentInstruction->label);
+                cout<<" coreId: "<<core_id<<"\t"<<": Instruction bne (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + currentInstruction->label + "," + to_string(switchOnBranch) + ")";
+                numOfInst[5]++;
+            }
+            break;
+        }
+        case 6: {
+            Request * request = new Request(0,core_id,currentInstruction);
+            bool dependent = memoryRequestManager->checkDependencies(core_id, request);
+            if (dependent) {
+                bool enqueued = memoryRequestManager->enqueueRequest (core_id,request);
+                if (!enqueued) stall(request,true);
+                else stall(request,false);
+            }
+            else {
+                beq (currentInstruction->cirs, currentInstruction->label);
+                cout<<" coreId: "<<core_id<<"\t"<<": Instruction beq (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + currentInstruction->label + "," + to_string(switchOnBranch) + ")";
+                numOfInst[6]++;
+
+            }
+            break;
+        }
+        case 7: 
+        case 8: {
+            Request * request = new Request(0,core_id,currentInstruction);
+            bool dependent = memoryRequestManager->checkDependencies(core_id, request);
+            bool enqueued = memoryRequestManager->enqueueRequest (core_id,request);
+            if (!enqueued) stall(request,true);
+            break;
+        }
+        case 9: {
+            j (currentInstruction->cirs,currentInstruction->label);
+
+            numOfInst[9]++;
+            break;
+        }
+        default: {}
+
+    }
+
+}
+
+
+
  void CORE::lexFile(string file)
     {
         ifstream ifs(file);
@@ -288,19 +518,19 @@ void CORE::offsetType()
                 if (first5 == "$zero")
                 {
                     buffer1 = first5;
-                    ValOfRegister = registers[0];
+                    ValOfRegister = registers->at(0);
                     strInsideParen = strInsideParen.substr(5);
                 }
                 else if (rmap.find(first3) != rmap.end())
                 {
                     buffer1 = first3;
-                    ValOfRegister = registers[rmap.at(first3)];
+                    ValOfRegister = registers->at(rmap.at(first3));
                     strInsideParen = strInsideParen.substr(3);
                 }
                 else if (rmap.find(first2) != rmap.end())
                 {
                     buffer1 = first2;
-                    ValOfRegister = registers[rmap.at(first2)];
+                    ValOfRegister = registers->at(rmap.at(first2));
                     strInsideParen = strInsideParen.substr(2);
                 }
                 else
@@ -491,12 +721,14 @@ instruction CORE::readInst()
     else
     {
         instruction inst(CIRS, operationId);
+        //cout<<operationId<<endl;
         return inst;
     }
 }
 
 void CORE::preprocess()
 { // checking if line has label: at the beginning;
+    //cout << "in preprocess 1" << endl;
     int labelIndex;
     currentInstNum = 1;
     string tempLabel = "";
@@ -506,6 +738,7 @@ void CORE::preprocess()
         bool isLabel = false;
         currentInst = inputprogram[i];
         RemoveSpaces();
+        //cout << "in preprocess 2" << endl;
         if (currentInst != "")
         {
             RemoveSpaces();
@@ -532,9 +765,12 @@ void CORE::preprocess()
         }
         else
             continue;
-
+        //cout << "in preprocess 3" << endl;
         instruction instObj = readInst();
-        iset->push_back(instObj);
+        cout << "aha " << instObj.opID << endl;
+        iset->push_back(&instObj);
+        cout << "ahahahaha " << iset->at (iset->size() - 1)->opID << endl;
+        //cout << "in preprocess 4" << endl;
         numberofInst++;
         currentInstNum++;
     }
@@ -551,23 +787,23 @@ void CORE::preprocess()
 
 void CORE::add(vector<int> &cirs)
 {
-    registers[cirs[0]] = registers[cirs[1]] + registers[cirs[2]];
+    registers->at(cirs[0]) = registers->at(cirs[1]) + registers->at(cirs[2]);
     
     return;
 }
 void CORE::sub(vector<int> &cirs)
 {
-    registers[cirs[0]] = registers[cirs[1]] - registers[cirs[2]];
+    registers->at(cirs[0]) = registers->at(cirs[1]) - registers->at(cirs[2]);
     return;
 }
 void CORE::mul(vector<int> &cirs)
 {
-    registers[cirs[0]] = registers[cirs[1]] * registers[cirs[2]];
+    registers->at(cirs[0]) = registers->at(cirs[1]) + registers->at(cirs[2]);
     return;
 }
 void CORE::addi(vector<int> &cirs)
 {
-    registers[cirs[0]] = registers[cirs[1]] + cirs[2];
+    registers->at(cirs[0]) = registers->at(cirs[1]) + cirs[2];
     return;
 }
 void CORE::bne(vector<int> &cirs, string &label)
@@ -623,9 +859,9 @@ void CORE::beq(vector<int> &cirs, string &label)
 void CORE::slt(vector<int> &cirs)
 {
     if (registers[cirs[1]] < registers[cirs[2]])
-        registers[cirs[0]] = 1;
+        registers->at(cirs[0]) = 1;
     else
-        registers[cirs[0]] = 0;
+        registers->at(cirs[0]) = 0;
     return;
 }
 

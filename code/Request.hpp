@@ -1,5 +1,9 @@
-#include "main.hpp"
+
+
+#ifndef Request_HPP
+#define Request_HPP
 #include "Instruction.hpp"
+#include "main.hpp"
 class Request {
 public:
     int cost;
@@ -8,12 +12,13 @@ public:
     int core_id;
     int changingRegister;
     int loadingMemoryAddress, savingMemoryAddress;
-
+    int storeThisForSW;
 
     Request (int c, int ci,instruction* i) {
         cost = c;
         core_id = ci;
         inst = i;
+        storeThisForSW = i->cirs[0];
         if (inst->opID == 0  && inst->opID == 1 && inst->opID == 2 && inst->opID == 3 && inst->opID == 4) {
             changingRegister = inst->cirs[0];
             loadingMemoryAddress = -1;
@@ -36,4 +41,7 @@ public:
         }
     }
 
+
 };
+
+#endif

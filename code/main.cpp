@@ -1,8 +1,9 @@
 #include "main.hpp"
 #include "CPU.hpp"
 int main (int argc,char* argv[]) {
-
-    CPU * cpu = new CPU (4, 100, "../INPUT", "../OUTPUT",10,2);
+    cout<<"in main"<<endl;
+    CPU * cpu = new CPU (4, 5, "../INPUT", "../OUTPUT",10,2);
+    cout<<"cpu initialised"<<endl;
     cpu->run ();
     return 0;
 }

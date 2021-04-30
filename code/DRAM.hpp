@@ -1,6 +1,8 @@
+#ifndef DRAM_HPP
+#define DRAM_HPP
 #include "main.hpp"
 #include "Request.hpp"
-#include "Core.hpp"
+
 class DRAM {
 private:
     vector<int> * memory; 
@@ -29,40 +31,39 @@ public:
     int getLoadedValueForLW () {return loadedValueForLW;}
     int getValueToBeStoredForSW () {return valueToBeStoredForSW;}
 
-    void lw(Request* r, CORE * core) 
+    int lw(Request* r) 
     {
         int address = r->loadingMemoryAddress;
         if (address < 0 || address > 1048576)
         {
-            core->setRuntimeError("Error: Memory Address not accessible");
-            return;
+            //core->setRuntimeError("");
+            return -1;
         }
         else if (address % 4 != 0)
         {
-            core->setRuntimeError("Error: invalid memory location");
-            return;
+            //core->setRuntimeError("");
+            return -2;
         }
         else address /= 4;
         loadedValueForLW = memory->at(address);
-        return;
+        return 0;
     }
 
-    void sw(Request * r, CORE * core)
+    int sw(Request * r)
     {
         int address = r->savingMemoryAddress;
         if (address < 0 || address > 1048576)
         {
-            core->setRuntimeError("Error: Memory Address not accessible");
-            return;
+            
+            return -1;
         }
         else if (address % 4 != 0)
         {
-            core->setRuntimeError("Error: invalid memory location");
-            return;
+            return -2;
         }
         else address /= 4;
-        valueToBeStoredForSW = core->getRegisters()->at(r->inst->cirs[0]);
-        return;
+        valueToBeStoredForSW = r->storeThisForSW;
+        return 0;
     }
 
     void setRowBuffer (int row) {currentRow = row;}
@@ -75,3 +76,5 @@ public:
     
 
 };
+
+#endif
