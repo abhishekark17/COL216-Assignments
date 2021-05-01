@@ -4,7 +4,7 @@
 
 
 
-CORE::CORE (string inFileName, int id, string outFileName,int nc,int DramCols,int DramRows)
+CORE::CORE (string inFileName, int id, string outFileName,int nc,int DramCols,int DramRows, OutputHandler * ho, int rowDelay, int colDelay)
     {
         core_id = id;
         runtimeError = "";
@@ -29,8 +29,8 @@ CORE::CORE (string inFileName, int id, string outFileName,int nc,int DramCols,in
         inputFileName = inFileName;   
         outputFileName = outFileName;
         inputprogram =*(new vector<string>());
-        iset = new vector<instruction*> ();
-        requestQueue = new vector<Request*>();
+        iset = *(new vector<instruction> ());
+        //requestQueue = new vector<Request*>();
         minCost = 0;
         minCostRequest = nullptr;
         freeBuffer = new vector<Request*>();
@@ -40,6 +40,9 @@ CORE::CORE (string inFileName, int id, string outFileName,int nc,int DramCols,in
         switchOnBranch = false;
         writingFromDRAM = false;
         switchOnBranch = false;
+        handleOutput = ho;
+        rowAccessDelay = rowDelay;
+        colAccessDelay = colDelay;
 
         rmap = *(new unordered_map<string,int> ());
         rrmap = *(new unordered_map<int,string> ());
@@ -61,8 +64,10 @@ CORE::CORE (string inFileName, int id, string outFileName,int nc,int DramCols,in
         lexFile (inputFileName); // * Now our inputprogram is ready to parse
         //cout << "pos 3" <<endl;
 
-        
+        //cout << iset.size() << "size of iset before preprocess " << endl;
         preprocess();   // * Now our iset is ready
+        //cout << iset.size() << "size of iset " << endl;
+        //cout << core_id << " after preprocess " << iset[0].opID << endl;
         //cout << "pos 4" <<endl;
         
         stalled = false;
@@ -72,39 +77,97 @@ CORE::CORE (string inFileName, int id, string outFileName,int nc,int DramCols,in
 
 void CORE::printIset () {
     cout << endl << "for core number " << core_id << endl;
-    for (auto i = iset->begin(); i != iset->end(); i++) {
-        cout << (*i)->opID << " " <<(*i)->cirs[0] << " " << (*i)->cirs[1] << " " <<(*i)->cirs[2] << endl;
+    for (auto i = iset.begin(); i != iset.end(); i++) {
+        cout << (*i).opID << " " << (*i).cirs[0] << " " << (*i).cirs[1] << " " <<(*i).cirs[2] << endl;
     }
 }
 
+void CORE::resume (bool sif) {
+        stalled = false;
+        if (sif) stallIfFull = false;
+        
+        //for (int i = 0; i < 100; i++) {cout << "adsfadsfasdfasdfasdfasdfasdfasd" << endl;}
+        
+        handleOutput->appendOutputForCore (core_id," coreId: " + to_string (core_id) + " RESUMED: ");
+    }
+
+void CORE::addInFreeBuffer (Request * request) {
+        freeBuffer->push_back(request);
+    }
+
+void CORE::smoothExit () {
+        cout << "smoothExit called " << core_id<< endl;
+    }
+
+bool CORE::isRunnable () {
+    return (pc <= iset.size()) || stalled;
+    } 
+bool CORE::isStalled () {return stalled;}
+
+void CORE::setMinCostRequest (Request *r) {minCostRequest = r;}
+    Request* CORE::getMinCostRequest () {return minCostRequest;}
+
+    Request * CORE::getStallingRequest () { return stallingRequest; }
+
+
+Request* CORE::getRequestWithMinCost () { return minCostRequest; }
+
+void CORE::setRuntimeError (string s) {runtimeError = s;}
+string CORE::getRuntimeError () {return runtimeError;}
+
+int CORE::getMinCost () {return minCost;}
+void CORE::setMinCost (int c) {minCost = c;}
+
+vector<int> * CORE::getRegisters () {return registers;}
+
+
+
+
+
+
+
+
+
+void CORE::stall (Request * request, bool sif) {
+        stalled = true;
+        stallIfFull = sif;
+        cout <<" coreId: \t"<<core_id<<"STALLED";
+        handleOutput->appendOutputForCore (core_id," coreId: " + to_string (core_id) + "STALLED");
+        stallingRequest = request;
+    }
+
 void CORE::run (MRM *memoryRequestManager) {
-    // cout << "entered 1 run " << core_id<<endl;
-    if (stalled) return;
-    if (pc > iset->size()) {
-        smoothExit();
+    cout <<core_id << " core:   starting mein minCost " << minCost << endl;
+    if (stalled) {
+        handleOutput->appendOutputForCore (core_id," coreId: " + to_string (core_id) + "STALLED");
         return;
     }
     instruction* currentInstruction = new instruction ();
-    cout <<"hello1" <<endl;
-    if (stallingRequest != nullptr) currentInstruction = stallingRequest->inst;
+       
+    if (stallingRequest != nullptr) {
+        currentInstruction = stallingRequest->inst;
+        stallingRequest = nullptr;
+    }
     else {
         if (freeBuffer->size() > 0) {
-            cout << "hello2" << endl;
             currentInstruction = freeBuffer->at(0)->inst;
             freeBuffer->erase (freeBuffer->begin());
         }
         else {
-            cout << "hello3" <<endl;
-            printIset();
-            cout << pc<<" "<<iset->at(pc-1)->opID << " adsfasdfasdf " << core_id << endl;
-            currentInstruction = iset->at (pc - 1);
-            pc++;
+            if (pc > iset.size()) {
+                smoothExit();
+                return;
+            }
+            else {
+                currentInstruction = &iset[pc - 1];
+                pc++;
+            }
         }
     }
-    cout << "outside switch " << core_id<<"   " << currentInstruction->opID << endl;
+    
     switch (currentInstruction->opID) {
         case 0: {
-            Request * request = new Request(0,core_id,currentInstruction);
+            Request * request = new Request(0,core_id,currentInstruction,this);
             bool dependent = memoryRequestManager->checkDependencies(core_id, request);
             if (dependent) {
                 bool enqueued = memoryRequestManager->enqueueRequest (core_id,request);
@@ -113,13 +176,14 @@ void CORE::run (MRM *memoryRequestManager) {
             }
             else {
                 add (currentInstruction->cirs);
-                cout<<" coreId: "<<core_id<<"\t"<<" Instruction: add (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + rrmap.at(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" + to_string(registers->at(currentInstruction->cirs[0]));
+                cout<<"coreId: "<<core_id<<" -> "<<": Instruction: add (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + rrmap.at(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" + to_string(registers->at(currentInstruction->cirs[0]))+"\t";
+                handleOutput->appendOutputForCore (core_id,": Instruction: add (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + rrmap.at(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" + to_string(registers->at(currentInstruction->cirs[0])));
                 numOfInst[0]++;
             }
             break;
         }
         case 1: {
-            Request * request = new Request(0,core_id,currentInstruction);
+            Request * request = new Request(0,core_id,currentInstruction,this);
             bool dependent = memoryRequestManager->checkDependencies(core_id, request);
             if (dependent) {
                 bool enqueued = memoryRequestManager->enqueueRequest (core_id,request);
@@ -127,13 +191,14 @@ void CORE::run (MRM *memoryRequestManager) {
             }
             else {
                 sub (currentInstruction->cirs);
-                cout<<" coreId: "<<core_id<<"\t"<<" Instruction: sub (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + rrmap.at(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" + to_string(registers->at(currentInstruction->cirs[0]));
+                cout<<" coreId: "<<core_id<<" -> "<<": Instruction: sub (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + rrmap.at(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" + to_string(registers->at(currentInstruction->cirs[0]))+"\t";
+                handleOutput->appendOutputForCore (core_id,": Instruction: sub (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + rrmap.at(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" + to_string(registers->at(currentInstruction->cirs[0])));                
                 numOfInst[1]++;
             }
             break;
         }
         case 2: {
-            Request * request = new Request(0,core_id,currentInstruction);
+            Request * request = new Request(0,core_id,currentInstruction,this);
             bool dependent = memoryRequestManager->checkDependencies(core_id, request);
             if (dependent) {
                 bool enqueued = memoryRequestManager->enqueueRequest (core_id,request);
@@ -141,13 +206,14 @@ void CORE::run (MRM *memoryRequestManager) {
             }
             else {
                 mul (currentInstruction->cirs);
-                cout<<" coreId: "<< core_id<<"\t"<<" Instruction: mul (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + rrmap.at(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" +to_string(registers->at(currentInstruction->cirs[0])) ;
+                cout<<" coreId: "<< core_id<<" -> "<<": Instruction: mul (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + rrmap.at(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" +to_string(registers->at(currentInstruction->cirs[0]))+"\t" ;
+                handleOutput->appendOutputForCore (core_id,": Instruction: mul (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + rrmap.at(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" + to_string(registers->at(currentInstruction->cirs[0])));
                 numOfInst[2]++;
             }
             break;
         }
         case 3: {
-            Request * request = new Request(0,core_id,currentInstruction);
+            Request * request = new Request(0,core_id,currentInstruction,this);
             bool dependent = memoryRequestManager->checkDependencies(core_id, request);
             if (dependent) {
                 bool enqueued = memoryRequestManager->enqueueRequest (core_id,request);
@@ -155,15 +221,16 @@ void CORE::run (MRM *memoryRequestManager) {
             }
             else {
                 slt (currentInstruction->cirs);
-                cout<<" coreId: "<<core_id<<"\t"<< " Instruction: slt (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + rrmap.at(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" + to_string(registers->at(currentInstruction->cirs[0]));
+                cout<<" coreId: "<<core_id<<" -> "<< ": Instruction: slt (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + rrmap.at(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" + to_string(registers->at(currentInstruction->cirs[0]))+"\t";
+                handleOutput->appendOutputForCore (core_id,": Instruction: slt (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + rrmap.at(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" + to_string(registers->at(currentInstruction->cirs[0])));
                 numOfInst[3]++;
             }
             break;
         }
         case 4: {
 
-            cout << "in addi " << core_id << endl;
-            Request * request = new Request(0,core_id,currentInstruction);
+            //cout << "in addi " << core_id << endl;
+            Request * request = new Request(0,core_id,currentInstruction,this);
             bool dependent = memoryRequestManager->checkDependencies(core_id, request);
             if (dependent) {
                 bool enqueued = memoryRequestManager->enqueueRequest (core_id,request);
@@ -171,13 +238,14 @@ void CORE::run (MRM *memoryRequestManager) {
             }
             else {
                 addi (currentInstruction->cirs);
-                cout<<" coreId: "<<core_id<<"\t"<<"Instruction: addi (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + to_string(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" + to_string(registers->at(currentInstruction->cirs[0]));
+                cout<<" coreId: "<<core_id<<" -> "<<": Instruction: addi (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + to_string(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" + to_string(registers->at(currentInstruction->cirs[0]))+"\t";
+                handleOutput->appendOutputForCore (core_id,": Instruction: addi (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + to_string(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" + to_string(registers->at(currentInstruction->cirs[0])));
                 numOfInst[4]++;
             }
             break;
         }
         case 5: {
-            Request * request = new Request(0,core_id,currentInstruction);
+            Request * request = new Request(0,core_id,currentInstruction,this);
             bool dependent = memoryRequestManager->checkDependencies(core_id, request);
             if (dependent) {
                 bool enqueued = memoryRequestManager->enqueueRequest (core_id,request);
@@ -186,13 +254,14 @@ void CORE::run (MRM *memoryRequestManager) {
             }
             else {
                 bne (currentInstruction->cirs, currentInstruction->label);
-                cout<<" coreId: "<<core_id<<"\t"<<": Instruction bne (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + currentInstruction->label + "," + to_string(switchOnBranch) + ")";
+                cout<<" coreId: "<<core_id<<" -> "<<": Instruction bne (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + currentInstruction->label + "," + to_string(switchOnBranch) + ")\t";
+                handleOutput->appendOutputForCore (core_id,": Instruction bne (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + currentInstruction->label + "," + to_string(switchOnBranch) + ")");
                 numOfInst[5]++;
             }
             break;
         }
         case 6: {
-            Request * request = new Request(0,core_id,currentInstruction);
+            Request * request = new Request(0,core_id,currentInstruction,this);
             bool dependent = memoryRequestManager->checkDependencies(core_id, request);
             if (dependent) {
                 bool enqueued = memoryRequestManager->enqueueRequest (core_id,request);
@@ -201,30 +270,51 @@ void CORE::run (MRM *memoryRequestManager) {
             }
             else {
                 beq (currentInstruction->cirs, currentInstruction->label);
-                cout<<" coreId: "<<core_id<<"\t"<<": Instruction beq (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + currentInstruction->label + "," + to_string(switchOnBranch) + ")";
+                cout<<" coreId: "<<core_id<<" -> "<<": Instruction beq (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + currentInstruction->label + "," + to_string(switchOnBranch) + ")\t";
+                handleOutput->appendOutputForCore (core_id,": Instruction beq (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + currentInstruction->label + "," + to_string(switchOnBranch) + ")");
                 numOfInst[6]++;
 
             }
             break;
         }
-        case 7: 
-        case 8: {
-            Request * request = new Request(0,core_id,currentInstruction);
+        case 7: {
+            Request * request = new Request(0,core_id,currentInstruction,this);
+
             bool dependent = memoryRequestManager->checkDependencies(core_id, request);
+            if (!dependent) request->cost = (2 * rowAccessDelay) + colAccessDelay;
+    
             bool enqueued = memoryRequestManager->enqueueRequest (core_id,request);
+            cout << "inside case 7 " <<endl;
             if (!enqueued) stall(request,true);
+            else handleOutput->appendOutputForCore (core_id,"Enqueueing LW Request: " + rrmap.at(request->changingRegister) + "= @Address:" + to_string(request->loadingMemoryAddress) +"IN DRAM\t");
+            
             break;
         }
+        case 8: {
+            Request * request = new Request(0,core_id,currentInstruction,this);
+
+            bool dependent = memoryRequestManager->checkDependencies(core_id, request);
+            if (!dependent) request->cost = (2 * rowAccessDelay) + colAccessDelay;
+    
+            bool enqueued = memoryRequestManager->enqueueRequest (core_id,request);
+            cout << "inside case 8 " <<endl;
+            if (!enqueued) stall(request,true);
+            else handleOutput->appendOutputForCore (core_id,"Enqueueing SW Request: " + rrmap.at(request->inst->cirs[0]) + "--> @Address:" + to_string(request->savingMemoryAddress) +"IN DRAM\t");
+            
+            break;
+        } 
         case 9: {
             j (currentInstruction->cirs,currentInstruction->label);
-
+            cout << " coreId: "<<core_id <<" -> "<<": Instruction j :" << "Jump to label ID: " + currentInstruction->label+"\t";
             numOfInst[9]++;
             break;
         }
         default: {}
 
     }
-
+    // int updateMinCostAndRequest = findMinCost ();
+    cout <<core_id << " core:   last mein minCost " << minCost << endl;
+    if(minCostRequest!=nullptr) cout << core_id << " core:   mincost request's opid " << minCostRequest->inst->opID << endl;
 }
 
 
@@ -242,6 +332,7 @@ void CORE::run (MRM *memoryRequestManager) {
         ifs.close();
         return;
     }   
+
  void CORE::initialize_registers()
 {
     rmap["$zero"] = 0;
@@ -344,8 +435,6 @@ void CORE::run (MRM *memoryRequestManager) {
     return;
 }
 
-
-
 void CORE::RemoveSpaces()
 {
     int32_t j = 0;
@@ -446,8 +535,6 @@ string CORE::findLabel()
         error.push_back("Syntax Error:" + to_string(currentInstNum) + ": Invalid Label Type");
     return buffer;
 }
-
-
 
 void CORE::offsetType()
 {
@@ -767,45 +854,21 @@ void CORE::preprocess()
             continue;
         //cout << "in preprocess 3" << endl;
         instruction instObj = readInst();
-        cout << "aha " << instObj.opID << endl;
-        iset->push_back(&instObj);
-        cout << "ahahahaha " << iset->at (iset->size() - 1)->opID << endl;
+        //cout << "aha " << instObj.opID << endl;
+        iset.push_back(instObj);
+        //cout << "ahahahaha " << iset[iset.size() - 1].opID << endl;
         //cout << "in preprocess 4" << endl;
         numberofInst++;
         currentInstNum++;
     }
 }
 
-
-
-
-
-
-
-
 ////////////////////////////////////////////////////
 
-void CORE::add(vector<int> &cirs)
-{
-    registers->at(cirs[0]) = registers->at(cirs[1]) + registers->at(cirs[2]);
-    
-    return;
-}
-void CORE::sub(vector<int> &cirs)
-{
-    registers->at(cirs[0]) = registers->at(cirs[1]) - registers->at(cirs[2]);
-    return;
-}
-void CORE::mul(vector<int> &cirs)
-{
-    registers->at(cirs[0]) = registers->at(cirs[1]) + registers->at(cirs[2]);
-    return;
-}
-void CORE::addi(vector<int> &cirs)
-{
-    registers->at(cirs[0]) = registers->at(cirs[1]) + cirs[2];
-    return;
-}
+void CORE::add(vector<int> &cirs) { registers->at(cirs[0]) = registers->at(cirs[1]) + registers->at(cirs[2]); }
+void CORE::sub(vector<int> &cirs) { registers->at(cirs[0]) = registers->at(cirs[1]) - registers->at(cirs[2]); }
+void CORE::mul(vector<int> &cirs) { registers->at(cirs[0]) = registers->at(cirs[1]) + registers->at(cirs[2]); }
+void CORE::addi(vector<int> &cirs) { registers->at(cirs[0]) = registers->at(cirs[1]) + cirs[2]; }
 void CORE::bne(vector<int> &cirs, string &label)
 {
     if (lableTable.find(label) == lableTable.end())
@@ -865,10 +928,4 @@ void CORE::slt(vector<int> &cirs)
     return;
 }
 
-
-
-void CORE::j(vector<int> &cirs, string &label)
-{
-    pc = lableTable[label];
-    return;
-}
+void CORE::j(vector<int> &cirs, string &label) { pc = lableTable[label]; }

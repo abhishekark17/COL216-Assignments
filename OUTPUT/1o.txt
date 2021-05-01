@@ -1,0 +1,200 @@
+Cycle: 1	: Instruction: addi ($s0,$zero,1000): $s0=1000
+Cycle: 2	: Instruction: addi ($s1,$zero,2500): $s1=2500
+Cycle: 3	: Instruction: addi ($t0,$zero,1): $t0=1
+Cycle: 4	: Instruction: addi ($t1,$zero,2): $t1=2
+Cycle: 5	: Instruction: addi ($t2,$zero,3): $t2=3
+Cycle: 6	: Instruction: addi ($t3,$zero,4): $t3=4
+Cycle: 7	Enqueueing SW Request: $t0--> @Address:1000IN DRAM	
+Cycle: 8	Enqueueing SW Request: $t1--> @Address:2500IN DRAM	
+Cycle: 9	Enqueueing SW Request: $t2--> @Address:1000IN DRAM	
+Cycle: 10	 coreId: 1STALLED
+Cycle: 11	 coreId: 1STALLED
+Cycle: 12	 coreId: 1STALLED
+Cycle: 13	 coreId: 1STALLED
+Cycle: 14	 coreId: 1STALLED
+Cycle: 15	 coreId: 1STALLED
+Cycle: 16	 coreId: 1STALLED
+Cycle: 17	 coreId: 1STALLED
+Cycle: 18	 coreId: 1STALLED
+Cycle: 19	 coreId: 1STALLED
+Cycle: 20	 coreId: 1STALLED
+Cycle: 21	 coreId: 1STALLED
+Cycle: 22	 coreId: 1STALLED
+Cycle: 23	 coreId: 1STALLED
+Cycle: 24	 coreId: 1STALLED
+Cycle: 25	 coreId: 1STALLED
+Cycle: 26	 coreId: 1STALLED: SW for core 1 Issued::[$t0,0,$s0]
+Cycle: 27	 coreId: 1STALLED
+Cycle: 28	 coreId: 1STALLED
+Cycle: 29	 coreId: 1STALLED
+Cycle: 30	 coreId: 1STALLED
+Cycle: 31	 coreId: 1STALLED
+Cycle: 32	 coreId: 1STALLED
+Cycle: 33	 coreId: 1STALLED
+Cycle: 34	 coreId: 1STALLED
+Cycle: 35	 coreId: 1STALLED
+Cycle: 36	 coreId: 1STALLED
+Cycle: 37	 coreId: 1STALLED
+Cycle: 38	 coreId: 1STALLED
+Cycle: 39	 coreId: 1STALLED
+Cycle: 40	 coreId: 1STALLED
+Cycle: 41	 coreId: 1STALLED
+Cycle: 42	 coreId: 1STALLED
+Cycle: 43	 coreId: 1STALLED
+Cycle: 44	 coreId: 1STALLED
+Cycle: 45	 coreId: 1STALLED
+Cycle: 46	 coreId: 1STALLED
+Cycle: 47	 coreId: 1STALLED
+Cycle: 48	 coreId: 1STALLED: memory address 1000-1003 = 1	
+Cycle: 49	Enqueueing SW Request: $t2--> @Address:1000IN DRAM	: SW for core 1 Issued::[$t1,0,$s1] coreId: 1 RESUMED: 
+Cycle: 50	 coreId: 1STALLED
+Cycle: 51	 coreId: 1STALLED
+Cycle: 52	 coreId: 1STALLED
+Cycle: 53	 coreId: 1STALLED
+Cycle: 54	 coreId: 1STALLED
+Cycle: 55	 coreId: 1STALLED
+Cycle: 56	 coreId: 1STALLED
+Cycle: 57	 coreId: 1STALLED
+Cycle: 58	 coreId: 1STALLED
+Cycle: 59	 coreId: 1STALLED
+Cycle: 60	 coreId: 1STALLED
+Cycle: 61	 coreId: 1STALLED
+Cycle: 62	 coreId: 1STALLED
+Cycle: 63	 coreId: 1STALLED
+Cycle: 64	 coreId: 1STALLED
+Cycle: 65	 coreId: 1STALLED
+Cycle: 66	 coreId: 1STALLED
+Cycle: 67	 coreId: 1STALLED
+Cycle: 68	 coreId: 1STALLED
+Cycle: 69	 coreId: 1STALLED
+Cycle: 70	 coreId: 1STALLED
+Cycle: 71	 coreId: 1STALLED: memory address 2500-2503 = 2	
+Cycle: 72	Enqueueing SW Request: $t3--> @Address:1000IN DRAM	: SW for core 1 Issued::[$t2,0,$s0] coreId: 1 RESUMED: 
+Cycle: 73	 coreId: 1STALLED
+Cycle: 74	 coreId: 1STALLED
+Cycle: 75	 coreId: 1STALLED
+Cycle: 76	 coreId: 1STALLED
+Cycle: 77	 coreId: 1STALLED
+Cycle: 78	 coreId: 1STALLED
+Cycle: 79	 coreId: 1STALLED
+Cycle: 80	 coreId: 1STALLED
+Cycle: 81	 coreId: 1STALLED
+Cycle: 82	 coreId: 1STALLED
+Cycle: 83	 coreId: 1STALLED
+Cycle: 84	 coreId: 1STALLED
+Cycle: 85	 coreId: 1STALLED
+Cycle: 86	 coreId: 1STALLED
+Cycle: 87	 coreId: 1STALLED
+Cycle: 88	 coreId: 1STALLED
+Cycle: 89	 coreId: 1STALLED
+Cycle: 90	 coreId: 1STALLED
+Cycle: 91	 coreId: 1STALLED
+Cycle: 92	 coreId: 1STALLED
+Cycle: 93	 coreId: 1STALLED
+Cycle: 94	 coreId: 1STALLED: memory address 1000-1003 = 3	
+Cycle: 95	Enqueueing SW Request: $t4--> @Address:1000IN DRAM	: SW for core 1 Issued::[$t2,0,$s0] coreId: 1 RESUMED: 
+Cycle: 96	Enqueueing SW Request: $t5--> @Address:1000IN DRAM	: memory address 1000-1003 = 3	
+Cycle: 97	 coreId: 1STALLED: SW for core 1 Issued::[$t3,0,$s0]
+Cycle: 98	 coreId: 1STALLED: memory address 1000-1003 = 4	
+Cycle: 99	Enqueueing SW Request: $t6--> @Address:1000IN DRAM	: SW for core 1 Issued::[$t4,0,$s0] coreId: 1 RESUMED: 
+Cycle: 100	Enqueueing SW Request: $t7--> @Address:1000IN DRAM	: memory address 1000-1003 = 0	
+Cycle: 101	 coreId: 1STALLED: SW for core 1 Issued::[$t5,0,$s0]
+Cycle: 102	 coreId: 1STALLED: memory address 1000-1003 = 0	
+Cycle: 103	: SW for core 1 Issued::[$t6,0,$s0] coreId: 1 RESUMED: 
+Cycle: 104	: memory address 1000-1003 = 0	
+Cycle: 105	: SW for core 1 Issued::[$t7,0,$s0]
+Cycle: 106	: memory address 1000-1003 = 0	
+Cycle: 107	
+Cycle: 108	
+Cycle: 109	
+Cycle: 110	
+Cycle: 111	
+Cycle: 112	
+Cycle: 113	
+Cycle: 114	
+Cycle: 115	
+Cycle: 116	
+Cycle: 117	
+Cycle: 118	
+Cycle: 119	
+Cycle: 120	
+Cycle: 121	
+Cycle: 122	
+Cycle: 123	
+Cycle: 124	
+Cycle: 125	
+Cycle: 126	
+Cycle: 127	
+Cycle: 128	
+Cycle: 129	
+Cycle: 130	
+Cycle: 131	
+Cycle: 132	
+Cycle: 133	
+Cycle: 134	
+Cycle: 135	
+Cycle: 136	
+Cycle: 137	
+Cycle: 138	
+Cycle: 139	
+Cycle: 140	
+Cycle: 141	
+Cycle: 142	
+Cycle: 143	
+Cycle: 144	
+Cycle: 145	
+Cycle: 146	
+Cycle: 147	
+Cycle: 148	
+Cycle: 149	
+Cycle: 150	
+Cycle: 151	
+Cycle: 152	
+Cycle: 153	
+Cycle: 154	
+Cycle: 155	
+Cycle: 156	
+Cycle: 157	
+Cycle: 158	
+Cycle: 159	
+Cycle: 160	
+Cycle: 161	
+Cycle: 162	
+Cycle: 163	
+Cycle: 164	
+Cycle: 165	
+Cycle: 166	
+Cycle: 167	
+Cycle: 168	
+Cycle: 169	
+Cycle: 170	
+Cycle: 171	
+Cycle: 172	
+Cycle: 173	
+Cycle: 174	
+Cycle: 175	
+Cycle: 176	
+Cycle: 177	
+Cycle: 178	
+Cycle: 179	
+Cycle: 180	
+Cycle: 181	
+Cycle: 182	
+Cycle: 183	
+Cycle: 184	
+Cycle: 185	
+Cycle: 186	
+Cycle: 187	
+Cycle: 188	
+Cycle: 189	
+Cycle: 190	
+Cycle: 191	
+Cycle: 192	
+Cycle: 193	
+Cycle: 194	
+Cycle: 195	
+Cycle: 196	
+Cycle: 197	
+Cycle: 198	
+Cycle: 199	
+Cycle: 200	

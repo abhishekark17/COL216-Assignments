@@ -7,6 +7,8 @@
 #include "main.hpp"
 #include "Instruction.hpp"
 #include "Request.hpp"
+#include "output.hpp"
+#include "DRAM.hpp"
 /* *
 *CIRS DEFINITION FOR VARIOUS INSTRUCTIONS:
 *add,sub,mul, slt := [register1 ,register2 ,register3 , NotUsed]
@@ -18,6 +20,10 @@
 */
 
 class MRM;
+
+class DRAM;
+
+class Request;
 class CORE {
 
 private:
@@ -55,24 +61,14 @@ private:
     void preprocess();
     void printIset ();
     
-    vector<instruction *> * iset;
+    vector<instruction> iset;
     
     void initialize_registers();
 
-    vector<Request*> * requestQueue;
+    //vector<Request*> * requestQueue;
     int minCost;
     Request * minCostRequest;
     vector<Request*> * freeBuffer;
-
-    int findMinCost () {
-        for (auto i = requestQueue->begin();i!=requestQueue->end();i++) {
-            if(minCost<((*i)->cost)) {
-                minCost=(*i)->cost;
-                minCostRequest = (*i);
-            }
-        }
-        return minCost;
-    }
 
     void add(vector<int> &cirs);
     void sub(vector<int> &cirs);
@@ -90,53 +86,41 @@ private:
     Request * stallingRequest;
 
     bool switchOnBranch;
+    OutputHandler * handleOutput;
 
+    int rowAccessDelay, colAccessDelay;
 public:
+    int getCoreId () { return core_id;}
     unordered_map <string,int> rmap;
     unordered_map <int, string> rrmap;
     
     void  lexFile(string file);
 
-    Request * getStallingRequest () { return stallingRequest; }
+    void setMinCostRequest (Request *r);
+    Request* getMinCostRequest ();
+    Request * getStallingRequest ();
 
     bool writingFromDRAM;
 
-    CORE (string inFileName, int id, string outFileName,int nc,int DramCols,int DramRows);
+    CORE (string inFileName, int id, string outFileName,int nc,int DramCols,int DramRows,OutputHandler * ho,int rowAccessDelay,int ColAccessDelay);
 
-    Request* getRequestWithMinCost () { return minCostRequest; }
-    void setRuntimeError (string s) {runtimeError = s;}
-    string getRuntimeError () {return runtimeError;}
+    Request* getRequestWithMinCost ();
 
-    int getMinCost () {return minCost;}
-    void setMinCost (int c) {minCost = c;}
+    void setRuntimeError (string s);
+    string getRuntimeError ();
 
-    vector<int> * getRegisters () {return registers;}
-    void stall (Request * request, bool sif) {
-        stalled = true;
-        stallIfFull = sif;
-        cout <<" coreId: \t"<<core_id<<"STALLED";
-        stallingRequest = request;
-    }
+    int getMinCost ();
+    void setMinCost (int c);
+    vector<int> * getRegisters ();
 
-    void resume (bool sif) {
-        stalled = false;
-        if (sif) stallIfFull = false;
-
-    }
-
-
+    void stall (Request * request, bool sif);
+    void resume (bool sif);
     void run (MRM *memoryRequestManager);
+    void addInFreeBuffer (Request * request);
+    void smoothExit ();
+    bool isRunnable ();
 
-    void addInFreeBuffer (Request * request) {
-        freeBuffer->push_back(request);
-    }
-
-    void smoothExit () {
-        cout << "smoothExit called " << core_id<< endl;
-    }
-
-    bool isRunnable () {return pc <= iset->size();} 
-
+    bool isStalled ();
     ~CORE();
 };
 

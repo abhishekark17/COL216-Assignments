@@ -1,6 +1,9 @@
 #pragma once
+#ifndef CPU_HPP
+#define CPU_HPP
 #include "Core.hpp"
 #include "main.hpp"
+#include "output.hpp"
 class CPU {
 private:
     int numCores;
@@ -14,12 +17,17 @@ private:
 
     DRAM *dram;
     MRM *memoryRequestManager;
+    OutputHandler * outputHandler;
 public: 
-    CPU (int n,int m,  string fpi, string fpo,int rad,int cad);
+    CPU (int n,int m,  string fpi, string fpo,int rad,int cad, string outputFolderPath);
 
      void exit ();
 
      void run ();
-
+    CORE* getCoreFromID (int id) {
+        return allCores->at (id - 1);
+    }
      int getNumCores();
 };
+
+#endif

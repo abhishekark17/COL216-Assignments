@@ -1,0 +1,200 @@
+Cycle: 1	: Idle
+Cycle: 2	: Idle
+Cycle: 3	: LW for core 2 Issued
+Cycle: 4	: Executing request for core 2
+Cycle: 5	: Executing request for core 2
+Cycle: 6	: Executing request for core 2
+Cycle: 7	: Executing request for core 2
+Cycle: 8	: Executing request for core 2
+Cycle: 9	: Executing request for core 2
+Cycle: 10	: Executing request for core 2
+Cycle: 11	: Executing request for core 2
+Cycle: 12	: Executing request for core 2
+Cycle: 13	: Executing request for core 2
+Cycle: 14	: Executing request for core 2
+Cycle: 15	: Executing request for core 2
+Cycle: 16	: Executing request for core 2
+Cycle: 17	: Executing request for core 2
+Cycle: 18	: Executing request for core 2
+Cycle: 19	: Executing request for core 2
+Cycle: 20	: Executing request for core 2
+Cycle: 21	: Executing request for core 2
+Cycle: 22	: Executing request for core 2
+Cycle: 23	: Executing request for core 2
+Cycle: 24	: Executing request for core 2
+Cycle: 25	: Executing request for core 2
+Cycle: 26	: SW for core 1 Issued::[$t0,0,$s0]
+Cycle: 27	: Executing request for core 1
+Cycle: 28	: Executing request for core 1
+Cycle: 29	: Executing request for core 1
+Cycle: 30	: Executing request for core 1
+Cycle: 31	: Executing request for core 1
+Cycle: 32	: Executing request for core 1
+Cycle: 33	: Executing request for core 1
+Cycle: 34	: Executing request for core 1
+Cycle: 35	: Executing request for core 1
+Cycle: 36	: Executing request for core 1
+Cycle: 37	: Executing request for core 1
+Cycle: 38	: Executing request for core 1
+Cycle: 39	: Executing request for core 1
+Cycle: 40	: Executing request for core 1
+Cycle: 41	: Executing request for core 1
+Cycle: 42	: Executing request for core 1
+Cycle: 43	: Executing request for core 1
+Cycle: 44	: Executing request for core 1
+Cycle: 45	: Executing request for core 1
+Cycle: 46	: Executing request for core 1
+Cycle: 47	: Executing request for core 1
+Cycle: 48	: Executing request for core 1
+Cycle: 49	: SW for core 1 Issued::[$t1,0,$s1]
+Cycle: 50	: Executing request for core 1
+Cycle: 51	: Executing request for core 1
+Cycle: 52	: Executing request for core 1
+Cycle: 53	: Executing request for core 1
+Cycle: 54	: Executing request for core 1
+Cycle: 55	: Executing request for core 1
+Cycle: 56	: Executing request for core 1
+Cycle: 57	: Executing request for core 1
+Cycle: 58	: Executing request for core 1
+Cycle: 59	: Executing request for core 1
+Cycle: 60	: Executing request for core 1
+Cycle: 61	: Executing request for core 1
+Cycle: 62	: Executing request for core 1
+Cycle: 63	: Executing request for core 1
+Cycle: 64	: Executing request for core 1
+Cycle: 65	: Executing request for core 1
+Cycle: 66	: Executing request for core 1
+Cycle: 67	: Executing request for core 1
+Cycle: 68	: Executing request for core 1
+Cycle: 69	: Executing request for core 1
+Cycle: 70	: Executing request for core 1
+Cycle: 71	: Executing request for core 1
+Cycle: 72	: SW for core 1 Issued::[$t2,0,$s0]
+Cycle: 73	: Executing request for core 1
+Cycle: 74	: Executing request for core 1
+Cycle: 75	: Executing request for core 1
+Cycle: 76	: Executing request for core 1
+Cycle: 77	: Executing request for core 1
+Cycle: 78	: Executing request for core 1
+Cycle: 79	: Executing request for core 1
+Cycle: 80	: Executing request for core 1
+Cycle: 81	: Executing request for core 1
+Cycle: 82	: Executing request for core 1
+Cycle: 83	: Executing request for core 1
+Cycle: 84	: Executing request for core 1
+Cycle: 85	: Executing request for core 1
+Cycle: 86	: Executing request for core 1
+Cycle: 87	: Executing request for core 1
+Cycle: 88	: Executing request for core 1
+Cycle: 89	: Executing request for core 1
+Cycle: 90	: Executing request for core 1
+Cycle: 91	: Executing request for core 1
+Cycle: 92	: Executing request for core 1
+Cycle: 93	: Executing request for core 1
+Cycle: 94	: Executing request for core 1
+Cycle: 95	: SW for core 1 Issued::[$t2,0,$s0]
+Cycle: 96	: Executing request for core 1
+Cycle: 97	: SW for core 1 Issued::[$t3,0,$s0]
+Cycle: 98	: Executing request for core 1
+Cycle: 99	: SW for core 1 Issued::[$t4,0,$s0]
+Cycle: 100	: Executing request for core 1
+Cycle: 101	: SW for core 1 Issued::[$t5,0,$s0]
+Cycle: 102	: Executing request for core 1
+Cycle: 103	: SW for core 1 Issued::[$t6,0,$s0]
+Cycle: 104	: Executing request for core 1
+Cycle: 105	: SW for core 1 Issued::[$t7,0,$s0]
+Cycle: 106	: Executing request for core 1
+Cycle: 107	: SW for core 2 Issued::[$t2,262144,$s0]
+Cycle: 108	: Executing request for core 2
+Cycle: 109	: Executing request for core 2
+Cycle: 110	: Executing request for core 2
+Cycle: 111	: Executing request for core 2
+Cycle: 112	: Executing request for core 2
+Cycle: 113	: Executing request for core 2
+Cycle: 114	: Executing request for core 2
+Cycle: 115	: Executing request for core 2
+Cycle: 116	: Executing request for core 2
+Cycle: 117	: Executing request for core 2
+Cycle: 118	: Executing request for core 2
+Cycle: 119	: Executing request for core 2
+Cycle: 120	: Executing request for core 2
+Cycle: 121	: Executing request for core 2
+Cycle: 122	: Executing request for core 2
+Cycle: 123	: Executing request for core 2
+Cycle: 124	: Executing request for core 2
+Cycle: 125	: Executing request for core 2
+Cycle: 126	: Executing request for core 2
+Cycle: 127	: Executing request for core 2
+Cycle: 128	: Executing request for core 2
+Cycle: 129	: Executing request for core 2
+Cycle: 130	: SW for core 2 Issued::[$t2,262144,$s0]
+Cycle: 131	: SW for core 2 Done
+Cycle: 132	: Idle
+Cycle: 133	: Idle
+Cycle: 134	: Idle
+Cycle: 135	: Idle
+Cycle: 136	: Idle
+Cycle: 137	: Idle
+Cycle: 138	: Idle
+Cycle: 139	: Idle
+Cycle: 140	: Idle
+Cycle: 141	: Idle
+Cycle: 142	: Idle
+Cycle: 143	: Idle
+Cycle: 144	: Idle
+Cycle: 145	: Idle
+Cycle: 146	: Idle
+Cycle: 147	: Idle
+Cycle: 148	: Idle
+Cycle: 149	: Idle
+Cycle: 150	: Idle
+Cycle: 151	: Idle
+Cycle: 152	: Idle
+Cycle: 153	: Idle
+Cycle: 154	: Idle
+Cycle: 155	: Idle
+Cycle: 156	: Idle
+Cycle: 157	: Idle
+Cycle: 158	: Idle
+Cycle: 159	: Idle
+Cycle: 160	: Idle
+Cycle: 161	: Idle
+Cycle: 162	: Idle
+Cycle: 163	: Idle
+Cycle: 164	: Idle
+Cycle: 165	: Idle
+Cycle: 166	: Idle
+Cycle: 167	: Idle
+Cycle: 168	: Idle
+Cycle: 169	: Idle
+Cycle: 170	: Idle
+Cycle: 171	: Idle
+Cycle: 172	: Idle
+Cycle: 173	: Idle
+Cycle: 174	: Idle
+Cycle: 175	: Idle
+Cycle: 176	: Idle
+Cycle: 177	: Idle
+Cycle: 178	: Idle
+Cycle: 179	: Idle
+Cycle: 180	: Idle
+Cycle: 181	: Idle
+Cycle: 182	: Idle
+Cycle: 183	: Idle
+Cycle: 184	: Idle
+Cycle: 185	: Idle
+Cycle: 186	: Idle
+Cycle: 187	: Idle
+Cycle: 188	: Idle
+Cycle: 189	: Idle
+Cycle: 190	: Idle
+Cycle: 191	: Idle
+Cycle: 192	: Idle
+Cycle: 193	: Idle
+Cycle: 194	: Idle
+Cycle: 195	: Idle
+Cycle: 196	: Idle
+Cycle: 197	: Idle
+Cycle: 198	: Idle
+Cycle: 199	: Idle
+Cycle: 200	: Idle

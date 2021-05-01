@@ -1,6 +1,6 @@
 CC = g++
 
-files = Core.cpp  DRAM.cpp CPU.cpp MRM.cpp  main.cpp
+files = Core.cpp  output.cpp DRAM.cpp Request.cpp CPU.cpp MRM.cpp  main.cpp
 
 all: $(files)
 	$(CC) $(files) -o main.out
