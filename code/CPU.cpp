@@ -29,8 +29,10 @@ void CPU::run () {
         //cout<<"Cycle: "<<curClockCycle<<"\t";
         memoryRequestManager->execute(allCores,curClockCycle);
         for (int i = 0; i < numCores; i++) { 
-            if (allCores->at(i)->isRunnable()) allCores->at(i)->run(memoryRequestManager); 
-            //allCores->at(i)->run(memoryRequestManager);   
+            //if (allCores->at(i)->isRunnable()) allCores->at(i)->run(memoryRequestManager);
+            allCores->at(i)->run(memoryRequestManager);   
+            outputHandler->updateNumOfInstForCore (i+1,allCores->at(i)->getNumOfInst());
+             
         }
         outputHandler->printAll (curClockCycle);
         //cout<<endl;
@@ -41,7 +43,6 @@ void CPU::run () {
 }
 
 void CPU::exit () {
-    //cout << "cpu exited" <<endl;
     outputHandler->printMetaData (dram->getMetaData (), dram->getNumLw(), dram->getNumSw());
     outputHandler->close();
 }

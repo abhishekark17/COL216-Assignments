@@ -92,21 +92,19 @@ void CORE::printIset () {
 }
 
 void CORE::resume (bool sif) {
-        stalled = false;
-        if (sif) stallIfFull = false;
-        
-        //for (int i = 0; i < 100; i++) {cout << "adsfadsfasdfasdfasdfasdfasdfasd" << endl;}
-        
-        handleOutput->appendOutputForCore (core_id," coreId: " + to_string (core_id) + " RESUMED: ");
-    }
+    stalled = false;
+    if (sif) stallIfFull = false;
+    handleOutput->appendOutputForCore (core_id," coreId: " + to_string (core_id) + " RESUMED: ");
+}
 
 void CORE::addInFreeBuffer (Request * request) {
-        freeBuffer->push_back(request);
-    }
+    freeBuffer->push_back(request);
+}
 
 void CORE::smoothExit () {
-        cout << "smoothExit called " << core_id<< endl;
-    }
+    //cout << "smoothExit called " << core_id<< endl;
+    handleOutput->appendOutputForCore (core_id,": Exited :");
+}
 
 bool CORE::isRunnable () {
     return  working && ((pc <= iset.size()) || stalled) ;
@@ -130,13 +128,11 @@ void CORE::stall (Request * request, bool sif) {
         stalled = true;
         stallIfFull = sif;
         //cout <<" coreId: \t"<<core_id<<"STALLED";
-        handleOutput->appendOutputForCore (core_id," coreId: " + to_string (core_id) + "STALLED");
+        handleOutput->appendOutputForCore (core_id," coreId: " + to_string (core_id) + ": Stalling :");
         stallingRequest = request;
     }
 
 void CORE::run (MRM *memoryRequestManager) {
-    //cout <<core_id << " core:   starting mein minCost " << minCost << endl;
-
     if (!working) return;
     if (hasRuntimeError) {
         working = false; 
@@ -145,7 +141,7 @@ void CORE::run (MRM *memoryRequestManager) {
         return;
     }
     if (stalled) {
-        handleOutput->appendOutputForCore (core_id," coreId: " + to_string (core_id) + "STALLED");
+        handleOutput->appendOutputForCore (core_id,": STALLED :");
         return;
     }
     instruction* currentInstruction = new instruction ();
@@ -349,13 +345,16 @@ void CORE::run (MRM *memoryRequestManager) {
         default: {}
 
     }
-    handleOutput->updateNumOfInstForCore (core_id, &numOfInst);
+    //handleOutput->updateNumOfInstForCore (core_id, &numOfInst);
     // int updateMinCostAndRequest = findMinCost ();
     //cout <<core_id << " core:   last mein minCost " << minCost << endl;
     //if(minCostRequest!=nullptr) cout << core_id << " core:   mincost request's opid " << minCostRequest->inst->opID << endl;
 }
 
-
+vector<int> * CORE::getNumOfInst ()
+{
+    return &numOfInst;
+}
 
 void CORE::updateNumOfInst (int instOpId) {
     numOfInst[instOpId]++;

@@ -77,8 +77,8 @@ bool MRM::checkDependencies ( int id,Request * r) {
                         r->cost += ceil ((*requestInQueue)->cost);
                         (*requestInQueue)->cost -= decCost;
                         dependent = true;
+                        r->cost += 1;
                     }
-                    //if (dependent) r->cost += 1;
                     break;
                 }
                 case 4: { // addi 
@@ -86,8 +86,8 @@ bool MRM::checkDependencies ( int id,Request * r) {
                         r->cost += ceil ((*requestInQueue)->cost);
                         (*requestInQueue)->cost -= decCost;
                         dependent = true;
+                        r->cost += 1;
                     }
-                    //if (dependent) r->cost += 1;
                     break;
                 }
                 
@@ -97,8 +97,8 @@ bool MRM::checkDependencies ( int id,Request * r) {
                         r->cost += ceil ((*requestInQueue)->cost);
                         (*requestInQueue)->cost -= decCost;
                         dependent = true;
+                        r->cost += 1;
                     }
-                    //if (dependent) r->cost += 1;
                     break;
                 }
                 case 7:  { //lw
@@ -106,8 +106,31 @@ bool MRM::checkDependencies ( int id,Request * r) {
                         r->cost += ceil ((*requestInQueue)->cost);
                         (*requestInQueue)->cost -= decCost;
                         dependent = true;
+
+                        if ((*requestInQueue)->inst->opID == 7) {
+                            if (DRAM::getRowOfRowBuffer((*requestInQueue)->loadingMemoryAddress) == DRAM::getRowOfRowBuffer(r->loadingMemoryAddress)) {
+                                if (DRAM::getColOfRowBuffer((*requestInQueue)->loadingMemoryAddress) == DRAM::getColOfRowBuffer(r->loadingMemoryAddress)) {
+                                    r->cost += 0;
+                                }
+                                else {
+                                    r->cost += 2;
+                                }
+                            }
+                            else r->cost += (2 * rowAccessDelay) + colAccessDelay;
+                        } 
+                        else if ((*requestInQueue)->inst->opID == 8) {
+                            if (DRAM::getRowOfRowBuffer((*requestInQueue)->savingMemoryAddress) == DRAM::getRowOfRowBuffer(r->loadingMemoryAddress)) {
+                                if (DRAM::getColOfRowBuffer((*requestInQueue)->savingMemoryAddress) == DRAM::getColOfRowBuffer(r->loadingMemoryAddress)) {
+                                    r->cost += 0;
+                                }
+                                else {
+                                    r->cost += 2;
+                                }
+                            }
+                            else r->cost += (2 * rowAccessDelay) + colAccessDelay;
+                        } 
                     }
-                    if(!dependent) r->cost += (2*rowAccessDelay) + colAccessDelay;
+                    //if(!dependent) r->cost = (2*rowAccessDelay) + colAccessDelay;
                     break;
                 }
                 case 8: { // sw
@@ -115,8 +138,31 @@ bool MRM::checkDependencies ( int id,Request * r) {
                         r->cost += ceil ((*requestInQueue)->cost);
                         (*requestInQueue)->cost -= decCost;
                         dependent = true;
+
+                        if ((*requestInQueue)->inst->opID == 7) {
+                            if (DRAM::getRowOfRowBuffer((*requestInQueue)->loadingMemoryAddress) == DRAM::getRowOfRowBuffer(r->savingMemoryAddress)) {
+                                if (DRAM::getColOfRowBuffer((*requestInQueue)->loadingMemoryAddress) == DRAM::getColOfRowBuffer(r->savingMemoryAddress)) {
+                                    r->cost += 0;
+                                }
+                                else {
+                                    r->cost += 2;
+                                }
+                            }
+                            else r->cost += (2 * rowAccessDelay) + colAccessDelay;
+                        } 
+                        else if ((*requestInQueue)->inst->opID == 8) {
+                            if (DRAM::getRowOfRowBuffer((*requestInQueue)->savingMemoryAddress) == DRAM::getRowOfRowBuffer(r->savingMemoryAddress)) {
+                                if (DRAM::getColOfRowBuffer((*requestInQueue)->savingMemoryAddress) == DRAM::getColOfRowBuffer(r->savingMemoryAddress)) {
+                                    r->cost += 0;
+                                }
+                                else {
+                                    r->cost += 2;
+                                }
+                            }
+                            else r->cost += (2 * rowAccessDelay) + colAccessDelay;
+                        } 
                     }
-                    if(!dependent) r->cost += (2*rowAccessDelay) + colAccessDelay;
+                    //if(!dependent) r->cost = (2*rowAccessDelay) + colAccessDelay;
                     // ! sw will have problem with other lw and sw
                     break;
                 } 
@@ -129,6 +175,7 @@ bool MRM::checkDependencies ( int id,Request * r) {
                     break;
             }
         }
+        if ((r->inst->opID == 7 || r->inst->opID == 8) && (!dependent)) r->cost = (2*rowAccessDelay) + colAccessDelay;
         return dependent;
     }
 
@@ -220,7 +267,7 @@ void MRM::execute (vector<CORE*> * allCores, int currentClockCycle) {
                 dram->setRowBuffer(DRAM::getRowOfRowBuffer (currentRequestInDRAM->loadingMemoryAddress));
                 dram->setColBuffer(DRAM::getColOfRowBuffer (currentRequestInDRAM->loadingMemoryAddress));
 
-                //cout <<" coreId: "<<currentRequestInDRAM->core_id <<  " ->  " + allCores->at(0)->rrmap.at(currentRequestInDRAM->changingRegister) + "=" + to_string(dram->getLoadedValueForLW ())+"\t";
+                cout <<" coreId: "<<currentRequestInDRAM->core_id <<  " ->  " + allCores->at(0)->rrmap.at(currentRequestInDRAM->changingRegister) + "=" + to_string(dram->getLoadedValueForLW ())+"\n";
                 handleOutput->appendOutputForCore (currentRequestInDRAM->core_id, allCores->at(0)->rrmap.at(currentRequestInDRAM->changingRegister) + "=" + to_string(dram->getLoadedValueForLW ())+"\t");
                 allCores->at (currentRequestInDRAM->core_id - 1)->getRegisters()->at (currentRequestInDRAM->changingRegister) = dram->getLoadedValueForLW ();
                 allCores->at (currentRequestInDRAM->core_id - 1)->updateNumOfInst (7);
@@ -232,14 +279,13 @@ void MRM::execute (vector<CORE*> * allCores, int currentClockCycle) {
                 dram->setRowBuffer(DRAM::getRowOfRowBuffer (currentRequestInDRAM->savingMemoryAddress));
                 dram->setColBuffer(DRAM::getColOfRowBuffer (currentRequestInDRAM->savingMemoryAddress));
 
-                //cout <<" coreId: "<<currentRequestInDRAM->core_id << " -> memory address " + to_string(currentRequestInDRAM->savingMemoryAddress) + "-" + to_string(currentRequestInDRAM->savingMemoryAddress + 3) + " = " + to_string(dram->getValueToBeStoredForSW()) + "\t";
+                cout <<" coreId: "<<currentRequestInDRAM->core_id << " -> memory address " + to_string(currentRequestInDRAM->savingMemoryAddress) + "-" + to_string(currentRequestInDRAM->savingMemoryAddress + 3) + " = " + to_string(dram->getValueToBeStoredForSW()) + "\n";
                 handleOutput->appendOutputForCore (currentRequestInDRAM->core_id,": memory address " + to_string(currentRequestInDRAM->savingMemoryAddress) + "-" + to_string(currentRequestInDRAM->savingMemoryAddress + 3) + " = " + to_string(dram->getValueToBeStoredForSW()) + "\t");                
                 
                 int setted = dram->setMemory (currentRequestInDRAM->savingMemoryAddress,dram->getValueToBeStoredForSW());
                 if (setted == -1) allCores->at(currentRequestInDRAM->core_id - 1)->setRuntimeError("Error: Memory Address not 123 accessible");
                 else if (setted == -2) allCores->at(currentRequestInDRAM->core_id - 1)->setRuntimeError("Error: invalid memory 123 location");
                 
-                //cout << "this value is stored for sw   " << dram->getValueToBeStoredForSW() << endl;
                 allCores->at (currentRequestInDRAM->core_id - 1)->updateNumOfInst (8);
                 handleOutput->addDramOutput (": SW for core " + to_string(currentRequestInDRAM->core_id) + " Done");
                 dequeueRequest (currentRequestInDRAM, getQueueOfCore_id (currentRequestInDRAM->core_id));
@@ -282,7 +328,7 @@ void MRM::execute (vector<CORE*> * allCores, int currentClockCycle) {
 
             if (request->inst->opID == 7) {
                 //cout<<" coreId: "<<currentRequestInDRAM->core_id<<"\t" << ": DRAM request issued : lw\t";
-                handleOutput->addDramOutput (": LW for core " + to_string(currentRequestInDRAM->core_id) + " Issued");
+                handleOutput->addDramOutput (": LW for core " + to_string(currentRequestInDRAM->core_id) + " Issued::[" +allCores->at(0)->rrmap.at(currentRequestInDRAM->inst->cirs[0]) + "," +  to_string(currentRequestInDRAM->inst->cirs[1]) + "," + allCores->at(0)->rrmap.at(currentRequestInDRAM->inst->cirs[2]) + "]");
                 handleOutput->appendOutputForCore (currentRequestInDRAM->core_id,": LW for core " + to_string(currentRequestInDRAM->core_id) + " Issued in DRAM::[" +allCores->at(0)->rrmap.at(currentRequestInDRAM->inst->cirs[0]) + "," +  to_string(currentRequestInDRAM->inst->cirs[1]) + "," + allCores->at(0)->rrmap.at(currentRequestInDRAM->inst->cirs[2]) + "]");
                 
                 if (dram->getRowBuffer() == DRAM::getRowOfRowBuffer (request->loadingMemoryAddress)) {
@@ -306,7 +352,7 @@ void MRM::execute (vector<CORE*> * allCores, int currentClockCycle) {
                     else uptoClkCycle = currentClockCycle + colAccessDelay; 
                 }
                 else uptoClkCycle = currentClockCycle + (2 * rowAccessDelay) + colAccessDelay;
-                
+
                 currentRequestInDRAM = request;
                 int success = dram->sw (request);
                 if (success == -1) allCores->at(request->core_id - 1)->setRuntimeError("Error: Memory Address not accessible");

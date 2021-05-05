@@ -7,199 +7,199 @@ Cycle: 6	: Instruction: addi ($t3,$zero,4): $t3=4
 Cycle: 7	Enqueueing SW Request: $t0--> @Address:1000IN DRAM	
 Cycle: 8	Enqueueing SW Request: $t1--> @Address:2500IN DRAM	: SW for core 1 Issued in DRAM::[$t0,0,$s0]
 Cycle: 9	Enqueueing SW Request: $t2--> @Address:1000IN DRAM	
-Cycle: 10	 coreId: 1STALLED
-Cycle: 11	 coreId: 1STALLED
-Cycle: 12	 coreId: 1STALLED
-Cycle: 13	 coreId: 1STALLED
-Cycle: 14	 coreId: 1STALLED
-Cycle: 15	 coreId: 1STALLED
-Cycle: 16	 coreId: 1STALLED
-Cycle: 17	 coreId: 1STALLED
-Cycle: 18	 coreId: 1STALLED
-Cycle: 19	 coreId: 1STALLED
-Cycle: 20	 coreId: 1STALLED
-Cycle: 21	 coreId: 1STALLED
-Cycle: 22	 coreId: 1STALLED
-Cycle: 23	 coreId: 1STALLED
-Cycle: 24	 coreId: 1STALLED
-Cycle: 25	 coreId: 1STALLED
-Cycle: 26	 coreId: 1STALLED
-Cycle: 27	 coreId: 1STALLED
-Cycle: 28	 coreId: 1STALLED
-Cycle: 29	 coreId: 1STALLED
-Cycle: 30	 coreId: 1STALLED: memory address 1000-1003 = 1	
+Cycle: 10	 coreId: 1: Stalling :
+Cycle: 11	: STALLED :
+Cycle: 12	: STALLED :
+Cycle: 13	: STALLED :
+Cycle: 14	: STALLED :
+Cycle: 15	: STALLED :
+Cycle: 16	: STALLED :
+Cycle: 17	: STALLED :
+Cycle: 18	: STALLED :
+Cycle: 19	: STALLED :
+Cycle: 20	: STALLED :
+Cycle: 21	: STALLED :
+Cycle: 22	: STALLED :
+Cycle: 23	: STALLED :
+Cycle: 24	: STALLED :
+Cycle: 25	: STALLED :
+Cycle: 26	: STALLED :
+Cycle: 27	: STALLED :
+Cycle: 28	: STALLED :
+Cycle: 29	: STALLED :
+Cycle: 30	: STALLED :: memory address 1000-1003 = 1	
 Cycle: 31	Enqueueing SW Request: $t2--> @Address:1000IN DRAM	: SW for core 1 Issued in DRAM::[$t2,0,$s0] coreId: 1 RESUMED: 
 Cycle: 32	Enqueueing SW Request: $t3--> @Address:1000IN DRAM	: memory address 1000-1003 = 3	
-Cycle: 33	 coreId: 1STALLED: SW for core 1 Issued in DRAM::[$t1,0,$s1]
-Cycle: 34	 coreId: 1STALLED
-Cycle: 35	 coreId: 1STALLED
-Cycle: 36	 coreId: 1STALLED
-Cycle: 37	 coreId: 1STALLED
-Cycle: 38	 coreId: 1STALLED
-Cycle: 39	 coreId: 1STALLED
-Cycle: 40	 coreId: 1STALLED
-Cycle: 41	 coreId: 1STALLED
-Cycle: 42	 coreId: 1STALLED
-Cycle: 43	 coreId: 1STALLED
-Cycle: 44	 coreId: 1STALLED
-Cycle: 45	 coreId: 1STALLED
-Cycle: 46	 coreId: 1STALLED
-Cycle: 47	 coreId: 1STALLED
-Cycle: 48	 coreId: 1STALLED
-Cycle: 49	 coreId: 1STALLED
-Cycle: 50	 coreId: 1STALLED
-Cycle: 51	 coreId: 1STALLED
-Cycle: 52	 coreId: 1STALLED
-Cycle: 53	 coreId: 1STALLED
-Cycle: 54	 coreId: 1STALLED
-Cycle: 55	 coreId: 1STALLED: memory address 2500-2503 = 2	
-Cycle: 56	Enqueueing SW Request: $t4--> @Address:1000IN DRAM	: SW for core 1 Issued in DRAM::[$t2,0,$s0] coreId: 1 RESUMED: 
-Cycle: 57	 coreId: 1STALLED
-Cycle: 58	 coreId: 1STALLED
-Cycle: 59	 coreId: 1STALLED
-Cycle: 60	 coreId: 1STALLED
-Cycle: 61	 coreId: 1STALLED
-Cycle: 62	 coreId: 1STALLED
-Cycle: 63	 coreId: 1STALLED
-Cycle: 64	 coreId: 1STALLED
-Cycle: 65	 coreId: 1STALLED
-Cycle: 66	 coreId: 1STALLED
-Cycle: 67	 coreId: 1STALLED
-Cycle: 68	 coreId: 1STALLED
-Cycle: 69	 coreId: 1STALLED
-Cycle: 70	 coreId: 1STALLED
-Cycle: 71	 coreId: 1STALLED
-Cycle: 72	 coreId: 1STALLED
-Cycle: 73	 coreId: 1STALLED
-Cycle: 74	 coreId: 1STALLED
-Cycle: 75	 coreId: 1STALLED
-Cycle: 76	 coreId: 1STALLED
-Cycle: 77	 coreId: 1STALLED
-Cycle: 78	 coreId: 1STALLED: memory address 1000-1003 = 3	
-Cycle: 79	Enqueueing SW Request: $t5--> @Address:1000IN DRAM	: SW for core 1 Issued in DRAM::[$t3,0,$s0] coreId: 1 RESUMED: 
-Cycle: 80	Enqueueing SW Request: $t6--> @Address:1000IN DRAM	: memory address 1000-1003 = 4	
-Cycle: 81	 coreId: 1STALLED: SW for core 1 Issued in DRAM::[$t4,0,$s0]
-Cycle: 82	 coreId: 1STALLED: memory address 1000-1003 = 0	
-Cycle: 83	Enqueueing SW Request: $t0--> @Address:1000IN DRAM	: SW for core 1 Issued in DRAM::[$t5,0,$s0] coreId: 1 RESUMED: 
-Cycle: 84	Enqueueing LW Request: $t8= @Address:2500IN DRAM	: memory address 1000-1003 = 0	
-Cycle: 85	: Instruction: addi ($v1,$v1,10): $v1=10: SW for core 1 Issued in DRAM::[$t6,0,$s0]
-Cycle: 86	: memory address 1000-1003 = 0	
-Cycle: 87	: SW for core 1 Issued in DRAM::[$t0,0,$s0]
-Cycle: 88	: memory address 1000-1003 = 1	
-Cycle: 89	: LW for core 1 Issued in DRAM::[$t8,0,$s1]
-Cycle: 90	
-Cycle: 91	
-Cycle: 92	
-Cycle: 93	
-Cycle: 94	
-Cycle: 95	
-Cycle: 96	
-Cycle: 97	
-Cycle: 98	
-Cycle: 99	
-Cycle: 100	
-Cycle: 101	
-Cycle: 102	
-Cycle: 103	
-Cycle: 104	
-Cycle: 105	
-Cycle: 106	
-Cycle: 107	
-Cycle: 108	
-Cycle: 109	
-Cycle: 110	
-Cycle: 111	$t8=2	
-Cycle: 112	
-Cycle: 113	
-Cycle: 114	
-Cycle: 115	
-Cycle: 116	
-Cycle: 117	
-Cycle: 118	
-Cycle: 119	
-Cycle: 120	
-Cycle: 121	
-Cycle: 122	
-Cycle: 123	
-Cycle: 124	
-Cycle: 125	
-Cycle: 126	
-Cycle: 127	
-Cycle: 128	
-Cycle: 129	
-Cycle: 130	
-Cycle: 131	
-Cycle: 132	
-Cycle: 133	
-Cycle: 134	
-Cycle: 135	
-Cycle: 136	
-Cycle: 137	
-Cycle: 138	
-Cycle: 139	
-Cycle: 140	
-Cycle: 141	
-Cycle: 142	
-Cycle: 143	
-Cycle: 144	
-Cycle: 145	
-Cycle: 146	
-Cycle: 147	
-Cycle: 148	
-Cycle: 149	
-Cycle: 150	
-Cycle: 151	
-Cycle: 152	
-Cycle: 153	
-Cycle: 154	
-Cycle: 155	
-Cycle: 156	
-Cycle: 157	
-Cycle: 158	
-Cycle: 159	
-Cycle: 160	
-Cycle: 161	
-Cycle: 162	
-Cycle: 163	
-Cycle: 164	
-Cycle: 165	
-Cycle: 166	
-Cycle: 167	
-Cycle: 168	
-Cycle: 169	
-Cycle: 170	
-Cycle: 171	
-Cycle: 172	
-Cycle: 173	
-Cycle: 174	
-Cycle: 175	
-Cycle: 176	
-Cycle: 177	
-Cycle: 178	
-Cycle: 179	
-Cycle: 180	
-Cycle: 181	
-Cycle: 182	
-Cycle: 183	
-Cycle: 184	
-Cycle: 185	
-Cycle: 186	
-Cycle: 187	
-Cycle: 188	
-Cycle: 189	
-Cycle: 190	
-Cycle: 191	
-Cycle: 192	
-Cycle: 193	
-Cycle: 194	
-Cycle: 195	
-Cycle: 196	
-Cycle: 197	
-Cycle: 198	
-Cycle: 199	
-Cycle: 200	
+Cycle: 33	 coreId: 1: Stalling :: SW for core 1 Issued in DRAM::[$t2,0,$s0]
+Cycle: 34	: STALLED :: memory address 1000-1003 = 3	
+Cycle: 35	Enqueueing SW Request: $t4--> @Address:1000IN DRAM	: SW for core 1 Issued in DRAM::[$t3,0,$s0] coreId: 1 RESUMED: 
+Cycle: 36	Enqueueing SW Request: $t5--> @Address:1000IN DRAM	: memory address 1000-1003 = 4	
+Cycle: 37	 coreId: 1: Stalling :: SW for core 1 Issued in DRAM::[$t4,0,$s0]
+Cycle: 38	: STALLED :: memory address 1000-1003 = 0	
+Cycle: 39	Enqueueing SW Request: $t6--> @Address:1000IN DRAM	: SW for core 1 Issued in DRAM::[$t5,0,$s0] coreId: 1 RESUMED: 
+Cycle: 40	Enqueueing SW Request: $t7--> @Address:1000IN DRAM	: memory address 1000-1003 = 0	
+Cycle: 41	 coreId: 1: Stalling :: SW for core 1 Issued in DRAM::[$t6,0,$s0]
+Cycle: 42	: STALLED :: memory address 1000-1003 = 0	
+Cycle: 43	Enqueueing LW Request: $t8= @Address:1000IN DRAM	: SW for core 1 Issued in DRAM::[$t7,0,$s0] coreId: 1 RESUMED: 
+Cycle: 44	: Exited :: memory address 1000-1003 = 0	
+Cycle: 45	: Exited :: LW for core 1 Issued in DRAM::[$t8,0,$s0]
+Cycle: 46	: Exited :$t8=0	
+Cycle: 47	: Exited :: SW for core 1 Issued in DRAM::[$t1,0,$s1]
+Cycle: 48	: Exited :
+Cycle: 49	: Exited :
+Cycle: 50	: Exited :
+Cycle: 51	: Exited :
+Cycle: 52	: Exited :
+Cycle: 53	: Exited :
+Cycle: 54	: Exited :
+Cycle: 55	: Exited :
+Cycle: 56	: Exited :
+Cycle: 57	: Exited :
+Cycle: 58	: Exited :
+Cycle: 59	: Exited :
+Cycle: 60	: Exited :
+Cycle: 61	: Exited :
+Cycle: 62	: Exited :
+Cycle: 63	: Exited :
+Cycle: 64	: Exited :
+Cycle: 65	: Exited :
+Cycle: 66	: Exited :
+Cycle: 67	: Exited :
+Cycle: 68	: Exited :
+Cycle: 69	: Exited :: memory address 2500-2503 = 2	
+Cycle: 70	: Exited :
+Cycle: 71	: Exited :
+Cycle: 72	: Exited :
+Cycle: 73	: Exited :
+Cycle: 74	: Exited :
+Cycle: 75	: Exited :
+Cycle: 76	: Exited :
+Cycle: 77	: Exited :
+Cycle: 78	: Exited :
+Cycle: 79	: Exited :
+Cycle: 80	: Exited :
+Cycle: 81	: Exited :
+Cycle: 82	: Exited :
+Cycle: 83	: Exited :
+Cycle: 84	: Exited :
+Cycle: 85	: Exited :
+Cycle: 86	: Exited :
+Cycle: 87	: Exited :
+Cycle: 88	: Exited :
+Cycle: 89	: Exited :
+Cycle: 90	: Exited :
+Cycle: 91	: Exited :
+Cycle: 92	: Exited :
+Cycle: 93	: Exited :
+Cycle: 94	: Exited :
+Cycle: 95	: Exited :
+Cycle: 96	: Exited :
+Cycle: 97	: Exited :
+Cycle: 98	: Exited :
+Cycle: 99	: Exited :
+Cycle: 100	: Exited :
+Cycle: 101	: Exited :
+Cycle: 102	: Exited :
+Cycle: 103	: Exited :
+Cycle: 104	: Exited :
+Cycle: 105	: Exited :
+Cycle: 106	: Exited :
+Cycle: 107	: Exited :
+Cycle: 108	: Exited :
+Cycle: 109	: Exited :
+Cycle: 110	: Exited :
+Cycle: 111	: Exited :
+Cycle: 112	: Exited :
+Cycle: 113	: Exited :
+Cycle: 114	: Exited :
+Cycle: 115	: Exited :
+Cycle: 116	: Exited :
+Cycle: 117	: Exited :
+Cycle: 118	: Exited :
+Cycle: 119	: Exited :
+Cycle: 120	: Exited :
+Cycle: 121	: Exited :
+Cycle: 122	: Exited :
+Cycle: 123	: Exited :
+Cycle: 124	: Exited :
+Cycle: 125	: Exited :
+Cycle: 126	: Exited :
+Cycle: 127	: Exited :
+Cycle: 128	: Exited :
+Cycle: 129	: Exited :
+Cycle: 130	: Exited :
+Cycle: 131	: Exited :
+Cycle: 132	: Exited :
+Cycle: 133	: Exited :
+Cycle: 134	: Exited :
+Cycle: 135	: Exited :
+Cycle: 136	: Exited :
+Cycle: 137	: Exited :
+Cycle: 138	: Exited :
+Cycle: 139	: Exited :
+Cycle: 140	: Exited :
+Cycle: 141	: Exited :
+Cycle: 142	: Exited :
+Cycle: 143	: Exited :
+Cycle: 144	: Exited :
+Cycle: 145	: Exited :
+Cycle: 146	: Exited :
+Cycle: 147	: Exited :
+Cycle: 148	: Exited :
+Cycle: 149	: Exited :
+Cycle: 150	: Exited :
+Cycle: 151	: Exited :
+Cycle: 152	: Exited :
+Cycle: 153	: Exited :
+Cycle: 154	: Exited :
+Cycle: 155	: Exited :
+Cycle: 156	: Exited :
+Cycle: 157	: Exited :
+Cycle: 158	: Exited :
+Cycle: 159	: Exited :
+Cycle: 160	: Exited :
+Cycle: 161	: Exited :
+Cycle: 162	: Exited :
+Cycle: 163	: Exited :
+Cycle: 164	: Exited :
+Cycle: 165	: Exited :
+Cycle: 166	: Exited :
+Cycle: 167	: Exited :
+Cycle: 168	: Exited :
+Cycle: 169	: Exited :
+Cycle: 170	: Exited :
+Cycle: 171	: Exited :
+Cycle: 172	: Exited :
+Cycle: 173	: Exited :
+Cycle: 174	: Exited :
+Cycle: 175	: Exited :
+Cycle: 176	: Exited :
+Cycle: 177	: Exited :
+Cycle: 178	: Exited :
+Cycle: 179	: Exited :
+Cycle: 180	: Exited :
+Cycle: 181	: Exited :
+Cycle: 182	: Exited :
+Cycle: 183	: Exited :
+Cycle: 184	: Exited :
+Cycle: 185	: Exited :
+Cycle: 186	: Exited :
+Cycle: 187	: Exited :
+Cycle: 188	: Exited :
+Cycle: 189	: Exited :
+Cycle: 190	: Exited :
+Cycle: 191	: Exited :
+Cycle: 192	: Exited :
+Cycle: 193	: Exited :
+Cycle: 194	: Exited :
+Cycle: 195	: Exited :
+Cycle: 196	: Exited :
+Cycle: 197	: Exited :
+Cycle: 198	: Exited :
+Cycle: 199	: Exited :
+Cycle: 200	: Exited :
 
 
 META DATA
-[add: 0,sub: 0,mul: 0,slt: 0,addi: 7,bne: 0,beq: 0,lw: 0,sw: 7,j: 0]
-TOTAL NUMBER OF INSTRUCTIONS EXECUTED := 14
+[add: 0,sub: 0,mul: 0,slt: 0,addi: 6,bne: 0,beq: 0,lw: 1,sw: 9,j: 0]
+TOTAL NUMBER OF INSTRUCTIONS EXECUTED := 16

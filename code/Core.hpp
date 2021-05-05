@@ -124,7 +124,7 @@ public:
     bool isRunnable ();
 
     void updateNumOfInst (int instOpId);
-
+    vector<int> * getNumOfInst ();
     
     bool isStalled ();
     ~CORE();
