@@ -94,6 +94,7 @@ void CORE::printIset () {
 void CORE::resume (bool sif) {
     stalled = false;
     if (sif) stallIfFull = false;
+    cout << "inside resume" << endl;
     handleOutput->appendOutputForCore (core_id," coreId: " + to_string (core_id) + " RESUMED: ");
 }
 
@@ -127,6 +128,7 @@ void CORE::setRuntimeError (string s) {
 void CORE::stall (Request * request, bool sif) {
         stalled = true;
         stallIfFull = sif;
+        cout << "hello " << request->inst->opID << endl;
         //cout <<" coreId: \t"<<core_id<<"STALLED";
         handleOutput->appendOutputForCore (core_id," coreId: " + to_string (core_id) + ": Stalling :");
         stallingRequest = request;
@@ -140,10 +142,12 @@ void CORE::run (MRM *memoryRequestManager) {
         cout << "Core " << core_id << " is not running" << endl;
         return;
     }
+
     if (stalled) {
         handleOutput->appendOutputForCore (core_id,": STALLED :");
         return;
     }
+
     instruction* currentInstruction = new instruction ();
        
     if (stallingRequest != nullptr) {
@@ -166,6 +170,8 @@ void CORE::run (MRM *memoryRequestManager) {
             }
         }
     }
+
+    // * now we know which instruction to execute
     
     switch (currentInstruction->opID) {
         case 0: {
@@ -179,6 +185,8 @@ void CORE::run (MRM *memoryRequestManager) {
                 if (dependent) {
                     bool enqueued = memoryRequestManager->enqueueRequest (core_id,request);
                     if (!enqueued) stall(request,true);
+                    else handleOutput->appendOutputForCore (core_id,": Enqueuing Instruction: add (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + rrmap.at(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" + to_string(registers->at(currentInstruction->cirs[0])));
+
                     
                 }
                 else {
@@ -201,6 +209,8 @@ void CORE::run (MRM *memoryRequestManager) {
                 if (dependent) {
                     bool enqueued = memoryRequestManager->enqueueRequest (core_id,request);
                     if (!enqueued) stall(request,true);
+                    else handleOutput->appendOutputForCore (core_id,":Enqueuing Instruction: sub (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + rrmap.at(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" + to_string(registers->at(currentInstruction->cirs[0])));
+
                 }
                 else {
                     sub (currentInstruction->cirs);
@@ -222,6 +232,8 @@ void CORE::run (MRM *memoryRequestManager) {
                 if (dependent) {
                     bool enqueued = memoryRequestManager->enqueueRequest (core_id,request);
                     if (!enqueued) stall(request,true);
+                    else handleOutput->appendOutputForCore (core_id,":Enqueuing Instruction: mul (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + rrmap.at(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" + to_string(registers->at(currentInstruction->cirs[0])));
+
                 }
                 else {
                     mul (currentInstruction->cirs);
@@ -243,6 +255,8 @@ void CORE::run (MRM *memoryRequestManager) {
                 if (dependent) {
                     bool enqueued = memoryRequestManager->enqueueRequest (core_id,request);
                     if (!enqueued) stall(request,true);
+                    else handleOutput->appendOutputForCore (core_id,":Enqueuing Instruction: slt (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + rrmap.at(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" + to_string(registers->at(currentInstruction->cirs[0])));
+
                 }
                 else {
                     slt (currentInstruction->cirs);
@@ -264,6 +278,8 @@ void CORE::run (MRM *memoryRequestManager) {
                 if (dependent) {
                     bool enqueued = memoryRequestManager->enqueueRequest (core_id,request);
                     if (!enqueued) stall(request,true);
+                    else handleOutput->appendOutputForCore (core_id,":Enqueuing Instruction: addi (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + to_string(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" + to_string(registers->at(currentInstruction->cirs[0])));
+
                 }
                 else {
                     addi (currentInstruction->cirs);
@@ -278,11 +294,20 @@ void CORE::run (MRM *memoryRequestManager) {
             Request * request = new Request(0,core_id,currentInstruction,this);
             bool dependent = memoryRequestManager->checkDependencies(core_id, request);
             if (dependent) {
+                cout << stalled << " stalled" << endl;
                 bool enqueued = memoryRequestManager->enqueueRequest (core_id,request);
-                if (!enqueued) stall(request,true);
-                else stall(request,false);
+                cout << "enqueued " << enqueued << endl;
+                if (!enqueued) {
+                    if (!stalled) stall(request,true);
+                }
+                else {
+                    if (!stalled) stall(request,false);
+                    handleOutput->appendOutputForCore (core_id,":Enqueuing Instruction bne (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + currentInstruction->label + "," + to_string(switchOnBranch) + ")");
+
+                }
             }
             else {
+
                 bne (currentInstruction->cirs, currentInstruction->label);
                 //cout<<" coreId: "<<core_id<<" -> "<<": Instruction bne (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + currentInstruction->label + "," + to_string(switchOnBranch) + ")\t";
                 handleOutput->appendOutputForCore (core_id,": Instruction bne (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + currentInstruction->label + "," + to_string(switchOnBranch) + ")");
@@ -295,8 +320,14 @@ void CORE::run (MRM *memoryRequestManager) {
             bool dependent = memoryRequestManager->checkDependencies(core_id, request);
             if (dependent) {
                 bool enqueued = memoryRequestManager->enqueueRequest (core_id,request);
-                if (!enqueued) stall(request,true);
-                else stall(request,false);
+                if (!enqueued) {
+                    if (!stalled) stall(request,true);
+                }
+                else {
+                    if (!stalled) stall(request,false);
+                    handleOutput->appendOutputForCore (core_id,":Enqueuing Instruction beq (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + currentInstruction->label + "," + to_string(switchOnBranch) + ")");
+
+                }
             }
             else {
                 beq (currentInstruction->cirs, currentInstruction->label);
@@ -314,9 +345,7 @@ void CORE::run (MRM *memoryRequestManager) {
             }
             else {
                 Request * request = new Request(0,core_id,currentInstruction,this);
-                bool dependent = memoryRequestManager->checkDependencies(core_id, request);
-                if (!dependent) request->cost = (2 * rowAccessDelay) + colAccessDelay;
-        
+                bool dependent = memoryRequestManager->checkDependencies(core_id, request);        
                 bool enqueued = memoryRequestManager->enqueueRequest (core_id,request);
                 if (!enqueued) stall(request,true);
                 else handleOutput->appendOutputForCore (core_id,"Enqueueing LW Request: " + rrmap.at(request->changingRegister) + "= @Address:" + to_string(request->loadingMemoryAddress) +"IN DRAM\t");
@@ -327,8 +356,6 @@ void CORE::run (MRM *memoryRequestManager) {
             Request * request = new Request(0,core_id,currentInstruction,this);
 
             bool dependent = memoryRequestManager->checkDependencies(core_id, request);
-            if (!dependent) request->cost = (2 * rowAccessDelay) + colAccessDelay;
-    
             bool enqueued = memoryRequestManager->enqueueRequest (core_id,request);
             if (!enqueued) stall(request,true);
             else handleOutput->appendOutputForCore (core_id,"Enqueueing SW Request: " + rrmap.at(request->inst->cirs[0]) + "--> @Address:" + to_string(request->savingMemoryAddress) +"IN DRAM\t");

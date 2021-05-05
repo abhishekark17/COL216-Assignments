@@ -5,6 +5,7 @@ Request::Request (double c, int ci,instruction* i, CORE* cc) {
         core_id = ci;
         inst = i;
         coreOfRequest = cc;
+        subtractCostQueue = new vector<pair<Request*,int>> ();
         storeThisForSW = coreOfRequest->getRegisters()->at (inst->cirs[0]);
         if (inst->opID == 0  && inst->opID == 1 && inst->opID == 2 && inst->opID == 3 && inst->opID == 4) {
             changingRegister = inst->cirs[0];

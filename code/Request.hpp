@@ -17,7 +17,7 @@ public:
     int changingRegister;
     int loadingMemoryAddress, savingMemoryAddress;
     int storeThisForSW;
-
+    vector<pair<Request*, int>> * subtractCostQueue;
     Request (double c, int ci,instruction* i, CORE* cc);
 
 

@@ -28,6 +28,7 @@ private:
     Request * currentRequestInDRAM;
     OutputHandler * handleOutput;
     double decCost;
+    int getCostToBeSubtracted (Request* r, vector<pair<Request*,int>> * requestQueue);
 public:
     MRM (DRAM * d,vector<CORE*> * ac, int nc, int rad, int cad,OutputHandler * ho, int cql);
 

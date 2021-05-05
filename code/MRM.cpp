@@ -74,19 +74,19 @@ bool MRM::checkDependencies ( int id,Request * r) {
                 case 2: //mul
                 case 3: { // slt 
                     if ( r->inst->cirs[0] == (*requestInQueue)->changingRegister || r->inst->cirs[1] == (*requestInQueue)->changingRegister || r->inst->cirs[2] == (*requestInQueue)->changingRegister ) {
-                        r->cost += ceil ((*requestInQueue)->cost);
+                        r->cost += ceil ((*requestInQueue)->cost) + 1;
+                        r->subtractCostQueue->push_back (make_pair((*requestInQueue),ceil ((*requestInQueue)->cost) + 1));
                         (*requestInQueue)->cost -= decCost;
                         dependent = true;
-                        r->cost += 1;
                     }
                     break;
                 }
                 case 4: { // addi 
                     if ( r->inst->cirs[0] == (*requestInQueue)->changingRegister || r->inst->cirs[1] == (*requestInQueue)->changingRegister) {
-                        r->cost += ceil ((*requestInQueue)->cost);
+                        r->cost += ceil ((*requestInQueue)->cost) + 1;
+                        r->subtractCostQueue->push_back (make_pair((*requestInQueue),ceil ((*requestInQueue)->cost)+1));
                         (*requestInQueue)->cost -= decCost;
                         dependent = true;
-                        r->cost += 1;
                     }
                     break;
                 }
@@ -94,40 +94,52 @@ bool MRM::checkDependencies ( int id,Request * r) {
                 case 5: // bne
                 case 6: { //beq
                     if ( r->inst->cirs[0] == (*requestInQueue)->changingRegister || r->inst->cirs[1] == (*requestInQueue)->changingRegister) {
-                        r->cost += ceil ((*requestInQueue)->cost);
+                        r->cost += ceil ((*requestInQueue)->cost) + 1;
+                        r->subtractCostQueue->push_back (make_pair((*requestInQueue),ceil ((*requestInQueue)->cost) + 1));
                         (*requestInQueue)->cost -= decCost;
                         dependent = true;
-                        r->cost += 1;
                     }
                     break;
                 }
                 case 7:  { //lw
                     if ( r->inst->cirs[0] == (*requestInQueue)->changingRegister || r->inst->cirs[2] == (*requestInQueue)->changingRegister || r->loadingMemoryAddress == (*requestInQueue)->savingMemoryAddress) {
                         r->cost += ceil ((*requestInQueue)->cost);
+
                         (*requestInQueue)->cost -= decCost;
                         dependent = true;
 
                         if ((*requestInQueue)->inst->opID == 7) {
                             if (DRAM::getRowOfRowBuffer((*requestInQueue)->loadingMemoryAddress) == DRAM::getRowOfRowBuffer(r->loadingMemoryAddress)) {
                                 if (DRAM::getColOfRowBuffer((*requestInQueue)->loadingMemoryAddress) == DRAM::getColOfRowBuffer(r->loadingMemoryAddress)) {
-                                    r->cost += 0;
+                                    r->cost += 2;
+                                    r->subtractCostQueue->push_back (make_pair((*requestInQueue),ceil ((*requestInQueue)->cost) + 2));
                                 }
                                 else {
-                                    r->cost += 2;
+                                    r->cost += colAccessDelay + 1;
+                                    r->subtractCostQueue->push_back (make_pair((*requestInQueue),ceil ((*requestInQueue)->cost) + colAccessDelay + 1));
                                 }
                             }
-                            else r->cost += (2 * rowAccessDelay) + colAccessDelay;
+                            else {
+                                r->cost += (2 * rowAccessDelay) + colAccessDelay + 1;
+                                r->subtractCostQueue->push_back (make_pair((*requestInQueue),ceil ((*requestInQueue)->cost) + (2 * rowAccessDelay) + colAccessDelay + 1));
+                            }
                         } 
                         else if ((*requestInQueue)->inst->opID == 8) {
                             if (DRAM::getRowOfRowBuffer((*requestInQueue)->savingMemoryAddress) == DRAM::getRowOfRowBuffer(r->loadingMemoryAddress)) {
                                 if (DRAM::getColOfRowBuffer((*requestInQueue)->savingMemoryAddress) == DRAM::getColOfRowBuffer(r->loadingMemoryAddress)) {
-                                    r->cost += 0;
+                                    r->cost += 1 + 1;
+                                    r->subtractCostQueue->push_back (make_pair((*requestInQueue),ceil ((*requestInQueue)->cost) + 1 + 1));
                                 }
                                 else {
-                                    r->cost += 2;
+                                    r->cost += colAccessDelay + 1;
+                                    r->subtractCostQueue->push_back (make_pair((*requestInQueue),ceil ((*requestInQueue)->cost) + colAccessDelay + 1));
                                 }
                             }
-                            else r->cost += (2 * rowAccessDelay) + colAccessDelay;
+                            else {
+                                r->cost += (2 * rowAccessDelay) + colAccessDelay + 1;
+                                r->subtractCostQueue->push_back (make_pair((*requestInQueue),ceil ((*requestInQueue)->cost) + (2 * rowAccessDelay) + colAccessDelay + 1));
+
+                            }
                         } 
                     }
                     //if(!dependent) r->cost = (2*rowAccessDelay) + colAccessDelay;
@@ -142,24 +154,34 @@ bool MRM::checkDependencies ( int id,Request * r) {
                         if ((*requestInQueue)->inst->opID == 7) {
                             if (DRAM::getRowOfRowBuffer((*requestInQueue)->loadingMemoryAddress) == DRAM::getRowOfRowBuffer(r->savingMemoryAddress)) {
                                 if (DRAM::getColOfRowBuffer((*requestInQueue)->loadingMemoryAddress) == DRAM::getColOfRowBuffer(r->savingMemoryAddress)) {
-                                    r->cost += 0;
+                                    r->cost += 1 + 1;
+                                    r->subtractCostQueue->push_back (make_pair((*requestInQueue),ceil ((*requestInQueue)->cost) + 1 + 1));
                                 }
                                 else {
-                                    r->cost += 2;
+                                    r->cost += colAccessDelay + 1;
+                                    r->subtractCostQueue->push_back (make_pair((*requestInQueue),ceil ((*requestInQueue)->cost) + colAccessDelay + 1));
                                 }
                             }
-                            else r->cost += (2 * rowAccessDelay) + colAccessDelay;
+                            else {
+                                r->cost += (2 * rowAccessDelay) + colAccessDelay + 1;
+                                r->subtractCostQueue->push_back (make_pair((*requestInQueue),ceil ((*requestInQueue)->cost) + (2 * rowAccessDelay) + colAccessDelay + 1));
+                            }
                         } 
                         else if ((*requestInQueue)->inst->opID == 8) {
                             if (DRAM::getRowOfRowBuffer((*requestInQueue)->savingMemoryAddress) == DRAM::getRowOfRowBuffer(r->savingMemoryAddress)) {
                                 if (DRAM::getColOfRowBuffer((*requestInQueue)->savingMemoryAddress) == DRAM::getColOfRowBuffer(r->savingMemoryAddress)) {
-                                    r->cost += 0;
+                                    r->cost += 1 + 1;
+                                    r->subtractCostQueue->push_back (make_pair((*requestInQueue),ceil ((*requestInQueue)->cost) + 1 + 1));
                                 }
                                 else {
-                                    r->cost += 2;
+                                    r->cost += colAccessDelay + 1;
+                                    r->subtractCostQueue->push_back (make_pair((*requestInQueue),ceil ((*requestInQueue)->cost) + colAccessDelay + 1));
                                 }
                             }
-                            else r->cost += (2 * rowAccessDelay) + colAccessDelay;
+                            else {
+                                r->cost += (2 * rowAccessDelay) + colAccessDelay + 1;
+                                r->subtractCostQueue->push_back (make_pair((*requestInQueue),ceil ((*requestInQueue)->cost) + (2 * rowAccessDelay) + colAccessDelay + 1));
+                            }
                         } 
                     }
                     //if(!dependent) r->cost = (2*rowAccessDelay) + colAccessDelay;
@@ -175,7 +197,11 @@ bool MRM::checkDependencies ( int id,Request * r) {
                     break;
             }
         }
-        if ((r->inst->opID == 7 || r->inst->opID == 8) && (!dependent)) r->cost = (2*rowAccessDelay) + colAccessDelay;
+        if ((r->inst->opID == 7 || r->inst->opID == 8) && (!dependent)) {
+            r->cost = (2*rowAccessDelay) + colAccessDelay + 1;
+            cout << "this is cost agag " << r->cost << endl;
+        }
+        //if (r->core_id == 1) cout << r->cost << " this is cost " << endl;
         return dependent;
     }
 
@@ -226,13 +252,23 @@ pair<Request *, int> MRM::getMinCostRequest (vector<Request*> * coreQueue) {
     return make_pair (myMinCostRequest, minCost);
 }
 
+int MRM::getCostToBeSubtracted (Request* r, vector<pair<Request*,int>> * requestQueue) {
+    for (auto x = requestQueue->begin(); x != requestQueue->end(); x++) {
+        if ((*x).first == r) {
+            int answer = (*x).second;
+            requestQueue->erase (x);
+            return answer;
+        }
+    }
+    return 0;
+}
 bool MRM::dequeueRequest (Request * r, vector<Request*> * coreQueue) {
         bool deleted = false;
         for (auto i = coreQueue->begin(); i != coreQueue->end(); i++) {
             if ( (*i) == r) {
                 for (auto j = i+1; j != coreQueue->end(); j++) {
-                    if (j != coreQueue->end()) if (isDependent(*i, *j)) {
-                        (*j)->cost -= ceil ((*i)->cost) ;
+                    if (j != coreQueue->end() && isDependent(*i, *j)) {
+                        (*j)->cost -= getCostToBeSubtracted ((*i), (*j)->subtractCostQueue) ;
                     }
                     
                 }
@@ -249,12 +285,12 @@ bool MRM::dequeueRequest (Request * r, vector<Request*> * coreQueue) {
     }
 
 void MRM::execute (vector<CORE*> * allCores, int currentClockCycle) {
-    
+    /*
         for (auto itr = allCores->begin(); itr != allCores->end();itr++) {
             if (getQueueOfCore_id((*itr)->getCoreId())->size() < coreQueueLength && 
                 (*itr)->isStalled()) (*itr)->resume(true);
         }
-
+*/
         if (currentClockCycle > uptoClkCycle) {
             DRAMrequestIssued = false;
             handleOutput->addDramOutput (": Idle");
@@ -298,12 +334,17 @@ void MRM::execute (vector<CORE*> * allCores, int currentClockCycle) {
        
 
         if (request == nullptr) return;
-       
+       cout << "opid of mincost request" << request->inst->opID <<"    " << allCores->at(0)->rrmap.at(request->inst->cirs[0])  << "    " <<request->cost << endl;
+
         if (request->inst->opID != 7 && request->inst->opID != 8 && request->cost <= 1) {
             if  (allCores->at(request->core_id - 1)->getStallingRequest() == request && 
                 getQueueOfCore_id(request->core_id)->size() == coreQueueLength) allCores->at(request->core_id)->resume(true);
-            else if(allCores->at(request->core_id - 1)->getStallingRequest() == request) allCores->at(request->core_id)->resume(false);
-            else allCores->at(request->core_id - 1)->addInFreeBuffer(request);
+            else if(allCores->at(request->core_id - 1)->getStallingRequest() == request) {
+                allCores->at((request->core_id) - 1)->resume(false);
+            }
+            else {
+                allCores->at(request->core_id - 1)->addInFreeBuffer(request);
+            }
 
             dequeueRequest (request,getQueueOfCore_id(request->core_id));
             return;

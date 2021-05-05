@@ -4,47 +4,47 @@ Cycle: 3	: Instruction: addi ($t0,$zero,1): $t0=1
 Cycle: 4	: Instruction: addi ($t1,$zero,2): $t1=2
 Cycle: 5	: Instruction: addi ($t2,$zero,3): $t2=3
 Cycle: 6	: Instruction: addi ($t3,$zero,4): $t3=4
-Cycle: 7	Enqueueing SW Request: $t0--> @Address:1000IN DRAM	
-Cycle: 8	Enqueueing SW Request: $t1--> @Address:2500IN DRAM	: SW for core 1 Issued in DRAM::[$t0,0,$s0]
-Cycle: 9	Enqueueing SW Request: $t2--> @Address:1000IN DRAM	
-Cycle: 10	 coreId: 1: Stalling :
-Cycle: 11	: STALLED :
-Cycle: 12	: STALLED :
-Cycle: 13	: STALLED :
-Cycle: 14	: STALLED :
-Cycle: 15	: STALLED :
-Cycle: 16	: STALLED :
-Cycle: 17	: STALLED :
-Cycle: 18	: STALLED :
-Cycle: 19	: STALLED :
-Cycle: 20	: STALLED :
-Cycle: 21	: STALLED :
-Cycle: 22	: STALLED :
-Cycle: 23	: STALLED :
-Cycle: 24	: STALLED :
-Cycle: 25	: STALLED :
-Cycle: 26	: STALLED :
-Cycle: 27	: STALLED :
-Cycle: 28	: STALLED :
-Cycle: 29	: STALLED :
-Cycle: 30	: STALLED :: memory address 1000-1003 = 1	
-Cycle: 31	Enqueueing SW Request: $t2--> @Address:1000IN DRAM	: SW for core 1 Issued in DRAM::[$t2,0,$s0] coreId: 1 RESUMED: 
-Cycle: 32	Enqueueing SW Request: $t3--> @Address:1000IN DRAM	: memory address 1000-1003 = 3	
-Cycle: 33	 coreId: 1: Stalling :: SW for core 1 Issued in DRAM::[$t2,0,$s0]
-Cycle: 34	: STALLED :: memory address 1000-1003 = 3	
-Cycle: 35	Enqueueing SW Request: $t4--> @Address:1000IN DRAM	: SW for core 1 Issued in DRAM::[$t3,0,$s0] coreId: 1 RESUMED: 
-Cycle: 36	Enqueueing SW Request: $t5--> @Address:1000IN DRAM	: memory address 1000-1003 = 4	
-Cycle: 37	 coreId: 1: Stalling :: SW for core 1 Issued in DRAM::[$t4,0,$s0]
-Cycle: 38	: STALLED :: memory address 1000-1003 = 0	
-Cycle: 39	Enqueueing SW Request: $t6--> @Address:1000IN DRAM	: SW for core 1 Issued in DRAM::[$t5,0,$s0] coreId: 1 RESUMED: 
-Cycle: 40	Enqueueing SW Request: $t7--> @Address:1000IN DRAM	: memory address 1000-1003 = 0	
-Cycle: 41	 coreId: 1: Stalling :: SW for core 1 Issued in DRAM::[$t6,0,$s0]
-Cycle: 42	: STALLED :: memory address 1000-1003 = 0	
-Cycle: 43	Enqueueing LW Request: $t8= @Address:1000IN DRAM	: SW for core 1 Issued in DRAM::[$t7,0,$s0] coreId: 1 RESUMED: 
-Cycle: 44	: Exited :: memory address 1000-1003 = 0	
-Cycle: 45	: Exited :: LW for core 1 Issued in DRAM::[$t8,0,$s0]
-Cycle: 46	: Exited :$t8=0	
-Cycle: 47	: Exited :: SW for core 1 Issued in DRAM::[$t1,0,$s1]
+Cycle: 7	Enqueueing LW Request: $t2= @Address:1000IN DRAM	
+Cycle: 8	Enqueueing SW Request: $t3--> @Address:1000IN DRAM	: LW for core 1 Issued in DRAM::[$t2,0,$s0]
+Cycle: 9	:Enqueuing Instruction: addi ($at,$t2,1234): $at=0
+Cycle: 10	: Exited :
+Cycle: 11	: Exited :
+Cycle: 12	: Exited :
+Cycle: 13	: Exited :
+Cycle: 14	: Exited :
+Cycle: 15	: Exited :
+Cycle: 16	: Exited :
+Cycle: 17	: Exited :
+Cycle: 18	: Exited :
+Cycle: 19	: Exited :
+Cycle: 20	: Exited :
+Cycle: 21	: Exited :
+Cycle: 22	: Exited :
+Cycle: 23	: Exited :
+Cycle: 24	: Exited :
+Cycle: 25	: Exited :
+Cycle: 26	: Exited :
+Cycle: 27	: Exited :
+Cycle: 28	: Exited :
+Cycle: 29	: Exited :
+Cycle: 30	: Exited :$t2=0	
+Cycle: 31	: Exited :: SW for core 1 Issued in DRAM::[$t3,0,$s0]
+Cycle: 32	: Instruction: addi ($at,$t2,1234): $at=1234: memory address 1000-1003 = 4	
+Cycle: 33	: Exited :
+Cycle: 34	: Exited :
+Cycle: 35	: Exited :
+Cycle: 36	: Exited :
+Cycle: 37	: Exited :
+Cycle: 38	: Exited :
+Cycle: 39	: Exited :
+Cycle: 40	: Exited :
+Cycle: 41	: Exited :
+Cycle: 42	: Exited :
+Cycle: 43	: Exited :
+Cycle: 44	: Exited :
+Cycle: 45	: Exited :
+Cycle: 46	: Exited :
+Cycle: 47	: Exited :
 Cycle: 48	: Exited :
 Cycle: 49	: Exited :
 Cycle: 50	: Exited :
@@ -66,7 +66,7 @@ Cycle: 65	: Exited :
 Cycle: 66	: Exited :
 Cycle: 67	: Exited :
 Cycle: 68	: Exited :
-Cycle: 69	: Exited :: memory address 2500-2503 = 2	
+Cycle: 69	: Exited :
 Cycle: 70	: Exited :
 Cycle: 71	: Exited :
 Cycle: 72	: Exited :
@@ -201,5 +201,5 @@ Cycle: 200	: Exited :
 
 
 META DATA
-[add: 0,sub: 0,mul: 0,slt: 0,addi: 6,bne: 0,beq: 0,lw: 1,sw: 9,j: 0]
-TOTAL NUMBER OF INSTRUCTIONS EXECUTED := 16
+[add: 0,sub: 0,mul: 0,slt: 0,addi: 7,bne: 0,beq: 0,lw: 1,sw: 1,j: 0]
+TOTAL NUMBER OF INSTRUCTIONS EXECUTED := 9
