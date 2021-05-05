@@ -37,65 +37,74 @@ int DRAM::getColOfRowBuffer(int address)
     return mypair.second;
 }
 
-
+vector<string>* DRAM::getMetaData () {
+    vector<string> * outp = new vector<string> ();
+    for (int i = 0; i < (1 << 18); i++)
+        if (memory->at(i) != 0) outp->push_back(to_string(i*4) + "-" + to_string((i*4) + 3) + ": " + to_string (memory->at(i)));
+    return outp;
+}
 
 int DRAM::sw(Request * r)
+{
+    int address = r->savingMemoryAddress;
+    if (address < 0 || address > 1048576)
     {
-        int address = r->savingMemoryAddress;
-        if (address < 0 || address > 1048576)
-        {
-            
-            return -1;
-        }
-        else if (address % 4 != 0)
-        {
-            return -2;
-        }
-        else address /= 4;
-        valueToBeStoredForSW = r->storeThisForSW;
-        return 0;
+        
+        return -1;
     }
+    else if (address % 4 != 0)
+    {
+        return -2;
+    }
+    else address /= 4;
+    valueToBeStoredForSW = r->storeThisForSW;
+    incNumSw();
+    return 0;
+}
 
 
 DRAM::DRAM (OutputHandler * ho) {
-        memory = new vector<int> (1<<18,0);
-        currentRow = -1, currentCol = -1;
-        handleOutput = ho;
-        loadedValueForLW = -1;
-        valueToBeStoredForSW = -1;
-    }
-    int DRAM::setMemory (int address, int value) {
-        if (address < 0 || address > 1048576) return -1;
-        else if (address % 4 != 0) return -2;
-        else address /= 4;
-        memory->at(address) = value;
-        return 0;
-    }
-    int DRAM::getMemory (int address) {
-        if (address < 0 || address > 1048576) return -1;
-        else if (address % 4 != 0) return -2;
-        else address /= 4;
-        return memory->at(address);
-    }
+    memory = new vector<int> (1<<18,0);
+    currentRow = -1, currentCol = -1;
+    handleOutput = ho;
+    loadedValueForLW = -1;
+    valueToBeStoredForSW = -1;
+    numLw = 0;
+    numSw = 0;
+}
+int DRAM::setMemory (int address, int value) {
+    if (address < 0 || address > 1048576) return -1;
+    else if (address % 4 != 0) return -2;
+    else address /= 4;
+    memory->at(address) = value;
+    return 0;
+}
+int DRAM::getMemory (int address) {
+    if (address < 0 || address > 1048576) return -1;
+    else if (address % 4 != 0) return -2;
+    else address /= 4;
+    return memory->at(address);
+}
 
-    int DRAM::getLoadedValueForLW () {return loadedValueForLW;}
-    int DRAM::getValueToBeStoredForSW () {return valueToBeStoredForSW;}
+int DRAM::getLoadedValueForLW () {return loadedValueForLW;}
+int DRAM::getValueToBeStoredForSW () {return valueToBeStoredForSW;}
 
-    int DRAM::lw(Request* r) 
+int DRAM::lw(Request* r) 
+{
+    int address = r->loadingMemoryAddress;
+    //cout << "loading memory address   " << address << endl;
+    if (address < 0 || address > 1048576)
+    {   
+        return -1;
+    }
+    else if (address % 4 != 0)
     {
-        int address = r->loadingMemoryAddress;
-        cout << "loading memory address   " << address << endl;
-        if (address < 0 || address > 1048576)
-        {   
-            return -1;
-        }
-        else if (address % 4 != 0)
-        {
-            return -2;
-        }
-
-        else address /= 4;
-        loadedValueForLW = memory->at(address);
-        cout << "loadedValue for lw " << loadedValueForLW << endl;
-        return 0;
+        return -2;
     }
+
+    else address /= 4;
+    loadedValueForLW = memory->at(address);
+    incNumLw();
+    //cout << "loadedValue for lw " << loadedValueForLW << endl;
+    return 0;
+}

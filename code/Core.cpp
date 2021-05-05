@@ -56,23 +56,32 @@ CORE::CORE (string inFileName, int id, string outFileName,int nc,int DramCols,in
         for (int i = 0; i < 10; i++) {
             numOfInst.push_back(0);
         }
-        //cout << "2222" <<endl;
-        
-        //cout << "3333" <<endl;
-        minCost = INT_MAX;
-        //cout << "pos 2" <<endl;
-        lexFile (inputFileName); // * Now our inputprogram is ready to parse
-        //cout << "pos 3" <<endl;
 
-        //cout << iset.size() << "size of iset before preprocess " << endl;
+        minCost = INT_MAX;
+
+        working = true;
+        hasSyntaxError = false; 
+        hasRuntimeError = false;
+      
+        lexFile (inputFileName); // * Now our inputprogram is ready to parse
         preprocess();   // * Now our iset is ready
-        //cout << iset.size() << "size of iset " << endl;
-        //cout << core_id << " after preprocess " << iset[0].opID << endl;
-        //cout << "pos 4" <<endl;
         
+        if (error.size() > 0) {
+            working = false;
+            hasSyntaxError = true;
+            handleOutput->updateNumOfInstForCore (core_id, &numOfInst);
+
+            cout << endl << "Syntax Errors in Core " << core_id << endl;
+		    for (int i = 0; i < error.size(); i++) cout << error[i] << endl;
+	        cout << "Core " << core_id << " is not functioning" << endl;
+        }
+
         stalled = false;
         stallIfFull = false;
         stallingRequest = nullptr;
+
+        
+
     }
 
 void CORE::printIset () {
@@ -100,44 +109,41 @@ void CORE::smoothExit () {
     }
 
 bool CORE::isRunnable () {
-    return (pc <= iset.size()) || stalled;
-    } 
+    return  working && ((pc <= iset.size()) || stalled) ;
+} 
 bool CORE::isStalled () {return stalled;}
 
 void CORE::setMinCostRequest (Request *r) {minCostRequest = r;}
-    Request* CORE::getMinCostRequest () {return minCostRequest;}
+Request* CORE::getMinCostRequest () {return minCostRequest;}
 
-    Request * CORE::getStallingRequest () { return stallingRequest; }
-
-
+Request * CORE::getStallingRequest () { return stallingRequest; }
+ 
 Request* CORE::getRequestWithMinCost () { return minCostRequest; }
 
-void CORE::setRuntimeError (string s) {runtimeError = s;}
-string CORE::getRuntimeError () {return runtimeError;}
-
-int CORE::getMinCost () {return minCost;}
-void CORE::setMinCost (int c) {minCost = c;}
-
-vector<int> * CORE::getRegisters () {return registers;}
-
-
-
-
-
-
-
+void CORE::setRuntimeError (string s) {
+    runtimeError = s;
+    hasRuntimeError = true;
+}
 
 
 void CORE::stall (Request * request, bool sif) {
         stalled = true;
         stallIfFull = sif;
-        cout <<" coreId: \t"<<core_id<<"STALLED";
+        //cout <<" coreId: \t"<<core_id<<"STALLED";
         handleOutput->appendOutputForCore (core_id," coreId: " + to_string (core_id) + "STALLED");
         stallingRequest = request;
     }
 
 void CORE::run (MRM *memoryRequestManager) {
-    cout <<core_id << " core:   starting mein minCost " << minCost << endl;
+    //cout <<core_id << " core:   starting mein minCost " << minCost << endl;
+
+    if (!working) return;
+    if (hasRuntimeError) {
+        working = false; 
+        cout << "Runtime Error in Core " << core_id << runtimeError << endl; 
+        cout << "Core " << core_id << " is not running" << endl;
+        return;
+    }
     if (stalled) {
         handleOutput->appendOutputForCore (core_id," coreId: " + to_string (core_id) + "STALLED");
         return;
@@ -167,80 +173,108 @@ void CORE::run (MRM *memoryRequestManager) {
     
     switch (currentInstruction->opID) {
         case 0: {
-            Request * request = new Request(0,core_id,currentInstruction,this);
-            bool dependent = memoryRequestManager->checkDependencies(core_id, request);
-            if (dependent) {
-                bool enqueued = memoryRequestManager->enqueueRequest (core_id,request);
-                if (!enqueued) stall(request,true);
-                
+            if (currentInstruction->cirs[0] == 0) {
+                hasRuntimeError = true; 
+                runtimeError += " : Cannot modify $zero register in add instruction";
             }
             else {
-                add (currentInstruction->cirs);
-                cout<<"coreId: "<<core_id<<" -> "<<": Instruction: add (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + rrmap.at(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" + to_string(registers->at(currentInstruction->cirs[0]))+"\t";
-                handleOutput->appendOutputForCore (core_id,": Instruction: add (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + rrmap.at(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" + to_string(registers->at(currentInstruction->cirs[0])));
-                numOfInst[0]++;
+                Request * request = new Request(0,core_id,currentInstruction,this);
+                bool dependent = memoryRequestManager->checkDependencies(core_id, request);
+                if (dependent) {
+                    bool enqueued = memoryRequestManager->enqueueRequest (core_id,request);
+                    if (!enqueued) stall(request,true);
+                    
+                }
+                else {
+                    add (currentInstruction->cirs);
+                    //cout<<"coreId: "<<core_id<<" -> "<<": Instruction: add (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + rrmap.at(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" + to_string(registers->at(currentInstruction->cirs[0]))+"\t";
+                    handleOutput->appendOutputForCore (core_id,": Instruction: add (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + rrmap.at(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" + to_string(registers->at(currentInstruction->cirs[0])));
+                    numOfInst[0]++;
+                }
             }
             break;
         }
         case 1: {
-            Request * request = new Request(0,core_id,currentInstruction,this);
-            bool dependent = memoryRequestManager->checkDependencies(core_id, request);
-            if (dependent) {
-                bool enqueued = memoryRequestManager->enqueueRequest (core_id,request);
-                if (!enqueued) stall(request,true);
+            if (currentInstruction->cirs[0] == 0) {
+                hasRuntimeError = true; 
+                runtimeError += " : Cannot modify $zero register in sub instruction";
             }
             else {
-                sub (currentInstruction->cirs);
-                cout<<" coreId: "<<core_id<<" -> "<<": Instruction: sub (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + rrmap.at(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" + to_string(registers->at(currentInstruction->cirs[0]))+"\t";
-                handleOutput->appendOutputForCore (core_id,": Instruction: sub (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + rrmap.at(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" + to_string(registers->at(currentInstruction->cirs[0])));                
-                numOfInst[1]++;
+                Request * request = new Request(0,core_id,currentInstruction,this);
+                bool dependent = memoryRequestManager->checkDependencies(core_id, request);
+                if (dependent) {
+                    bool enqueued = memoryRequestManager->enqueueRequest (core_id,request);
+                    if (!enqueued) stall(request,true);
+                }
+                else {
+                    sub (currentInstruction->cirs);
+                    //cout<<" coreId: "<<core_id<<" -> "<<": Instruction: sub (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + rrmap.at(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" + to_string(registers->at(currentInstruction->cirs[0]))+"\t";
+                    handleOutput->appendOutputForCore (core_id,": Instruction: sub (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + rrmap.at(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" + to_string(registers->at(currentInstruction->cirs[0])));                
+                    numOfInst[1]++;
+                }
             }
             break;
         }
         case 2: {
-            Request * request = new Request(0,core_id,currentInstruction,this);
-            bool dependent = memoryRequestManager->checkDependencies(core_id, request);
-            if (dependent) {
-                bool enqueued = memoryRequestManager->enqueueRequest (core_id,request);
-                if (!enqueued) stall(request,true);
+            if (currentInstruction->cirs[0] == 0) {
+                hasRuntimeError = true; 
+                runtimeError += " : Cannot modify $zero register in mul instruction";
             }
             else {
-                mul (currentInstruction->cirs);
-                cout<<" coreId: "<< core_id<<" -> "<<": Instruction: mul (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + rrmap.at(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" +to_string(registers->at(currentInstruction->cirs[0]))+"\t" ;
-                handleOutput->appendOutputForCore (core_id,": Instruction: mul (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + rrmap.at(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" + to_string(registers->at(currentInstruction->cirs[0])));
-                numOfInst[2]++;
+                Request * request = new Request(0,core_id,currentInstruction,this);
+                bool dependent = memoryRequestManager->checkDependencies(core_id, request);
+                if (dependent) {
+                    bool enqueued = memoryRequestManager->enqueueRequest (core_id,request);
+                    if (!enqueued) stall(request,true);
+                }
+                else {
+                    mul (currentInstruction->cirs);
+                    //cout<<" coreId: "<< core_id<<" -> "<<": Instruction: mul (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + rrmap.at(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" +to_string(registers->at(currentInstruction->cirs[0]))+"\t" ;
+                    handleOutput->appendOutputForCore (core_id,": Instruction: mul (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + rrmap.at(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" + to_string(registers->at(currentInstruction->cirs[0])));
+                    numOfInst[2]++;
+                }
             }
             break;
         }
         case 3: {
-            Request * request = new Request(0,core_id,currentInstruction,this);
-            bool dependent = memoryRequestManager->checkDependencies(core_id, request);
-            if (dependent) {
-                bool enqueued = memoryRequestManager->enqueueRequest (core_id,request);
-                if (!enqueued) stall(request,true);
+            if (currentInstruction->cirs[0] == 0) {
+                hasRuntimeError = true; 
+                runtimeError += " : Cannot modify $zero register in slt instruction";
             }
             else {
-                slt (currentInstruction->cirs);
-                cout<<" coreId: "<<core_id<<" -> "<< ": Instruction: slt (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + rrmap.at(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" + to_string(registers->at(currentInstruction->cirs[0]))+"\t";
-                handleOutput->appendOutputForCore (core_id,": Instruction: slt (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + rrmap.at(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" + to_string(registers->at(currentInstruction->cirs[0])));
-                numOfInst[3]++;
+                Request * request = new Request(0,core_id,currentInstruction,this);
+                bool dependent = memoryRequestManager->checkDependencies(core_id, request);
+                if (dependent) {
+                    bool enqueued = memoryRequestManager->enqueueRequest (core_id,request);
+                    if (!enqueued) stall(request,true);
+                }
+                else {
+                    slt (currentInstruction->cirs);
+                    //cout<<" coreId: "<<core_id<<" -> "<< ": Instruction: slt (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + rrmap.at(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" + to_string(registers->at(currentInstruction->cirs[0]))+"\t";
+                    handleOutput->appendOutputForCore (core_id,": Instruction: slt (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + rrmap.at(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" + to_string(registers->at(currentInstruction->cirs[0])));
+                    numOfInst[3]++;
+                }
             }
             break;
         }
         case 4: {
-
-            //cout << "in addi " << core_id << endl;
-            Request * request = new Request(0,core_id,currentInstruction,this);
-            bool dependent = memoryRequestManager->checkDependencies(core_id, request);
-            if (dependent) {
-                bool enqueued = memoryRequestManager->enqueueRequest (core_id,request);
-                if (!enqueued) stall(request,true);
+            if (currentInstruction->cirs[0] == 0) {
+                hasRuntimeError = true; 
+                runtimeError += " : Cannot modify $zero register in addi instruction";
             }
             else {
-                addi (currentInstruction->cirs);
-                cout<<" coreId: "<<core_id<<" -> "<<": Instruction: addi (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + to_string(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" + to_string(registers->at(currentInstruction->cirs[0]))+"\t";
-                handleOutput->appendOutputForCore (core_id,": Instruction: addi (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + to_string(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" + to_string(registers->at(currentInstruction->cirs[0])));
-                numOfInst[4]++;
+                Request * request = new Request(0,core_id,currentInstruction,this);
+                bool dependent = memoryRequestManager->checkDependencies(core_id, request);
+                if (dependent) {
+                    bool enqueued = memoryRequestManager->enqueueRequest (core_id,request);
+                    if (!enqueued) stall(request,true);
+                }
+                else {
+                    addi (currentInstruction->cirs);
+                    //cout<<" coreId: "<<core_id<<" -> "<<": Instruction: addi (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + to_string(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" + to_string(registers->at(currentInstruction->cirs[0]))+"\t";
+                    handleOutput->appendOutputForCore (core_id,": Instruction: addi (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + to_string(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" + to_string(registers->at(currentInstruction->cirs[0])));
+                    numOfInst[4]++;
+                }
             }
             break;
         }
@@ -254,7 +288,7 @@ void CORE::run (MRM *memoryRequestManager) {
             }
             else {
                 bne (currentInstruction->cirs, currentInstruction->label);
-                cout<<" coreId: "<<core_id<<" -> "<<": Instruction bne (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + currentInstruction->label + "," + to_string(switchOnBranch) + ")\t";
+                //cout<<" coreId: "<<core_id<<" -> "<<": Instruction bne (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + currentInstruction->label + "," + to_string(switchOnBranch) + ")\t";
                 handleOutput->appendOutputForCore (core_id,": Instruction bne (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + currentInstruction->label + "," + to_string(switchOnBranch) + ")");
                 numOfInst[5]++;
             }
@@ -270,7 +304,7 @@ void CORE::run (MRM *memoryRequestManager) {
             }
             else {
                 beq (currentInstruction->cirs, currentInstruction->label);
-                cout<<" coreId: "<<core_id<<" -> "<<": Instruction beq (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + currentInstruction->label + "," + to_string(switchOnBranch) + ")\t";
+                //cout<<" coreId: "<<core_id<<" -> "<<": Instruction beq (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + currentInstruction->label + "," + to_string(switchOnBranch) + ")\t";
                 handleOutput->appendOutputForCore (core_id,": Instruction beq (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + currentInstruction->label + "," + to_string(switchOnBranch) + ")");
                 numOfInst[6]++;
 
@@ -278,16 +312,19 @@ void CORE::run (MRM *memoryRequestManager) {
             break;
         }
         case 7: {
-            Request * request = new Request(0,core_id,currentInstruction,this);
-
-            bool dependent = memoryRequestManager->checkDependencies(core_id, request);
-            if (!dependent) request->cost = (2 * rowAccessDelay) + colAccessDelay;
-    
-            bool enqueued = memoryRequestManager->enqueueRequest (core_id,request);
-            cout << "inside case 7 " <<endl;
-            if (!enqueued) stall(request,true);
-            else handleOutput->appendOutputForCore (core_id,"Enqueueing LW Request: " + rrmap.at(request->changingRegister) + "= @Address:" + to_string(request->loadingMemoryAddress) +"IN DRAM\t");
-            
+            if (currentInstruction->cirs[0] == 0) {
+                hasRuntimeError = true; 
+                runtimeError += " : Cannot modify $zero register in lw instruction";
+            }
+            else {
+                Request * request = new Request(0,core_id,currentInstruction,this);
+                bool dependent = memoryRequestManager->checkDependencies(core_id, request);
+                if (!dependent) request->cost = (2 * rowAccessDelay) + colAccessDelay;
+        
+                bool enqueued = memoryRequestManager->enqueueRequest (core_id,request);
+                if (!enqueued) stall(request,true);
+                else handleOutput->appendOutputForCore (core_id,"Enqueueing LW Request: " + rrmap.at(request->changingRegister) + "= @Address:" + to_string(request->loadingMemoryAddress) +"IN DRAM\t");
+            }
             break;
         }
         case 8: {
@@ -297,7 +334,6 @@ void CORE::run (MRM *memoryRequestManager) {
             if (!dependent) request->cost = (2 * rowAccessDelay) + colAccessDelay;
     
             bool enqueued = memoryRequestManager->enqueueRequest (core_id,request);
-            cout << "inside case 8 " <<endl;
             if (!enqueued) stall(request,true);
             else handleOutput->appendOutputForCore (core_id,"Enqueueing SW Request: " + rrmap.at(request->inst->cirs[0]) + "--> @Address:" + to_string(request->savingMemoryAddress) +"IN DRAM\t");
             
@@ -305,19 +341,25 @@ void CORE::run (MRM *memoryRequestManager) {
         } 
         case 9: {
             j (currentInstruction->cirs,currentInstruction->label);
-            cout << " coreId: "<<core_id <<" -> "<<": Instruction j :" << "Jump to label ID: " + currentInstruction->label+"\t";
+            //cout << " coreId: "<<core_id <<" -> "<<": Instruction j :" << "Jump to label ID: " + currentInstruction->label+"\t";
+            handleOutput->appendOutputForCore (core_id,": Instruction j : Jump to label ID: " + currentInstruction->label);
             numOfInst[9]++;
             break;
         }
         default: {}
 
     }
+    handleOutput->updateNumOfInstForCore (core_id, &numOfInst);
     // int updateMinCostAndRequest = findMinCost ();
-    cout <<core_id << " core:   last mein minCost " << minCost << endl;
-    if(minCostRequest!=nullptr) cout << core_id << " core:   mincost request's opid " << minCostRequest->inst->opID << endl;
+    //cout <<core_id << " core:   last mein minCost " << minCost << endl;
+    //if(minCostRequest!=nullptr) cout << core_id << " core:   mincost request's opid " << minCostRequest->inst->opID << endl;
 }
 
 
+
+void CORE::updateNumOfInst (int instOpId) {
+    numOfInst[instOpId]++;
+}
 
  void CORE::lexFile(string file)
     {
@@ -480,7 +522,7 @@ void CORE::findRegister(int i)
         return;
     }
 
-    error.push_back("Synatx Error:" + to_string(currentInstNum) + ": Unknown Register");
+    error.push_back("Syntax Error:" + to_string(currentInstNum) + ": Unknown Register");
     return;
 }
 
@@ -512,7 +554,8 @@ void CORE::findImmediate()
         buffer += currentInst[i];
         i++;
     }
-    CIRS[2] = stoi(buffer);
+    if (buffer == "") error.push_back("Syntax Error:" + to_string(currentInstNum) + ": Integer constant value not found");
+    else CIRS[2] = stoi(buffer);
     currentInst = currentInst.substr(i);
 }
 
@@ -725,6 +768,7 @@ instruction CORE::readInst()
         for (int i = 0; i < 3; i++)
         {
             RemoveSpaces();
+            
             findRegister(i);
             RemoveSpaces();
             if (i == 2)
@@ -815,7 +859,6 @@ instruction CORE::readInst()
 
 void CORE::preprocess()
 { // checking if line has label: at the beginning;
-    //cout << "in preprocess 1" << endl;
     int labelIndex;
     currentInstNum = 1;
     string tempLabel = "";
@@ -825,7 +868,6 @@ void CORE::preprocess()
         bool isLabel = false;
         currentInst = inputprogram[i];
         RemoveSpaces();
-        //cout << "in preprocess 2" << endl;
         if (currentInst != "")
         {
             RemoveSpaces();
@@ -852,18 +894,19 @@ void CORE::preprocess()
         }
         else
             continue;
-        //cout << "in preprocess 3" << endl;
         instruction instObj = readInst();
-        //cout << "aha " << instObj.opID << endl;
         iset.push_back(instObj);
-        //cout << "ahahahaha " << iset[iset.size() - 1].opID << endl;
-        //cout << "in preprocess 4" << endl;
         numberofInst++;
         currentInstNum++;
     }
 }
 
 ////////////////////////////////////////////////////
+
+string CORE::getRuntimeError () {return runtimeError;}
+int CORE::getMinCost () {return minCost;}
+void CORE::setMinCost (int c) {minCost = c;}
+vector<int> * CORE::getRegisters () {return registers;}
 
 void CORE::add(vector<int> &cirs) { registers->at(cirs[0]) = registers->at(cirs[1]) + registers->at(cirs[2]); }
 void CORE::sub(vector<int> &cirs) { registers->at(cirs[0]) = registers->at(cirs[1]) - registers->at(cirs[2]); }
@@ -918,7 +961,6 @@ void CORE::beq(vector<int> &cirs, string &label)
         switchOnBranch = false;
     return;
 }
-
 void CORE::slt(vector<int> &cirs)
 {
     if (registers[cirs[1]] < registers[cirs[2]])
@@ -927,5 +969,4 @@ void CORE::slt(vector<int> &cirs)
         registers->at(cirs[0]) = 0;
     return;
 }
-
 void CORE::j(vector<int> &cirs, string &label) { pc = lableTable[label]; }

@@ -19,7 +19,7 @@ private:
     MRM *memoryRequestManager;
     OutputHandler * outputHandler;
 public: 
-    CPU (int n,int m,  string fpi, string fpo,int rad,int cad, string outputFolderPath);
+    CPU (int n,int m,  string fpi, string fpo,int rad,int cad, int coreQueueLength);
 
      void exit ();
 

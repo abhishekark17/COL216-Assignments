@@ -1,9 +1,9 @@
-Cycle: 1	: Instruction: addi ($t0,$t1,4): $t0=4
-Cycle: 2	
-Cycle: 3	
-Cycle: 4	
-Cycle: 5	
-Cycle: 6	
+Cycle: 1	: Instruction: addi ($s0,$zero,1000): $s0=1000
+Cycle: 2	: Instruction: addi ($s1,$zero,2500): $s1=2500
+Cycle: 3	: Instruction: addi ($t0,$zero,1): $t0=1
+Cycle: 4	: Instruction: addi ($t1,$zero,2): $t1=2
+Cycle: 5	: Instruction: addi ($t2,$zero,3): $t2=3
+Cycle: 6	: Instruction: addi ($t3,$zero,4): $t3=4
 Cycle: 7	
 Cycle: 8	
 Cycle: 9	
@@ -201,5 +201,5 @@ Cycle: 200
 
 
 META DATA
-[add: 0,sub: 0,mul: 0,slt: 0,addi: 1,bne: 0,beq: 0,lw: 0,sw: 0,j: 0]
-TOTAL NUMBER OF INSTRUTIONS EXECUTED := 1
+[add: 0,sub: 0,mul: 0,slt: 0,addi: 6,bne: 0,beq: 0,lw: 0,sw: 0,j: 0]
+TOTAL NUMBER OF INSTRUCTIONS EXECUTED := 6

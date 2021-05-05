@@ -65,7 +65,6 @@ private:
     
     void initialize_registers();
 
-    //vector<Request*> * requestQueue;
     int minCost;
     Request * minCostRequest;
     vector<Request*> * freeBuffer;
@@ -77,8 +76,8 @@ private:
     void addi(vector<int> &cirs);
     void bne(vector<int> &cirs, string &label);
     void beq(vector<int> &cirs, string &label);
-    void lw(vector<int> &cirs);
-    void sw(vector<int> &cirs);
+    //void lw(vector<int> &cirs);
+    //void sw(vector<int> &cirs);
     void j(vector<int> &cirs, string &label);
 
     bool stalled;
@@ -89,6 +88,10 @@ private:
     OutputHandler * handleOutput;
 
     int rowAccessDelay, colAccessDelay;
+    bool working;
+    bool hasSyntaxError;
+    bool hasRuntimeError;
+
 public:
     int getCoreId () { return core_id;}
     unordered_map <string,int> rmap;
@@ -120,6 +123,9 @@ public:
     void smoothExit ();
     bool isRunnable ();
 
+    void updateNumOfInst (int instOpId);
+
+    
     bool isStalled ();
     ~CORE();
 };

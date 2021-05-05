@@ -1,6 +1,6 @@
 #include "Request.hpp"
 
-Request::Request (int c, int ci,instruction* i, CORE* cc) {
+Request::Request (double c, int ci,instruction* i, CORE* cc) {
         cost = c;
         core_id = ci;
         inst = i;

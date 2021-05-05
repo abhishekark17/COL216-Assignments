@@ -1,6 +1,6 @@
 Cycle: 1	: Idle
 Cycle: 2	: Idle
-Cycle: 3	: LW for core 2 Issued
+Cycle: 3	: Idle: LW for core 2 Issued
 Cycle: 4	: Executing request for core 2
 Cycle: 5	: Executing request for core 2
 Cycle: 6	: Executing request for core 2
@@ -22,8 +22,8 @@ Cycle: 21	: Executing request for core 2
 Cycle: 22	: Executing request for core 2
 Cycle: 23	: Executing request for core 2
 Cycle: 24	: Executing request for core 2
-Cycle: 25	: Executing request for core 2
-Cycle: 26	: SW for core 1 Issued::[$t0,0,$s0]
+Cycle: 25	: LW for core 2 Done: Executing request for core 2
+Cycle: 26	: Idle: SW for core 1 Issued::[$t0,0,$s0]
 Cycle: 27	: Executing request for core 1
 Cycle: 28	: Executing request for core 1
 Cycle: 29	: Executing request for core 1
@@ -45,8 +45,8 @@ Cycle: 44	: Executing request for core 1
 Cycle: 45	: Executing request for core 1
 Cycle: 46	: Executing request for core 1
 Cycle: 47	: Executing request for core 1
-Cycle: 48	: Executing request for core 1
-Cycle: 49	: SW for core 1 Issued::[$t1,0,$s1]
+Cycle: 48	: SW for core 1 Done: Executing request for core 1
+Cycle: 49	: Idle: SW for core 1 Issued::[$t1,0,$s1]
 Cycle: 50	: Executing request for core 1
 Cycle: 51	: Executing request for core 1
 Cycle: 52	: Executing request for core 1
@@ -68,8 +68,8 @@ Cycle: 67	: Executing request for core 1
 Cycle: 68	: Executing request for core 1
 Cycle: 69	: Executing request for core 1
 Cycle: 70	: Executing request for core 1
-Cycle: 71	: Executing request for core 1
-Cycle: 72	: SW for core 1 Issued::[$t2,0,$s0]
+Cycle: 71	: SW for core 1 Done: Executing request for core 1
+Cycle: 72	: Idle: SW for core 1 Issued::[$t2,0,$s0]
 Cycle: 73	: Executing request for core 1
 Cycle: 74	: Executing request for core 1
 Cycle: 75	: Executing request for core 1
@@ -91,20 +91,20 @@ Cycle: 90	: Executing request for core 1
 Cycle: 91	: Executing request for core 1
 Cycle: 92	: Executing request for core 1
 Cycle: 93	: Executing request for core 1
-Cycle: 94	: Executing request for core 1
-Cycle: 95	: SW for core 1 Issued::[$t2,0,$s0]
-Cycle: 96	: Executing request for core 1
-Cycle: 97	: SW for core 1 Issued::[$t3,0,$s0]
-Cycle: 98	: Executing request for core 1
-Cycle: 99	: SW for core 1 Issued::[$t4,0,$s0]
-Cycle: 100	: Executing request for core 1
-Cycle: 101	: SW for core 1 Issued::[$t5,0,$s0]
-Cycle: 102	: Executing request for core 1
-Cycle: 103	: SW for core 1 Issued::[$t6,0,$s0]
-Cycle: 104	: Executing request for core 1
-Cycle: 105	: SW for core 1 Issued::[$t7,0,$s0]
-Cycle: 106	: Executing request for core 1
-Cycle: 107	: SW for core 2 Issued::[$t2,262144,$s0]
+Cycle: 94	: SW for core 1 Done: Executing request for core 1
+Cycle: 95	: Idle: SW for core 1 Issued::[$t2,0,$s0]
+Cycle: 96	: SW for core 1 Done: Executing request for core 1
+Cycle: 97	: Idle: SW for core 1 Issued::[$t3,0,$s0]
+Cycle: 98	: SW for core 1 Done: Executing request for core 1
+Cycle: 99	: Idle: SW for core 1 Issued::[$t4,0,$s0]
+Cycle: 100	: SW for core 1 Done: Executing request for core 1
+Cycle: 101	: Idle: SW for core 1 Issued::[$t5,0,$s0]
+Cycle: 102	: SW for core 1 Done: Executing request for core 1
+Cycle: 103	: Idle: SW for core 1 Issued::[$t6,0,$s0]
+Cycle: 104	: SW for core 1 Done: Executing request for core 1
+Cycle: 105	: Idle: SW for core 1 Issued::[$t7,0,$s0]
+Cycle: 106	: SW for core 1 Done: Executing request for core 1
+Cycle: 107	: Idle: SW for core 2 Issued::[$t2,262144,$s0]
 Cycle: 108	: Executing request for core 2
 Cycle: 109	: Executing request for core 2
 Cycle: 110	: Executing request for core 2
@@ -126,8 +126,8 @@ Cycle: 125	: Executing request for core 2
 Cycle: 126	: Executing request for core 2
 Cycle: 127	: Executing request for core 2
 Cycle: 128	: Executing request for core 2
-Cycle: 129	: Executing request for core 2
-Cycle: 130	: SW for core 2 Issued::[$t2,262144,$s0]
+Cycle: 129	: SW for core 2 Done: Executing request for core 2
+Cycle: 130	: Idle: SW for core 2 Issued::[$t2,262144,$s0]
 Cycle: 131	: SW for core 2 Done
 Cycle: 132	: Idle
 Cycle: 133	: Idle

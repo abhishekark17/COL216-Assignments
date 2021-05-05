@@ -14,7 +14,8 @@ main:
 	sw $t4, 0($s0) 
 	sw $t5, 0($s0) 
 	sw $t6, 0($s0) 
-	sw $t7, 0($s0)
-	lw $t8, 0($s0)
+	sw $t0, 0($s0)
+	lw $t8, 0($s1)
+	addi $3, $3, 10
 	
 exit:

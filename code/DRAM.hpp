@@ -14,6 +14,7 @@ private:
 
     int loadedValueForLW, valueToBeStoredForSW;
     OutputHandler * handleOutput;
+    int numLw, numSw;
 public:
     static int getRowOfRowBuffer(int address);
     static int getColOfRowBuffer(int address);
@@ -36,6 +37,14 @@ public:
     int getColBuffer () {return currentCol;}
     int getNumDRAMCols() {return numDramCols;}
     int getNumDRAMRows() {return numDramRows;}
+
+    int getNumLw () {return numLw;}
+    int getNumSw () {return numSw;}
+
+    void incNumLw () {numLw++;}
+    void incNumSw () {numSw++;}
+    
+    vector<string> * getMetaData ();
     ~DRAM();
     
 

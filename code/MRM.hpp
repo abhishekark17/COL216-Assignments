@@ -27,6 +27,7 @@ private:
 
     Request * currentRequestInDRAM;
     OutputHandler * handleOutput;
+    double decCost;
 public:
     MRM (DRAM * d,vector<CORE*> * ac, int nc, int rad, int cad,OutputHandler * ho, int cql);
 

@@ -10,7 +10,7 @@
 class CORE;
 class Request {
 public:
-    int cost;
+    double cost;
     CORE* coreOfRequest;
     instruction* inst;
     int core_id;
@@ -18,7 +18,7 @@ public:
     int loadingMemoryAddress, savingMemoryAddress;
     int storeThisForSW;
 
-    Request (int c, int ci,instruction* i, CORE* cc);
+    Request (double c, int ci,instruction* i, CORE* cc);
 
 
 };

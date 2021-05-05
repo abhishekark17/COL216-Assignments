@@ -5,7 +5,7 @@ Cycle: 4	: Instruction: addi ($t1,$zero,2): $t1=2
 Cycle: 5	: Instruction: addi ($t2,$zero,3): $t2=3
 Cycle: 6	: Instruction: addi ($t3,$zero,4): $t3=4
 Cycle: 7	Enqueueing SW Request: $t0--> @Address:1000IN DRAM	
-Cycle: 8	Enqueueing SW Request: $t1--> @Address:2500IN DRAM	
+Cycle: 8	Enqueueing SW Request: $t1--> @Address:2500IN DRAM	: SW for core 1 Issued in DRAM::[$t0,0,$s0]
 Cycle: 9	Enqueueing SW Request: $t2--> @Address:1000IN DRAM	
 Cycle: 10	 coreId: 1STALLED
 Cycle: 11	 coreId: 1STALLED
@@ -23,14 +23,14 @@ Cycle: 22	 coreId: 1STALLED
 Cycle: 23	 coreId: 1STALLED
 Cycle: 24	 coreId: 1STALLED
 Cycle: 25	 coreId: 1STALLED
-Cycle: 26	 coreId: 1STALLED: SW for core 1 Issued::[$t0,0,$s0]
+Cycle: 26	 coreId: 1STALLED
 Cycle: 27	 coreId: 1STALLED
 Cycle: 28	 coreId: 1STALLED
 Cycle: 29	 coreId: 1STALLED
-Cycle: 30	 coreId: 1STALLED
-Cycle: 31	 coreId: 1STALLED
-Cycle: 32	 coreId: 1STALLED
-Cycle: 33	 coreId: 1STALLED
+Cycle: 30	 coreId: 1STALLED: memory address 1000-1003 = 1	
+Cycle: 31	Enqueueing SW Request: $t2--> @Address:1000IN DRAM	: SW for core 1 Issued in DRAM::[$t2,0,$s0] coreId: 1 RESUMED: 
+Cycle: 32	Enqueueing SW Request: $t3--> @Address:1000IN DRAM	: memory address 1000-1003 = 3	
+Cycle: 33	 coreId: 1STALLED: SW for core 1 Issued in DRAM::[$t1,0,$s1]
 Cycle: 34	 coreId: 1STALLED
 Cycle: 35	 coreId: 1STALLED
 Cycle: 36	 coreId: 1STALLED
@@ -45,15 +45,15 @@ Cycle: 44	 coreId: 1STALLED
 Cycle: 45	 coreId: 1STALLED
 Cycle: 46	 coreId: 1STALLED
 Cycle: 47	 coreId: 1STALLED
-Cycle: 48	 coreId: 1STALLED: memory address 1000-1003 = 1	
-Cycle: 49	Enqueueing SW Request: $t2--> @Address:1000IN DRAM	: SW for core 1 Issued::[$t1,0,$s1] coreId: 1 RESUMED: 
+Cycle: 48	 coreId: 1STALLED
+Cycle: 49	 coreId: 1STALLED
 Cycle: 50	 coreId: 1STALLED
 Cycle: 51	 coreId: 1STALLED
 Cycle: 52	 coreId: 1STALLED
 Cycle: 53	 coreId: 1STALLED
 Cycle: 54	 coreId: 1STALLED
-Cycle: 55	 coreId: 1STALLED
-Cycle: 56	 coreId: 1STALLED
+Cycle: 55	 coreId: 1STALLED: memory address 2500-2503 = 2	
+Cycle: 56	Enqueueing SW Request: $t4--> @Address:1000IN DRAM	: SW for core 1 Issued in DRAM::[$t2,0,$s0] coreId: 1 RESUMED: 
 Cycle: 57	 coreId: 1STALLED
 Cycle: 58	 coreId: 1STALLED
 Cycle: 59	 coreId: 1STALLED
@@ -68,47 +68,47 @@ Cycle: 67	 coreId: 1STALLED
 Cycle: 68	 coreId: 1STALLED
 Cycle: 69	 coreId: 1STALLED
 Cycle: 70	 coreId: 1STALLED
-Cycle: 71	 coreId: 1STALLED: memory address 2500-2503 = 2	
-Cycle: 72	Enqueueing SW Request: $t3--> @Address:1000IN DRAM	: SW for core 1 Issued::[$t2,0,$s0] coreId: 1 RESUMED: 
+Cycle: 71	 coreId: 1STALLED
+Cycle: 72	 coreId: 1STALLED
 Cycle: 73	 coreId: 1STALLED
 Cycle: 74	 coreId: 1STALLED
 Cycle: 75	 coreId: 1STALLED
 Cycle: 76	 coreId: 1STALLED
 Cycle: 77	 coreId: 1STALLED
-Cycle: 78	 coreId: 1STALLED
-Cycle: 79	 coreId: 1STALLED
-Cycle: 80	 coreId: 1STALLED
-Cycle: 81	 coreId: 1STALLED
-Cycle: 82	 coreId: 1STALLED
-Cycle: 83	 coreId: 1STALLED
-Cycle: 84	 coreId: 1STALLED
-Cycle: 85	 coreId: 1STALLED
-Cycle: 86	 coreId: 1STALLED
-Cycle: 87	 coreId: 1STALLED
-Cycle: 88	 coreId: 1STALLED
-Cycle: 89	 coreId: 1STALLED
-Cycle: 90	 coreId: 1STALLED
-Cycle: 91	 coreId: 1STALLED
-Cycle: 92	 coreId: 1STALLED
-Cycle: 93	 coreId: 1STALLED
-Cycle: 94	 coreId: 1STALLED: memory address 1000-1003 = 3	
-Cycle: 95	Enqueueing SW Request: $t4--> @Address:1000IN DRAM	: SW for core 1 Issued::[$t2,0,$s0] coreId: 1 RESUMED: 
-Cycle: 96	Enqueueing SW Request: $t5--> @Address:1000IN DRAM	: memory address 1000-1003 = 3	
-Cycle: 97	 coreId: 1STALLED: SW for core 1 Issued::[$t3,0,$s0]
-Cycle: 98	 coreId: 1STALLED: memory address 1000-1003 = 4	
-Cycle: 99	Enqueueing SW Request: $t6--> @Address:1000IN DRAM	: SW for core 1 Issued::[$t4,0,$s0] coreId: 1 RESUMED: 
-Cycle: 100	Enqueueing SW Request: $t7--> @Address:1000IN DRAM	: memory address 1000-1003 = 0	
-Cycle: 101	 coreId: 1STALLED: SW for core 1 Issued::[$t5,0,$s0]
-Cycle: 102	 coreId: 1STALLED: memory address 1000-1003 = 0	
-Cycle: 103	: SW for core 1 Issued::[$t6,0,$s0] coreId: 1 RESUMED: 
-Cycle: 104	: memory address 1000-1003 = 0	
-Cycle: 105	: SW for core 1 Issued::[$t7,0,$s0]
-Cycle: 106	: memory address 1000-1003 = 0	
+Cycle: 78	 coreId: 1STALLED: memory address 1000-1003 = 3	
+Cycle: 79	Enqueueing SW Request: $t5--> @Address:1000IN DRAM	: SW for core 1 Issued in DRAM::[$t3,0,$s0] coreId: 1 RESUMED: 
+Cycle: 80	Enqueueing SW Request: $t6--> @Address:1000IN DRAM	: memory address 1000-1003 = 4	
+Cycle: 81	 coreId: 1STALLED: SW for core 1 Issued in DRAM::[$t4,0,$s0]
+Cycle: 82	 coreId: 1STALLED: memory address 1000-1003 = 0	
+Cycle: 83	Enqueueing SW Request: $t0--> @Address:1000IN DRAM	: SW for core 1 Issued in DRAM::[$t5,0,$s0] coreId: 1 RESUMED: 
+Cycle: 84	Enqueueing LW Request: $t8= @Address:2500IN DRAM	: memory address 1000-1003 = 0	
+Cycle: 85	: Instruction: addi ($v1,$v1,10): $v1=10: SW for core 1 Issued in DRAM::[$t6,0,$s0]
+Cycle: 86	: memory address 1000-1003 = 0	
+Cycle: 87	: SW for core 1 Issued in DRAM::[$t0,0,$s0]
+Cycle: 88	: memory address 1000-1003 = 1	
+Cycle: 89	: LW for core 1 Issued in DRAM::[$t8,0,$s1]
+Cycle: 90	
+Cycle: 91	
+Cycle: 92	
+Cycle: 93	
+Cycle: 94	
+Cycle: 95	
+Cycle: 96	
+Cycle: 97	
+Cycle: 98	
+Cycle: 99	
+Cycle: 100	
+Cycle: 101	
+Cycle: 102	
+Cycle: 103	
+Cycle: 104	
+Cycle: 105	
+Cycle: 106	
 Cycle: 107	
 Cycle: 108	
 Cycle: 109	
 Cycle: 110	
-Cycle: 111	
+Cycle: 111	$t8=2	
 Cycle: 112	
 Cycle: 113	
 Cycle: 114	
@@ -201,5 +201,5 @@ Cycle: 200
 
 
 META DATA
-[add: 0,sub: 0,mul: 0,slt: 0,addi: 6,bne: 0,beq: 0,lw: 0,sw: 6,j: 0]
-TOTAL NUMBER OF INSTRUTIONS EXECUTED := 12
+[add: 0,sub: 0,mul: 0,slt: 0,addi: 7,bne: 0,beq: 0,lw: 0,sw: 7,j: 0]
+TOTAL NUMBER OF INSTRUCTIONS EXECUTED := 14

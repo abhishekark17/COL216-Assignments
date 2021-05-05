@@ -198,3 +198,8 @@ Cycle: 197
 Cycle: 198	
 Cycle: 199	
 Cycle: 200	
+
+
+META DATA
+[add: 0,sub: 0,mul: 0,slt: 0,addi: 1,bne: 0,beq: 0,lw: 0,sw: 0,j: 0]
+TOTAL NUMBER OF INSTRUTIONS EXECUTED := 1
