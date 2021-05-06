@@ -79,7 +79,7 @@ CORE::CORE (string inFileName, int id, string outFileName,int nc,int DramCols,in
         stalled = false;
         stallIfFull = false;
         stallingRequest = nullptr;
-
+        isFromFreeBuffer = false;
         
 
     }
@@ -110,6 +110,7 @@ void CORE::smoothExit () {
 bool CORE::isRunnable () {
     return  working && ((pc <= iset.size()) || stalled) ;
 } 
+bool CORE::isWorking () {return working;}
 bool CORE::isStalled () {return stalled;}
 
 void CORE::setMinCostRequest (Request *r) {minCostRequest = r;}
@@ -156,8 +157,10 @@ void CORE::run (MRM *memoryRequestManager) {
     }
     else {
         if (freeBuffer->size() > 0) {
+            cout << "jello " << endl;
             currentInstruction = freeBuffer->at(0)->inst;
             freeBuffer->erase (freeBuffer->begin());
+            isFromFreeBuffer = true;
         }
         else {
             if (pc > iset.size()) {
@@ -181,19 +184,25 @@ void CORE::run (MRM *memoryRequestManager) {
             }
             else {
                 Request * request = new Request(0,core_id,currentInstruction,this);
-                bool dependent = memoryRequestManager->checkDependencies(core_id, request);
-                if (dependent) {
-                    bool enqueued = memoryRequestManager->enqueueRequest (core_id,request);
-                    if (!enqueued) stall(request,true);
-                    else handleOutput->appendOutputForCore (core_id,": Enqueuing Instruction: add (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + rrmap.at(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" + to_string(registers->at(currentInstruction->cirs[0])));
-
-                    
-                }
-                else {
+                if (isFromFreeBuffer) {
+                    isFromFreeBuffer = false;
                     add (currentInstruction->cirs);
-                    //cout<<"coreId: "<<core_id<<" -> "<<": Instruction: add (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + rrmap.at(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" + to_string(registers->at(currentInstruction->cirs[0]))+"\t";
                     handleOutput->appendOutputForCore (core_id,": Instruction: add (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + rrmap.at(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" + to_string(registers->at(currentInstruction->cirs[0])));
                     numOfInst[0]++;
+                }
+                else {
+                    bool dependent = memoryRequestManager->checkDependencies(core_id, request);
+                    if (dependent) {
+                        bool enqueued = memoryRequestManager->enqueueRequest (core_id,request);
+                        if (!enqueued) stall(request,true);
+                        else handleOutput->appendOutputForCore (core_id,": Enqueuing Instruction: add (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + rrmap.at(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" + to_string(registers->at(currentInstruction->cirs[0])));                        
+                    }
+                    else {
+                        add (currentInstruction->cirs);
+                        //cout<<"coreId: "<<core_id<<" -> "<<": Instruction: add (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + rrmap.at(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" + to_string(registers->at(currentInstruction->cirs[0]))+"\t";
+                        handleOutput->appendOutputForCore (core_id,": Instruction: add (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + rrmap.at(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" + to_string(registers->at(currentInstruction->cirs[0])));
+                        numOfInst[0]++;
+                    }
                 }
             }
             break;
@@ -204,19 +213,28 @@ void CORE::run (MRM *memoryRequestManager) {
                 runtimeError += " : Cannot modify $zero register in sub instruction";
             }
             else {
-                Request * request = new Request(0,core_id,currentInstruction,this);
-                bool dependent = memoryRequestManager->checkDependencies(core_id, request);
-                if (dependent) {
-                    bool enqueued = memoryRequestManager->enqueueRequest (core_id,request);
-                    if (!enqueued) stall(request,true);
-                    else handleOutput->appendOutputForCore (core_id,":Enqueuing Instruction: sub (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + rrmap.at(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" + to_string(registers->at(currentInstruction->cirs[0])));
-
-                }
-                else {
+                if (isFromFreeBuffer) {
+                    isFromFreeBuffer = false;
                     sub (currentInstruction->cirs);
                     //cout<<" coreId: "<<core_id<<" -> "<<": Instruction: sub (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + rrmap.at(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" + to_string(registers->at(currentInstruction->cirs[0]))+"\t";
                     handleOutput->appendOutputForCore (core_id,": Instruction: sub (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + rrmap.at(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" + to_string(registers->at(currentInstruction->cirs[0])));                
                     numOfInst[1]++;
+                }
+                else {
+                    Request * request = new Request(0,core_id,currentInstruction,this);
+                    bool dependent = memoryRequestManager->checkDependencies(core_id, request);
+                    if (dependent) {
+                        bool enqueued = memoryRequestManager->enqueueRequest (core_id,request);
+                        if (!enqueued) stall(request,true);
+                        else handleOutput->appendOutputForCore (core_id,":Enqueuing Instruction: sub (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + rrmap.at(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" + to_string(registers->at(currentInstruction->cirs[0])));
+
+                    }
+                    else {
+                        sub (currentInstruction->cirs);
+                        //cout<<" coreId: "<<core_id<<" -> "<<": Instruction: sub (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + rrmap.at(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" + to_string(registers->at(currentInstruction->cirs[0]))+"\t";
+                        handleOutput->appendOutputForCore (core_id,": Instruction: sub (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + rrmap.at(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" + to_string(registers->at(currentInstruction->cirs[0])));                
+                        numOfInst[1]++;
+                    }
                 }
             }
             break;
@@ -227,19 +245,28 @@ void CORE::run (MRM *memoryRequestManager) {
                 runtimeError += " : Cannot modify $zero register in mul instruction";
             }
             else {
-                Request * request = new Request(0,core_id,currentInstruction,this);
-                bool dependent = memoryRequestManager->checkDependencies(core_id, request);
-                if (dependent) {
-                    bool enqueued = memoryRequestManager->enqueueRequest (core_id,request);
-                    if (!enqueued) stall(request,true);
-                    else handleOutput->appendOutputForCore (core_id,":Enqueuing Instruction: mul (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + rrmap.at(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" + to_string(registers->at(currentInstruction->cirs[0])));
-
-                }
-                else {
+                if (isFromFreeBuffer) {
+                    isFromFreeBuffer = false;
                     mul (currentInstruction->cirs);
                     //cout<<" coreId: "<< core_id<<" -> "<<": Instruction: mul (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + rrmap.at(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" +to_string(registers->at(currentInstruction->cirs[0]))+"\t" ;
                     handleOutput->appendOutputForCore (core_id,": Instruction: mul (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + rrmap.at(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" + to_string(registers->at(currentInstruction->cirs[0])));
                     numOfInst[2]++;
+                }
+                else {
+                    Request * request = new Request(0,core_id,currentInstruction,this);
+                    bool dependent = memoryRequestManager->checkDependencies(core_id, request);
+                    if (dependent) {
+                        bool enqueued = memoryRequestManager->enqueueRequest (core_id,request);
+                        if (!enqueued) stall(request,true);
+                        else handleOutput->appendOutputForCore (core_id,":Enqueuing Instruction: mul (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + rrmap.at(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" + to_string(registers->at(currentInstruction->cirs[0])));
+
+                    }
+                    else {
+                        mul (currentInstruction->cirs);
+                        //cout<<" coreId: "<< core_id<<" -> "<<": Instruction: mul (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + rrmap.at(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" +to_string(registers->at(currentInstruction->cirs[0]))+"\t" ;
+                        handleOutput->appendOutputForCore (core_id,": Instruction: mul (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + rrmap.at(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" + to_string(registers->at(currentInstruction->cirs[0])));
+                        numOfInst[2]++;
+                    }
                 }
             }
             break;
@@ -250,19 +277,28 @@ void CORE::run (MRM *memoryRequestManager) {
                 runtimeError += " : Cannot modify $zero register in slt instruction";
             }
             else {
-                Request * request = new Request(0,core_id,currentInstruction,this);
-                bool dependent = memoryRequestManager->checkDependencies(core_id, request);
-                if (dependent) {
-                    bool enqueued = memoryRequestManager->enqueueRequest (core_id,request);
-                    if (!enqueued) stall(request,true);
-                    else handleOutput->appendOutputForCore (core_id,":Enqueuing Instruction: slt (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + rrmap.at(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" + to_string(registers->at(currentInstruction->cirs[0])));
-
-                }
-                else {
+                 if (isFromFreeBuffer) {
+                    isFromFreeBuffer = false;
                     slt (currentInstruction->cirs);
                     //cout<<" coreId: "<<core_id<<" -> "<< ": Instruction: slt (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + rrmap.at(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" + to_string(registers->at(currentInstruction->cirs[0]))+"\t";
                     handleOutput->appendOutputForCore (core_id,": Instruction: slt (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + rrmap.at(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" + to_string(registers->at(currentInstruction->cirs[0])));
                     numOfInst[3]++;
+                 }
+                else {
+                    Request * request = new Request(0,core_id,currentInstruction,this);
+                    bool dependent = memoryRequestManager->checkDependencies(core_id, request);
+                    if (dependent) {
+                        bool enqueued = memoryRequestManager->enqueueRequest (core_id,request);
+                        if (!enqueued) stall(request,true);
+                        else handleOutput->appendOutputForCore (core_id,":Enqueuing Instruction: slt (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + rrmap.at(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" + to_string(registers->at(currentInstruction->cirs[0])));
+
+                    }
+                    else {
+                        slt (currentInstruction->cirs);
+                        //cout<<" coreId: "<<core_id<<" -> "<< ": Instruction: slt (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + rrmap.at(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" + to_string(registers->at(currentInstruction->cirs[0]))+"\t";
+                        handleOutput->appendOutputForCore (core_id,": Instruction: slt (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + rrmap.at(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" + to_string(registers->at(currentInstruction->cirs[0])));
+                        numOfInst[3]++;
+                    }    
                 }
             }
             break;
@@ -273,24 +309,34 @@ void CORE::run (MRM *memoryRequestManager) {
                 runtimeError += " : Cannot modify $zero register in addi instruction";
             }
             else {
-                Request * request = new Request(0,core_id,currentInstruction,this);
-                bool dependent = memoryRequestManager->checkDependencies(core_id, request);
-                if (dependent) {
-                    bool enqueued = memoryRequestManager->enqueueRequest (core_id,request);
-                    if (!enqueued) stall(request,true);
-                    else handleOutput->appendOutputForCore (core_id,":Enqueuing Instruction: addi (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + to_string(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" + to_string(registers->at(currentInstruction->cirs[0])));
-
-                }
-                else {
+                if (isFromFreeBuffer) {
+                    isFromFreeBuffer = false;
                     addi (currentInstruction->cirs);
                     //cout<<" coreId: "<<core_id<<" -> "<<": Instruction: addi (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + to_string(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" + to_string(registers->at(currentInstruction->cirs[0]))+"\t";
                     handleOutput->appendOutputForCore (core_id,": Instruction: addi (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + to_string(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" + to_string(registers->at(currentInstruction->cirs[0])));
                     numOfInst[4]++;
                 }
+                else {
+                    Request * request = new Request(0,core_id,currentInstruction,this);
+                    bool dependent = memoryRequestManager->checkDependencies(core_id, request);
+                    if (dependent) {
+                        bool enqueued = memoryRequestManager->enqueueRequest (core_id,request);
+                        if (!enqueued) stall(request,true);
+                        else handleOutput->appendOutputForCore (core_id,":Enqueuing Instruction: addi (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + to_string(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" + to_string(registers->at(currentInstruction->cirs[0])));
+
+                    }
+                    else {
+                        addi (currentInstruction->cirs);
+                        //cout<<" coreId: "<<core_id<<" -> "<<": Instruction: addi (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + to_string(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" + to_string(registers->at(currentInstruction->cirs[0]))+"\t";
+                        handleOutput->appendOutputForCore (core_id,": Instruction: addi (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + to_string(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" + to_string(registers->at(currentInstruction->cirs[0])));
+                        numOfInst[4]++;
+                    }
+                }
             }
             break;
         }
         case 5: {
+            // ? bne beq do they come from free buffer?
             Request * request = new Request(0,core_id,currentInstruction,this);
             bool dependent = memoryRequestManager->checkDependencies(core_id, request);
             if (dependent) {
@@ -307,7 +353,6 @@ void CORE::run (MRM *memoryRequestManager) {
                 }
             }
             else {
-
                 bne (currentInstruction->cirs, currentInstruction->label);
                 //cout<<" coreId: "<<core_id<<" -> "<<": Instruction bne (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + currentInstruction->label + "," + to_string(switchOnBranch) + ")\t";
                 handleOutput->appendOutputForCore (core_id,": Instruction bne (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + currentInstruction->label + "," + to_string(switchOnBranch) + ")");

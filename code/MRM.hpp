@@ -28,7 +28,9 @@ private:
     Request * currentRequestInDRAM;
     OutputHandler * handleOutput;
     double decCost;
+    double incCost;
     int getCostToBeSubtracted (Request* r, vector<pair<Request*,int>> * requestQueue);
+    int numDependent (Request * r, vector<Request*> * coreQueue);
 public:
     MRM (DRAM * d,vector<CORE*> * ac, int nc, int rad, int cad,OutputHandler * ho, int cql);
 
@@ -46,11 +48,11 @@ public:
     bool enqueueRequest (int coreId, Request * r);
     bool dequeueRequest (Request * r, vector<Request*> * coreQueue);
 
-    CORE * selectCore (vector<CORE*> * allCores);
-    Request* getMinCostRequest (vector<CORE*> * allCores,int& Delay);
+    CORE * selectCore (vector<CORE*> * allCores, vector<bool> * isWorking);
+    Request* getMinCostRequest (vector<CORE*> * allCores, vector<bool> * isWorking);
     int getDelayOfForwardingRequest (Request* request,vector<CORE*> * allCores, int unitDelay = 1);
 
-    void execute (vector<CORE*> * allCores, int currentClockCycle);
+    void execute (vector<CORE*> * allCores, int currentClockCycle, vector<bool> * isWorking);
 };
 
 #endif

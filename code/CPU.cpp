@@ -25,9 +25,10 @@ CPU::CPU (int n,int m,  string fpi, string fpo,int rad,int cad, int coreQueueLen
 
 
 void CPU::run () {
+    vector<bool> *isWorking = new vector<bool> (numCores,true);
     for (curClockCycle = 1; curClockCycle <= maxClockCycle; curClockCycle++) { 
-        //cout<<"Cycle: "<<curClockCycle<<"\t";
-        memoryRequestManager->execute(allCores,curClockCycle);
+        for (int i = 0; i < numCores; i++) isWorking->at(i) = allCores->at(i)->isWorking();
+        memoryRequestManager->execute(allCores,curClockCycle,isWorking);
         for (int i = 0; i < numCores; i++) { 
             //if (allCores->at(i)->isRunnable()) allCores->at(i)->run(memoryRequestManager);
             allCores->at(i)->run(memoryRequestManager);   

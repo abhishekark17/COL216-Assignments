@@ -21,6 +21,7 @@ MRM::MRM (DRAM * d,vector<CORE*> * ac, int nc, int rad, int cad,OutputHandler * 
     uptoDelayClkCycle = -1;
     handleOutput = ho;
     decCost = 0.01;
+    incCost = 0.03;
 }
 
 vector<Request*> * MRM::getQueueOfCore_id (int id) {
@@ -37,7 +38,11 @@ bool MRM::isDependent (Request* srcRequest, Request * dstRequest) {
                     break;
                 }
                 case 4: { // addi 
-                    if ( dstRequest->inst->cirs[0] == srcRequest->changingRegister || dstRequest->inst->cirs[1] == srcRequest->changingRegister) return true;
+                    if ( dstRequest->inst->cirs[0] == srcRequest->changingRegister || dstRequest->inst->cirs[1] == srcRequest->changingRegister) {
+                        //cout << "reached hereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee" << endl;
+                        return true;
+                        
+                    }
                     break;
                 }
                 case 5: // bne
@@ -74,8 +79,9 @@ bool MRM::checkDependencies ( int id,Request * r) {
                 case 2: //mul
                 case 3: { // slt 
                     if ( r->inst->cirs[0] == (*requestInQueue)->changingRegister || r->inst->cirs[1] == (*requestInQueue)->changingRegister || r->inst->cirs[2] == (*requestInQueue)->changingRegister ) {
-                        r->cost += ceil ((*requestInQueue)->cost) + 1;
-                        r->subtractCostQueue->push_back (make_pair((*requestInQueue),ceil ((*requestInQueue)->cost) + 1));
+                        int addCost = ceil ((*requestInQueue)->cost);
+                        r->cost += addCost + incCost;
+                        r->subtractCostQueue->push_back (make_pair((*requestInQueue),addCost));
                         (*requestInQueue)->cost -= decCost;
                         dependent = true;
                     }
@@ -83,8 +89,9 @@ bool MRM::checkDependencies ( int id,Request * r) {
                 }
                 case 4: { // addi 
                     if ( r->inst->cirs[0] == (*requestInQueue)->changingRegister || r->inst->cirs[1] == (*requestInQueue)->changingRegister) {
-                        r->cost += ceil ((*requestInQueue)->cost) + 1;
-                        r->subtractCostQueue->push_back (make_pair((*requestInQueue),ceil ((*requestInQueue)->cost)+1));
+                        int addCost = ceil ((*requestInQueue)->cost);
+                        r->cost += addCost + incCost;
+                        r->subtractCostQueue->push_back (make_pair((*requestInQueue),addCost));
                         (*requestInQueue)->cost -= decCost;
                         dependent = true;
                     }
@@ -94,8 +101,9 @@ bool MRM::checkDependencies ( int id,Request * r) {
                 case 5: // bne
                 case 6: { //beq
                     if ( r->inst->cirs[0] == (*requestInQueue)->changingRegister || r->inst->cirs[1] == (*requestInQueue)->changingRegister) {
-                        r->cost += ceil ((*requestInQueue)->cost) + 1;
-                        r->subtractCostQueue->push_back (make_pair((*requestInQueue),ceil ((*requestInQueue)->cost) + 1));
+                        int addCost = ceil ((*requestInQueue)->cost);
+                        r->cost += addCost + incCost;
+                        r->subtractCostQueue->push_back (make_pair((*requestInQueue),addCost));
                         (*requestInQueue)->cost -= decCost;
                         dependent = true;
                     }
@@ -111,33 +119,33 @@ bool MRM::checkDependencies ( int id,Request * r) {
                         if ((*requestInQueue)->inst->opID == 7) {
                             if (DRAM::getRowOfRowBuffer((*requestInQueue)->loadingMemoryAddress) == DRAM::getRowOfRowBuffer(r->loadingMemoryAddress)) {
                                 if (DRAM::getColOfRowBuffer((*requestInQueue)->loadingMemoryAddress) == DRAM::getColOfRowBuffer(r->loadingMemoryAddress)) {
-                                    r->cost += 2;
-                                    r->subtractCostQueue->push_back (make_pair((*requestInQueue),ceil ((*requestInQueue)->cost) + 2));
+                                    r->cost += 1 + incCost;
+                                    r->subtractCostQueue->push_back (make_pair((*requestInQueue),ceil ((*requestInQueue)->cost) + 1));
                                 }
                                 else {
-                                    r->cost += colAccessDelay + 1;
-                                    r->subtractCostQueue->push_back (make_pair((*requestInQueue),ceil ((*requestInQueue)->cost) + colAccessDelay + 1));
+                                    r->cost += colAccessDelay + incCost;
+                                    r->subtractCostQueue->push_back (make_pair((*requestInQueue),ceil ((*requestInQueue)->cost) + colAccessDelay));
                                 }
                             }
                             else {
-                                r->cost += (2 * rowAccessDelay) + colAccessDelay + 1;
-                                r->subtractCostQueue->push_back (make_pair((*requestInQueue),ceil ((*requestInQueue)->cost) + (2 * rowAccessDelay) + colAccessDelay + 1));
+                                r->cost += (2 * rowAccessDelay) + colAccessDelay + incCost;
+                                r->subtractCostQueue->push_back (make_pair((*requestInQueue),ceil ((*requestInQueue)->cost) + (2 * rowAccessDelay) + colAccessDelay));
                             }
                         } 
                         else if ((*requestInQueue)->inst->opID == 8) {
                             if (DRAM::getRowOfRowBuffer((*requestInQueue)->savingMemoryAddress) == DRAM::getRowOfRowBuffer(r->loadingMemoryAddress)) {
                                 if (DRAM::getColOfRowBuffer((*requestInQueue)->savingMemoryAddress) == DRAM::getColOfRowBuffer(r->loadingMemoryAddress)) {
-                                    r->cost += 1 + 1;
-                                    r->subtractCostQueue->push_back (make_pair((*requestInQueue),ceil ((*requestInQueue)->cost) + 1 + 1));
+                                    r->cost += 1 + incCost;
+                                    r->subtractCostQueue->push_back (make_pair((*requestInQueue),ceil ((*requestInQueue)->cost) + 1));
                                 }
                                 else {
-                                    r->cost += colAccessDelay + 1;
-                                    r->subtractCostQueue->push_back (make_pair((*requestInQueue),ceil ((*requestInQueue)->cost) + colAccessDelay + 1));
+                                    r->cost += colAccessDelay + incCost;
+                                    r->subtractCostQueue->push_back (make_pair((*requestInQueue),ceil ((*requestInQueue)->cost) + colAccessDelay));
                                 }
                             }
                             else {
-                                r->cost += (2 * rowAccessDelay) + colAccessDelay + 1;
-                                r->subtractCostQueue->push_back (make_pair((*requestInQueue),ceil ((*requestInQueue)->cost) + (2 * rowAccessDelay) + colAccessDelay + 1));
+                                r->cost += (2 * rowAccessDelay) + colAccessDelay + incCost;
+                                r->subtractCostQueue->push_back (make_pair((*requestInQueue),ceil ((*requestInQueue)->cost) + (2 * rowAccessDelay) + colAccessDelay));
 
                             }
                         } 
@@ -154,33 +162,33 @@ bool MRM::checkDependencies ( int id,Request * r) {
                         if ((*requestInQueue)->inst->opID == 7) {
                             if (DRAM::getRowOfRowBuffer((*requestInQueue)->loadingMemoryAddress) == DRAM::getRowOfRowBuffer(r->savingMemoryAddress)) {
                                 if (DRAM::getColOfRowBuffer((*requestInQueue)->loadingMemoryAddress) == DRAM::getColOfRowBuffer(r->savingMemoryAddress)) {
-                                    r->cost += 1 + 1;
-                                    r->subtractCostQueue->push_back (make_pair((*requestInQueue),ceil ((*requestInQueue)->cost) + 1 + 1));
+                                    r->cost += 1 + incCost;
+                                    r->subtractCostQueue->push_back (make_pair((*requestInQueue),ceil ((*requestInQueue)->cost) + 1));
                                 }
                                 else {
-                                    r->cost += colAccessDelay + 1;
-                                    r->subtractCostQueue->push_back (make_pair((*requestInQueue),ceil ((*requestInQueue)->cost) + colAccessDelay + 1));
+                                    r->cost += colAccessDelay + incCost;
+                                    r->subtractCostQueue->push_back (make_pair((*requestInQueue),ceil ((*requestInQueue)->cost) + colAccessDelay));
                                 }
                             }
                             else {
-                                r->cost += (2 * rowAccessDelay) + colAccessDelay + 1;
-                                r->subtractCostQueue->push_back (make_pair((*requestInQueue),ceil ((*requestInQueue)->cost) + (2 * rowAccessDelay) + colAccessDelay + 1));
+                                r->cost += (2 * rowAccessDelay) + colAccessDelay + incCost;
+                                r->subtractCostQueue->push_back (make_pair((*requestInQueue),ceil ((*requestInQueue)->cost) + (2 * rowAccessDelay) + colAccessDelay));
                             }
                         } 
                         else if ((*requestInQueue)->inst->opID == 8) {
                             if (DRAM::getRowOfRowBuffer((*requestInQueue)->savingMemoryAddress) == DRAM::getRowOfRowBuffer(r->savingMemoryAddress)) {
                                 if (DRAM::getColOfRowBuffer((*requestInQueue)->savingMemoryAddress) == DRAM::getColOfRowBuffer(r->savingMemoryAddress)) {
-                                    r->cost += 1 + 1;
-                                    r->subtractCostQueue->push_back (make_pair((*requestInQueue),ceil ((*requestInQueue)->cost) + 1 + 1));
+                                    r->cost += 1 + incCost;
+                                    r->subtractCostQueue->push_back (make_pair((*requestInQueue),ceil ((*requestInQueue)->cost) + 1));
                                 }
                                 else {
-                                    r->cost += colAccessDelay + 1;
-                                    r->subtractCostQueue->push_back (make_pair((*requestInQueue),ceil ((*requestInQueue)->cost) + colAccessDelay + 1));
+                                    r->cost += colAccessDelay + incCost;
+                                    r->subtractCostQueue->push_back (make_pair((*requestInQueue),ceil ((*requestInQueue)->cost) + colAccessDelay));
                                 }
                             }
                             else {
-                                r->cost += (2 * rowAccessDelay) + colAccessDelay + 1;
-                                r->subtractCostQueue->push_back (make_pair((*requestInQueue),ceil ((*requestInQueue)->cost) + (2 * rowAccessDelay) + colAccessDelay + 1));
+                                r->cost += (2 * rowAccessDelay) + colAccessDelay + incCost;
+                                r->subtractCostQueue->push_back (make_pair((*requestInQueue),ceil ((*requestInQueue)->cost) + (2 * rowAccessDelay) + colAccessDelay ));
                             }
                         } 
                     }
@@ -199,9 +207,9 @@ bool MRM::checkDependencies ( int id,Request * r) {
         }
         if ((r->inst->opID == 7 || r->inst->opID == 8) && (!dependent)) {
             r->cost = (2*rowAccessDelay) + colAccessDelay + 1;
-            cout << "this is cost agag " << r->cost << endl;
         }
         //if (r->core_id == 1) cout << r->cost << " this is cost " << endl;
+        
         return dependent;
     }
 
@@ -219,27 +227,28 @@ bool MRM::enqueueRequest (int coreId, Request * r) {
         return true;
     }
 
-CORE * MRM::selectCore (vector<CORE*> * allCores) {
-        // * returns nullptr if there are no requests 
-        int minCost = INT_MAX;
-        CORE * coreWithMinCost = nullptr;
-        for (auto core = allCores->begin(); core != allCores->end(); core++) {
-            if ((*core)->getMinCost() < minCost) {
-                minCost = (*core)->getMinCost();
-                coreWithMinCost = (*core);
-            }
+CORE * MRM::selectCore (vector<CORE*> * allCores, vector<bool> * isWorking) {
+    // * returns nullptr if there are no requests 
+    int minCost = INT_MAX;
+    CORE * coreWithMinCost = nullptr;
+    for (int i = 0; i < allCores->size(); i++) {
+        if (isWorking->at (i) && allCores->at (i)->getMinCost() < minCost) {
+            minCost = allCores->at (i)->getMinCost();
+            coreWithMinCost = allCores->at (i);
         }
-        return coreWithMinCost;
     }
+    return coreWithMinCost;
+}
+// ! used in mrm execute
+Request* MRM::getMinCostRequest (vector<CORE*> * allCores, vector<bool> * isWorking) { 
+    CORE* minCostCore = selectCore(allCores,isWorking);
+    if (minCostCore == nullptr) return nullptr; 
+    Request* request = minCostCore->getRequestWithMinCost();
+    return request;
+}
 
-Request* MRM::getMinCostRequest (vector<CORE*> * allCores,int& Delay) { 
-        CORE* minCostCore = selectCore(allCores);
-        if (minCostCore == nullptr) return nullptr; 
-        Request* request = minCostCore->getRequestWithMinCost();
-        return request;
-    }
 
-
+// ! used in dequeue request
 pair<Request *, int> MRM::getMinCostRequest (vector<Request*> * coreQueue) {
     int minCost = INT_MAX;
     Request * myMinCostRequest = nullptr;
@@ -268,7 +277,8 @@ bool MRM::dequeueRequest (Request * r, vector<Request*> * coreQueue) {
             if ( (*i) == r) {
                 for (auto j = i+1; j != coreQueue->end(); j++) {
                     if (j != coreQueue->end() && isDependent(*i, *j)) {
-                        (*j)->cost -= getCostToBeSubtracted ((*i), (*j)->subtractCostQueue) ;
+                        int toBeSubtracted = getCostToBeSubtracted ((*i), (*j)->subtractCostQueue) ;
+                        (*j)->cost -= toBeSubtracted; 
                     }
                     
                 }
@@ -284,13 +294,28 @@ bool MRM::dequeueRequest (Request * r, vector<Request*> * coreQueue) {
         return deleted;
     }
 
-void MRM::execute (vector<CORE*> * allCores, int currentClockCycle) {
+int MRM::numDependent (Request * r, vector<Request*> * coreQueue) {
+    int ans = 0;
+    for (auto i = coreQueue->begin(); i != coreQueue->end(); i++) {
+        if ( (*i) == r) {
+            for (auto j = i+1; j != coreQueue->end(); j++) {
+                if ((j != coreQueue->end()) && isDependent(*i, *j)) ans++;
+                
+            }
+            break;
+        }
+    }
+    return ans;
+}
+
+
+void MRM::execute (vector<CORE*> * allCores, int currentClockCycle,vector<bool> * isWorking) {
     /*
         for (auto itr = allCores->begin(); itr != allCores->end();itr++) {
             if (getQueueOfCore_id((*itr)->getCoreId())->size() < coreQueueLength && 
                 (*itr)->isStalled()) (*itr)->resume(true);
         }
-*/
+*/      
         if (currentClockCycle > uptoClkCycle) {
             DRAMrequestIssued = false;
             handleOutput->addDramOutput (": Idle");
@@ -309,7 +334,9 @@ void MRM::execute (vector<CORE*> * allCores, int currentClockCycle) {
                 allCores->at (currentRequestInDRAM->core_id - 1)->updateNumOfInst (7);
 
                 handleOutput->addDramOutput (": LW for core " + to_string (currentRequestInDRAM->core_id) + " Done");
+
                 dequeueRequest (currentRequestInDRAM, getQueueOfCore_id (currentRequestInDRAM->core_id));
+                ////uptoDelayClkCycle = currentClockCycle + numDependent (currentRequestInDRAM, getQueueOfCore_id (currentRequestInDRAM->core_id));
             }
             else if (currentRequestInDRAM->inst->opID == 8) {
                 dram->setRowBuffer(DRAM::getRowOfRowBuffer (currentRequestInDRAM->savingMemoryAddress));
@@ -324,17 +351,18 @@ void MRM::execute (vector<CORE*> * allCores, int currentClockCycle) {
                 
                 allCores->at (currentRequestInDRAM->core_id - 1)->updateNumOfInst (8);
                 handleOutput->addDramOutput (": SW for core " + to_string(currentRequestInDRAM->core_id) + " Done");
+
                 dequeueRequest (currentRequestInDRAM, getQueueOfCore_id (currentRequestInDRAM->core_id));
+                ////uptoDelayClkCycle = currentClockCycle + numDependent (currentRequestInDRAM, getQueueOfCore_id (currentRequestInDRAM->core_id));
             }
             else allCores->at(currentRequestInDRAM->core_id - 1)->setRuntimeError("Request in DRAM cannot be other than sw and lw");
         }
 
         //if (currentClockCycle < uptoDelayClkCycle) {return;}
-        Request* request = getMinCostRequest (allCores,Delay);
+        Request* request = getMinCostRequest (allCores, isWorking);
        
 
         if (request == nullptr) return;
-       cout << "opid of mincost request" << request->inst->opID <<"    " << allCores->at(0)->rrmap.at(request->inst->cirs[0])  << "    " <<request->cost << endl;
 
         if (request->inst->opID != 7 && request->inst->opID != 8 && request->cost <= 1) {
             if  (allCores->at(request->core_id - 1)->getStallingRequest() == request && 
@@ -346,60 +374,74 @@ void MRM::execute (vector<CORE*> * allCores, int currentClockCycle) {
                 allCores->at(request->core_id - 1)->addInFreeBuffer(request);
             }
 
+            int addDelay = numDependent (request, getQueueOfCore_id (request->core_id));
+            cout << "this is mrm 3delay  " << addDelay << endl;
+            uptoDelayClkCycle = currentClockCycle + addDelay;
             dequeueRequest (request,getQueueOfCore_id(request->core_id));
             return;
         }
 
         if (request->inst->opID != 7 && request->inst->opID != 8 && request->cost > 1) {
             allCores->at(request->core_id - 1)->setRuntimeError("This should not happen");
+            cout << "this is the request " << request->inst->opID << " " << request->inst->cirs[0] << " " << request->inst->cirs[1] << " " << request->inst->cirs[2] << " " << request->cost << endl;
             return;
         }
-        
+    
         if (DRAMrequestIssued) {
             // * calculate delay 
             if (currentRequestInDRAM->inst->opID == 7) handleOutput->addDramOutput (": Executing LW request for core " + to_string(currentRequestInDRAM->core_id) + ": @Address " + to_string (currentRequestInDRAM->loadingMemoryAddress) + " --> @Register " + allCores->at(0)->rrmap.at(currentRequestInDRAM->inst->cirs[0]));
             else if (currentRequestInDRAM->inst->opID == 8) handleOutput->addDramOutput (": Executing SW request for core " + to_string(currentRequestInDRAM->core_id) + ": @Address " + to_string (currentRequestInDRAM->savingMemoryAddress) + " <-- @Value " + to_string (currentRequestInDRAM->storeThisForSW));
             else allCores->at(currentRequestInDRAM->core_id - 1)->setRuntimeError("not a lw or sw instruction sent in DRAM");
-            uptoDelayClkCycle = currentClockCycle + 1;
         }
         else {
-
-            DRAMrequestIssued = true;
-            currentRequestInDRAM = request;
-
-            if (request->inst->opID == 7) {
-                //cout<<" coreId: "<<currentRequestInDRAM->core_id<<"\t" << ": DRAM request issued : lw\t";
-                handleOutput->addDramOutput (": LW for core " + to_string(currentRequestInDRAM->core_id) + " Issued::[" +allCores->at(0)->rrmap.at(currentRequestInDRAM->inst->cirs[0]) + "," +  to_string(currentRequestInDRAM->inst->cirs[1]) + "," + allCores->at(0)->rrmap.at(currentRequestInDRAM->inst->cirs[2]) + "]");
-                handleOutput->appendOutputForCore (currentRequestInDRAM->core_id,": LW for core " + to_string(currentRequestInDRAM->core_id) + " Issued in DRAM::[" +allCores->at(0)->rrmap.at(currentRequestInDRAM->inst->cirs[0]) + "," +  to_string(currentRequestInDRAM->inst->cirs[1]) + "," + allCores->at(0)->rrmap.at(currentRequestInDRAM->inst->cirs[2]) + "]");
+            if (currentClockCycle > uptoDelayClkCycle) {
                 
-                if (dram->getRowBuffer() == DRAM::getRowOfRowBuffer (request->loadingMemoryAddress)) {
-                    if (dram->getColBuffer() == DRAM::getColOfRowBuffer (request->loadingMemoryAddress)) uptoClkCycle = currentClockCycle + 1;
-                    else uptoClkCycle = currentClockCycle + colAccessDelay; 
-                }
-                else uptoClkCycle = currentClockCycle + (2 * rowAccessDelay) + colAccessDelay;
-
+                DRAMrequestIssued = true;
                 currentRequestInDRAM = request;
-                int success = dram->lw (request);
-                if (success == -1) allCores->at(request->core_id - 1)->setRuntimeError("Error: Memory Address not accessible");
-                else if (success == -2) allCores->at(request->core_id - 1)->setRuntimeError("Error: invalid memory location");
+
+                int addDelay = numDependent (currentRequestInDRAM, getQueueOfCore_id (currentRequestInDRAM->core_id));
+                cout << "this is mrm 2delay  " << addDelay << endl;
+                uptoDelayClkCycle = currentClockCycle + addDelay;
+
+
+                if (request->inst->opID == 7) {
+                    //cout<<" coreId: "<<currentRequestInDRAM->core_id<<"\t" << ": DRAM request issued : lw\t";
+                    handleOutput->addDramOutput (": LW for core " + to_string(currentRequestInDRAM->core_id) + " Issued::[" +allCores->at(0)->rrmap.at(currentRequestInDRAM->inst->cirs[0]) + "," +  to_string(currentRequestInDRAM->inst->cirs[1]) + "," + allCores->at(0)->rrmap.at(currentRequestInDRAM->inst->cirs[2]) + "]");
+                    handleOutput->appendOutputForCore (currentRequestInDRAM->core_id,": LW for core " + to_string(currentRequestInDRAM->core_id) + " Issued in DRAM::[" +allCores->at(0)->rrmap.at(currentRequestInDRAM->inst->cirs[0]) + "," +  to_string(currentRequestInDRAM->inst->cirs[1]) + "," + allCores->at(0)->rrmap.at(currentRequestInDRAM->inst->cirs[2]) + "]");
+                    
+                    if (dram->getRowBuffer() == DRAM::getRowOfRowBuffer (request->loadingMemoryAddress)) {
+                        if (dram->getColBuffer() == DRAM::getColOfRowBuffer (request->loadingMemoryAddress)) uptoClkCycle = currentClockCycle + 1;
+                        else uptoClkCycle = currentClockCycle + colAccessDelay; 
+                    }
+                    else uptoClkCycle = currentClockCycle + (2 * rowAccessDelay) + colAccessDelay;
+
+                    currentRequestInDRAM = request;
+                    int success = dram->lw (request);
+                    if (success == -1) allCores->at(request->core_id - 1)->setRuntimeError("Error: Memory Address not accessible");
+                    else if (success == -2) allCores->at(request->core_id - 1)->setRuntimeError("Error: invalid memory location");
+                }
+                else if (request->inst->opID == 8) {
+                    //cout<<" coreId: "<<currentRequestInDRAM->core_id<<"\t" << ": DRAM request issued : sw\t";
+                    handleOutput->addDramOutput (": SW for core " + to_string(currentRequestInDRAM->core_id) + " Issued::[" +allCores->at(0)->rrmap.at(currentRequestInDRAM->inst->cirs[0]) + "," +  to_string(currentRequestInDRAM->inst->cirs[1]) + "," + allCores->at(0)->rrmap.at(currentRequestInDRAM->inst->cirs[2]) + "]");
+                    handleOutput->appendOutputForCore (currentRequestInDRAM->core_id,": SW for core " + to_string(currentRequestInDRAM->core_id) + " Issued in DRAM::[" +allCores->at(0)->rrmap.at(currentRequestInDRAM->inst->cirs[0]) + "," +  to_string(currentRequestInDRAM->inst->cirs[1]) + "," + allCores->at(0)->rrmap.at(currentRequestInDRAM->inst->cirs[2]) + "]");
+                
+                    if (dram->getRowBuffer() == DRAM::getRowOfRowBuffer (request->savingMemoryAddress)) {
+                        if (dram->getColBuffer() == DRAM::getColOfRowBuffer (request->savingMemoryAddress)) uptoClkCycle = currentClockCycle + 1;
+                        else uptoClkCycle = currentClockCycle + colAccessDelay; 
+                    }
+                    else uptoClkCycle = currentClockCycle + (2 * rowAccessDelay) + colAccessDelay;
+
+                    currentRequestInDRAM = request;
+                    int success = dram->sw (request);
+                    if (success == -1) allCores->at(request->core_id - 1)->setRuntimeError("Error: Memory Address not accessible");
+                    else if (success == -2) allCores->at(request->core_id - 1)->setRuntimeError("Error: invalid memory location");
+                }
+                else allCores->at(request->core_id - 1)->setRuntimeError("not a lw or sw instruction");    
             }
-            else if (request->inst->opID == 8) {
-                //cout<<" coreId: "<<currentRequestInDRAM->core_id<<"\t" << ": DRAM request issued : sw\t";
-                handleOutput->addDramOutput (": SW for core " + to_string(currentRequestInDRAM->core_id) + " Issued::[" +allCores->at(0)->rrmap.at(currentRequestInDRAM->inst->cirs[0]) + "," +  to_string(currentRequestInDRAM->inst->cirs[1]) + "," + allCores->at(0)->rrmap.at(currentRequestInDRAM->inst->cirs[2]) + "]");
-                handleOutput->appendOutputForCore (currentRequestInDRAM->core_id,": SW for core " + to_string(currentRequestInDRAM->core_id) + " Issued in DRAM::[" +allCores->at(0)->rrmap.at(currentRequestInDRAM->inst->cirs[0]) + "," +  to_string(currentRequestInDRAM->inst->cirs[1]) + "," + allCores->at(0)->rrmap.at(currentRequestInDRAM->inst->cirs[2]) + "]");
+            else {
+                handleOutput->addDramOutput ("(MRM is deciding : opID of request = " + to_string(request->inst->opID) + ")");
+            }
             
-                if (dram->getRowBuffer() == DRAM::getRowOfRowBuffer (request->savingMemoryAddress)) {
-                    if (dram->getColBuffer() == DRAM::getColOfRowBuffer (request->savingMemoryAddress)) uptoClkCycle = currentClockCycle + 1;
-                    else uptoClkCycle = currentClockCycle + colAccessDelay; 
-                }
-                else uptoClkCycle = currentClockCycle + (2 * rowAccessDelay) + colAccessDelay;
-
-                currentRequestInDRAM = request;
-                int success = dram->sw (request);
-                if (success == -1) allCores->at(request->core_id - 1)->setRuntimeError("Error: Memory Address not accessible");
-                else if (success == -2) allCores->at(request->core_id - 1)->setRuntimeError("Error: invalid memory location");
-            }
-            else allCores->at(request->core_id - 1)->setRuntimeError("not a lw or sw instruction");
         }
         
         return;

@@ -91,6 +91,7 @@ private:
     bool working;
     bool hasSyntaxError;
     bool hasRuntimeError;
+    bool isFromFreeBuffer;
 
 public:
     int getCoreId () { return core_id;}
@@ -98,6 +99,7 @@ public:
     unordered_map <int, string> rrmap;
     
     void  lexFile(string file);
+    bool isWorking ();
 
     void setMinCostRequest (Request *r);
     Request* getMinCostRequest ();
