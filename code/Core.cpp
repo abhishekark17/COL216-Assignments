@@ -81,6 +81,7 @@ CORE::CORE (string inFileName, int id, string outFileName,int nc,int DramCols,in
         stallingRequest = nullptr;
         isFromFreeBuffer = false;
         
+        postponedInstruction = *(new instruction ());
 
     }
 
@@ -151,29 +152,38 @@ void CORE::run (MRM *memoryRequestManager) {
 
     instruction* currentInstruction = new instruction ();
        
-    if (stallingRequest != nullptr) {
-        currentInstruction = stallingRequest->inst;
-        stallingRequest = nullptr;
+    if (postponedInstruction.opID > -1) {
+        currentInstruction->opID = postponedInstruction.opID;
+        currentInstruction->cirs = postponedInstruction.cirs;
+        currentInstruction->label = postponedInstruction.label;
+        currentInstruction->cirsValue = postponedInstruction.cirsValue;
+        postponedInstruction = *(new instruction ());
     }
     else {
-        if (freeBuffer->size() > 0) {
-            cout << "jello " << endl;
-            currentInstruction = freeBuffer->at(0)->inst;
-            freeBuffer->erase (freeBuffer->begin());
-            isFromFreeBuffer = true;
+        if (stallingRequest != nullptr) {
+            currentInstruction = stallingRequest->inst;
+            stallingRequest = nullptr;
         }
         else {
-            if (pc > iset.size()) {
-                smoothExit();
-                return;
+            if (freeBuffer->size() > 0) {
+                cout << "jello " << endl;
+                currentInstruction = freeBuffer->at(0)->inst;
+                freeBuffer->erase (freeBuffer->begin());
+                isFromFreeBuffer = true;
             }
             else {
-                currentInstruction = &iset[pc - 1];
-                pc++;
+                if (pc > iset.size()) {
+                    smoothExit();
+                    return;
+                }
+                else {
+                    currentInstruction = &iset[pc - 1];
+                    pc++;
+                }
             }
         }
     }
-
+    
     // * now we know which instruction to execute
     
     switch (currentInstruction->opID) {
@@ -186,9 +196,17 @@ void CORE::run (MRM *memoryRequestManager) {
                 Request * request = new Request(0,core_id,currentInstruction,this);
                 if (isFromFreeBuffer) {
                     isFromFreeBuffer = false;
-                    add (currentInstruction->cirs);
-                    handleOutput->appendOutputForCore (core_id,": Instruction: add (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + rrmap.at(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" + to_string(registers->at(currentInstruction->cirs[0])));
-                    numOfInst[0]++;
+                    if (writingFromDRAM) {
+                        writingFromDRAM = false;
+                        postponedInstruction = (*currentInstruction);
+                        handleOutput->appendOutputForCore (core_id,": Instruction: add (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + rrmap.at(currentInstruction->cirs[2]) + ")" + ": POSTPONED because write port is busy : ");
+                    }
+                    else {
+                        add (currentInstruction->cirs);
+                        handleOutput->appendOutputForCore (core_id,": Instruction: add (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + rrmap.at(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" + to_string(registers->at(currentInstruction->cirs[0])));
+                        numOfInst[0]++;
+                    }
+                    
                 }
                 else {
                     bool dependent = memoryRequestManager->checkDependencies(core_id, request);
@@ -198,10 +216,17 @@ void CORE::run (MRM *memoryRequestManager) {
                         else handleOutput->appendOutputForCore (core_id,": Enqueuing Instruction: add (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + rrmap.at(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" + to_string(registers->at(currentInstruction->cirs[0])));                        
                     }
                     else {
-                        add (currentInstruction->cirs);
-                        //cout<<"coreId: "<<core_id<<" -> "<<": Instruction: add (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + rrmap.at(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" + to_string(registers->at(currentInstruction->cirs[0]))+"\t";
-                        handleOutput->appendOutputForCore (core_id,": Instruction: add (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + rrmap.at(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" + to_string(registers->at(currentInstruction->cirs[0])));
-                        numOfInst[0]++;
+                        if (writingFromDRAM) {
+                            writingFromDRAM = false;
+                            postponedInstruction = (*currentInstruction);
+                            handleOutput->appendOutputForCore (core_id,": Instruction: add (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + rrmap.at(currentInstruction->cirs[2]) + ")" + ": POSTPONED because write port is busy : ");
+                        }
+                        else {
+                            add (currentInstruction->cirs);
+                            handleOutput->appendOutputForCore (core_id,": Instruction: add (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + rrmap.at(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" + to_string(registers->at(currentInstruction->cirs[0])));
+                            numOfInst[0]++;
+                        }
+                        
                     }
                 }
             }
@@ -215,10 +240,16 @@ void CORE::run (MRM *memoryRequestManager) {
             else {
                 if (isFromFreeBuffer) {
                     isFromFreeBuffer = false;
-                    sub (currentInstruction->cirs);
-                    //cout<<" coreId: "<<core_id<<" -> "<<": Instruction: sub (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + rrmap.at(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" + to_string(registers->at(currentInstruction->cirs[0]))+"\t";
-                    handleOutput->appendOutputForCore (core_id,": Instruction: sub (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + rrmap.at(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" + to_string(registers->at(currentInstruction->cirs[0])));                
-                    numOfInst[1]++;
+                    if (writingFromDRAM) {
+                        writingFromDRAM = false;
+                        postponedInstruction = (*currentInstruction);
+                        handleOutput->appendOutputForCore (core_id,": Instruction: sub (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + rrmap.at(currentInstruction->cirs[2]) + ")" + ": POSTPONED because write port is busy : ");
+                    }
+                    else {
+                        sub (currentInstruction->cirs);
+                        handleOutput->appendOutputForCore (core_id,": Instruction: sub (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + rrmap.at(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" + to_string(registers->at(currentInstruction->cirs[0])));                
+                        numOfInst[1]++;
+                    }
                 }
                 else {
                     Request * request = new Request(0,core_id,currentInstruction,this);
@@ -230,10 +261,17 @@ void CORE::run (MRM *memoryRequestManager) {
 
                     }
                     else {
+                        if (writingFromDRAM) {
+                            writingFromDRAM = false;
+                            postponedInstruction = (*currentInstruction);
+                            handleOutput->appendOutputForCore (core_id,": Instruction: sub (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + rrmap.at(currentInstruction->cirs[2]) + ")" + ": POSTPONED because write port is busy : ");
+                        }
+                        else {
                         sub (currentInstruction->cirs);
-                        //cout<<" coreId: "<<core_id<<" -> "<<": Instruction: sub (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + rrmap.at(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" + to_string(registers->at(currentInstruction->cirs[0]))+"\t";
                         handleOutput->appendOutputForCore (core_id,": Instruction: sub (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + rrmap.at(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" + to_string(registers->at(currentInstruction->cirs[0])));                
                         numOfInst[1]++;
+                        }
+                        
                     }
                 }
             }
@@ -247,10 +285,16 @@ void CORE::run (MRM *memoryRequestManager) {
             else {
                 if (isFromFreeBuffer) {
                     isFromFreeBuffer = false;
-                    mul (currentInstruction->cirs);
-                    //cout<<" coreId: "<< core_id<<" -> "<<": Instruction: mul (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + rrmap.at(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" +to_string(registers->at(currentInstruction->cirs[0]))+"\t" ;
-                    handleOutput->appendOutputForCore (core_id,": Instruction: mul (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + rrmap.at(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" + to_string(registers->at(currentInstruction->cirs[0])));
-                    numOfInst[2]++;
+                    if (writingFromDRAM) {
+                        writingFromDRAM = false;
+                        postponedInstruction = (*currentInstruction);
+                        handleOutput->appendOutputForCore (core_id,": Instruction: mul (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + rrmap.at(currentInstruction->cirs[2]) + ")" + ": POSTPONED because write port is busy : ");
+                    }
+                    else {
+                        mul (currentInstruction->cirs);
+                        handleOutput->appendOutputForCore (core_id,": Instruction: mul (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + rrmap.at(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" + to_string(registers->at(currentInstruction->cirs[0])));
+                        numOfInst[2]++;
+                    }   
                 }
                 else {
                     Request * request = new Request(0,core_id,currentInstruction,this);
@@ -262,10 +306,16 @@ void CORE::run (MRM *memoryRequestManager) {
 
                     }
                     else {
-                        mul (currentInstruction->cirs);
-                        //cout<<" coreId: "<< core_id<<" -> "<<": Instruction: mul (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + rrmap.at(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" +to_string(registers->at(currentInstruction->cirs[0]))+"\t" ;
-                        handleOutput->appendOutputForCore (core_id,": Instruction: mul (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + rrmap.at(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" + to_string(registers->at(currentInstruction->cirs[0])));
-                        numOfInst[2]++;
+                        if (writingFromDRAM) {
+                            writingFromDRAM = false;
+                            postponedInstruction = (*currentInstruction);
+                            handleOutput->appendOutputForCore (core_id,": Instruction: mul (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + rrmap.at(currentInstruction->cirs[2]) + ")" + ": POSTPONED because write port is busy : ");
+                        }
+                        else {
+                            mul (currentInstruction->cirs);
+                            handleOutput->appendOutputForCore (core_id,": Instruction: mul (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + rrmap.at(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" + to_string(registers->at(currentInstruction->cirs[0])));
+                            numOfInst[2]++;
+                        }
                     }
                 }
             }
@@ -279,11 +329,17 @@ void CORE::run (MRM *memoryRequestManager) {
             else {
                  if (isFromFreeBuffer) {
                     isFromFreeBuffer = false;
-                    slt (currentInstruction->cirs);
-                    //cout<<" coreId: "<<core_id<<" -> "<< ": Instruction: slt (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + rrmap.at(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" + to_string(registers->at(currentInstruction->cirs[0]))+"\t";
-                    handleOutput->appendOutputForCore (core_id,": Instruction: slt (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + rrmap.at(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" + to_string(registers->at(currentInstruction->cirs[0])));
-                    numOfInst[3]++;
-                 }
+                    if (writingFromDRAM) {
+                        writingFromDRAM = false;
+                        postponedInstruction = (*currentInstruction);
+                        handleOutput->appendOutputForCore (core_id,": Instruction: slt (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + rrmap.at(currentInstruction->cirs[2]) + ")" + ": POSTPONED because write port is busy : ");
+                    }
+                    else {
+                        slt (currentInstruction->cirs);
+                        handleOutput->appendOutputForCore (core_id,": Instruction: slt (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + rrmap.at(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" + to_string(registers->at(currentInstruction->cirs[0])));
+                        numOfInst[3]++;
+                    }
+                }
                 else {
                     Request * request = new Request(0,core_id,currentInstruction,this);
                     bool dependent = memoryRequestManager->checkDependencies(core_id, request);
@@ -294,10 +350,16 @@ void CORE::run (MRM *memoryRequestManager) {
 
                     }
                     else {
-                        slt (currentInstruction->cirs);
-                        //cout<<" coreId: "<<core_id<<" -> "<< ": Instruction: slt (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + rrmap.at(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" + to_string(registers->at(currentInstruction->cirs[0]))+"\t";
-                        handleOutput->appendOutputForCore (core_id,": Instruction: slt (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + rrmap.at(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" + to_string(registers->at(currentInstruction->cirs[0])));
-                        numOfInst[3]++;
+                        if (writingFromDRAM) {
+                            writingFromDRAM = false;
+                            postponedInstruction = (*currentInstruction);
+                            handleOutput->appendOutputForCore (core_id,": Instruction: slt (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + rrmap.at(currentInstruction->cirs[2]) + ")" + ": POSTPONED because write port is busy : ");
+                        }
+                        else {
+                            slt (currentInstruction->cirs);
+                            handleOutput->appendOutputForCore (core_id,": Instruction: slt (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + rrmap.at(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" + to_string(registers->at(currentInstruction->cirs[0])));
+                            numOfInst[3]++;
+                        }
                     }    
                 }
             }
@@ -311,10 +373,16 @@ void CORE::run (MRM *memoryRequestManager) {
             else {
                 if (isFromFreeBuffer) {
                     isFromFreeBuffer = false;
-                    addi (currentInstruction->cirs);
-                    //cout<<" coreId: "<<core_id<<" -> "<<": Instruction: addi (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + to_string(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" + to_string(registers->at(currentInstruction->cirs[0]))+"\t";
-                    handleOutput->appendOutputForCore (core_id,": Instruction: addi (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + to_string(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" + to_string(registers->at(currentInstruction->cirs[0])));
-                    numOfInst[4]++;
+                    if (writingFromDRAM) {
+                        writingFromDRAM = false;
+                        postponedInstruction = (*currentInstruction);
+                        handleOutput->appendOutputForCore (core_id,": Instruction: addi (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + to_string(currentInstruction->cirs[2]) + ")" + ": POSTPONED because write port is busy : ");
+                    }
+                    else {
+                        addi (currentInstruction->cirs);
+                        handleOutput->appendOutputForCore (core_id,": Instruction: addi (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + to_string(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" + to_string(registers->at(currentInstruction->cirs[0])));
+                        numOfInst[4]++;
+                    }
                 }
                 else {
                     Request * request = new Request(0,core_id,currentInstruction,this);
@@ -326,10 +394,16 @@ void CORE::run (MRM *memoryRequestManager) {
 
                     }
                     else {
-                        addi (currentInstruction->cirs);
-                        //cout<<" coreId: "<<core_id<<" -> "<<": Instruction: addi (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + to_string(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" + to_string(registers->at(currentInstruction->cirs[0]))+"\t";
-                        handleOutput->appendOutputForCore (core_id,": Instruction: addi (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + to_string(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" + to_string(registers->at(currentInstruction->cirs[0])));
-                        numOfInst[4]++;
+                        if (writingFromDRAM) {
+                            writingFromDRAM = false;
+                            postponedInstruction = (*currentInstruction);
+                            handleOutput->appendOutputForCore (core_id,": Instruction: addi (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + to_string(currentInstruction->cirs[2]) + ")" + ": POSTPONED because write port is busy : ");
+                        }
+                        else {
+                            addi (currentInstruction->cirs);
+                            handleOutput->appendOutputForCore (core_id,": Instruction: addi (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + to_string(currentInstruction->cirs[2]) + ")" + ": " + rrmap.at(currentInstruction->cirs[0]) + "=" + to_string(registers->at(currentInstruction->cirs[0])));
+                            numOfInst[4]++;
+                        }
                     }
                 }
             }
@@ -354,7 +428,6 @@ void CORE::run (MRM *memoryRequestManager) {
             }
             else {
                 bne (currentInstruction->cirs, currentInstruction->label);
-                //cout<<" coreId: "<<core_id<<" -> "<<": Instruction bne (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + currentInstruction->label + "," + to_string(switchOnBranch) + ")\t";
                 handleOutput->appendOutputForCore (core_id,": Instruction bne (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + currentInstruction->label + "," + to_string(switchOnBranch) + ")");
                 numOfInst[5]++;
             }
@@ -376,7 +449,6 @@ void CORE::run (MRM *memoryRequestManager) {
             }
             else {
                 beq (currentInstruction->cirs, currentInstruction->label);
-                //cout<<" coreId: "<<core_id<<" -> "<<": Instruction beq (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + currentInstruction->label + "," + to_string(switchOnBranch) + ")\t";
                 handleOutput->appendOutputForCore (core_id,": Instruction beq (" + rrmap.at(currentInstruction->cirs[0]) + "," + rrmap.at(currentInstruction->cirs[1]) + "," + currentInstruction->label + "," + to_string(switchOnBranch) + ")");
                 numOfInst[6]++;
 

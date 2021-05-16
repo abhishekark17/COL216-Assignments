@@ -93,6 +93,8 @@ private:
     bool hasRuntimeError;
     bool isFromFreeBuffer;
 
+    instruction postponedInstruction;
+
 public:
     int getCoreId () { return core_id;}
     unordered_map <string,int> rmap;

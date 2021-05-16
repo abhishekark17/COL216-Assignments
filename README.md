@@ -23,6 +23,6 @@ Sixth argument: row access delay for the DRAM.</br>
 Seventh argument: column access delay for the DRAM.</br>
 
 Example:</br>
-`./main.out ../INPUT/tc1 ../OUTPUT/tc1 200 4 3 10 2`</br>
+`./main.out ../INPUT/tc1 ../OUTPUT/tc1 200 4 20 10 2`</br>
 
 Note: if there aren't exactly 7 arguments then program won't be executed.</br>
