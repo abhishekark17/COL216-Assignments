@@ -59,7 +59,6 @@ private:
     void offsetType();
     instruction readInst();
     void preprocess();
-    void printIset ();
     
     vector<instruction> iset;
     
@@ -81,7 +80,7 @@ private:
     void j(vector<int> &cirs, string &label);
 
     bool stalled;
-    bool stallIfFull;
+    
     Request * stallingRequest;
 
     bool switchOnBranch;
@@ -96,6 +95,7 @@ private:
     instruction postponedInstruction;
 
 public:
+    bool stallIfFull;
     int getCoreId () { return core_id;}
     unordered_map <string,int> rmap;
     unordered_map <int, string> rrmap;

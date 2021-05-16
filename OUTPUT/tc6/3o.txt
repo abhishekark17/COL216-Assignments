@@ -1,0 +1,305 @@
+Cycle: 1	: Instruction: addi ($t0,$t0,50): $t0=50
+Cycle: 2	: Instruction: addi ($s0,$s0,1000): $s0=1000
+Cycle: 3	: Instruction: addi ($t8,$t8,10): $t8=10
+Cycle: 4	: Instruction: addi ($t2,$t2,1): $t2=1
+Cycle: 5	: Instruction: addi ($t5,$t5,3): $t5=3
+Cycle: 6	: Instruction: addi ($t6,$t6,1000): $t6=1000
+Cycle: 7	: Instruction: addi ($s3,$zero,500): $s3=500
+Cycle: 8	Enqueueing LW Request: $s1= @Address:524888IN DRAM	
+Cycle: 9	Enqueueing SW Request: $t0--> @Address:525288IN DRAM	
+Cycle: 10	: Instruction: slt ($t9,$t0,$t2): $t9=0
+Cycle: 11	: Instruction beq ($t9,$t1,loop,1)
+Cycle: 12	: Instruction: addi ($t6,$t6,20): $t6=1020
+Cycle: 13	Enqueueing SW Request: $t8--> @Address:525308IN DRAM	
+Cycle: 14	: Instruction: add ($t1,$t1,$t3): $t1=0
+Cycle: 15	: Instruction: addi ($t4,$t4,1): $t4=1
+Cycle: 16	: Instruction: addi ($t4,$t4,1): $t4=2
+Cycle: 17	: Instruction: addi ($t4,$t4,1): $t4=3
+Cycle: 18	: Instruction: sub ($t4,$t4,$t5): $t4=0
+Cycle: 19	: Instruction beq ($t8,$zero,end,0)
+Cycle: 20	: Instruction: sub ($t8,$t8,$t2): $t8=9
+Cycle: 21	: Instruction j : Jump to label ID: loop
+Cycle: 22	: Instruction: addi ($t6,$t6,20): $t6=1040
+Cycle: 23	Enqueueing SW Request: $t8--> @Address:525328IN DRAM	
+Cycle: 24	: Instruction: add ($t1,$t1,$t3): $t1=0
+Cycle: 25	: Instruction: addi ($t4,$t4,1): $t4=1
+Cycle: 26	: Instruction: addi ($t4,$t4,1): $t4=2
+Cycle: 27	: Instruction: addi ($t4,$t4,1): $t4=3
+Cycle: 28	: Instruction: sub ($t4,$t4,$t5): $t4=0
+Cycle: 29	: Instruction beq ($t8,$zero,end,0)
+Cycle: 30	: Instruction: sub ($t8,$t8,$t2): $t8=8
+Cycle: 31	: Instruction j : Jump to label ID: loop
+Cycle: 32	: Instruction: addi ($t6,$t6,20): $t6=1060
+Cycle: 33	Enqueueing SW Request: $t8--> @Address:525348IN DRAM	
+Cycle: 34	: Instruction: add ($t1,$t1,$t3): $t1=0
+Cycle: 35	: Instruction: addi ($t4,$t4,1): $t4=1
+Cycle: 36	: Instruction: addi ($t4,$t4,1): $t4=2
+Cycle: 37	: Instruction: addi ($t4,$t4,1): $t4=3
+Cycle: 38	: Instruction: sub ($t4,$t4,$t5): $t4=0
+Cycle: 39	: Instruction beq ($t8,$zero,end,0)
+Cycle: 40	: Instruction: sub ($t8,$t8,$t2): $t8=7
+Cycle: 41	: Instruction j : Jump to label ID: loop
+Cycle: 42	: Instruction: addi ($t6,$t6,20): $t6=1080
+Cycle: 43	Enqueueing SW Request: $t8--> @Address:525368IN DRAM	
+Cycle: 44	: Instruction: add ($t1,$t1,$t3): $t1=0
+Cycle: 45	: Instruction: addi ($t4,$t4,1): $t4=1
+Cycle: 46	: Instruction: addi ($t4,$t4,1): $t4=2
+Cycle: 47	: Instruction: addi ($t4,$t4,1): $t4=3
+Cycle: 48	: Instruction: sub ($t4,$t4,$t5): $t4=0
+Cycle: 49	: Instruction beq ($t8,$zero,end,0)
+Cycle: 50	: Instruction: sub ($t8,$t8,$t2): $t8=6
+Cycle: 51	: Instruction j : Jump to label ID: loop
+Cycle: 52	: Instruction: addi ($t6,$t6,20): $t6=1100
+Cycle: 53	Enqueueing SW Request: $t8--> @Address:525388IN DRAM	
+Cycle: 54	: Instruction: add ($t1,$t1,$t3): $t1=0
+Cycle: 55	: Instruction: addi ($t4,$t4,1): $t4=1
+Cycle: 56	: Instruction: addi ($t4,$t4,1): $t4=2
+Cycle: 57	: Instruction: addi ($t4,$t4,1): $t4=3
+Cycle: 58	: Instruction: sub ($t4,$t4,$t5): $t4=0
+Cycle: 59	: Instruction beq ($t8,$zero,end,0)
+Cycle: 60	: Instruction: sub ($t8,$t8,$t2): $t8=5
+Cycle: 61	: Instruction j : Jump to label ID: loop: LW for core 3 Issued in DRAM::[$s1,524388,$s3]
+Cycle: 62	: Instruction: addi ($t6,$t6,20): $t6=1120
+Cycle: 63	Enqueueing SW Request: $t8--> @Address:525408IN DRAM	
+Cycle: 64	: Instruction: add ($t1,$t1,$t3): $t1=0
+Cycle: 65	: Instruction: addi ($t4,$t4,1): $t4=1
+Cycle: 66	: Instruction: addi ($t4,$t4,1): $t4=2
+Cycle: 67	: Instruction: addi ($t4,$t4,1): $t4=3
+Cycle: 68	: Instruction: sub ($t4,$t4,$t5): $t4=0
+Cycle: 69	: Instruction beq ($t8,$zero,end,0)
+Cycle: 70	: Instruction: sub ($t8,$t8,$t2): $t8=4
+Cycle: 71	: Instruction j : Jump to label ID: loop
+Cycle: 72	: Instruction: addi ($t6,$t6,20): $t6=1140
+Cycle: 73	Enqueueing SW Request: $t8--> @Address:525428IN DRAM	
+Cycle: 74	: Instruction: add ($t1,$t1,$t3): $t1=0
+Cycle: 75	: Instruction: addi ($t4,$t4,1): $t4=1
+Cycle: 76	: Instruction: addi ($t4,$t4,1): $t4=2
+Cycle: 77	: Instruction: addi ($t4,$t4,1): $t4=3
+Cycle: 78	: Instruction: sub ($t4,$t4,$t5): $t4=0
+Cycle: 79	: Instruction beq ($t8,$zero,end,0)
+Cycle: 80	: Instruction: sub ($t8,$t8,$t2): $t8=3
+Cycle: 81	: Instruction j : Jump to label ID: loop
+Cycle: 82	: Instruction: addi ($t6,$t6,20): $t6=1160
+Cycle: 83	Enqueueing SW Request: $t8--> @Address:525448IN DRAM	(lw) $s1=0	
+Cycle: 84	: Instruction: add ($t1,$t1,$t3): POSTPONED because write port is busy : : SW for core 3 Issued in DRAM::[$t0,524788,$s3]
+Cycle: 85	: Instruction: add ($t1,$t1,$t3): $t1=0
+Cycle: 86	: Instruction: addi ($t4,$t4,1): $t4=1: memory address 525288-525291 = 50	
+Cycle: 87	: Instruction: addi ($t4,$t4,1): $t4=2: SW for core 3 Issued in DRAM::[$t8,524288,$t6]
+Cycle: 88	: Instruction: addi ($t4,$t4,1): $t4=3
+Cycle: 89	: Instruction: sub ($t4,$t4,$t5): $t4=0: memory address 525308-525311 = 10	
+Cycle: 90	: Instruction beq ($t8,$zero,end,0): SW for core 3 Issued in DRAM::[$t8,524288,$t6]
+Cycle: 91	: Instruction: sub ($t8,$t8,$t2): $t8=2
+Cycle: 92	: Instruction j : Jump to label ID: loop
+Cycle: 93	: Instruction: addi ($t6,$t6,20): $t6=1180
+Cycle: 94	Enqueueing SW Request: $t8--> @Address:525468IN DRAM	
+Cycle: 95	: Instruction: add ($t1,$t1,$t3): $t1=0
+Cycle: 96	: Instruction: addi ($t4,$t4,1): $t4=1
+Cycle: 97	: Instruction: addi ($t4,$t4,1): $t4=2
+Cycle: 98	: Instruction: addi ($t4,$t4,1): $t4=3
+Cycle: 99	: Instruction: sub ($t4,$t4,$t5): $t4=0
+Cycle: 100	: Instruction beq ($t8,$zero,end,0)
+Cycle: 101	: Instruction: sub ($t8,$t8,$t2): $t8=1
+Cycle: 102	: Instruction j : Jump to label ID: loop
+Cycle: 103	: Instruction: addi ($t6,$t6,20): $t6=1200
+Cycle: 104	Enqueueing SW Request: $t8--> @Address:525488IN DRAM	
+Cycle: 105	: Instruction: add ($t1,$t1,$t3): $t1=0
+Cycle: 106	: Instruction: addi ($t4,$t4,1): $t4=1
+Cycle: 107	: Instruction: addi ($t4,$t4,1): $t4=2
+Cycle: 108	: Instruction: addi ($t4,$t4,1): $t4=3
+Cycle: 109	: Instruction: sub ($t4,$t4,$t5): $t4=0
+Cycle: 110	: Instruction beq ($t8,$zero,end,0)
+Cycle: 111	: Instruction: sub ($t8,$t8,$t2): $t8=0
+Cycle: 112	: Instruction j : Jump to label ID: loop: memory address 525328-525331 = 9	
+Cycle: 113	: Instruction: addi ($t6,$t6,20): $t6=1220: SW for core 3 Issued in DRAM::[$t8,524288,$t6]
+Cycle: 114	Enqueueing SW Request: $t8--> @Address:525508IN DRAM	
+Cycle: 115	: Instruction: add ($t1,$t1,$t3): $t1=0: memory address 525348-525351 = 8	
+Cycle: 116	: Instruction: addi ($t4,$t4,1): $t4=1: SW for core 3 Issued in DRAM::[$t8,524288,$t6]
+Cycle: 117	: Instruction: addi ($t4,$t4,1): $t4=2
+Cycle: 118	: Instruction: addi ($t4,$t4,1): $t4=3: memory address 525368-525371 = 7	
+Cycle: 119	: Instruction: sub ($t4,$t4,$t5): $t4=0: SW for core 3 Issued in DRAM::[$t8,524288,$t6]
+Cycle: 120	: Instruction beq ($t8,$zero,end,1)
+Cycle: 121	Enqueueing SW Request: $t1--> @Address:524788IN DRAM	: memory address 525388-525391 = 6	
+Cycle: 122	Enqueueing LW Request: $s5= @Address:524788IN DRAM	: SW for core 3 Issued in DRAM::[$t8,524288,$t6]
+Cycle: 123	: Exited :
+Cycle: 124	: Exited :: memory address 525408-525411 = 5	
+Cycle: 125	: Exited :: SW for core 3 Issued in DRAM::[$t1,524788,$zero]
+Cycle: 126	: Exited :
+Cycle: 127	: Exited :
+Cycle: 128	: Exited :
+Cycle: 129	: Exited :
+Cycle: 130	: Exited :
+Cycle: 131	: Exited :
+Cycle: 132	: Exited :
+Cycle: 133	: Exited :
+Cycle: 134	: Exited :
+Cycle: 135	: Exited :
+Cycle: 136	: Exited :
+Cycle: 137	: Exited :
+Cycle: 138	: Exited :
+Cycle: 139	: Exited :
+Cycle: 140	: Exited :
+Cycle: 141	: Exited :
+Cycle: 142	: Exited :
+Cycle: 143	: Exited :
+Cycle: 144	: Exited :
+Cycle: 145	: Exited :
+Cycle: 146	: Exited :
+Cycle: 147	: Exited :: memory address 524788-524791 = 0	
+Cycle: 148	: Exited :: LW for core 3 Issued in DRAM::[$s5,524788,$zero]
+Cycle: 149	: Exited :(lw) $s5=0	
+Cycle: 150	: Exited :: SW for core 3 Issued in DRAM::[$t8,524288,$t6]
+Cycle: 151	: Exited :
+Cycle: 152	: Exited :
+Cycle: 153	: Exited :
+Cycle: 154	: Exited :
+Cycle: 155	: Exited :
+Cycle: 156	: Exited :
+Cycle: 157	: Exited :
+Cycle: 158	: Exited :
+Cycle: 159	: Exited :
+Cycle: 160	: Exited :
+Cycle: 161	: Exited :
+Cycle: 162	: Exited :
+Cycle: 163	: Exited :
+Cycle: 164	: Exited :
+Cycle: 165	: Exited :
+Cycle: 166	: Exited :
+Cycle: 167	: Exited :
+Cycle: 168	: Exited :
+Cycle: 169	: Exited :
+Cycle: 170	: Exited :
+Cycle: 171	: Exited :
+Cycle: 172	: Exited :: memory address 525428-525431 = 4	
+Cycle: 173	: Exited :: SW for core 3 Issued in DRAM::[$t8,524288,$t6]
+Cycle: 174	: Exited :
+Cycle: 175	: Exited :: memory address 525448-525451 = 3	
+Cycle: 176	: Exited :: SW for core 3 Issued in DRAM::[$t8,524288,$t6]
+Cycle: 177	: Exited :
+Cycle: 178	: Exited :: memory address 525468-525471 = 2	
+Cycle: 179	: Exited :: SW for core 3 Issued in DRAM::[$t8,524288,$t6]
+Cycle: 180	: Exited :
+Cycle: 181	: Exited :: memory address 525488-525491 = 1	
+Cycle: 182	: Exited :: SW for core 3 Issued in DRAM::[$t8,524288,$t6]
+Cycle: 183	: Exited :
+Cycle: 184	: Exited :: memory address 525508-525511 = 0	
+Cycle: 185	: Exited :
+Cycle: 186	: Exited :
+Cycle: 187	: Exited :
+Cycle: 188	: Exited :
+Cycle: 189	: Exited :
+Cycle: 190	: Exited :
+Cycle: 191	: Exited :
+Cycle: 192	: Exited :
+Cycle: 193	: Exited :
+Cycle: 194	: Exited :
+Cycle: 195	: Exited :
+Cycle: 196	: Exited :
+Cycle: 197	: Exited :
+Cycle: 198	: Exited :
+Cycle: 199	: Exited :
+Cycle: 200	: Exited :
+Cycle: 201	: Exited :
+Cycle: 202	: Exited :
+Cycle: 203	: Exited :
+Cycle: 204	: Exited :
+Cycle: 205	: Exited :
+Cycle: 206	: Exited :
+Cycle: 207	: Exited :
+Cycle: 208	: Exited :
+Cycle: 209	: Exited :
+Cycle: 210	: Exited :
+Cycle: 211	: Exited :
+Cycle: 212	: Exited :
+Cycle: 213	: Exited :
+Cycle: 214	: Exited :
+Cycle: 215	: Exited :
+Cycle: 216	: Exited :
+Cycle: 217	: Exited :
+Cycle: 218	: Exited :
+Cycle: 219	: Exited :
+Cycle: 220	: Exited :
+Cycle: 221	: Exited :
+Cycle: 222	: Exited :
+Cycle: 223	: Exited :
+Cycle: 224	: Exited :
+Cycle: 225	: Exited :
+Cycle: 226	: Exited :
+Cycle: 227	: Exited :
+Cycle: 228	: Exited :
+Cycle: 229	: Exited :
+Cycle: 230	: Exited :
+Cycle: 231	: Exited :
+Cycle: 232	: Exited :
+Cycle: 233	: Exited :
+Cycle: 234	: Exited :
+Cycle: 235	: Exited :
+Cycle: 236	: Exited :
+Cycle: 237	: Exited :
+Cycle: 238	: Exited :
+Cycle: 239	: Exited :
+Cycle: 240	: Exited :
+Cycle: 241	: Exited :
+Cycle: 242	: Exited :
+Cycle: 243	: Exited :
+Cycle: 244	: Exited :
+Cycle: 245	: Exited :
+Cycle: 246	: Exited :
+Cycle: 247	: Exited :
+Cycle: 248	: Exited :
+Cycle: 249	: Exited :
+Cycle: 250	: Exited :
+Cycle: 251	: Exited :
+Cycle: 252	: Exited :
+Cycle: 253	: Exited :
+Cycle: 254	: Exited :
+Cycle: 255	: Exited :
+Cycle: 256	: Exited :
+Cycle: 257	: Exited :
+Cycle: 258	: Exited :
+Cycle: 259	: Exited :
+Cycle: 260	: Exited :
+Cycle: 261	: Exited :
+Cycle: 262	: Exited :
+Cycle: 263	: Exited :
+Cycle: 264	: Exited :
+Cycle: 265	: Exited :
+Cycle: 266	: Exited :
+Cycle: 267	: Exited :
+Cycle: 268	: Exited :
+Cycle: 269	: Exited :
+Cycle: 270	: Exited :
+Cycle: 271	: Exited :
+Cycle: 272	: Exited :
+Cycle: 273	: Exited :
+Cycle: 274	: Exited :
+Cycle: 275	: Exited :
+Cycle: 276	: Exited :
+Cycle: 277	: Exited :
+Cycle: 278	: Exited :
+Cycle: 279	: Exited :
+Cycle: 280	: Exited :
+Cycle: 281	: Exited :
+Cycle: 282	: Exited :
+Cycle: 283	: Exited :
+Cycle: 284	: Exited :
+Cycle: 285	: Exited :
+Cycle: 286	: Exited :
+Cycle: 287	: Exited :
+Cycle: 288	: Exited :
+Cycle: 289	: Exited :
+Cycle: 290	: Exited :
+Cycle: 291	: Exited :
+Cycle: 292	: Exited :
+Cycle: 293	: Exited :
+Cycle: 294	: Exited :
+Cycle: 295	: Exited :
+Cycle: 296	: Exited :
+Cycle: 297	: Exited :
+Cycle: 298	: Exited :
+Cycle: 299	: Exited :
+Cycle: 300	: Exited :
+
+
+META DATA
+[add: 11,sub: 21,mul: 0,slt: 1,addi: 51,bne: 0,beq: 12,lw: 2,sw: 13,j: 10]
+TOTAL NUMBER OF INSTRUCTIONS EXECUTED := 121

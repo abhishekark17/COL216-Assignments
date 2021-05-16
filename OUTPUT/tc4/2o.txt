@@ -4,30 +4,30 @@ Cycle: 3	: Instruction: addi ($t0,$zero,1): $t0=1
 Cycle: 4	: Instruction: addi ($t1,$zero,2): $t1=2
 Cycle: 5	: Instruction: addi ($t2,$zero,3): $t2=3
 Cycle: 6	: Instruction: addi ($t3,$zero,4): $t3=4
-Cycle: 7	Enqueueing SW Request: $t0--> @Address:1000IN DRAM	
-Cycle: 8	Enqueueing SW Request: $t1--> @Address:2500IN DRAM	
-Cycle: 9	Enqueueing LW Request: $t2= @Address:1000IN DRAM	
-Cycle: 10	Enqueueing SW Request: $t9--> @Address:1000IN DRAM	
-Cycle: 11	Enqueueing SW Request: $t3--> @Address:1000IN DRAM	
-Cycle: 12	Enqueueing LW Request: $t4= @Address:1000IN DRAM	
+Cycle: 7	Enqueueing SW Request: $t0--> @Address:132072IN DRAM	
+Cycle: 8	Enqueueing SW Request: $t1--> @Address:133572IN DRAM	
+Cycle: 9	Enqueueing LW Request: $t2= @Address:132072IN DRAM	
+Cycle: 10	Enqueueing SW Request: $t9--> @Address:132072IN DRAM	
+Cycle: 11	Enqueueing SW Request: $t3--> @Address:132072IN DRAM	
+Cycle: 12	Enqueueing LW Request: $t4= @Address:132072IN DRAM	
 Cycle: 13	: Instruction: addi ($at,$t5,500): $at=500
-Cycle: 14	: Instruction: addi ($at,$t5,500): $at=500
-Cycle: 15	: Instruction: addi ($at,$t5,500): $at=500
-Cycle: 16	: Instruction: addi ($at,$t5,500): $at=500
-Cycle: 17	: Instruction: addi ($at,$t5,500): $at=500
-Cycle: 18	: Instruction: addi ($at,$t5,500): $at=500
-Cycle: 19	: Instruction: addi ($at,$t5,500): $at=500
-Cycle: 20	: Instruction: addi ($at,$t5,500): $at=500
-Cycle: 21	: Instruction: addi ($at,$t5,500): $at=500
-Cycle: 22	: Instruction: addi ($at,$t5,500): $at=500
-Cycle: 23	: Instruction: addi ($at,$t5,500): $at=500
-Cycle: 24	: Instruction: addi ($at,$t5,500): $at=500
-Cycle: 25	: Instruction: addi ($at,$t5,500): $at=500
-Cycle: 26	Enqueueing LW Request: $t5= @Address:500IN DRAM	
-Cycle: 27	Enqueueing LW Request: $t5= @Address:500IN DRAM	
-Cycle: 28	Enqueueing LW Request: $t5= @Address:500IN DRAM	
-Cycle: 29	Enqueueing SW Request: $t6--> @Address:1000IN DRAM	
-Cycle: 30	 coreId: 1: Stalling :
+Cycle: 14	Enqueueing LW Request: $t5= @Address:131572IN DRAM	
+Cycle: 15	Enqueueing LW Request: $t5= @Address:131572IN DRAM	
+Cycle: 16	Enqueueing LW Request: $t5= @Address:131572IN DRAM	
+Cycle: 17	Enqueueing SW Request: $t6--> @Address:132072IN DRAM	
+Cycle: 18	 coreId: 2: Stalling :
+Cycle: 19	: STALLED :
+Cycle: 20	: STALLED :
+Cycle: 21	: STALLED :
+Cycle: 22	: STALLED :
+Cycle: 23	: STALLED :
+Cycle: 24	: STALLED :
+Cycle: 25	: STALLED :
+Cycle: 26	: STALLED :
+Cycle: 27	: STALLED :
+Cycle: 28	: STALLED :
+Cycle: 29	: STALLED :
+Cycle: 30	: STALLED :
 Cycle: 31	: STALLED :
 Cycle: 32	: STALLED :
 Cycle: 33	: STALLED :
@@ -61,10 +61,10 @@ Cycle: 60	: STALLED :
 Cycle: 61	: STALLED :
 Cycle: 62	: STALLED :
 Cycle: 63	: STALLED :
-Cycle: 64	: STALLED :: SW for core 1 Issued in DRAM::[$t0,0,$s0]
+Cycle: 64	: STALLED :
 Cycle: 65	: STALLED :
 Cycle: 66	: STALLED :
-Cycle: 67	: STALLED :
+Cycle: 67	: STALLED :: SW for core 2 Issued in DRAM::[$t0,131072,$s0]
 Cycle: 68	: STALLED :
 Cycle: 69	: STALLED :
 Cycle: 70	: STALLED :
@@ -83,34 +83,34 @@ Cycle: 82	: STALLED :
 Cycle: 83	: STALLED :
 Cycle: 84	: STALLED :
 Cycle: 85	: STALLED :
-Cycle: 86	:Enqueuing Instruction bne ($t3,$t2,exit,0) coreId: 1: Stalling : coreId: 1 RESUMED: : memory address 1000-1003 = 1	
-Cycle: 87	: STALLED :: LW for core 1 Issued in DRAM::[$t2,0,$s0]
-Cycle: 88	: STALLED :(lw) $t2=1	
-Cycle: 89	: STALLED :
-Cycle: 90	: STALLED :
-Cycle: 91	: STALLED :
-Cycle: 92	: STALLED :: SW for core 1 Issued in DRAM::[$t9,0,$s0]
-Cycle: 93	: STALLED :: memory address 1000-1003 = 0	
+Cycle: 86	: STALLED :
+Cycle: 87	: STALLED :
+Cycle: 88	: STALLED :
+Cycle: 89	:Enqueuing Instruction bne ($t3,$t2,exit,0) coreId: 2: Stalling : coreId: 2 RESUMED: : memory address 132072-132075 = 1	
+Cycle: 90	: STALLED :: LW for core 2 Issued in DRAM::[$t2,131072,$s0]
+Cycle: 91	: STALLED :(lw) $t2=1	
+Cycle: 92	: STALLED :
+Cycle: 93	: STALLED :
 Cycle: 94	: STALLED :
-Cycle: 95	: STALLED :
-Cycle: 96	: STALLED :: SW for core 1 Issued in DRAM::[$t3,0,$s0]
-Cycle: 97	: STALLED :: memory address 1000-1003 = 4	
+Cycle: 95	: STALLED :: SW for core 2 Issued in DRAM::[$t9,131072,$s0]
+Cycle: 96	: STALLED :: memory address 132072-132075 = 0	
+Cycle: 97	: STALLED :
 Cycle: 98	: STALLED :
-Cycle: 99	: STALLED :: LW for core 1 Issued in DRAM::[$t4,0,$s0]
-Cycle: 100	: Instruction bne ($t3,$t2,exit,1) coreId: 1 RESUMED: (lw) $t4=4	
-Cycle: 101	: Instruction: add ($at,$v0,$v1): POSTPONED because write port is busy : : SW for core 1 Issued in DRAM::[$t6,0,$s0]
-Cycle: 102	: Instruction: add ($at,$v0,$v1): $at=0: memory address 1000-1003 = 0	
-Cycle: 103	: Exited :: LW for core 1 Issued in DRAM::[$t5,0,$at]
-Cycle: 104	: Exited :
-Cycle: 105	: Exited :(lw) $t5=0	
-Cycle: 106	: Exited :: LW for core 1 Issued in DRAM::[$t5,0,$at]
-Cycle: 107	: Exited :(lw) $t5=0	
-Cycle: 108	: Exited :: LW for core 1 Issued in DRAM::[$t5,0,$at]
-Cycle: 109	: Exited :(lw) $t5=0	
-Cycle: 110	: Exited :: SW for core 1 Issued in DRAM::[$t1,0,$s1]
-Cycle: 111	: Exited :
-Cycle: 112	: Exited :
-Cycle: 113	: Exited :
+Cycle: 99	: STALLED :: SW for core 2 Issued in DRAM::[$t3,131072,$s0]
+Cycle: 100	: STALLED :: memory address 132072-132075 = 4	
+Cycle: 101	: STALLED :
+Cycle: 102	: STALLED :: LW for core 2 Issued in DRAM::[$t4,131072,$s0]
+Cycle: 103	: Instruction bne ($t3,$t2,exit,1) coreId: 2 RESUMED: (lw) $t4=4	
+Cycle: 104	: Instruction: add ($at,$v0,$v1): POSTPONED because write port is busy : : SW for core 2 Issued in DRAM::[$t6,131072,$s0]
+Cycle: 105	: Instruction: add ($at,$v0,$v1): $at=0: memory address 132072-132075 = 0	
+Cycle: 106	: Exited :: LW for core 2 Issued in DRAM::[$t5,131072,$at]
+Cycle: 107	: Exited :
+Cycle: 108	: Exited :(lw) $t5=0	
+Cycle: 109	: Exited :: LW for core 2 Issued in DRAM::[$t5,131072,$at]
+Cycle: 110	: Exited :(lw) $t5=0	
+Cycle: 111	: Exited :: LW for core 2 Issued in DRAM::[$t5,131072,$at]
+Cycle: 112	: Exited :(lw) $t5=0	
+Cycle: 113	: Exited :: SW for core 2 Issued in DRAM::[$t1,131072,$s1]
 Cycle: 114	: Exited :
 Cycle: 115	: Exited :
 Cycle: 116	: Exited :
@@ -129,10 +129,10 @@ Cycle: 128	: Exited :
 Cycle: 129	: Exited :
 Cycle: 130	: Exited :
 Cycle: 131	: Exited :
-Cycle: 132	: Exited :: memory address 2500-2503 = 2	
+Cycle: 132	: Exited :
 Cycle: 133	: Exited :
 Cycle: 134	: Exited :
-Cycle: 135	: Exited :
+Cycle: 135	: Exited :: memory address 133572-133575 = 2	
 Cycle: 136	: Exited :
 Cycle: 137	: Exited :
 Cycle: 138	: Exited :
@@ -301,5 +301,5 @@ Cycle: 300	: Exited :
 
 
 META DATA
-[add: 1,sub: 0,mul: 0,slt: 0,addi: 19,bne: 1,beq: 0,lw: 5,sw: 5,j: 0]
-TOTAL NUMBER OF INSTRUCTIONS EXECUTED := 31
+[add: 1,sub: 0,mul: 0,slt: 0,addi: 7,bne: 1,beq: 0,lw: 5,sw: 5,j: 0]
+TOTAL NUMBER OF INSTRUCTIONS EXECUTED := 19

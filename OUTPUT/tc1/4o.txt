@@ -1,10 +1,10 @@
-Cycle: 1	: Instruction: addi ($s0,$zero,1000): $s0=1000
-Cycle: 2	: Instruction: addi ($s1,$zero,2500): $s1=2500
-Cycle: 3	: Instruction: addi ($t0,$zero,1): $t0=1
-Cycle: 4	: Instruction: addi ($t1,$zero,2): $t1=2
-Cycle: 5	: Instruction: addi ($t2,$zero,3): $t2=3
-Cycle: 6	: Instruction: addi ($t3,$zero,4): $t3=4
-Cycle: 7	: Exited :
+Cycle: 1	: Instruction: addi ($t0,$t0,5000): $t0=5000
+Cycle: 2	: Instruction: addi ($t1,$t1,10000): $t1=10000
+Cycle: 3	: Instruction: addi ($t2,$t2,1000): $t2=1000
+Cycle: 4	Enqueueing LW Request: $s0= @Address:787432IN DRAM	
+Cycle: 5	Enqueueing LW Request: $s1= @Address:791432IN DRAM	: LW for core 4 Issued in DRAM::[$s0,786432,$t2]
+Cycle: 6	Enqueueing LW Request: $s2= @Address:793932IN DRAM	
+Cycle: 7	: Enqueuing Instruction: add ($s2,$s2,$s5): $s2=0
 Cycle: 8	: Exited :
 Cycle: 9	: Exited :
 Cycle: 10	: Exited :
@@ -14,8 +14,8 @@ Cycle: 13	: Exited :
 Cycle: 14	: Exited :
 Cycle: 15	: Exited :
 Cycle: 16	: Exited :
-Cycle: 17	: Exited :
-Cycle: 18	: Exited :
+Cycle: 17	: Exited :(lw) $s0=0	
+Cycle: 18	: Exited :: LW for core 4 Issued in DRAM::[$s1,786432,$t0]
 Cycle: 19	: Exited :
 Cycle: 20	: Exited :
 Cycle: 21	: Exited :
@@ -37,8 +37,8 @@ Cycle: 36	: Exited :
 Cycle: 37	: Exited :
 Cycle: 38	: Exited :
 Cycle: 39	: Exited :
-Cycle: 40	: Exited :
-Cycle: 41	: Exited :
+Cycle: 40	: Exited :(lw) $s1=0	
+Cycle: 41	: Exited :: LW for core 4 Issued in DRAM::[$s2,793932,$s1]
 Cycle: 42	: Exited :
 Cycle: 43	: Exited :
 Cycle: 44	: Exited :
@@ -60,8 +60,8 @@ Cycle: 59	: Exited :
 Cycle: 60	: Exited :
 Cycle: 61	: Exited :
 Cycle: 62	: Exited :
-Cycle: 63	: Exited :
-Cycle: 64	: Exited :
+Cycle: 63	: Instruction: add ($s2,$s2,$s5): POSTPONED because write port is busy : (lw) $s2=0	
+Cycle: 64	: Instruction: add ($s2,$s2,$s5): $s2=0
 Cycle: 65	: Exited :
 Cycle: 66	: Exited :
 Cycle: 67	: Exited :
@@ -198,8 +198,108 @@ Cycle: 197	: Exited :
 Cycle: 198	: Exited :
 Cycle: 199	: Exited :
 Cycle: 200	: Exited :
+Cycle: 201	: Exited :
+Cycle: 202	: Exited :
+Cycle: 203	: Exited :
+Cycle: 204	: Exited :
+Cycle: 205	: Exited :
+Cycle: 206	: Exited :
+Cycle: 207	: Exited :
+Cycle: 208	: Exited :
+Cycle: 209	: Exited :
+Cycle: 210	: Exited :
+Cycle: 211	: Exited :
+Cycle: 212	: Exited :
+Cycle: 213	: Exited :
+Cycle: 214	: Exited :
+Cycle: 215	: Exited :
+Cycle: 216	: Exited :
+Cycle: 217	: Exited :
+Cycle: 218	: Exited :
+Cycle: 219	: Exited :
+Cycle: 220	: Exited :
+Cycle: 221	: Exited :
+Cycle: 222	: Exited :
+Cycle: 223	: Exited :
+Cycle: 224	: Exited :
+Cycle: 225	: Exited :
+Cycle: 226	: Exited :
+Cycle: 227	: Exited :
+Cycle: 228	: Exited :
+Cycle: 229	: Exited :
+Cycle: 230	: Exited :
+Cycle: 231	: Exited :
+Cycle: 232	: Exited :
+Cycle: 233	: Exited :
+Cycle: 234	: Exited :
+Cycle: 235	: Exited :
+Cycle: 236	: Exited :
+Cycle: 237	: Exited :
+Cycle: 238	: Exited :
+Cycle: 239	: Exited :
+Cycle: 240	: Exited :
+Cycle: 241	: Exited :
+Cycle: 242	: Exited :
+Cycle: 243	: Exited :
+Cycle: 244	: Exited :
+Cycle: 245	: Exited :
+Cycle: 246	: Exited :
+Cycle: 247	: Exited :
+Cycle: 248	: Exited :
+Cycle: 249	: Exited :
+Cycle: 250	: Exited :
+Cycle: 251	: Exited :
+Cycle: 252	: Exited :
+Cycle: 253	: Exited :
+Cycle: 254	: Exited :
+Cycle: 255	: Exited :
+Cycle: 256	: Exited :
+Cycle: 257	: Exited :
+Cycle: 258	: Exited :
+Cycle: 259	: Exited :
+Cycle: 260	: Exited :
+Cycle: 261	: Exited :
+Cycle: 262	: Exited :
+Cycle: 263	: Exited :
+Cycle: 264	: Exited :
+Cycle: 265	: Exited :
+Cycle: 266	: Exited :
+Cycle: 267	: Exited :
+Cycle: 268	: Exited :
+Cycle: 269	: Exited :
+Cycle: 270	: Exited :
+Cycle: 271	: Exited :
+Cycle: 272	: Exited :
+Cycle: 273	: Exited :
+Cycle: 274	: Exited :
+Cycle: 275	: Exited :
+Cycle: 276	: Exited :
+Cycle: 277	: Exited :
+Cycle: 278	: Exited :
+Cycle: 279	: Exited :
+Cycle: 280	: Exited :
+Cycle: 281	: Exited :
+Cycle: 282	: Exited :
+Cycle: 283	: Exited :
+Cycle: 284	: Exited :
+Cycle: 285	: Exited :
+Cycle: 286	: Exited :
+Cycle: 287	: Exited :
+Cycle: 288	: Exited :
+Cycle: 289	: Exited :
+Cycle: 290	: Exited :
+Cycle: 291	: Exited :
+Cycle: 292	: Exited :
+Cycle: 293	: Exited :
+Cycle: 294	: Exited :
+Cycle: 295	: Exited :
+Cycle: 296	: Exited :
+Cycle: 297	: Exited :
+Cycle: 298	: Exited :
+Cycle: 299	: Exited :
+Cycle: 300	: Exited :
 
 
 META DATA
-[add: 0,sub: 0,mul: 0,slt: 0,addi: 6,bne: 0,beq: 0,lw: 0,sw: 0,j: 0]
-TOTAL NUMBER OF INSTRUCTIONS EXECUTED := 6
+[add: 1,sub: 0,mul: 0,slt: 0,addi: 3,bne: 0,beq: 0,lw: 3,sw: 0,j: 0]
+TOTAL NUMBER OF INSTRUCTIONS EXECUTED := 7

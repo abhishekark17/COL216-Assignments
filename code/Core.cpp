@@ -85,17 +85,9 @@ CORE::CORE (string inFileName, int id, string outFileName,int nc,int DramCols,in
 
     }
 
-void CORE::printIset () {
-    cout << endl << "for core number " << core_id << endl;
-    for (auto i = iset.begin(); i != iset.end(); i++) {
-        cout << (*i).opID << " " << (*i).cirs[0] << " " << (*i).cirs[1] << " " <<(*i).cirs[2] << endl;
-    }
-}
-
 void CORE::resume (bool sif) {
     stalled = false;
     if (sif) stallIfFull = false;
-    cout << "inside resume" << endl;
     handleOutput->appendOutputForCore (core_id," coreId: " + to_string (core_id) + " RESUMED: ");
 }
 
@@ -104,7 +96,6 @@ void CORE::addInFreeBuffer (Request * request) {
 }
 
 void CORE::smoothExit () {
-    //cout << "smoothExit called " << core_id<< endl;
     handleOutput->appendOutputForCore (core_id,": Exited :");
 }
 
@@ -130,8 +121,6 @@ void CORE::setRuntimeError (string s) {
 void CORE::stall (Request * request, bool sif) {
         stalled = true;
         stallIfFull = sif;
-        cout << "hello " << request->inst->opID << endl;
-        //cout <<" coreId: \t"<<core_id<<"STALLED";
         handleOutput->appendOutputForCore (core_id," coreId: " + to_string (core_id) + ": Stalling :");
         stallingRequest = request;
     }
@@ -166,7 +155,6 @@ void CORE::run (MRM *memoryRequestManager) {
         }
         else {
             if (freeBuffer->size() > 0) {
-                cout << "jello " << endl;
                 currentInstruction = freeBuffer->at(0)->inst;
                 freeBuffer->erase (freeBuffer->begin());
                 isFromFreeBuffer = true;
@@ -414,9 +402,7 @@ void CORE::run (MRM *memoryRequestManager) {
             Request * request = new Request(0,core_id,currentInstruction,this);
             bool dependent = memoryRequestManager->checkDependencies(core_id, request);
             if (dependent) {
-                cout << stalled << " stalled" << endl;
                 bool enqueued = memoryRequestManager->enqueueRequest (core_id,request);
-                cout << "enqueued " << enqueued << endl;
                 if (!enqueued) {
                     if (!stalled) stall(request,true);
                 }
@@ -481,7 +467,6 @@ void CORE::run (MRM *memoryRequestManager) {
         } 
         case 9: {
             j (currentInstruction->cirs,currentInstruction->label);
-            //cout << " coreId: "<<core_id <<" -> "<<": Instruction j :" << "Jump to label ID: " + currentInstruction->label+"\t";
             handleOutput->appendOutputForCore (core_id,": Instruction j : Jump to label ID: " + currentInstruction->label);
             numOfInst[9]++;
             break;
@@ -491,8 +476,6 @@ void CORE::run (MRM *memoryRequestManager) {
     }
     //handleOutput->updateNumOfInstForCore (core_id, &numOfInst);
     // int updateMinCostAndRequest = findMinCost ();
-    //cout <<core_id << " core:   last mein minCost " << minCost << endl;
-    //if(minCostRequest!=nullptr) cout << core_id << " core:   mincost request's opid " << minCostRequest->inst->opID << endl;
 }
 
 vector<int> * CORE::getNumOfInst ()
@@ -995,7 +978,6 @@ instruction CORE::readInst()
     else
     {
         instruction inst(CIRS, operationId);
-        //cout<<operationId<<endl;
         return inst;
     }
 }
@@ -1062,7 +1044,7 @@ void CORE::bne(vector<int> &cirs, string &label)
         runtimeError = "Error: Label Not Found";
         return;
     }
-    if (registers[cirs[0]] != registers[cirs[1]])
+    if (registers->at(cirs[0]) != registers->at(cirs[1]))
     {
         if (lableTable.find(label) != lableTable.end())
         {
@@ -1087,7 +1069,7 @@ void CORE::beq(vector<int> &cirs, string &label)
         return;
     }
 
-    if (registers[cirs[0]] == registers[cirs[1]])
+    if (registers->at(cirs[0]) == registers->at(cirs[1]))
     {
         if (lableTable.find(label) != lableTable.end())
         {
@@ -1106,7 +1088,7 @@ void CORE::beq(vector<int> &cirs, string &label)
 }
 void CORE::slt(vector<int> &cirs)
 {
-    if (registers[cirs[1]] < registers[cirs[2]])
+    if (registers->at(cirs[1]) < registers->at(cirs[2]))
         registers->at(cirs[0]) = 1;
     else
         registers->at(cirs[0]) = 0;

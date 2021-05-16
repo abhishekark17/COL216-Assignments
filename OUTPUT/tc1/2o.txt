@@ -1,164 +1,164 @@
 Cycle: 1	: Instruction: addi ($s0,$zero,1000): $s0=1000
-Cycle: 2	: Instruction: addi ($s1,$zero,2500): $s1=2500
-Cycle: 3	: Instruction: addi ($t0,$zero,1): $t0=1
-Cycle: 4	: Instruction: addi ($t1,$zero,2): $t1=2
-Cycle: 5	: Instruction: addi ($t2,$zero,3): $t2=3
-Cycle: 6	: Instruction: addi ($t3,$zero,4): $t3=4
-Cycle: 7	: Exited :
-Cycle: 8	: Exited :
-Cycle: 9	: Exited :
-Cycle: 10	: Exited :
-Cycle: 11	: Exited :
-Cycle: 12	: Exited :
-Cycle: 13	: Exited :
-Cycle: 14	: Exited :
-Cycle: 15	: Exited :
-Cycle: 16	: Exited :
-Cycle: 17	: Exited :
-Cycle: 18	: Exited :
-Cycle: 19	: Exited :
-Cycle: 20	: Exited :
-Cycle: 21	: Exited :
-Cycle: 22	: Exited :
-Cycle: 23	: Exited :
-Cycle: 24	: Exited :
-Cycle: 25	: Exited :
-Cycle: 26	: Exited :
-Cycle: 27	: Exited :
-Cycle: 28	: Exited :
-Cycle: 29	: Exited :
-Cycle: 30	: Exited :
-Cycle: 31	: Exited :
-Cycle: 32	: Exited :
-Cycle: 33	: Exited :
-Cycle: 34	: Exited :
-Cycle: 35	: Exited :
-Cycle: 36	: Exited :
-Cycle: 37	: Exited :
-Cycle: 38	: Exited :
-Cycle: 39	: Exited :
-Cycle: 40	: Exited :
-Cycle: 41	: Exited :
-Cycle: 42	: Exited :
-Cycle: 43	: Exited :
-Cycle: 44	: Exited :
-Cycle: 45	: Exited :
-Cycle: 46	: Exited :
-Cycle: 47	: Exited :
-Cycle: 48	: Exited :
-Cycle: 49	: Exited :
-Cycle: 50	: Exited :
-Cycle: 51	: Exited :
-Cycle: 52	: Exited :
-Cycle: 53	: Exited :
-Cycle: 54	: Exited :
-Cycle: 55	: Exited :
-Cycle: 56	: Exited :
-Cycle: 57	: Exited :
-Cycle: 58	: Exited :
-Cycle: 59	: Exited :
-Cycle: 60	: Exited :
-Cycle: 61	: Exited :
-Cycle: 62	: Exited :
-Cycle: 63	: Exited :
-Cycle: 64	: Exited :
-Cycle: 65	: Exited :
-Cycle: 66	: Exited :
-Cycle: 67	: Exited :
-Cycle: 68	: Exited :
-Cycle: 69	: Exited :
-Cycle: 70	: Exited :
-Cycle: 71	: Exited :
-Cycle: 72	: Exited :
-Cycle: 73	: Exited :
-Cycle: 74	: Exited :
-Cycle: 75	: Exited :
-Cycle: 76	: Exited :
-Cycle: 77	: Exited :
-Cycle: 78	: Exited :
-Cycle: 79	: Exited :
-Cycle: 80	: Exited :
-Cycle: 81	: Exited :
-Cycle: 82	: Exited :
-Cycle: 83	: Exited :
-Cycle: 84	: Exited :
-Cycle: 85	: Exited :
-Cycle: 86	: Exited :
-Cycle: 87	: Exited :
-Cycle: 88	: Exited :
-Cycle: 89	: Exited :
-Cycle: 90	: Exited :
-Cycle: 91	: Exited :
-Cycle: 92	: Exited :
-Cycle: 93	: Exited :
-Cycle: 94	: Exited :
-Cycle: 95	: Exited :
-Cycle: 96	: Exited :
-Cycle: 97	: Exited :
-Cycle: 98	: Exited :
-Cycle: 99	: Exited :
-Cycle: 100	: Exited :
-Cycle: 101	: Exited :
-Cycle: 102	: Exited :
-Cycle: 103	: Exited :
-Cycle: 104	: Exited :
-Cycle: 105	: Exited :
-Cycle: 106	: Exited :
-Cycle: 107	: Exited :
-Cycle: 108	: Exited :
-Cycle: 109	: Exited :
-Cycle: 110	: Exited :
-Cycle: 111	: Exited :
-Cycle: 112	: Exited :
-Cycle: 113	: Exited :
-Cycle: 114	: Exited :
-Cycle: 115	: Exited :
-Cycle: 116	: Exited :
-Cycle: 117	: Exited :
-Cycle: 118	: Exited :
-Cycle: 119	: Exited :
-Cycle: 120	: Exited :
-Cycle: 121	: Exited :
-Cycle: 122	: Exited :
-Cycle: 123	: Exited :
-Cycle: 124	: Exited :
-Cycle: 125	: Exited :
-Cycle: 126	: Exited :
-Cycle: 127	: Exited :
-Cycle: 128	: Exited :
-Cycle: 129	: Exited :
-Cycle: 130	: Exited :
-Cycle: 131	: Exited :
-Cycle: 132	: Exited :
-Cycle: 133	: Exited :
-Cycle: 134	: Exited :
-Cycle: 135	: Exited :
-Cycle: 136	: Exited :
-Cycle: 137	: Exited :
-Cycle: 138	: Exited :
-Cycle: 139	: Exited :
-Cycle: 140	: Exited :
-Cycle: 141	: Exited :
-Cycle: 142	: Exited :
-Cycle: 143	: Exited :
-Cycle: 144	: Exited :
-Cycle: 145	: Exited :
-Cycle: 146	: Exited :
-Cycle: 147	: Exited :
-Cycle: 148	: Exited :
-Cycle: 149	: Exited :
-Cycle: 150	: Exited :
-Cycle: 151	: Exited :
-Cycle: 152	: Exited :
-Cycle: 153	: Exited :
-Cycle: 154	: Exited :
-Cycle: 155	: Exited :
-Cycle: 156	: Exited :
-Cycle: 157	: Exited :
-Cycle: 158	: Exited :
-Cycle: 159	: Exited :
-Cycle: 160	: Exited :
-Cycle: 161	: Exited :
+Cycle: 2	: Instruction: addi ($s5,$s5,10000): $s5=10000
+Cycle: 3	: Instruction: addi ($s1,$zero,0): $s1=0
+Cycle: 4	: Instruction: addi ($s2,$zero,2): $s2=2
+Cycle: 5	: Instruction: addi ($t1,$zero,0): $t1=0
+Cycle: 6	: Instruction: addi ($t1,$t1,1): $t1=1
+Cycle: 7	Enqueueing SW Request: $t1--> @Address:263144IN DRAM	
+Cycle: 8	: Instruction: addi ($s0,$s0,4): $s0=1004
+Cycle: 9	: Instruction: addi ($s1,$s1,1): $s1=1
+Cycle: 10	Enqueueing SW Request: $t7--> @Address:272144IN DRAM	
+Cycle: 11	: Instruction: slt ($s3,$s1,$s2): $s3=1
+Cycle: 12	: Instruction bne ($s3,$zero,initloop,1)
+Cycle: 13	: Instruction: addi ($t1,$t1,1): $t1=2
+Cycle: 14	Enqueueing SW Request: $t1--> @Address:263148IN DRAM	
+Cycle: 15	: Instruction: addi ($s0,$s0,4): $s0=1008
+Cycle: 16	: Instruction: addi ($s1,$s1,1): $s1=2
+Cycle: 17	Enqueueing SW Request: $t7--> @Address:272144IN DRAM	
+Cycle: 18	: Instruction: slt ($s3,$s1,$s2): $s3=0
+Cycle: 19	: Instruction bne ($s3,$zero,initloop,0)
+Cycle: 20	: Instruction: addi ($s0,$zero,1000): $s0=1000
+Cycle: 21	: Instruction: addi ($s1,$zero,0): $s1=0
+Cycle: 22	: Instruction: addi ($s3,$zero,0): $s3=0
+Cycle: 23	: Instruction: addi ($s2,$zero,2): $s2=2
+Cycle: 24	Enqueueing LW Request: $t0= @Address:263144IN DRAM	
+Cycle: 25	: Instruction: addi ($s0,$s0,4): $s0=1004
+Cycle: 26	Enqueueing LW Request: $t1= @Address:263148IN DRAM	
+Cycle: 27	: Enqueuing Instruction: add ($t2,$t0,$t1): $t2=0
+Cycle: 28	Enqueueing SW Request: $t2--> @Address:263148IN DRAM	
+Cycle: 29	: Instruction: addi ($s1,$s1,1): $s1=1
+Cycle: 30	: Instruction: slt ($s3,$s1,$s2): $s3=1
+Cycle: 31	: Instruction bne ($s3,$zero,sumloop,1)
+Cycle: 32	Enqueueing LW Request: $t0= @Address:263148IN DRAM	
+Cycle: 33	: Instruction: addi ($s0,$s0,4): $s0=1008
+Cycle: 34	Enqueueing LW Request: $t1= @Address:263152IN DRAM	
+Cycle: 35	 coreId: 2: Stalling :
+Cycle: 36	: STALLED :
+Cycle: 37	: STALLED :
+Cycle: 38	: STALLED :
+Cycle: 39	: STALLED :
+Cycle: 40	: STALLED :
+Cycle: 41	: STALLED :
+Cycle: 42	: STALLED :
+Cycle: 43	: STALLED :
+Cycle: 44	: STALLED :
+Cycle: 45	: STALLED :
+Cycle: 46	: STALLED :
+Cycle: 47	: STALLED :
+Cycle: 48	: STALLED :
+Cycle: 49	: STALLED :
+Cycle: 50	: STALLED :
+Cycle: 51	: STALLED :
+Cycle: 52	: STALLED :
+Cycle: 53	: STALLED :
+Cycle: 54	: STALLED :
+Cycle: 55	: STALLED :
+Cycle: 56	: STALLED :
+Cycle: 57	: STALLED :
+Cycle: 58	: STALLED :
+Cycle: 59	: STALLED :
+Cycle: 60	: STALLED :
+Cycle: 61	: STALLED :
+Cycle: 62	: STALLED :
+Cycle: 63	: STALLED :
+Cycle: 64	: STALLED :
+Cycle: 65	: STALLED :
+Cycle: 66	: STALLED :
+Cycle: 67	: STALLED :
+Cycle: 68	: STALLED :
+Cycle: 69	: STALLED :
+Cycle: 70	: STALLED :
+Cycle: 71	: STALLED :
+Cycle: 72	: STALLED :
+Cycle: 73	: STALLED :
+Cycle: 74	: STALLED :
+Cycle: 75	: STALLED :
+Cycle: 76	: STALLED :
+Cycle: 77	: STALLED :
+Cycle: 78	: STALLED :
+Cycle: 79	: STALLED :
+Cycle: 80	: STALLED :
+Cycle: 81	: STALLED :
+Cycle: 82	: STALLED :
+Cycle: 83	: STALLED :
+Cycle: 84	: STALLED :
+Cycle: 85	: STALLED :
+Cycle: 86	: STALLED :
+Cycle: 87	: STALLED :
+Cycle: 88	: STALLED :
+Cycle: 89	: STALLED :
+Cycle: 90	: STALLED :
+Cycle: 91	: STALLED :
+Cycle: 92	: STALLED :
+Cycle: 93	: STALLED :
+Cycle: 94	: STALLED :
+Cycle: 95	: STALLED :
+Cycle: 96	: STALLED :
+Cycle: 97	: STALLED :
+Cycle: 98	: STALLED :
+Cycle: 99	: STALLED :
+Cycle: 100	: STALLED :
+Cycle: 101	: STALLED :
+Cycle: 102	: STALLED :
+Cycle: 103	: STALLED :
+Cycle: 104	: STALLED :
+Cycle: 105	: STALLED :
+Cycle: 106	: STALLED :
+Cycle: 107	: STALLED :
+Cycle: 108	: STALLED :
+Cycle: 109	: STALLED :
+Cycle: 110	: STALLED :
+Cycle: 111	: STALLED :
+Cycle: 112	: STALLED :
+Cycle: 113	: STALLED :
+Cycle: 114	: STALLED :
+Cycle: 115	: STALLED :
+Cycle: 116	: STALLED :
+Cycle: 117	: STALLED :
+Cycle: 118	: STALLED :
+Cycle: 119	: STALLED :
+Cycle: 120	: STALLED :
+Cycle: 121	: STALLED :
+Cycle: 122	: STALLED :
+Cycle: 123	: STALLED :
+Cycle: 124	: STALLED :
+Cycle: 125	: STALLED :
+Cycle: 126	: STALLED :
+Cycle: 127	: STALLED :
+Cycle: 128	: STALLED :
+Cycle: 129	: STALLED :
+Cycle: 130	: STALLED :
+Cycle: 131	: STALLED :
+Cycle: 132	: STALLED :
+Cycle: 133	: STALLED :: SW for core 2 Issued in DRAM::[$t1,262144,$s0]
+Cycle: 134	: STALLED :
+Cycle: 135	: STALLED :
+Cycle: 136	: STALLED :
+Cycle: 137	: STALLED :
+Cycle: 138	: STALLED :
+Cycle: 139	: STALLED :
+Cycle: 140	: STALLED :
+Cycle: 141	: STALLED :
+Cycle: 142	: STALLED :
+Cycle: 143	: STALLED :
+Cycle: 144	: STALLED :
+Cycle: 145	: STALLED :
+Cycle: 146	: STALLED :
+Cycle: 147	: STALLED :
+Cycle: 148	: STALLED :
+Cycle: 149	: STALLED :
+Cycle: 150	: STALLED :
+Cycle: 151	: STALLED :
+Cycle: 152	: STALLED :
+Cycle: 153	: STALLED :
+Cycle: 154	: STALLED :
+Cycle: 155	: Enqueuing Instruction: add ($t2,$t0,$t1): $t2=0 coreId: 2 RESUMED: : memory address 263144-263147 = 1	
+Cycle: 156	 coreId: 2: Stalling :: LW for core 2 Issued in DRAM::[$t0,262144,$s0]
+Cycle: 157	Enqueueing SW Request: $t2--> @Address:263152IN DRAM	 coreId: 2 RESUMED: (lw) $t0=1	
+Cycle: 158	: Instruction: addi ($s1,$s1,1): POSTPONED because write port is busy : 
+Cycle: 159	: Instruction: addi ($s1,$s1,1): $s1=2
+Cycle: 160	: Instruction: slt ($s3,$s1,$s2): $s3=0: SW for core 2 Issued in DRAM::[$t7,262144,$s5]
+Cycle: 161	: Instruction bne ($s3,$zero,sumloop,0)
 Cycle: 162	: Exited :
 Cycle: 163	: Exited :
 Cycle: 164	: Exited :
@@ -179,10 +179,10 @@ Cycle: 178	: Exited :
 Cycle: 179	: Exited :
 Cycle: 180	: Exited :
 Cycle: 181	: Exited :
-Cycle: 182	: Exited :
-Cycle: 183	: Exited :
-Cycle: 184	: Exited :
-Cycle: 185	: Exited :
+Cycle: 182	: Exited :: memory address 272144-272147 = 0	
+Cycle: 183	: Exited :: SW for core 2 Issued in DRAM::[$t7,262144,$s5]
+Cycle: 184	: Exited :: memory address 272144-272147 = 0	
+Cycle: 185	: Exited :: SW for core 2 Issued in DRAM::[$t1,262144,$s0]
 Cycle: 186	: Exited :
 Cycle: 187	: Exited :
 Cycle: 188	: Exited :
@@ -198,8 +198,108 @@ Cycle: 197	: Exited :
 Cycle: 198	: Exited :
 Cycle: 199	: Exited :
 Cycle: 200	: Exited :
+Cycle: 201	: Exited :
+Cycle: 202	: Exited :
+Cycle: 203	: Exited :
+Cycle: 204	: Exited :
+Cycle: 205	: Exited :
+Cycle: 206	: Exited :
+Cycle: 207	: Exited :: memory address 263148-263151 = 2	
+Cycle: 208	: Exited :: LW for core 2 Issued in DRAM::[$t1,262144,$s0]
+Cycle: 209	: Instruction: add ($t2,$t0,$t1): POSTPONED because write port is busy : (lw) $t1=2	
+Cycle: 210	: Enqueuing Instruction: add ($t2,$t0,$t1): $t2=0
+Cycle: 211	: Exited :
+Cycle: 212	: Exited :
+Cycle: 213	: Exited :: LW for core 2 Issued in DRAM::[$t1,262144,$s0]
+Cycle: 214	: Exited :
+Cycle: 215	: Exited :(lw) $t1=0	
+Cycle: 216	: Exited :
+Cycle: 217	: Exited :
+Cycle: 218	: Exited :
+Cycle: 219	: Exited :
+Cycle: 220	: Exited :
+Cycle: 221	: Exited :
+Cycle: 222	: Exited :
+Cycle: 223	: Exited :
+Cycle: 224	: Exited :
+Cycle: 225	: Exited :
+Cycle: 226	: Exited :
+Cycle: 227	: Exited :
+Cycle: 228	: Exited :
+Cycle: 229	: Exited :
+Cycle: 230	: Exited :
+Cycle: 231	: Exited :
+Cycle: 232	: Exited :
+Cycle: 233	: Exited :
+Cycle: 234	: Exited :
+Cycle: 235	: Exited :
+Cycle: 236	: Exited :
+Cycle: 237	: Exited :
+Cycle: 238	: Exited :
+Cycle: 239	: Exited :
+Cycle: 240	: Exited :
+Cycle: 241	: Exited :
+Cycle: 242	: Exited :
+Cycle: 243	: Exited :
+Cycle: 244	: Exited :
+Cycle: 245	: Exited :
+Cycle: 246	: Exited :
+Cycle: 247	: Exited :
+Cycle: 248	: Exited :
+Cycle: 249	: Exited :
+Cycle: 250	: Exited :
+Cycle: 251	: Exited :
+Cycle: 252	: Exited :
+Cycle: 253	: Exited :
+Cycle: 254	: Exited :
+Cycle: 255	: Exited :
+Cycle: 256	: Exited :
+Cycle: 257	: Exited :
+Cycle: 258	: Exited :
+Cycle: 259	: Exited :
+Cycle: 260	: Exited :
+Cycle: 261	: Exited :
+Cycle: 262	: Exited :
+Cycle: 263	: Exited :
+Cycle: 264	: Exited :
+Cycle: 265	: Exited :
+Cycle: 266	: Exited :
+Cycle: 267	: Exited :
+Cycle: 268	: Exited :
+Cycle: 269	: Exited :
+Cycle: 270	: Exited :
+Cycle: 271	: Exited :
+Cycle: 272	: Exited :
+Cycle: 273	: Exited :
+Cycle: 274	: Exited :
+Cycle: 275	: Exited :
+Cycle: 276	: Exited :
+Cycle: 277	: Exited :
+Cycle: 278	: Exited :
+Cycle: 279	: Exited :
+Cycle: 280	: Exited :
+Cycle: 281	: Exited :
+Cycle: 282	: Exited :
+Cycle: 283	: Exited :
+Cycle: 284	: Exited :
+Cycle: 285	: Exited :
+Cycle: 286	: Exited :
+Cycle: 287	: Exited :
+Cycle: 288	: Exited :
+Cycle: 289	: Exited :
+Cycle: 290	: Exited :
+Cycle: 291	: Exited :
+Cycle: 292	: Exited :
+Cycle: 293	: Exited :
+Cycle: 294	: Exited :
+Cycle: 295	: Exited :
+Cycle: 296	: Exited :
+Cycle: 297	: Exited :
+Cycle: 298	: Exited :: SW for core 2 Issued in DRAM::[$t2,262144,$s0]
+Cycle: 299	: Exited :
+Cycle: 300	: Exited :
 
 
 META DATA
-[add: 0,sub: 0,mul: 0,slt: 0,addi: 6,bne: 0,beq: 0,lw: 0,sw: 0,j: 0]
-TOTAL NUMBER OF INSTRUCTIONS EXECUTED := 6
+[add: 0,sub: 0,mul: 0,slt: 4,addi: 19,bne: 4,beq: 0,lw: 3,sw: 4,j: 0]
+TOTAL NUMBER OF INSTRUCTIONS EXECUTED := 34

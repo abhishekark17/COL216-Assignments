@@ -10,118 +10,118 @@ Cycle: 9	Enqueueing SW Request: $t2--> @Address:787436IN DRAM
 Cycle: 10	Enqueueing SW Request: $t3--> @Address:788936IN DRAM	
 Cycle: 11	Enqueueing LW Request: $t5= @Address:787432IN DRAM	
 Cycle: 12	Enqueueing LW Request: $t6= @Address:788932IN DRAM	
-Cycle: 13	Enqueueing LW Request: $t7= @Address:787436IN DRAM	
-Cycle: 14	Enqueueing LW Request: $t8= @Address:788936IN DRAM	
-Cycle: 15	: Exited :
-Cycle: 16	: Exited :
-Cycle: 17	: Exited :
-Cycle: 18	: Exited :
-Cycle: 19	: Exited :
-Cycle: 20	: Exited :
-Cycle: 21	: Exited :
-Cycle: 22	: Exited :
-Cycle: 23	: Exited :
-Cycle: 24	: Exited :
-Cycle: 25	: Exited :
-Cycle: 26	: Exited :
-Cycle: 27	: Exited :
-Cycle: 28	: Exited :
-Cycle: 29	: Exited :
-Cycle: 30	: Exited :
-Cycle: 31	: Exited :
-Cycle: 32	: Exited :
-Cycle: 33	: Exited :
-Cycle: 34	: Exited :
-Cycle: 35	: Exited :
-Cycle: 36	: Exited :
-Cycle: 37	: Exited :
-Cycle: 38	: Exited :
-Cycle: 39	: Exited :
-Cycle: 40	: Exited :
-Cycle: 41	: Exited :
-Cycle: 42	: Exited :
-Cycle: 43	: Exited :
-Cycle: 44	: Exited :
-Cycle: 45	: Exited :
-Cycle: 46	: Exited :
-Cycle: 47	: Exited :
-Cycle: 48	: Exited :
-Cycle: 49	: Exited :
-Cycle: 50	: Exited :
-Cycle: 51	: Exited :
-Cycle: 52	: Exited :
-Cycle: 53	: Exited :
-Cycle: 54	: Exited :
-Cycle: 55	: Exited :
-Cycle: 56	: Exited :
-Cycle: 57	: Exited :
-Cycle: 58	: Exited :
-Cycle: 59	: Exited :
-Cycle: 60	: Exited :
-Cycle: 61	: Exited :
-Cycle: 62	: Exited :
-Cycle: 63	: Exited :
-Cycle: 64	: Exited :
-Cycle: 65	: Exited :
-Cycle: 66	: Exited :: SW for core 4 Issued in DRAM::[$t0,786432,$s0]
-Cycle: 67	: Exited :
-Cycle: 68	: Exited :
-Cycle: 69	: Exited :
-Cycle: 70	: Exited :
-Cycle: 71	: Exited :
-Cycle: 72	: Exited :
-Cycle: 73	: Exited :
-Cycle: 74	: Exited :
-Cycle: 75	: Exited :
-Cycle: 76	: Exited :
-Cycle: 77	: Exited :
-Cycle: 78	: Exited :
-Cycle: 79	: Exited :
-Cycle: 80	: Exited :
-Cycle: 81	: Exited :
-Cycle: 82	: Exited :
-Cycle: 83	: Exited :
-Cycle: 84	: Exited :
-Cycle: 85	: Exited :
-Cycle: 86	: Exited :
-Cycle: 87	: Exited :
-Cycle: 88	: Exited :: memory address 787432-787435 = 1	
-Cycle: 89	: Exited :: LW for core 4 Issued in DRAM::[$t5,786432,$s0]
-Cycle: 90	: Exited :(lw) $t5=1	
-Cycle: 91	: Exited :: SW for core 4 Issued in DRAM::[$t1,786432,$s1]
-Cycle: 92	: Exited :
-Cycle: 93	: Exited :
-Cycle: 94	: Exited :
-Cycle: 95	: Exited :
-Cycle: 96	: Exited :
-Cycle: 97	: Exited :
-Cycle: 98	: Exited :
-Cycle: 99	: Exited :
-Cycle: 100	: Exited :
-Cycle: 101	: Exited :
-Cycle: 102	: Exited :
-Cycle: 103	: Exited :
-Cycle: 104	: Exited :
-Cycle: 105	: Exited :
-Cycle: 106	: Exited :
-Cycle: 107	: Exited :
-Cycle: 108	: Exited :
-Cycle: 109	: Exited :
-Cycle: 110	: Exited :
-Cycle: 111	: Exited :
-Cycle: 112	: Exited :
-Cycle: 113	: Exited :: memory address 788932-788935 = 2	
-Cycle: 114	: Exited :: LW for core 4 Issued in DRAM::[$t6,786432,$s1]
-Cycle: 115	: Exited :(lw) $t6=2	
-Cycle: 116	: Exited :: SW for core 4 Issued in DRAM::[$t2,786436,$s0]
-Cycle: 117	: Exited :
-Cycle: 118	: Exited :
-Cycle: 119	: Exited :
-Cycle: 120	: Exited :
-Cycle: 121	: Exited :
-Cycle: 122	: Exited :
-Cycle: 123	: Exited :
-Cycle: 124	: Exited :
+Cycle: 13	 coreId: 4: Stalling :
+Cycle: 14	: STALLED :
+Cycle: 15	: STALLED :
+Cycle: 16	: STALLED :
+Cycle: 17	: STALLED :
+Cycle: 18	: STALLED :
+Cycle: 19	: STALLED :
+Cycle: 20	: STALLED :
+Cycle: 21	: STALLED :
+Cycle: 22	: STALLED :
+Cycle: 23	: STALLED :
+Cycle: 24	: STALLED :
+Cycle: 25	: STALLED :
+Cycle: 26	: STALLED :
+Cycle: 27	: STALLED :
+Cycle: 28	: STALLED :
+Cycle: 29	: STALLED :
+Cycle: 30	: STALLED :
+Cycle: 31	: STALLED :
+Cycle: 32	: STALLED :
+Cycle: 33	: STALLED :
+Cycle: 34	: STALLED :
+Cycle: 35	: STALLED :
+Cycle: 36	: STALLED :
+Cycle: 37	: STALLED :
+Cycle: 38	: STALLED :
+Cycle: 39	: STALLED :
+Cycle: 40	: STALLED :
+Cycle: 41	: STALLED :
+Cycle: 42	: STALLED :
+Cycle: 43	: STALLED :
+Cycle: 44	: STALLED :
+Cycle: 45	: STALLED :
+Cycle: 46	: STALLED :
+Cycle: 47	: STALLED :
+Cycle: 48	: STALLED :
+Cycle: 49	: STALLED :
+Cycle: 50	: STALLED :
+Cycle: 51	: STALLED :
+Cycle: 52	: STALLED :
+Cycle: 53	: STALLED :
+Cycle: 54	: STALLED :
+Cycle: 55	: STALLED :
+Cycle: 56	: STALLED :
+Cycle: 57	: STALLED :
+Cycle: 58	: STALLED :
+Cycle: 59	: STALLED :
+Cycle: 60	: STALLED :
+Cycle: 61	: STALLED :
+Cycle: 62	: STALLED :
+Cycle: 63	: STALLED :
+Cycle: 64	: STALLED :
+Cycle: 65	: STALLED :
+Cycle: 66	: STALLED :
+Cycle: 67	: STALLED :
+Cycle: 68	: STALLED :
+Cycle: 69	: STALLED :
+Cycle: 70	: STALLED :
+Cycle: 71	: STALLED :
+Cycle: 72	: STALLED :
+Cycle: 73	: STALLED :
+Cycle: 74	: STALLED :
+Cycle: 75	: STALLED :
+Cycle: 76	: STALLED :
+Cycle: 77	: STALLED :
+Cycle: 78	: STALLED :
+Cycle: 79	: STALLED :
+Cycle: 80	: STALLED :
+Cycle: 81	: STALLED :
+Cycle: 82	: STALLED :
+Cycle: 83	: STALLED :
+Cycle: 84	: STALLED :
+Cycle: 85	: STALLED :
+Cycle: 86	: STALLED :
+Cycle: 87	: STALLED :
+Cycle: 88	: STALLED :
+Cycle: 89	: STALLED :
+Cycle: 90	: STALLED :
+Cycle: 91	: STALLED :
+Cycle: 92	: STALLED :
+Cycle: 93	: STALLED :
+Cycle: 94	: STALLED :
+Cycle: 95	: STALLED :
+Cycle: 96	: STALLED :
+Cycle: 97	: STALLED :
+Cycle: 98	: STALLED :
+Cycle: 99	: STALLED :: SW for core 4 Issued in DRAM::[$t0,786432,$s0]
+Cycle: 100	: STALLED :
+Cycle: 101	: STALLED :
+Cycle: 102	: STALLED :
+Cycle: 103	: STALLED :
+Cycle: 104	: STALLED :
+Cycle: 105	: STALLED :
+Cycle: 106	: STALLED :
+Cycle: 107	: STALLED :
+Cycle: 108	: STALLED :
+Cycle: 109	: STALLED :
+Cycle: 110	: STALLED :
+Cycle: 111	: STALLED :
+Cycle: 112	: STALLED :
+Cycle: 113	: STALLED :
+Cycle: 114	: STALLED :
+Cycle: 115	: STALLED :
+Cycle: 116	: STALLED :
+Cycle: 117	: STALLED :
+Cycle: 118	: STALLED :
+Cycle: 119	: STALLED :
+Cycle: 120	: STALLED :
+Cycle: 121	Enqueueing LW Request: $t7= @Address:787436IN DRAM	 coreId: 4 RESUMED: : memory address 787432-787435 = 1	
+Cycle: 122	 coreId: 4: Stalling :: LW for core 4 Issued in DRAM::[$t5,786432,$s0]
+Cycle: 123	Enqueueing LW Request: $t8= @Address:788936IN DRAM	 coreId: 4 RESUMED: (lw) $t5=1	
+Cycle: 124	: Exited :: SW for core 4 Issued in DRAM::[$t1,786432,$s1]
 Cycle: 125	: Exited :
 Cycle: 126	: Exited :
 Cycle: 127	: Exited :
@@ -135,18 +135,18 @@ Cycle: 134	: Exited :
 Cycle: 135	: Exited :
 Cycle: 136	: Exited :
 Cycle: 137	: Exited :
-Cycle: 138	: Exited :: memory address 787436-787439 = 3	
-Cycle: 139	: Exited :: LW for core 4 Issued in DRAM::[$t7,786436,$s0]
-Cycle: 140	: Exited :(lw) $t7=3	
-Cycle: 141	: Exited :: SW for core 4 Issued in DRAM::[$t3,786436,$s1]
+Cycle: 138	: Exited :
+Cycle: 139	: Exited :
+Cycle: 140	: Exited :
+Cycle: 141	: Exited :
 Cycle: 142	: Exited :
 Cycle: 143	: Exited :
 Cycle: 144	: Exited :
 Cycle: 145	: Exited :
-Cycle: 146	: Exited :
-Cycle: 147	: Exited :
-Cycle: 148	: Exited :
-Cycle: 149	: Exited :
+Cycle: 146	: Exited :: memory address 788932-788935 = 2	
+Cycle: 147	: Exited :: LW for core 4 Issued in DRAM::[$t6,786432,$s1]
+Cycle: 148	: Exited :(lw) $t6=2	
+Cycle: 149	: Exited :: SW for core 4 Issued in DRAM::[$t2,786436,$s0]
 Cycle: 150	: Exited :
 Cycle: 151	: Exited :
 Cycle: 152	: Exited :
@@ -160,18 +160,18 @@ Cycle: 159	: Exited :
 Cycle: 160	: Exited :
 Cycle: 161	: Exited :
 Cycle: 162	: Exited :
-Cycle: 163	: Exited :: memory address 788936-788939 = 4	
-Cycle: 164	: Exited :: LW for core 4 Issued in DRAM::[$t8,786436,$s1]
-Cycle: 165	: Exited :(lw) $t8=4	
+Cycle: 163	: Exited :
+Cycle: 164	: Exited :
+Cycle: 165	: Exited :
 Cycle: 166	: Exited :
 Cycle: 167	: Exited :
 Cycle: 168	: Exited :
 Cycle: 169	: Exited :
 Cycle: 170	: Exited :
-Cycle: 171	: Exited :
-Cycle: 172	: Exited :
-Cycle: 173	: Exited :
-Cycle: 174	: Exited :
+Cycle: 171	: Exited :: memory address 787436-787439 = 3	
+Cycle: 172	: Exited :: LW for core 4 Issued in DRAM::[$t7,786436,$s0]
+Cycle: 173	: Exited :(lw) $t7=3	
+Cycle: 174	: Exited :: SW for core 4 Issued in DRAM::[$t3,786436,$s1]
 Cycle: 175	: Exited :
 Cycle: 176	: Exited :
 Cycle: 177	: Exited :
@@ -193,11 +193,111 @@ Cycle: 192	: Exited :
 Cycle: 193	: Exited :
 Cycle: 194	: Exited :
 Cycle: 195	: Exited :
-Cycle: 196	: Exited :
-Cycle: 197	: Exited :
-Cycle: 198	: Exited :
+Cycle: 196	: Exited :: memory address 788936-788939 = 4	
+Cycle: 197	: Exited :: LW for core 4 Issued in DRAM::[$t8,786436,$s1]
+Cycle: 198	: Exited :(lw) $t8=4	
 Cycle: 199	: Exited :
 Cycle: 200	: Exited :
+Cycle: 201	: Exited :
+Cycle: 202	: Exited :
+Cycle: 203	: Exited :
+Cycle: 204	: Exited :
+Cycle: 205	: Exited :
+Cycle: 206	: Exited :
+Cycle: 207	: Exited :
+Cycle: 208	: Exited :
+Cycle: 209	: Exited :
+Cycle: 210	: Exited :
+Cycle: 211	: Exited :
+Cycle: 212	: Exited :
+Cycle: 213	: Exited :
+Cycle: 214	: Exited :
+Cycle: 215	: Exited :
+Cycle: 216	: Exited :
+Cycle: 217	: Exited :
+Cycle: 218	: Exited :
+Cycle: 219	: Exited :
+Cycle: 220	: Exited :
+Cycle: 221	: Exited :
+Cycle: 222	: Exited :
+Cycle: 223	: Exited :
+Cycle: 224	: Exited :
+Cycle: 225	: Exited :
+Cycle: 226	: Exited :
+Cycle: 227	: Exited :
+Cycle: 228	: Exited :
+Cycle: 229	: Exited :
+Cycle: 230	: Exited :
+Cycle: 231	: Exited :
+Cycle: 232	: Exited :
+Cycle: 233	: Exited :
+Cycle: 234	: Exited :
+Cycle: 235	: Exited :
+Cycle: 236	: Exited :
+Cycle: 237	: Exited :
+Cycle: 238	: Exited :
+Cycle: 239	: Exited :
+Cycle: 240	: Exited :
+Cycle: 241	: Exited :
+Cycle: 242	: Exited :
+Cycle: 243	: Exited :
+Cycle: 244	: Exited :
+Cycle: 245	: Exited :
+Cycle: 246	: Exited :
+Cycle: 247	: Exited :
+Cycle: 248	: Exited :
+Cycle: 249	: Exited :
+Cycle: 250	: Exited :
+Cycle: 251	: Exited :
+Cycle: 252	: Exited :
+Cycle: 253	: Exited :
+Cycle: 254	: Exited :
+Cycle: 255	: Exited :
+Cycle: 256	: Exited :
+Cycle: 257	: Exited :
+Cycle: 258	: Exited :
+Cycle: 259	: Exited :
+Cycle: 260	: Exited :
+Cycle: 261	: Exited :
+Cycle: 262	: Exited :
+Cycle: 263	: Exited :
+Cycle: 264	: Exited :
+Cycle: 265	: Exited :
+Cycle: 266	: Exited :
+Cycle: 267	: Exited :
+Cycle: 268	: Exited :
+Cycle: 269	: Exited :
+Cycle: 270	: Exited :
+Cycle: 271	: Exited :
+Cycle: 272	: Exited :
+Cycle: 273	: Exited :
+Cycle: 274	: Exited :
+Cycle: 275	: Exited :
+Cycle: 276	: Exited :
+Cycle: 277	: Exited :
+Cycle: 278	: Exited :
+Cycle: 279	: Exited :
+Cycle: 280	: Exited :
+Cycle: 281	: Exited :
+Cycle: 282	: Exited :
+Cycle: 283	: Exited :
+Cycle: 284	: Exited :
+Cycle: 285	: Exited :
+Cycle: 286	: Exited :
+Cycle: 287	: Exited :
+Cycle: 288	: Exited :
+Cycle: 289	: Exited :
+Cycle: 290	: Exited :
+Cycle: 291	: Exited :
+Cycle: 292	: Exited :
+Cycle: 293	: Exited :
+Cycle: 294	: Exited :
+Cycle: 295	: Exited :
+Cycle: 296	: Exited :
+Cycle: 297	: Exited :
+Cycle: 298	: Exited :
+Cycle: 299	: Exited :
+Cycle: 300	: Exited :
 
 
 META DATA

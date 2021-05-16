@@ -1,35 +1,35 @@
-Cycle: 1	: Instruction: addi ($s0,$zero,5): $s0=5
-Cycle: 2	: Instruction: addi ($s1,$zero,0): $s1=0
-Cycle: 3	: Instruction: addi ($s2,$zero,1): $s2=1
-Cycle: 4	: Instruction: addi ($s3,$zero,1): $s3=1
-Cycle: 5	: Instruction: addi ($s4,$zero,1): $s4=1
-Cycle: 6	: Instruction: addi ($t1,$zero,5): $t1=5
-Cycle: 7	: Instruction: slt ($t0,$s0,$s2): $t0=0
-Cycle: 8	Enqueueing LW Request: $t2= @Address:8IN DRAM	
-Cycle: 9	: Enqueuing Instruction: add ($t2,$t2,$t1): $t2=0
-Cycle: 10	: Instruction beq ($t1,$zero,loopexit,0)
-Cycle: 11	: Instruction: add ($s1,$s1,$s0): $s1=5
-Cycle: 12	: Instruction: mul ($s3,$s3,$s0): $s3=6
-Cycle: 13	: Instruction: sub ($t1,$t1,$s2): $t1=4
-Cycle: 14	: Instruction j : Jump to label ID: check
-Cycle: 15	: Instruction: slt ($t0,$s0,$s2): $t0=0
-Cycle: 16	Enqueueing LW Request: $t2= @Address:8IN DRAM	
-Cycle: 17	: Enqueuing Instruction: add ($t2,$t2,$t1): $t2=0
-Cycle: 18	: Instruction beq ($t1,$zero,loopexit,0)
-Cycle: 19	: Instruction: add ($s1,$s1,$s0): $s1=10
-Cycle: 20	: Instruction: mul ($s3,$s3,$s0): $s3=11
-Cycle: 21	: Instruction: sub ($t1,$t1,$s2): $t1=3
-Cycle: 22	: Instruction j : Jump to label ID: check
-Cycle: 23	: Instruction: slt ($t0,$s0,$s2): $t0=0
-Cycle: 24	Enqueueing LW Request: $t2= @Address:8IN DRAM	
-Cycle: 25	: Enqueuing Instruction: add ($t2,$t2,$t1): $t2=0
-Cycle: 26	: Instruction beq ($t1,$zero,loopexit,0)
-Cycle: 27	: Instruction: add ($s1,$s1,$s0): $s1=15
-Cycle: 28	: Instruction: mul ($s3,$s3,$s0): $s3=16
-Cycle: 29	: Instruction: sub ($t1,$t1,$s2): $t1=2
-Cycle: 30	: Instruction j : Jump to label ID: check
-Cycle: 31	: Instruction: slt ($t0,$s0,$s2): $t0=0
-Cycle: 32	 coreId: 1: Stalling :
+Cycle: 1	: Instruction: addi ($s0,$zero,1000): $s0=1000
+Cycle: 2	: Instruction: addi ($s1,$zero,2500): $s1=2500
+Cycle: 3	: Instruction: addi ($t0,$zero,1): $t0=1
+Cycle: 4	: Instruction: addi ($t1,$zero,2): $t1=2
+Cycle: 5	: Instruction: addi ($t2,$zero,3): $t2=3
+Cycle: 6	: Instruction: addi ($t3,$zero,4): $t3=4
+Cycle: 7	Enqueueing SW Request: $t0--> @Address:394216IN DRAM	
+Cycle: 8	Enqueueing SW Request: $t1--> @Address:395716IN DRAM	
+Cycle: 9	Enqueueing LW Request: $t2= @Address:394216IN DRAM	
+Cycle: 10	Enqueueing SW Request: $t9--> @Address:394216IN DRAM	
+Cycle: 11	Enqueueing SW Request: $t3--> @Address:394216IN DRAM	
+Cycle: 12	Enqueueing LW Request: $t4= @Address:394216IN DRAM	
+Cycle: 13	: Instruction: addi ($at,$t5,500): $at=500
+Cycle: 14	Enqueueing LW Request: $t5= @Address:393716IN DRAM	
+Cycle: 15	Enqueueing LW Request: $t5= @Address:393716IN DRAM	
+Cycle: 16	Enqueueing LW Request: $t5= @Address:393716IN DRAM	
+Cycle: 17	Enqueueing SW Request: $t6--> @Address:394216IN DRAM	
+Cycle: 18	 coreId: 4: Stalling :
+Cycle: 19	: STALLED :
+Cycle: 20	: STALLED :
+Cycle: 21	: STALLED :
+Cycle: 22	: STALLED :
+Cycle: 23	: STALLED :
+Cycle: 24	: STALLED :
+Cycle: 25	: STALLED :
+Cycle: 26	: STALLED :
+Cycle: 27	: STALLED :
+Cycle: 28	: STALLED :
+Cycle: 29	: STALLED :
+Cycle: 30	: STALLED :
+Cycle: 31	: STALLED :
+Cycle: 32	: STALLED :
 Cycle: 33	: STALLED :
 Cycle: 34	: STALLED :
 Cycle: 35	: STALLED :
@@ -37,7 +37,7 @@ Cycle: 36	: STALLED :
 Cycle: 37	: STALLED :
 Cycle: 38	: STALLED :
 Cycle: 39	: STALLED :
-Cycle: 40	: STALLED :: LW for core 1 Issued in DRAM::[$t2,8,$zero]
+Cycle: 40	: STALLED :
 Cycle: 41	: STALLED :
 Cycle: 42	: STALLED :
 Cycle: 43	: STALLED :
@@ -59,22 +59,22 @@ Cycle: 58	: STALLED :
 Cycle: 59	: STALLED :
 Cycle: 60	: STALLED :
 Cycle: 61	: STALLED :
-Cycle: 62	Enqueueing LW Request: $t2= @Address:8IN DRAM	 coreId: 1 RESUMED: (lw) $t2=0	
-Cycle: 63	: Instruction: add ($t2,$t2,$t1): POSTPONED because write port is busy : 
-Cycle: 64	: Enqueuing Instruction: add ($t2,$t2,$t1): $t2=0
-Cycle: 65	 coreId: 1: Stalling :
+Cycle: 62	: STALLED :
+Cycle: 63	: STALLED :
+Cycle: 64	: STALLED :
+Cycle: 65	: STALLED :
 Cycle: 66	: STALLED :
-Cycle: 67	: STALLED :: LW for core 1 Issued in DRAM::[$t2,8,$zero]
-Cycle: 68	: Enqueuing Instruction: add ($t2,$t2,$t1): $t2=0 coreId: 1 RESUMED: (lw) $t2=0	
-Cycle: 69	: Instruction: add ($t2,$t2,$t1): POSTPONED because write port is busy : 
-Cycle: 70	: Enqueuing Instruction: add ($t2,$t2,$t1): $t2=0
-Cycle: 71	: Instruction beq ($t1,$zero,loopexit,0)
-Cycle: 72	: Instruction: add ($s1,$s1,$s0): $s1=20
-Cycle: 73	: Instruction: mul ($s3,$s3,$s0): $s3=21
-Cycle: 74	: Instruction: sub ($t1,$t1,$s2): $t1=1
-Cycle: 75	: Instruction j : Jump to label ID: check
-Cycle: 76	: Instruction: slt ($t0,$s0,$s2): $t0=0
-Cycle: 77	 coreId: 1: Stalling :
+Cycle: 67	: STALLED :
+Cycle: 68	: STALLED :
+Cycle: 69	: STALLED :
+Cycle: 70	: STALLED :
+Cycle: 71	: STALLED :
+Cycle: 72	: STALLED :
+Cycle: 73	: STALLED :
+Cycle: 74	: STALLED :
+Cycle: 75	: STALLED :
+Cycle: 76	: STALLED :
+Cycle: 77	: STALLED :
 Cycle: 78	: STALLED :
 Cycle: 79	: STALLED :
 Cycle: 80	: STALLED :
@@ -196,13 +196,13 @@ Cycle: 195	: STALLED :
 Cycle: 196	: STALLED :
 Cycle: 197	: STALLED :
 Cycle: 198	: STALLED :
-Cycle: 199	: STALLED :: LW for core 1 Issued in DRAM::[$t2,8,$zero]
+Cycle: 199	: STALLED :
 Cycle: 200	: STALLED :
 Cycle: 201	: STALLED :
 Cycle: 202	: STALLED :
 Cycle: 203	: STALLED :
 Cycle: 204	: STALLED :
-Cycle: 205	: STALLED :
+Cycle: 205	: STALLED :: SW for core 4 Issued in DRAM::[$t0,393216,$s0]
 Cycle: 206	: STALLED :
 Cycle: 207	: STALLED :
 Cycle: 208	: STALLED :
@@ -218,37 +218,37 @@ Cycle: 217	: STALLED :
 Cycle: 218	: STALLED :
 Cycle: 219	: STALLED :
 Cycle: 220	: STALLED :
-Cycle: 221	Enqueueing LW Request: $t2= @Address:8IN DRAM	 coreId: 1 RESUMED: (lw) $t2=0	
-Cycle: 222	: Instruction: add ($t2,$t2,$t1): POSTPONED because write port is busy : 
-Cycle: 223	: Enqueuing Instruction: add ($t2,$t2,$t1): $t2=0
-Cycle: 224	 coreId: 1: Stalling :
+Cycle: 221	: STALLED :
+Cycle: 222	: STALLED :
+Cycle: 223	: STALLED :
+Cycle: 224	: STALLED :
 Cycle: 225	: STALLED :
-Cycle: 226	: STALLED :: LW for core 1 Issued in DRAM::[$t2,8,$zero]
-Cycle: 227	: Enqueuing Instruction: add ($t2,$t2,$t1): $t2=0 coreId: 1 RESUMED: (lw) $t2=0	
-Cycle: 228	: Instruction: add ($t2,$t2,$t1): POSTPONED because write port is busy : 
-Cycle: 229	: Enqueuing Instruction: add ($t2,$t2,$t1): $t2=0
-Cycle: 230	: Instruction: add ($t2,$t2,$t1): $t2=1
-Cycle: 231	: Instruction: add ($t2,$t2,$t1): $t2=2
-Cycle: 232	: Instruction beq ($t1,$zero,loopexit,0)
-Cycle: 233	: Instruction: add ($s1,$s1,$s0): $s1=25: LW for core 1 Issued in DRAM::[$t2,8,$zero]
-Cycle: 234	: Instruction: add ($t2,$t2,$t1): POSTPONED because write port is busy : (lw) $t2=0	
-Cycle: 235	: Enqueuing Instruction: add ($t2,$t2,$t1): $t2=0
-Cycle: 236	: Instruction: add ($t2,$t2,$t1): $t2=1
-Cycle: 237	: Instruction: add ($t2,$t2,$t1): $t2=2
-Cycle: 238	: Instruction: add ($t2,$t2,$t1): $t2=3
-Cycle: 239	: Instruction: mul ($s3,$s3,$s0): $s3=26
-Cycle: 240	: Instruction: sub ($t1,$t1,$s2): $t1=0
-Cycle: 241	: Instruction j : Jump to label ID: check
-Cycle: 242	: Instruction: slt ($t0,$s0,$s2): $t0=0
-Cycle: 243	Enqueueing LW Request: $t2= @Address:8IN DRAM	
-Cycle: 244	: Enqueuing Instruction: add ($t2,$t2,$t1): $t2=3: LW for core 1 Issued in DRAM::[$t2,8,$zero]
-Cycle: 245	: Instruction: add ($t2,$t2,$t1): POSTPONED because write port is busy : (lw) $t2=0	
-Cycle: 246	: Instruction: add ($t2,$t2,$t1): $t2=0
-Cycle: 247	: Instruction beq ($t1,$zero,loopexit,1)
-Cycle: 248	: Instruction: add ($s1,$s1,$zero): $s1=25
-Cycle: 249	: Instruction: mul ($s3,$s3,$s4): $s3=27
-Cycle: 250	: Exited :
-Cycle: 251	: Exited :
+Cycle: 226	: STALLED :
+Cycle: 227	:Enqueuing Instruction bne ($t3,$t2,exit,0) coreId: 4: Stalling : coreId: 4 RESUMED: : memory address 394216-394219 = 1	
+Cycle: 228	: STALLED :: LW for core 4 Issued in DRAM::[$t2,393216,$s0]
+Cycle: 229	: STALLED :(lw) $t2=1	
+Cycle: 230	: STALLED :
+Cycle: 231	: STALLED :
+Cycle: 232	: STALLED :
+Cycle: 233	: STALLED :: SW for core 4 Issued in DRAM::[$t9,393216,$s0]
+Cycle: 234	: STALLED :: memory address 394216-394219 = 0	
+Cycle: 235	: STALLED :
+Cycle: 236	: STALLED :
+Cycle: 237	: STALLED :: SW for core 4 Issued in DRAM::[$t3,393216,$s0]
+Cycle: 238	: STALLED :: memory address 394216-394219 = 4	
+Cycle: 239	: STALLED :
+Cycle: 240	: STALLED :: LW for core 4 Issued in DRAM::[$t4,393216,$s0]
+Cycle: 241	: Instruction bne ($t3,$t2,exit,1) coreId: 4 RESUMED: (lw) $t4=4	
+Cycle: 242	: Instruction: add ($at,$v0,$v1): POSTPONED because write port is busy : : SW for core 4 Issued in DRAM::[$t6,393216,$s0]
+Cycle: 243	: Instruction: add ($at,$v0,$v1): $at=0: memory address 394216-394219 = 0	
+Cycle: 244	: Exited :: LW for core 4 Issued in DRAM::[$t5,393216,$at]
+Cycle: 245	: Exited :
+Cycle: 246	: Exited :(lw) $t5=0	
+Cycle: 247	: Exited :: LW for core 4 Issued in DRAM::[$t5,393216,$at]
+Cycle: 248	: Exited :(lw) $t5=0	
+Cycle: 249	: Exited :: LW for core 4 Issued in DRAM::[$t5,393216,$at]
+Cycle: 250	: Exited :(lw) $t5=0	
+Cycle: 251	: Exited :: SW for core 4 Issued in DRAM::[$t1,393216,$s1]
 Cycle: 252	: Exited :
 Cycle: 253	: Exited :
 Cycle: 254	: Exited :
@@ -270,7 +270,7 @@ Cycle: 269	: Exited :
 Cycle: 270	: Exited :
 Cycle: 271	: Exited :
 Cycle: 272	: Exited :
-Cycle: 273	: Exited :
+Cycle: 273	: Exited :: memory address 395716-395719 = 2	
 Cycle: 274	: Exited :
 Cycle: 275	: Exited :
 Cycle: 276	: Exited :
@@ -301,5 +301,5 @@ Cycle: 300	: Exited :
 
 
 META DATA
-[add: 12,sub: 5,mul: 6,slt: 6,addi: 6,bne: 0,beq: 6,lw: 6,sw: 0,j: 5]
-TOTAL NUMBER OF INSTRUCTIONS EXECUTED := 52
+[add: 1,sub: 0,mul: 0,slt: 0,addi: 7,bne: 1,beq: 0,lw: 5,sw: 5,j: 0]
+TOTAL NUMBER OF INSTRUCTIONS EXECUTED := 19

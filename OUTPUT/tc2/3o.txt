@@ -37,7 +37,7 @@ Cycle: 36	: Exited :
 Cycle: 37	: Exited :
 Cycle: 38	: Exited :
 Cycle: 39	: Exited :
-Cycle: 40	: Exited :: SW for core 3 Issued in DRAM::[$t0,525288,$zero]
+Cycle: 40	: Exited :
 Cycle: 41	: Exited :
 Cycle: 42	: Exited :
 Cycle: 43	: Exited :
@@ -59,18 +59,18 @@ Cycle: 58	: Exited :
 Cycle: 59	: Exited :
 Cycle: 60	: Exited :
 Cycle: 61	: Exited :
-Cycle: 62	: Exited :: memory address 525288-525291 = 15	
-Cycle: 63	: Exited :: LW for core 3 Issued in DRAM::[$t1,525288,$zero]
-Cycle: 64	: Instruction: add ($t1,$t1,$t1): POSTPONED because write port is busy : (lw) $t1=15	
-Cycle: 65	: Instruction: add ($t1,$t1,$t1): $t1=30
-Cycle: 66	: Instruction: mul ($t2,$t1,$t0): $t2=45
+Cycle: 62	: Exited :
+Cycle: 63	: Exited :
+Cycle: 64	: Exited :
+Cycle: 65	: Exited :
+Cycle: 66	: Exited :
 Cycle: 67	: Exited :
 Cycle: 68	: Exited :
 Cycle: 69	: Exited :
 Cycle: 70	: Exited :
 Cycle: 71	: Exited :
 Cycle: 72	: Exited :
-Cycle: 73	: Exited :
+Cycle: 73	: Exited :: SW for core 3 Issued in DRAM::[$t0,525288,$zero]
 Cycle: 74	: Exited :
 Cycle: 75	: Exited :
 Cycle: 76	: Exited :
@@ -92,11 +92,11 @@ Cycle: 91	: Exited :
 Cycle: 92	: Exited :
 Cycle: 93	: Exited :
 Cycle: 94	: Exited :
-Cycle: 95	: Exited :
-Cycle: 96	: Exited :
-Cycle: 97	: Exited :
-Cycle: 98	: Exited :
-Cycle: 99	: Exited :
+Cycle: 95	: Exited :: memory address 525288-525291 = 15	
+Cycle: 96	: Exited :: LW for core 3 Issued in DRAM::[$t1,525288,$zero]
+Cycle: 97	: Instruction: add ($t1,$t1,$t1): POSTPONED because write port is busy : (lw) $t1=15	
+Cycle: 98	: Instruction: add ($t1,$t1,$t1): $t1=30
+Cycle: 99	: Instruction: mul ($t2,$t1,$t0): $t2=45
 Cycle: 100	: Exited :
 Cycle: 101	: Exited :
 Cycle: 102	: Exited :
@@ -198,6 +198,106 @@ Cycle: 197	: Exited :
 Cycle: 198	: Exited :
 Cycle: 199	: Exited :
 Cycle: 200	: Exited :
+Cycle: 201	: Exited :
+Cycle: 202	: Exited :
+Cycle: 203	: Exited :
+Cycle: 204	: Exited :
+Cycle: 205	: Exited :
+Cycle: 206	: Exited :
+Cycle: 207	: Exited :
+Cycle: 208	: Exited :
+Cycle: 209	: Exited :
+Cycle: 210	: Exited :
+Cycle: 211	: Exited :
+Cycle: 212	: Exited :
+Cycle: 213	: Exited :
+Cycle: 214	: Exited :
+Cycle: 215	: Exited :
+Cycle: 216	: Exited :
+Cycle: 217	: Exited :
+Cycle: 218	: Exited :
+Cycle: 219	: Exited :
+Cycle: 220	: Exited :
+Cycle: 221	: Exited :
+Cycle: 222	: Exited :
+Cycle: 223	: Exited :
+Cycle: 224	: Exited :
+Cycle: 225	: Exited :
+Cycle: 226	: Exited :
+Cycle: 227	: Exited :
+Cycle: 228	: Exited :
+Cycle: 229	: Exited :
+Cycle: 230	: Exited :
+Cycle: 231	: Exited :
+Cycle: 232	: Exited :
+Cycle: 233	: Exited :
+Cycle: 234	: Exited :
+Cycle: 235	: Exited :
+Cycle: 236	: Exited :
+Cycle: 237	: Exited :
+Cycle: 238	: Exited :
+Cycle: 239	: Exited :
+Cycle: 240	: Exited :
+Cycle: 241	: Exited :
+Cycle: 242	: Exited :
+Cycle: 243	: Exited :
+Cycle: 244	: Exited :
+Cycle: 245	: Exited :
+Cycle: 246	: Exited :
+Cycle: 247	: Exited :
+Cycle: 248	: Exited :
+Cycle: 249	: Exited :
+Cycle: 250	: Exited :
+Cycle: 251	: Exited :
+Cycle: 252	: Exited :
+Cycle: 253	: Exited :
+Cycle: 254	: Exited :
+Cycle: 255	: Exited :
+Cycle: 256	: Exited :
+Cycle: 257	: Exited :
+Cycle: 258	: Exited :
+Cycle: 259	: Exited :
+Cycle: 260	: Exited :
+Cycle: 261	: Exited :
+Cycle: 262	: Exited :
+Cycle: 263	: Exited :
+Cycle: 264	: Exited :
+Cycle: 265	: Exited :
+Cycle: 266	: Exited :
+Cycle: 267	: Exited :
+Cycle: 268	: Exited :
+Cycle: 269	: Exited :
+Cycle: 270	: Exited :
+Cycle: 271	: Exited :
+Cycle: 272	: Exited :
+Cycle: 273	: Exited :
+Cycle: 274	: Exited :
+Cycle: 275	: Exited :
+Cycle: 276	: Exited :
+Cycle: 277	: Exited :
+Cycle: 278	: Exited :
+Cycle: 279	: Exited :
+Cycle: 280	: Exited :
+Cycle: 281	: Exited :
+Cycle: 282	: Exited :
+Cycle: 283	: Exited :
+Cycle: 284	: Exited :
+Cycle: 285	: Exited :
+Cycle: 286	: Exited :
+Cycle: 287	: Exited :
+Cycle: 288	: Exited :
+Cycle: 289	: Exited :
+Cycle: 290	: Exited :
+Cycle: 291	: Exited :
+Cycle: 292	: Exited :
+Cycle: 293	: Exited :
+Cycle: 294	: Exited :
+Cycle: 295	: Exited :
+Cycle: 296	: Exited :
+Cycle: 297	: Exited :
+Cycle: 298	: Exited :
+Cycle: 299	: Exited :
+Cycle: 300	: Exited :
 
 
 META DATA

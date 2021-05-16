@@ -321,6 +321,7 @@ void MRM::execute (vector<CORE*> * allCores, int currentClockCycle,vector<bool> 
             if (currentRequestInDRAM->inst->opID == 7) {
                 dram->setRowBuffer(DRAM::getRowOfRowBuffer (currentRequestInDRAM->loadingMemoryAddress));
                 dram->setColBuffer(DRAM::getColOfRowBuffer (currentRequestInDRAM->loadingMemoryAddress));
+                
 
                 handleOutput->appendOutputForCore (currentRequestInDRAM->core_id,"(lw) " + allCores->at(0)->rrmap.at(currentRequestInDRAM->changingRegister) + "=" + to_string(dram->getLoadedValueForLW ())+"\t");
                 allCores->at (currentRequestInDRAM->core_id - 1)->getRegisters()->at (currentRequestInDRAM->changingRegister) = dram->getLoadedValueForLW ();
@@ -329,7 +330,11 @@ void MRM::execute (vector<CORE*> * allCores, int currentClockCycle,vector<bool> 
                 allCores->at (currentRequestInDRAM->core_id - 1)->writingFromDRAM = true;
                 handleOutput->addDramOutput (": LW for core " + to_string (currentRequestInDRAM->core_id) + " Done");
 
+                if (getQueueOfCore_id(currentRequestInDRAM->core_id)->size() == coreQueueLength && (allCores->at (currentRequestInDRAM->core_id -1 ))->stallIfFull) allCores->at(currentRequestInDRAM->core_id - 1)->resume(true);
+
                 dequeueRequest (currentRequestInDRAM, getQueueOfCore_id (currentRequestInDRAM->core_id));
+
+            
                 ////uptoDelayClkCycle = currentClockCycle + numDependent (currentRequestInDRAM, getQueueOfCore_id (currentRequestInDRAM->core_id));
             }
             else if (currentRequestInDRAM->inst->opID == 8) {
@@ -344,6 +349,7 @@ void MRM::execute (vector<CORE*> * allCores, int currentClockCycle,vector<bool> 
                 
                 allCores->at (currentRequestInDRAM->core_id - 1)->updateNumOfInst (8);
                 handleOutput->addDramOutput (": SW for core " + to_string(currentRequestInDRAM->core_id) + " Done");
+                if (getQueueOfCore_id(currentRequestInDRAM->core_id)->size() == coreQueueLength && (allCores->at (currentRequestInDRAM->core_id -1 ))->stallIfFull) allCores->at(currentRequestInDRAM->core_id - 1)->resume(true);
 
                 dequeueRequest (currentRequestInDRAM, getQueueOfCore_id (currentRequestInDRAM->core_id));
                 ////uptoDelayClkCycle = currentClockCycle + numDependent (currentRequestInDRAM, getQueueOfCore_id (currentRequestInDRAM->core_id));
@@ -358,7 +364,7 @@ void MRM::execute (vector<CORE*> * allCores, int currentClockCycle,vector<bool> 
         if (request == nullptr) return;
 
         if (request->inst->opID != 7 && request->inst->opID != 8 && request->cost <= 1) {
-            if  (allCores->at(request->core_id - 1)->getStallingRequest() == request && getQueueOfCore_id(request->core_id)->size() == coreQueueLength) allCores->at(request->core_id)->resume(true);
+            if  (allCores->at(request->core_id - 1)->getStallingRequest() == request && getQueueOfCore_id(request->core_id)->size() == coreQueueLength) allCores->at(request->core_id - 1)->resume(true);
             else if(allCores->at(request->core_id - 1)->getStallingRequest() == request) allCores->at((request->core_id) - 1)->resume(false);
             else allCores->at(request->core_id - 1)->addInFreeBuffer(request);
             

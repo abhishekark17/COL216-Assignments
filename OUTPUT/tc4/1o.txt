@@ -1,47 +1,47 @@
 Cycle: 1	: Instruction: addi ($s0,$zero,1000): $s0=1000
 Cycle: 2	: Instruction: addi ($s1,$zero,2500): $s1=2500
-Cycle: 3	: Instruction: addi ($s5,$zero,4000): $s5=4000
-Cycle: 4	: Instruction: addi ($t0,$zero,1): $t0=1
-Cycle: 5	: Instruction: addi ($t1,$zero,2): $t1=2
-Cycle: 6	: Instruction: addi ($t2,$zero,3): $t2=3
-Cycle: 7	: Instruction: addi ($t3,$zero,4): $t3=4
-Cycle: 8	Enqueueing SW Request: $t0--> @Address:525288IN DRAM	
-Cycle: 9	Enqueueing SW Request: $t1--> @Address:526788IN DRAM	
-Cycle: 10	Enqueueing SW Request: $t2--> @Address:525292IN DRAM	
-Cycle: 11	Enqueueing SW Request: $t4--> @Address:526792IN DRAM	
-Cycle: 12	Enqueueing LW Request: $t5= @Address:525288IN DRAM	
-Cycle: 13	Enqueueing LW Request: $t6= @Address:528288IN DRAM	
-Cycle: 14	Enqueueing LW Request: $t7= @Address:525292IN DRAM	
-Cycle: 15	Enqueueing LW Request: $t8= @Address:526792IN DRAM	
-Cycle: 16	: Exited :
-Cycle: 17	: Exited :
-Cycle: 18	: Exited :
-Cycle: 19	: Exited :
-Cycle: 20	: Exited :
-Cycle: 21	: Exited :
-Cycle: 22	: Exited :
-Cycle: 23	: Exited :
-Cycle: 24	: Exited :
-Cycle: 25	: Exited :
-Cycle: 26	: Exited :
-Cycle: 27	: Exited :
-Cycle: 28	: Exited :
-Cycle: 29	: Exited :
-Cycle: 30	: Exited :
-Cycle: 31	: Exited :
-Cycle: 32	: Exited :
-Cycle: 33	: Exited :
-Cycle: 34	: Exited :
-Cycle: 35	: Exited :
-Cycle: 36	: Exited :
-Cycle: 37	: Exited :
+Cycle: 3	: Instruction: addi ($t0,$zero,1): $t0=1
+Cycle: 4	: Instruction: addi ($t1,$zero,2): $t1=2
+Cycle: 5	: Instruction: addi ($t2,$zero,3): $t2=3
+Cycle: 6	: Instruction: addi ($t3,$zero,4): $t3=4
+Cycle: 7	Enqueueing SW Request: $t0--> @Address:1000IN DRAM	
+Cycle: 8	Enqueueing SW Request: $t1--> @Address:2500IN DRAM	: SW for core 1 Issued in DRAM::[$t0,0,$s0]
+Cycle: 9	Enqueueing LW Request: $t2= @Address:1000IN DRAM	
+Cycle: 10	Enqueueing SW Request: $t9--> @Address:1000IN DRAM	
+Cycle: 11	Enqueueing SW Request: $t3--> @Address:1000IN DRAM	
+Cycle: 12	Enqueueing LW Request: $t4= @Address:1000IN DRAM	
+Cycle: 13	: Instruction: addi ($at,$t5,500): $at=500
+Cycle: 14	Enqueueing LW Request: $t5= @Address:500IN DRAM	
+Cycle: 15	Enqueueing LW Request: $t5= @Address:500IN DRAM	
+Cycle: 16	Enqueueing LW Request: $t5= @Address:500IN DRAM	
+Cycle: 17	Enqueueing SW Request: $t6--> @Address:1000IN DRAM	
+Cycle: 18	 coreId: 1: Stalling :
+Cycle: 19	: STALLED :
+Cycle: 20	:Enqueuing Instruction bne ($t3,$t2,exit,0) coreId: 1: Stalling : coreId: 1 RESUMED: : memory address 1000-1003 = 1	
+Cycle: 21	: STALLED :: LW for core 1 Issued in DRAM::[$t2,0,$s0]
+Cycle: 22	: STALLED :(lw) $t2=1	
+Cycle: 23	: STALLED :
+Cycle: 24	: STALLED :
+Cycle: 25	: STALLED :
+Cycle: 26	: STALLED :: SW for core 1 Issued in DRAM::[$t9,0,$s0]
+Cycle: 27	: STALLED :: memory address 1000-1003 = 0	
+Cycle: 28	: STALLED :
+Cycle: 29	: STALLED :
+Cycle: 30	: STALLED :: SW for core 1 Issued in DRAM::[$t3,0,$s0]
+Cycle: 31	: STALLED :: memory address 1000-1003 = 4	
+Cycle: 32	: STALLED :
+Cycle: 33	: STALLED :: LW for core 1 Issued in DRAM::[$t4,0,$s0]
+Cycle: 34	: Instruction bne ($t3,$t2,exit,1) coreId: 1 RESUMED: (lw) $t4=4	
+Cycle: 35	: Instruction: add ($at,$v0,$v1): POSTPONED because write port is busy : : SW for core 1 Issued in DRAM::[$t6,0,$s0]
+Cycle: 36	: Instruction: add ($at,$v0,$v1): $at=0: memory address 1000-1003 = 0	
+Cycle: 37	: Exited :: LW for core 1 Issued in DRAM::[$t5,0,$at]
 Cycle: 38	: Exited :
-Cycle: 39	: Exited :
-Cycle: 40	: Exited :
-Cycle: 41	: Exited :
-Cycle: 42	: Exited :
-Cycle: 43	: Exited :
-Cycle: 44	: Exited :
+Cycle: 39	: Exited :(lw) $t5=0	
+Cycle: 40	: Exited :: LW for core 1 Issued in DRAM::[$t5,0,$at]
+Cycle: 41	: Exited :(lw) $t5=0	
+Cycle: 42	: Exited :: LW for core 1 Issued in DRAM::[$t5,0,$at]
+Cycle: 43	: Exited :(lw) $t5=0	
+Cycle: 44	: Exited :: SW for core 1 Issued in DRAM::[$t1,0,$s1]
 Cycle: 45	: Exited :
 Cycle: 46	: Exited :
 Cycle: 47	: Exited :
@@ -63,7 +63,7 @@ Cycle: 62	: Exited :
 Cycle: 63	: Exited :
 Cycle: 64	: Exited :
 Cycle: 65	: Exited :
-Cycle: 66	: Exited :
+Cycle: 66	: Exited :: memory address 2500-2503 = 2	
 Cycle: 67	: Exited :
 Cycle: 68	: Exited :
 Cycle: 69	: Exited :
@@ -214,7 +214,7 @@ Cycle: 213	: Exited :
 Cycle: 214	: Exited :
 Cycle: 215	: Exited :
 Cycle: 216	: Exited :
-Cycle: 217	: Exited :: SW for core 3 Issued in DRAM::[$t0,524288,$s0]
+Cycle: 217	: Exited :
 Cycle: 218	: Exited :
 Cycle: 219	: Exited :
 Cycle: 220	: Exited :
@@ -236,15 +236,15 @@ Cycle: 235	: Exited :
 Cycle: 236	: Exited :
 Cycle: 237	: Exited :
 Cycle: 238	: Exited :
-Cycle: 239	: Exited :: memory address 525288-525291 = 1	
-Cycle: 240	: Exited :: LW for core 3 Issued in DRAM::[$t5,524288,$s0]
-Cycle: 241	: Exited :(lw) $t5=1	
-Cycle: 242	: Exited :: SW for core 3 Issued in DRAM::[$t2,524292,$s0]
+Cycle: 239	: Exited :
+Cycle: 240	: Exited :
+Cycle: 241	: Exited :
+Cycle: 242	: Exited :
 Cycle: 243	: Exited :
-Cycle: 244	: Exited :: memory address 525292-525295 = 3	
-Cycle: 245	: Exited :: LW for core 3 Issued in DRAM::[$t7,524292,$s0]
-Cycle: 246	: Exited :(lw) $t7=3	
-Cycle: 247	: Exited :: SW for core 3 Issued in DRAM::[$t4,524292,$s1]
+Cycle: 244	: Exited :
+Cycle: 245	: Exited :
+Cycle: 246	: Exited :
+Cycle: 247	: Exited :
 Cycle: 248	: Exited :
 Cycle: 249	: Exited :
 Cycle: 250	: Exited :
@@ -266,13 +266,13 @@ Cycle: 265	: Exited :
 Cycle: 266	: Exited :
 Cycle: 267	: Exited :
 Cycle: 268	: Exited :
-Cycle: 269	: Exited :: memory address 526792-526795 = 0	
-Cycle: 270	: Exited :: LW for core 3 Issued in DRAM::[$t8,524292,$s1]
-Cycle: 271	: Exited :(lw) $t8=0	
-Cycle: 272	: Exited :: SW for core 3 Issued in DRAM::[$t1,524288,$s1]
+Cycle: 269	: Exited :
+Cycle: 270	: Exited :
+Cycle: 271	: Exited :
+Cycle: 272	: Exited :
 Cycle: 273	: Exited :
-Cycle: 274	: Exited :: memory address 526788-526791 = 2	
-Cycle: 275	: Exited :: LW for core 3 Issued in DRAM::[$t6,524288,$s5]
+Cycle: 274	: Exited :
+Cycle: 275	: Exited :
 Cycle: 276	: Exited :
 Cycle: 277	: Exited :
 Cycle: 278	: Exited :
@@ -294,12 +294,12 @@ Cycle: 293	: Exited :
 Cycle: 294	: Exited :
 Cycle: 295	: Exited :
 Cycle: 296	: Exited :
-Cycle: 297	: Exited :(lw) $t6=0	
+Cycle: 297	: Exited :
 Cycle: 298	: Exited :
 Cycle: 299	: Exited :
 Cycle: 300	: Exited :
 
 
 META DATA
-[add: 0,sub: 0,mul: 0,slt: 0,addi: 7,bne: 0,beq: 0,lw: 4,sw: 4,j: 0]
-TOTAL NUMBER OF INSTRUCTIONS EXECUTED := 15
+[add: 1,sub: 0,mul: 0,slt: 0,addi: 7,bne: 1,beq: 0,lw: 5,sw: 5,j: 0]
+TOTAL NUMBER OF INSTRUCTIONS EXECUTED := 19
