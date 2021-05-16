@@ -392,12 +392,17 @@ void MRM::execute (vector<CORE*> * allCores, int currentClockCycle,vector<bool> 
                     handleOutput->addDramOutput (": LW for core " + to_string(currentRequestInDRAM->core_id) + " Issued::[" +allCores->at(0)->rrmap.at(currentRequestInDRAM->inst->cirs[0]) + "," +  to_string(currentRequestInDRAM->inst->cirs[1]) + "," + allCores->at(0)->rrmap.at(currentRequestInDRAM->inst->cirs[2]) + "]");
                     handleOutput->appendOutputForCore (currentRequestInDRAM->core_id,": LW for core " + to_string(currentRequestInDRAM->core_id) + " Issued in DRAM::[" +allCores->at(0)->rrmap.at(currentRequestInDRAM->inst->cirs[0]) + "," +  to_string(currentRequestInDRAM->inst->cirs[1]) + "," + allCores->at(0)->rrmap.at(currentRequestInDRAM->inst->cirs[2]) + "]");
                     
-                    if (dram->getRowBuffer() == DRAM::getRowOfRowBuffer (request->loadingMemoryAddress)) {
-                        if (dram->getColBuffer() == DRAM::getColOfRowBuffer (request->loadingMemoryAddress)) uptoClkCycle = currentClockCycle + 1;
-                        else uptoClkCycle = currentClockCycle + colAccessDelay; 
+                    if (dram->getRowBuffer() == -1) {
+                        uptoClkCycle = currentClockCycle + colAccessDelay + rowAccessDelay;
                     }
-                    else uptoClkCycle = currentClockCycle + (2 * rowAccessDelay) + colAccessDelay;
-
+                    else {
+                        if (dram->getRowBuffer() == DRAM::getRowOfRowBuffer (request->loadingMemoryAddress)) {
+                            if (dram->getColBuffer() == DRAM::getColOfRowBuffer (request->loadingMemoryAddress)) uptoClkCycle = currentClockCycle + 1;
+                            else uptoClkCycle = currentClockCycle + colAccessDelay; 
+                        }
+                        else uptoClkCycle = currentClockCycle + (2 * rowAccessDelay) + colAccessDelay;
+                    }
+                    
                     currentRequestInDRAM = request;
                     int success = dram->lw (request);
                     if (success == -1) allCores->at(request->core_id - 1)->setRuntimeError("Error: Memory Address not accessible");
@@ -407,12 +412,17 @@ void MRM::execute (vector<CORE*> * allCores, int currentClockCycle,vector<bool> 
                     handleOutput->addDramOutput (": SW for core " + to_string(currentRequestInDRAM->core_id) + " Issued::[" +allCores->at(0)->rrmap.at(currentRequestInDRAM->inst->cirs[0]) + "," +  to_string(currentRequestInDRAM->inst->cirs[1]) + "," + allCores->at(0)->rrmap.at(currentRequestInDRAM->inst->cirs[2]) + "]");
                     handleOutput->appendOutputForCore (currentRequestInDRAM->core_id,": SW for core " + to_string(currentRequestInDRAM->core_id) + " Issued in DRAM::[" +allCores->at(0)->rrmap.at(currentRequestInDRAM->inst->cirs[0]) + "," +  to_string(currentRequestInDRAM->inst->cirs[1]) + "," + allCores->at(0)->rrmap.at(currentRequestInDRAM->inst->cirs[2]) + "]");
                 
-                    if (dram->getRowBuffer() == DRAM::getRowOfRowBuffer (request->savingMemoryAddress)) {
-                        if (dram->getColBuffer() == DRAM::getColOfRowBuffer (request->savingMemoryAddress)) uptoClkCycle = currentClockCycle + 1;
-                        else uptoClkCycle = currentClockCycle + colAccessDelay; 
+                    if (dram->getRowBuffer() == -1) {
+                        uptoClkCycle = currentClockCycle + colAccessDelay + rowAccessDelay;
                     }
-                    else uptoClkCycle = currentClockCycle + (2 * rowAccessDelay) + colAccessDelay;
-
+                    else {
+                        if (dram->getRowBuffer() == DRAM::getRowOfRowBuffer (request->savingMemoryAddress)) {
+                            if (dram->getColBuffer() == DRAM::getColOfRowBuffer (request->savingMemoryAddress)) uptoClkCycle = currentClockCycle + 1;
+                            else uptoClkCycle = currentClockCycle + colAccessDelay; 
+                        }
+                        else uptoClkCycle = currentClockCycle + (2 * rowAccessDelay) + colAccessDelay;
+                    }
+                    
                     currentRequestInDRAM = request;
                     int success = dram->sw (request);
                     if (success == -1) allCores->at(request->core_id - 1)->setRuntimeError("Error: Memory Address not accessible");

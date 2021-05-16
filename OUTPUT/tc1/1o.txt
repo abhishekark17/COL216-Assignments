@@ -17,41 +17,41 @@ Cycle: 16	: Instruction: addi ($at,$t5,500): $at=500
 Cycle: 17	: Instruction: addi ($at,$t5,500): $at=500
 Cycle: 18	: Instruction: addi ($at,$t5,500): $at=500
 Cycle: 19	: Instruction: addi ($at,$t5,500): $at=500
-Cycle: 20	: Instruction: addi ($at,$t5,500): $at=500
-Cycle: 21	: Instruction: addi ($at,$t5,500): $at=500
-Cycle: 22	: Instruction: addi ($at,$t5,500): $at=500
+Cycle: 20	: Instruction: addi ($at,$t5,500): $at=500: memory address 1000-1003 = 1	
+Cycle: 21	: Instruction: addi ($at,$t5,500): $at=500: LW for core 1 Issued in DRAM::[$t2,0,$s0]
+Cycle: 22	: Instruction: addi ($at,$t5,500): POSTPONED because write port is busy : (lw) $t2=1	
 Cycle: 23	: Instruction: addi ($at,$t5,500): $at=500
-Cycle: 24	: Instruction: addi ($at,$t5,500): $at=500
-Cycle: 25	: Instruction: addi ($at,$t5,500): $at=500
+Cycle: 24	: Instruction: addi ($at,$t5,500): $at=500: SW for core 1 Issued in DRAM::[$t9,0,$s0]
+Cycle: 25	: Instruction: addi ($at,$t5,500): $at=500: memory address 1000-1003 = 0	
 Cycle: 26	: Instruction: addi ($at,$t5,500): $at=500
-Cycle: 27	: Instruction: addi ($at,$t5,500): $at=500
-Cycle: 28	: Instruction: addi ($at,$t5,500): $at=500
-Cycle: 29	: Instruction: addi ($at,$t5,500): $at=500
-Cycle: 30	: Instruction: addi ($at,$t5,500): $at=500: memory address 1000-1003 = 1	
-Cycle: 31	: Instruction: addi ($at,$t5,500): $at=500: LW for core 1 Issued in DRAM::[$t2,0,$s0]
-Cycle: 32	: Instruction: addi ($at,$t5,500): POSTPONED because write port is busy : (lw) $t2=1	
+Cycle: 27	: Instruction: addi ($at,$t5,500): $at=500: SW for core 1 Issued in DRAM::[$t3,0,$s0]
+Cycle: 28	: Instruction: addi ($at,$t5,500): $at=500: memory address 1000-1003 = 4	
+Cycle: 29	: Instruction: addi ($at,$t5,500): $at=500: LW for core 1 Issued in DRAM::[$t4,0,$s0]
+Cycle: 30	: Instruction: addi ($at,$t5,500): POSTPONED because write port is busy : (lw) $t4=4	
+Cycle: 31	: Instruction: addi ($at,$t5,500): $at=500: SW for core 1 Issued in DRAM::[$t1,0,$s1]
+Cycle: 32	: Instruction: addi ($at,$t5,500): $at=500
 Cycle: 33	: Instruction: addi ($at,$t5,500): $at=500
-Cycle: 34	: Instruction: addi ($at,$t5,500): $at=500: SW for core 1 Issued in DRAM::[$t9,0,$s0]
-Cycle: 35	Enqueueing LW Request: $t5= @Address:500IN DRAM	: memory address 1000-1003 = 0	
+Cycle: 34	: Instruction: addi ($at,$t5,500): $at=500
+Cycle: 35	: Instruction: addi ($at,$t5,500): $at=500
 Cycle: 36	Enqueueing LW Request: $t5= @Address:500IN DRAM	
-Cycle: 37	Enqueueing LW Request: $t5= @Address:500IN DRAM	: SW for core 1 Issued in DRAM::[$t3,0,$s0]
-Cycle: 38	Enqueueing SW Request: $t6--> @Address:1000IN DRAM	: memory address 1000-1003 = 4	
-Cycle: 39	: Instruction bne ($t3,$t2,exit,1): LW for core 1 Issued in DRAM::[$t4,0,$s0]
-Cycle: 40	: Instruction: add ($at,$v0,$v1): POSTPONED because write port is busy : (lw) $t4=4	
-Cycle: 41	: Instruction: add ($at,$v0,$v1): $at=0: SW for core 1 Issued in DRAM::[$t6,0,$s0]
-Cycle: 42	: Exited :: memory address 1000-1003 = 0	
-Cycle: 43	: Exited :: LW for core 1 Issued in DRAM::[$t5,0,$at]
+Cycle: 37	Enqueueing LW Request: $t5= @Address:500IN DRAM	
+Cycle: 38	Enqueueing LW Request: $t5= @Address:500IN DRAM	
+Cycle: 39	Enqueueing SW Request: $t6--> @Address:1000IN DRAM	
+Cycle: 40	: Instruction bne ($t3,$t2,exit,1)
+Cycle: 41	: Instruction: add ($at,$v0,$v1): $at=0
+Cycle: 42	: Exited :
+Cycle: 43	: Exited :
 Cycle: 44	: Exited :
-Cycle: 45	: Exited :(lw) $t5=0	
-Cycle: 46	: Exited :: LW for core 1 Issued in DRAM::[$t5,0,$at]
-Cycle: 47	: Exited :(lw) $t5=0	
-Cycle: 48	: Exited :: LW for core 1 Issued in DRAM::[$t5,0,$at]
-Cycle: 49	: Exited :(lw) $t5=0	
-Cycle: 50	: Exited :: SW for core 1 Issued in DRAM::[$t1,0,$s1]
+Cycle: 45	: Exited :
+Cycle: 46	: Exited :
+Cycle: 47	: Exited :
+Cycle: 48	: Exited :
+Cycle: 49	: Exited :
+Cycle: 50	: Exited :
 Cycle: 51	: Exited :
 Cycle: 52	: Exited :
-Cycle: 53	: Exited :
-Cycle: 54	: Exited :
+Cycle: 53	: Exited :: memory address 2500-2503 = 2	
+Cycle: 54	: Exited :: LW for core 1 Issued in DRAM::[$t5,0,$at]
 Cycle: 55	: Exited :
 Cycle: 56	: Exited :
 Cycle: 57	: Exited :
@@ -69,18 +69,18 @@ Cycle: 68	: Exited :
 Cycle: 69	: Exited :
 Cycle: 70	: Exited :
 Cycle: 71	: Exited :
-Cycle: 72	: Exited :: memory address 2500-2503 = 2	
+Cycle: 72	: Exited :
 Cycle: 73	: Exited :
 Cycle: 74	: Exited :
 Cycle: 75	: Exited :
-Cycle: 76	: Exited :
-Cycle: 77	: Exited :
-Cycle: 78	: Exited :
-Cycle: 79	: Exited :
-Cycle: 80	: Exited :
-Cycle: 81	: Exited :
+Cycle: 76	: Exited :(lw) $t5=0	
+Cycle: 77	: Exited :: LW for core 1 Issued in DRAM::[$t5,0,$at]
+Cycle: 78	: Exited :(lw) $t5=0	
+Cycle: 79	: Exited :: LW for core 1 Issued in DRAM::[$t5,0,$at]
+Cycle: 80	: Exited :(lw) $t5=0	
+Cycle: 81	: Exited :: SW for core 1 Issued in DRAM::[$t6,0,$s0]
 Cycle: 82	: Exited :
-Cycle: 83	: Exited :
+Cycle: 83	: Exited :: memory address 1000-1003 = 0	
 Cycle: 84	: Exited :
 Cycle: 85	: Exited :
 Cycle: 86	: Exited :

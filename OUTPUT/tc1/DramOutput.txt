@@ -17,70 +17,70 @@ Cycle: 16	: Executing SW request for core 1: @Address 1000 <-- @Value 1
 Cycle: 17	: Executing SW request for core 1: @Address 1000 <-- @Value 1
 Cycle: 18	: Executing SW request for core 1: @Address 1000 <-- @Value 1
 Cycle: 19	: Executing SW request for core 1: @Address 1000 <-- @Value 1
-Cycle: 20	: Executing SW request for core 1: @Address 1000 <-- @Value 1
-Cycle: 21	: Executing SW request for core 1: @Address 1000 <-- @Value 1
-Cycle: 22	: Executing SW request for core 1: @Address 1000 <-- @Value 1
-Cycle: 23	: Executing SW request for core 1: @Address 1000 <-- @Value 1
-Cycle: 24	: Executing SW request for core 1: @Address 1000 <-- @Value 1
-Cycle: 25	: Executing SW request for core 1: @Address 1000 <-- @Value 1
-Cycle: 26	: Executing SW request for core 1: @Address 1000 <-- @Value 1
-Cycle: 27	: Executing SW request for core 1: @Address 1000 <-- @Value 1
-Cycle: 28	: Executing SW request for core 1: @Address 1000 <-- @Value 1
-Cycle: 29	: Executing SW request for core 1: @Address 1000 <-- @Value 1
-Cycle: 30	: Executing SW request for core 1: @Address 1000 <-- @Value 1: SW for core 1 Done
-Cycle: 31	: LW for core 1 Issued::[$t2,0,$s0]: Idle
-Cycle: 32	: Executing LW request for core 1: @Address 1000 --> @Register $t2: LW for core 1 Done
-Cycle: 33	(MRM Delay : opID of request = 8): Idle
-Cycle: 34	: SW for core 1 Issued::[$t9,0,$s0]: Idle
-Cycle: 35	: Executing SW request for core 1: @Address 1000 <-- @Value 0: SW for core 1 Done
-Cycle: 36	(MRM Delay : opID of request = 8): Idle
-Cycle: 37	: SW for core 1 Issued::[$t3,0,$s0]: Idle
-Cycle: 38	: Executing SW request for core 1: @Address 1000 <-- @Value 4: SW for core 1 Done
-Cycle: 39	: LW for core 1 Issued::[$t4,0,$s0]: Idle
-Cycle: 40	: Executing LW request for core 1: @Address 1000 --> @Register $t4: LW for core 1 Done
-Cycle: 41	: SW for core 1 Issued::[$t6,0,$s0]: Idle
-Cycle: 42	: Executing SW request for core 1: @Address 1000 <-- @Value 0: SW for core 1 Done
-Cycle: 43	: LW for core 1 Issued::[$t5,0,$at]: Idle
-Cycle: 44	: Executing LW request for core 1: @Address 500 --> @Register $t5
-Cycle: 45	: Executing LW request for core 1: @Address 500 --> @Register $t5: LW for core 1 Done
-Cycle: 46	: LW for core 1 Issued::[$t5,0,$at]: Idle
-Cycle: 47	: Executing LW request for core 1: @Address 500 --> @Register $t5: LW for core 1 Done
-Cycle: 48	: LW for core 1 Issued::[$t5,0,$at]: Idle
-Cycle: 49	: Executing LW request for core 1: @Address 500 --> @Register $t5: LW for core 1 Done
-Cycle: 50	: SW for core 1 Issued::[$t1,0,$s1]: Idle
+Cycle: 20	: Executing SW request for core 1: @Address 1000 <-- @Value 1: SW for core 1 Done
+Cycle: 21	: LW for core 1 Issued::[$t2,0,$s0]: Idle
+Cycle: 22	: Executing LW request for core 1: @Address 1000 --> @Register $t2: LW for core 1 Done
+Cycle: 23	(MRM Delay : opID of request = 8): Idle
+Cycle: 24	: SW for core 1 Issued::[$t9,0,$s0]: Idle
+Cycle: 25	: Executing SW request for core 1: @Address 1000 <-- @Value 0: SW for core 1 Done
+Cycle: 26	(MRM Delay : opID of request = 8): Idle
+Cycle: 27	: SW for core 1 Issued::[$t3,0,$s0]: Idle
+Cycle: 28	: Executing SW request for core 1: @Address 1000 <-- @Value 4: SW for core 1 Done
+Cycle: 29	: LW for core 1 Issued::[$t4,0,$s0]: Idle
+Cycle: 30	: Executing LW request for core 1: @Address 1000 --> @Register $t4: LW for core 1 Done
+Cycle: 31	: SW for core 1 Issued::[$t1,0,$s1]: Idle
+Cycle: 32	: Executing SW request for core 1: @Address 2500 <-- @Value 2
+Cycle: 33	: Executing SW request for core 1: @Address 2500 <-- @Value 2
+Cycle: 34	: Executing SW request for core 1: @Address 2500 <-- @Value 2
+Cycle: 35	: Executing SW request for core 1: @Address 2500 <-- @Value 2
+Cycle: 36	: Executing SW request for core 1: @Address 2500 <-- @Value 2
+Cycle: 37	: Executing SW request for core 1: @Address 2500 <-- @Value 2
+Cycle: 38	: Executing SW request for core 1: @Address 2500 <-- @Value 2
+Cycle: 39	: Executing SW request for core 1: @Address 2500 <-- @Value 2
+Cycle: 40	: Executing SW request for core 1: @Address 2500 <-- @Value 2
+Cycle: 41	: Executing SW request for core 1: @Address 2500 <-- @Value 2
+Cycle: 42	: Executing SW request for core 1: @Address 2500 <-- @Value 2
+Cycle: 43	: Executing SW request for core 1: @Address 2500 <-- @Value 2
+Cycle: 44	: Executing SW request for core 1: @Address 2500 <-- @Value 2
+Cycle: 45	: Executing SW request for core 1: @Address 2500 <-- @Value 2
+Cycle: 46	: Executing SW request for core 1: @Address 2500 <-- @Value 2
+Cycle: 47	: Executing SW request for core 1: @Address 2500 <-- @Value 2
+Cycle: 48	: Executing SW request for core 1: @Address 2500 <-- @Value 2
+Cycle: 49	: Executing SW request for core 1: @Address 2500 <-- @Value 2
+Cycle: 50	: Executing SW request for core 1: @Address 2500 <-- @Value 2
 Cycle: 51	: Executing SW request for core 1: @Address 2500 <-- @Value 2
 Cycle: 52	: Executing SW request for core 1: @Address 2500 <-- @Value 2
-Cycle: 53	: Executing SW request for core 1: @Address 2500 <-- @Value 2
-Cycle: 54	: Executing SW request for core 1: @Address 2500 <-- @Value 2
-Cycle: 55	: Executing SW request for core 1: @Address 2500 <-- @Value 2
-Cycle: 56	: Executing SW request for core 1: @Address 2500 <-- @Value 2
-Cycle: 57	: Executing SW request for core 1: @Address 2500 <-- @Value 2
-Cycle: 58	: Executing SW request for core 1: @Address 2500 <-- @Value 2
-Cycle: 59	: Executing SW request for core 1: @Address 2500 <-- @Value 2
-Cycle: 60	: Executing SW request for core 1: @Address 2500 <-- @Value 2
-Cycle: 61	: Executing SW request for core 1: @Address 2500 <-- @Value 2
-Cycle: 62	: Executing SW request for core 1: @Address 2500 <-- @Value 2
-Cycle: 63	: Executing SW request for core 1: @Address 2500 <-- @Value 2
-Cycle: 64	: Executing SW request for core 1: @Address 2500 <-- @Value 2
-Cycle: 65	: Executing SW request for core 1: @Address 2500 <-- @Value 2
-Cycle: 66	: Executing SW request for core 1: @Address 2500 <-- @Value 2
-Cycle: 67	: Executing SW request for core 1: @Address 2500 <-- @Value 2
-Cycle: 68	: Executing SW request for core 1: @Address 2500 <-- @Value 2
-Cycle: 69	: Executing SW request for core 1: @Address 2500 <-- @Value 2
-Cycle: 70	: Executing SW request for core 1: @Address 2500 <-- @Value 2
-Cycle: 71	: Executing SW request for core 1: @Address 2500 <-- @Value 2
-Cycle: 72	: SW for core 1 Done
-Cycle: 73	: Idle
-Cycle: 74	: Idle
-Cycle: 75	: Idle
-Cycle: 76	: Idle
-Cycle: 77	: Idle
-Cycle: 78	: Idle
-Cycle: 79	: Idle
-Cycle: 80	: Idle
-Cycle: 81	: Idle
-Cycle: 82	: Idle
-Cycle: 83	: Idle
+Cycle: 53	: Executing SW request for core 1: @Address 2500 <-- @Value 2: SW for core 1 Done
+Cycle: 54	: LW for core 1 Issued::[$t5,0,$at]: Idle
+Cycle: 55	: Executing LW request for core 1: @Address 500 --> @Register $t5
+Cycle: 56	: Executing LW request for core 1: @Address 500 --> @Register $t5
+Cycle: 57	: Executing LW request for core 1: @Address 500 --> @Register $t5
+Cycle: 58	: Executing LW request for core 1: @Address 500 --> @Register $t5
+Cycle: 59	: Executing LW request for core 1: @Address 500 --> @Register $t5
+Cycle: 60	: Executing LW request for core 1: @Address 500 --> @Register $t5
+Cycle: 61	: Executing LW request for core 1: @Address 500 --> @Register $t5
+Cycle: 62	: Executing LW request for core 1: @Address 500 --> @Register $t5
+Cycle: 63	: Executing LW request for core 1: @Address 500 --> @Register $t5
+Cycle: 64	: Executing LW request for core 1: @Address 500 --> @Register $t5
+Cycle: 65	: Executing LW request for core 1: @Address 500 --> @Register $t5
+Cycle: 66	: Executing LW request for core 1: @Address 500 --> @Register $t5
+Cycle: 67	: Executing LW request for core 1: @Address 500 --> @Register $t5
+Cycle: 68	: Executing LW request for core 1: @Address 500 --> @Register $t5
+Cycle: 69	: Executing LW request for core 1: @Address 500 --> @Register $t5
+Cycle: 70	: Executing LW request for core 1: @Address 500 --> @Register $t5
+Cycle: 71	: Executing LW request for core 1: @Address 500 --> @Register $t5
+Cycle: 72	: Executing LW request for core 1: @Address 500 --> @Register $t5
+Cycle: 73	: Executing LW request for core 1: @Address 500 --> @Register $t5
+Cycle: 74	: Executing LW request for core 1: @Address 500 --> @Register $t5
+Cycle: 75	: Executing LW request for core 1: @Address 500 --> @Register $t5
+Cycle: 76	: Executing LW request for core 1: @Address 500 --> @Register $t5: LW for core 1 Done
+Cycle: 77	: LW for core 1 Issued::[$t5,0,$at]: Idle
+Cycle: 78	: Executing LW request for core 1: @Address 500 --> @Register $t5: LW for core 1 Done
+Cycle: 79	: LW for core 1 Issued::[$t5,0,$at]: Idle
+Cycle: 80	: Executing LW request for core 1: @Address 500 --> @Register $t5: LW for core 1 Done
+Cycle: 81	: SW for core 1 Issued::[$t6,0,$s0]: Idle
+Cycle: 82	: Executing SW request for core 1: @Address 1000 <-- @Value 0
+Cycle: 83	: SW for core 1 Done
 Cycle: 84	: Idle
 Cycle: 85	: Idle
 Cycle: 86	: Idle
