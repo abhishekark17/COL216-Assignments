@@ -1,8 +1,10 @@
 addi $t1, $t1, 5
 sw $t1, 2500 ($0)
+bne $t1, $zero, main
 main: 
     addi $t1, $t1, -1
     lw $t2, 5000 ($zero)
+    slt $s0, $t1, $t2
     beq $t1, $zero, label
     j main
 
