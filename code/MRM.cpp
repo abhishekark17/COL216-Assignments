@@ -322,7 +322,6 @@ void MRM::execute (vector<CORE*> * allCores, int currentClockCycle,vector<bool> 
                 dram->setRowBuffer(DRAM::getRowOfRowBuffer (currentRequestInDRAM->loadingMemoryAddress));
                 dram->setColBuffer(DRAM::getColOfRowBuffer (currentRequestInDRAM->loadingMemoryAddress));
 
-                //cout <<" coreId: "<<currentRequestInDRAM->core_id <<  " ->  " + allCores->at(0)->rrmap.at(currentRequestInDRAM->changingRegister) + "=" + to_string(dram->getLoadedValueForLW ())+"\n";
                 handleOutput->appendOutputForCore (currentRequestInDRAM->core_id,"(lw) " + allCores->at(0)->rrmap.at(currentRequestInDRAM->changingRegister) + "=" + to_string(dram->getLoadedValueForLW ())+"\t");
                 allCores->at (currentRequestInDRAM->core_id - 1)->getRegisters()->at (currentRequestInDRAM->changingRegister) = dram->getLoadedValueForLW ();
                 allCores->at (currentRequestInDRAM->core_id - 1)->updateNumOfInst (7);
@@ -337,7 +336,6 @@ void MRM::execute (vector<CORE*> * allCores, int currentClockCycle,vector<bool> 
                 dram->setRowBuffer(DRAM::getRowOfRowBuffer (currentRequestInDRAM->savingMemoryAddress));
                 dram->setColBuffer(DRAM::getColOfRowBuffer (currentRequestInDRAM->savingMemoryAddress));
 
-                //cout <<" coreId: "<<currentRequestInDRAM->core_id << " -> memory address " + to_string(currentRequestInDRAM->savingMemoryAddress) + "-" + to_string(currentRequestInDRAM->savingMemoryAddress + 3) + " = " + to_string(dram->getValueToBeStoredForSW()) + "\n";
                 handleOutput->appendOutputForCore (currentRequestInDRAM->core_id,": memory address " + to_string(currentRequestInDRAM->savingMemoryAddress) + "-" + to_string(currentRequestInDRAM->savingMemoryAddress + 3) + " = " + to_string(dram->getValueToBeStoredForSW()) + "\t");                
                 
                 int setted = dram->setMemory (currentRequestInDRAM->savingMemoryAddress,dram->getValueToBeStoredForSW());
@@ -360,25 +358,18 @@ void MRM::execute (vector<CORE*> * allCores, int currentClockCycle,vector<bool> 
         if (request == nullptr) return;
 
         if (request->inst->opID != 7 && request->inst->opID != 8 && request->cost <= 1) {
-            if  (allCores->at(request->core_id - 1)->getStallingRequest() == request && 
-                getQueueOfCore_id(request->core_id)->size() == coreQueueLength) allCores->at(request->core_id)->resume(true);
-            else if(allCores->at(request->core_id - 1)->getStallingRequest() == request) {
-                allCores->at((request->core_id) - 1)->resume(false);
-            }
-            else {
-                allCores->at(request->core_id - 1)->addInFreeBuffer(request);
-            }
-
+            if  (allCores->at(request->core_id - 1)->getStallingRequest() == request && getQueueOfCore_id(request->core_id)->size() == coreQueueLength) allCores->at(request->core_id)->resume(true);
+            else if(allCores->at(request->core_id - 1)->getStallingRequest() == request) allCores->at((request->core_id) - 1)->resume(false);
+            else allCores->at(request->core_id - 1)->addInFreeBuffer(request);
+            
             int addDelay = numDependent (request, getQueueOfCore_id (request->core_id));
-            //cout << "this is mrm 3delay  " << addDelay << endl;
             uptoDelayClkCycle = currentClockCycle + addDelay;
             dequeueRequest (request,getQueueOfCore_id(request->core_id));
             return;
         }
 
         if (request->inst->opID != 7 && request->inst->opID != 8 && request->cost > 1) {
-            allCores->at(request->core_id - 1)->setRuntimeError("This should not happen");
-            //cout << "this is the request " << request->inst->opID << " " << request->inst->cirs[0] << " " << request->inst->cirs[1] << " " << request->inst->cirs[2] << " " << request->cost << endl;
+            allCores->at(request->core_id - 1)->setRuntimeError("Minimum cost request is not lw/sw and has cost > 1");
             return;
         }
     
@@ -393,14 +384,11 @@ void MRM::execute (vector<CORE*> * allCores, int currentClockCycle,vector<bool> 
                 
                 DRAMrequestIssued = true;
                 currentRequestInDRAM = request;
-
                 int addDelay = numDependent (currentRequestInDRAM, getQueueOfCore_id (currentRequestInDRAM->core_id));
-                //cout << "this is mrm 2delay  " << addDelay << endl;
                 uptoDelayClkCycle = currentClockCycle + addDelay;
 
 
                 if (request->inst->opID == 7) {
-                    //cout<<" coreId: "<<currentRequestInDRAM->core_id<<"\t" << ": DRAM request issued : lw\t";
                     handleOutput->addDramOutput (": LW for core " + to_string(currentRequestInDRAM->core_id) + " Issued::[" +allCores->at(0)->rrmap.at(currentRequestInDRAM->inst->cirs[0]) + "," +  to_string(currentRequestInDRAM->inst->cirs[1]) + "," + allCores->at(0)->rrmap.at(currentRequestInDRAM->inst->cirs[2]) + "]");
                     handleOutput->appendOutputForCore (currentRequestInDRAM->core_id,": LW for core " + to_string(currentRequestInDRAM->core_id) + " Issued in DRAM::[" +allCores->at(0)->rrmap.at(currentRequestInDRAM->inst->cirs[0]) + "," +  to_string(currentRequestInDRAM->inst->cirs[1]) + "," + allCores->at(0)->rrmap.at(currentRequestInDRAM->inst->cirs[2]) + "]");
                     
@@ -416,7 +404,6 @@ void MRM::execute (vector<CORE*> * allCores, int currentClockCycle,vector<bool> 
                     else if (success == -2) allCores->at(request->core_id - 1)->setRuntimeError("Error: invalid memory location");
                 }
                 else if (request->inst->opID == 8) {
-                    //cout<<" coreId: "<<currentRequestInDRAM->core_id<<"\t" << ": DRAM request issued : sw\t";
                     handleOutput->addDramOutput (": SW for core " + to_string(currentRequestInDRAM->core_id) + " Issued::[" +allCores->at(0)->rrmap.at(currentRequestInDRAM->inst->cirs[0]) + "," +  to_string(currentRequestInDRAM->inst->cirs[1]) + "," + allCores->at(0)->rrmap.at(currentRequestInDRAM->inst->cirs[2]) + "]");
                     handleOutput->appendOutputForCore (currentRequestInDRAM->core_id,": SW for core " + to_string(currentRequestInDRAM->core_id) + " Issued in DRAM::[" +allCores->at(0)->rrmap.at(currentRequestInDRAM->inst->cirs[0]) + "," +  to_string(currentRequestInDRAM->inst->cirs[1]) + "," + allCores->at(0)->rrmap.at(currentRequestInDRAM->inst->cirs[2]) + "]");
                 
