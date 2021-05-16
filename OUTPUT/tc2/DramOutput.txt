@@ -1,0 +1,213 @@
+Cycle: 1	: Idle
+Cycle: 2	: Idle
+Cycle: 3	: SW for core 2 Issued::[$s0,263144,$zero]: Idle
+Cycle: 4	: Executing SW request for core 2: @Address 263144 <-- @Value 20
+Cycle: 5	: Executing SW request for core 2: @Address 263144 <-- @Value 20
+Cycle: 6	: Executing SW request for core 2: @Address 263144 <-- @Value 20
+Cycle: 7	: Executing SW request for core 2: @Address 263144 <-- @Value 20
+Cycle: 8	: Executing SW request for core 2: @Address 263144 <-- @Value 20
+Cycle: 9	: Executing SW request for core 2: @Address 263144 <-- @Value 20
+Cycle: 10	: Executing SW request for core 2: @Address 263144 <-- @Value 20
+Cycle: 11	: Executing SW request for core 2: @Address 263144 <-- @Value 20
+Cycle: 12	: Executing SW request for core 2: @Address 263144 <-- @Value 20
+Cycle: 13	: Executing SW request for core 2: @Address 263144 <-- @Value 20
+Cycle: 14	: Executing SW request for core 2: @Address 263144 <-- @Value 20
+Cycle: 15	: Executing SW request for core 2: @Address 263144 <-- @Value 20: SW for core 2 Done
+Cycle: 16	: LW for core 2 Issued::[$s1,263172,$zero]: Idle
+Cycle: 17	: Executing LW request for core 2: @Address 263172 --> @Register $s1
+Cycle: 18	: Executing LW request for core 2: @Address 263172 --> @Register $s1
+Cycle: 19	: Executing LW request for core 2: @Address 263172 --> @Register $s1
+Cycle: 20	: Executing LW request for core 2: @Address 263172 --> @Register $s1
+Cycle: 21	: Executing LW request for core 2: @Address 263172 --> @Register $s1
+Cycle: 22	: Executing LW request for core 2: @Address 263172 --> @Register $s1
+Cycle: 23	: Executing LW request for core 2: @Address 263172 --> @Register $s1
+Cycle: 24	: Executing LW request for core 2: @Address 263172 --> @Register $s1
+Cycle: 25	: Executing LW request for core 2: @Address 263172 --> @Register $s1
+Cycle: 26	: Executing LW request for core 2: @Address 263172 --> @Register $s1
+Cycle: 27	: Executing LW request for core 2: @Address 263172 --> @Register $s1
+Cycle: 28	: Executing LW request for core 2: @Address 263172 --> @Register $s1
+Cycle: 29	: Executing LW request for core 2: @Address 263172 --> @Register $s1
+Cycle: 30	: Executing LW request for core 2: @Address 263172 --> @Register $s1
+Cycle: 31	: Executing LW request for core 2: @Address 263172 --> @Register $s1
+Cycle: 32	: Executing LW request for core 2: @Address 263172 --> @Register $s1
+Cycle: 33	: Executing LW request for core 2: @Address 263172 --> @Register $s1
+Cycle: 34	: Executing LW request for core 2: @Address 263172 --> @Register $s1
+Cycle: 35	: Executing LW request for core 2: @Address 263172 --> @Register $s1
+Cycle: 36	: Executing LW request for core 2: @Address 263172 --> @Register $s1
+Cycle: 37	: Executing LW request for core 2: @Address 263172 --> @Register $s1
+Cycle: 38	: LW for core 2 Done
+Cycle: 39	: Idle
+Cycle: 40	: SW for core 3 Issued::[$t0,525288,$zero]: Idle
+Cycle: 41	: Executing SW request for core 3: @Address 525288 <-- @Value 15
+Cycle: 42	: Executing SW request for core 3: @Address 525288 <-- @Value 15
+Cycle: 43	: Executing SW request for core 3: @Address 525288 <-- @Value 15
+Cycle: 44	: Executing SW request for core 3: @Address 525288 <-- @Value 15
+Cycle: 45	: Executing SW request for core 3: @Address 525288 <-- @Value 15
+Cycle: 46	: Executing SW request for core 3: @Address 525288 <-- @Value 15
+Cycle: 47	: Executing SW request for core 3: @Address 525288 <-- @Value 15
+Cycle: 48	: Executing SW request for core 3: @Address 525288 <-- @Value 15
+Cycle: 49	: Executing SW request for core 3: @Address 525288 <-- @Value 15
+Cycle: 50	: Executing SW request for core 3: @Address 525288 <-- @Value 15
+Cycle: 51	: Executing SW request for core 3: @Address 525288 <-- @Value 15
+Cycle: 52	: Executing SW request for core 3: @Address 525288 <-- @Value 15
+Cycle: 53	: Executing SW request for core 3: @Address 525288 <-- @Value 15
+Cycle: 54	: Executing SW request for core 3: @Address 525288 <-- @Value 15
+Cycle: 55	: Executing SW request for core 3: @Address 525288 <-- @Value 15
+Cycle: 56	: Executing SW request for core 3: @Address 525288 <-- @Value 15
+Cycle: 57	: Executing SW request for core 3: @Address 525288 <-- @Value 15
+Cycle: 58	: Executing SW request for core 3: @Address 525288 <-- @Value 15
+Cycle: 59	: Executing SW request for core 3: @Address 525288 <-- @Value 15
+Cycle: 60	: Executing SW request for core 3: @Address 525288 <-- @Value 15
+Cycle: 61	: Executing SW request for core 3: @Address 525288 <-- @Value 15
+Cycle: 62	: Executing SW request for core 3: @Address 525288 <-- @Value 15: SW for core 3 Done
+Cycle: 63	: LW for core 3 Issued::[$t1,525288,$zero]: Idle
+Cycle: 64	: LW for core 3 Done
+Cycle: 65	: Idle
+Cycle: 66	: SW for core 4 Issued::[$t0,786432,$s0]: Idle
+Cycle: 67	: Executing SW request for core 4: @Address 787432 <-- @Value 1
+Cycle: 68	: Executing SW request for core 4: @Address 787432 <-- @Value 1
+Cycle: 69	: Executing SW request for core 4: @Address 787432 <-- @Value 1
+Cycle: 70	: Executing SW request for core 4: @Address 787432 <-- @Value 1
+Cycle: 71	: Executing SW request for core 4: @Address 787432 <-- @Value 1
+Cycle: 72	: Executing SW request for core 4: @Address 787432 <-- @Value 1
+Cycle: 73	: Executing SW request for core 4: @Address 787432 <-- @Value 1
+Cycle: 74	: Executing SW request for core 4: @Address 787432 <-- @Value 1
+Cycle: 75	: Executing SW request for core 4: @Address 787432 <-- @Value 1
+Cycle: 76	: Executing SW request for core 4: @Address 787432 <-- @Value 1
+Cycle: 77	: Executing SW request for core 4: @Address 787432 <-- @Value 1
+Cycle: 78	: Executing SW request for core 4: @Address 787432 <-- @Value 1
+Cycle: 79	: Executing SW request for core 4: @Address 787432 <-- @Value 1
+Cycle: 80	: Executing SW request for core 4: @Address 787432 <-- @Value 1
+Cycle: 81	: Executing SW request for core 4: @Address 787432 <-- @Value 1
+Cycle: 82	: Executing SW request for core 4: @Address 787432 <-- @Value 1
+Cycle: 83	: Executing SW request for core 4: @Address 787432 <-- @Value 1
+Cycle: 84	: Executing SW request for core 4: @Address 787432 <-- @Value 1
+Cycle: 85	: Executing SW request for core 4: @Address 787432 <-- @Value 1
+Cycle: 86	: Executing SW request for core 4: @Address 787432 <-- @Value 1
+Cycle: 87	: Executing SW request for core 4: @Address 787432 <-- @Value 1
+Cycle: 88	: Executing SW request for core 4: @Address 787432 <-- @Value 1: SW for core 4 Done
+Cycle: 89	: LW for core 4 Issued::[$t5,786432,$s0]: Idle
+Cycle: 90	: Executing LW request for core 4: @Address 787432 --> @Register $t5: LW for core 4 Done
+Cycle: 91	: SW for core 4 Issued::[$t1,786432,$s1]: Idle
+Cycle: 92	: Executing SW request for core 4: @Address 788932 <-- @Value 2
+Cycle: 93	: Executing SW request for core 4: @Address 788932 <-- @Value 2
+Cycle: 94	: Executing SW request for core 4: @Address 788932 <-- @Value 2
+Cycle: 95	: Executing SW request for core 4: @Address 788932 <-- @Value 2
+Cycle: 96	: Executing SW request for core 4: @Address 788932 <-- @Value 2
+Cycle: 97	: Executing SW request for core 4: @Address 788932 <-- @Value 2
+Cycle: 98	: Executing SW request for core 4: @Address 788932 <-- @Value 2
+Cycle: 99	: Executing SW request for core 4: @Address 788932 <-- @Value 2
+Cycle: 100	: Executing SW request for core 4: @Address 788932 <-- @Value 2
+Cycle: 101	: Executing SW request for core 4: @Address 788932 <-- @Value 2
+Cycle: 102	: Executing SW request for core 4: @Address 788932 <-- @Value 2
+Cycle: 103	: Executing SW request for core 4: @Address 788932 <-- @Value 2
+Cycle: 104	: Executing SW request for core 4: @Address 788932 <-- @Value 2
+Cycle: 105	: Executing SW request for core 4: @Address 788932 <-- @Value 2
+Cycle: 106	: Executing SW request for core 4: @Address 788932 <-- @Value 2
+Cycle: 107	: Executing SW request for core 4: @Address 788932 <-- @Value 2
+Cycle: 108	: Executing SW request for core 4: @Address 788932 <-- @Value 2
+Cycle: 109	: Executing SW request for core 4: @Address 788932 <-- @Value 2
+Cycle: 110	: Executing SW request for core 4: @Address 788932 <-- @Value 2
+Cycle: 111	: Executing SW request for core 4: @Address 788932 <-- @Value 2
+Cycle: 112	: Executing SW request for core 4: @Address 788932 <-- @Value 2
+Cycle: 113	: Executing SW request for core 4: @Address 788932 <-- @Value 2: SW for core 4 Done
+Cycle: 114	: LW for core 4 Issued::[$t6,786432,$s1]: Idle
+Cycle: 115	: Executing LW request for core 4: @Address 788932 --> @Register $t6: LW for core 4 Done
+Cycle: 116	: SW for core 4 Issued::[$t2,786436,$s0]: Idle
+Cycle: 117	: Executing SW request for core 4: @Address 787436 <-- @Value 3
+Cycle: 118	: Executing SW request for core 4: @Address 787436 <-- @Value 3
+Cycle: 119	: Executing SW request for core 4: @Address 787436 <-- @Value 3
+Cycle: 120	: Executing SW request for core 4: @Address 787436 <-- @Value 3
+Cycle: 121	: Executing SW request for core 4: @Address 787436 <-- @Value 3
+Cycle: 122	: Executing SW request for core 4: @Address 787436 <-- @Value 3
+Cycle: 123	: Executing SW request for core 4: @Address 787436 <-- @Value 3
+Cycle: 124	: Executing SW request for core 4: @Address 787436 <-- @Value 3
+Cycle: 125	: Executing SW request for core 4: @Address 787436 <-- @Value 3
+Cycle: 126	: Executing SW request for core 4: @Address 787436 <-- @Value 3
+Cycle: 127	: Executing SW request for core 4: @Address 787436 <-- @Value 3
+Cycle: 128	: Executing SW request for core 4: @Address 787436 <-- @Value 3
+Cycle: 129	: Executing SW request for core 4: @Address 787436 <-- @Value 3
+Cycle: 130	: Executing SW request for core 4: @Address 787436 <-- @Value 3
+Cycle: 131	: Executing SW request for core 4: @Address 787436 <-- @Value 3
+Cycle: 132	: Executing SW request for core 4: @Address 787436 <-- @Value 3
+Cycle: 133	: Executing SW request for core 4: @Address 787436 <-- @Value 3
+Cycle: 134	: Executing SW request for core 4: @Address 787436 <-- @Value 3
+Cycle: 135	: Executing SW request for core 4: @Address 787436 <-- @Value 3
+Cycle: 136	: Executing SW request for core 4: @Address 787436 <-- @Value 3
+Cycle: 137	: Executing SW request for core 4: @Address 787436 <-- @Value 3
+Cycle: 138	: Executing SW request for core 4: @Address 787436 <-- @Value 3: SW for core 4 Done
+Cycle: 139	: LW for core 4 Issued::[$t7,786436,$s0]: Idle
+Cycle: 140	: Executing LW request for core 4: @Address 787436 --> @Register $t7: LW for core 4 Done
+Cycle: 141	: SW for core 4 Issued::[$t3,786436,$s1]: Idle
+Cycle: 142	: Executing SW request for core 4: @Address 788936 <-- @Value 4
+Cycle: 143	: Executing SW request for core 4: @Address 788936 <-- @Value 4
+Cycle: 144	: Executing SW request for core 4: @Address 788936 <-- @Value 4
+Cycle: 145	: Executing SW request for core 4: @Address 788936 <-- @Value 4
+Cycle: 146	: Executing SW request for core 4: @Address 788936 <-- @Value 4
+Cycle: 147	: Executing SW request for core 4: @Address 788936 <-- @Value 4
+Cycle: 148	: Executing SW request for core 4: @Address 788936 <-- @Value 4
+Cycle: 149	: Executing SW request for core 4: @Address 788936 <-- @Value 4
+Cycle: 150	: Executing SW request for core 4: @Address 788936 <-- @Value 4
+Cycle: 151	: Executing SW request for core 4: @Address 788936 <-- @Value 4
+Cycle: 152	: Executing SW request for core 4: @Address 788936 <-- @Value 4
+Cycle: 153	: Executing SW request for core 4: @Address 788936 <-- @Value 4
+Cycle: 154	: Executing SW request for core 4: @Address 788936 <-- @Value 4
+Cycle: 155	: Executing SW request for core 4: @Address 788936 <-- @Value 4
+Cycle: 156	: Executing SW request for core 4: @Address 788936 <-- @Value 4
+Cycle: 157	: Executing SW request for core 4: @Address 788936 <-- @Value 4
+Cycle: 158	: Executing SW request for core 4: @Address 788936 <-- @Value 4
+Cycle: 159	: Executing SW request for core 4: @Address 788936 <-- @Value 4
+Cycle: 160	: Executing SW request for core 4: @Address 788936 <-- @Value 4
+Cycle: 161	: Executing SW request for core 4: @Address 788936 <-- @Value 4
+Cycle: 162	: Executing SW request for core 4: @Address 788936 <-- @Value 4
+Cycle: 163	: Executing SW request for core 4: @Address 788936 <-- @Value 4: SW for core 4 Done
+Cycle: 164	: LW for core 4 Issued::[$t8,786436,$s1]: Idle
+Cycle: 165	: LW for core 4 Done
+Cycle: 166	: Idle
+Cycle: 167	: Idle
+Cycle: 168	: Idle
+Cycle: 169	: Idle
+Cycle: 170	: Idle
+Cycle: 171	: Idle
+Cycle: 172	: Idle
+Cycle: 173	: Idle
+Cycle: 174	: Idle
+Cycle: 175	: Idle
+Cycle: 176	: Idle
+Cycle: 177	: Idle
+Cycle: 178	: Idle
+Cycle: 179	: Idle
+Cycle: 180	: Idle
+Cycle: 181	: Idle
+Cycle: 182	: Idle
+Cycle: 183	: Idle
+Cycle: 184	: Idle
+Cycle: 185	: Idle
+Cycle: 186	: Idle
+Cycle: 187	: Idle
+Cycle: 188	: Idle
+Cycle: 189	: Idle
+Cycle: 190	: Idle
+Cycle: 191	: Idle
+Cycle: 192	: Idle
+Cycle: 193	: Idle
+Cycle: 194	: Idle
+Cycle: 195	: Idle
+Cycle: 196	: Idle
+Cycle: 197	: Idle
+Cycle: 198	: Idle
+Cycle: 199	: Idle
+Cycle: 200	: Idle
+
+META DATA
+Number of LW instructions executed by DRAM := 6
+Number of SW instructions executed by DRAM := 6
+
+
+MEMORY LOCATIONS WHICH CHANGED AFTER EXECUTION
+263144-263147: 20
+525288-525291: 15
+787432-787435: 1
+787436-787439: 3
+788932-788935: 2
+788936-788939: 4
